@@ -1,7 +1,7 @@
 {
-  "User.Details": {
+  "UserData.User": {
     "target": {
-      "object": "User.Details"
+      "object": "UserData.User"
     }
   }
 }

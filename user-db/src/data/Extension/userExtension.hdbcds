@@ -1,6 +1,6 @@
 namespace userExt;
 in package userExt;
-using User.Details as User1;
+using UserData.User as User1;
 
 extend entity User1 with {
 	ZMYNEW1: String(10);
