@@ -1,0 +1,12 @@
+using Core;
+
+context User {
+
+     Entity Details {
+     	key PERS_NO: String(10);
+     	FIRSTNAME: Core.SString;
+     	LASTNAME: Core.SString;
+     	E_MAIL: Core.LString;
+     };	
+    
+};

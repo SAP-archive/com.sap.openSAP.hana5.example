@@ -1,0 +1,8 @@
+{
+  "User.Details": {
+    "target": {
+      "grantor" : "hdi-user-service",
+      "object" : "User.Details"
+     }
+  }
+}

@@ -1,0 +1,22 @@
+{
+	"xsappname": "openSAP5-ex",
+	"scopes": [{
+		"name": "$XSAPPNAME.Display",
+		"description": "display"
+	}, {
+		"name": "$XSAPPNAME.Create",
+		"description": "create"
+	}, {
+		"name": "$XSAPPNAME.Delete",
+		"description": "delete"
+	}],
+	"role-templates": [{
+		"name": "Viewer",
+		"description": "View all records",
+		"scope-references": ["$XSAPPNAME.Display"]
+	}, {
+		"name": "Editor",
+		"description": "Edit and Delete records",
+		"scope-references": ["$XSAPPNAME.Create", "$XSAPPNAME.Delete", "$XSAPPNAME.Display"]
+	}]
+}
