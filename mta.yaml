@@ -1,0 +1,71 @@
+_schema-version: '2.0'
+ID: com.sap.openSAP.hana5.example
+version: 1.12.1
+
+modules:
+ - name: openSAP5-ex-core-db
+   type: hdb
+   path: core-db
+   requires:
+    - name: container
+      properties:
+        TARGET_CONTAINER: ~{container-name}
+    - name: CrossSchemaService
+      group: SERVICE_REPLACEMENTS
+      properties:
+        key: hdi-sflight-service
+        service: ~{sflight-service-name}   
+    - name: CrossSchemaSys
+      group: SERVICE_REPLACEMENTS
+      properties:
+        key: hdi-sys-service
+        service: ~{sys-service-name}   
+    - name: user-container
+      group: SERVICE_REPLACEMENTS
+      properties:
+        key: hdi-user-service
+        service: ~{user-container-name}  
+        
+ - name: openSAP5-ex-user-db
+   type: hdb
+   path: user-db
+   requires:
+    - name: user-container
+      properties:
+        TARGET_CONTAINER: ~{user-container-name}
+
+resources:
+ - name: container
+   properties:
+     container-name: ${service-name}
+   type: com.sap.xs.hdi-container
+   parameters: 
+     config:
+       schema: OPENSAP_HANA5_EXAMPLE
+      
+ - name: user-container
+   properties:
+     user-container-name: ${service-name}
+   type: com.sap.xs.hdi-container
+   parameters: 
+     config:
+       schema: OPENSAP_HANA5_USER_EXAMPLE
+       
+ - name: openSAP5-ex-uaa
+   type: com.sap.xs.uaa
+   parameters:
+    config-path: xs-security.json
+    
+ - name: CrossSchemaService
+   type: org.cloudfoundry.existing-service
+   parameters:
+     service-name: CROSS_SCHEMA_SFLIGHT
+   properties:
+     sflight-service-name: ${service-name}
+
+ - name: CrossSchemaSys
+   type: org.cloudfoundry.existing-service
+   parameters:
+     service-name: CROSS_SCHEMA_SYS
+   properties:
+     sys-service-name: ${service-name}    
