@@ -10,16 +10,25 @@ modules:
     - name: container
       properties:
         TARGET_CONTAINER: ~{container-name}
+        
     - name: CrossSchemaService
       group: SERVICE_REPLACEMENTS
       properties:
         key: hdi-sflight-service
-        service: ~{sflight-service-name}   
+        service: ~{sflight-service-name}  
+        
     - name: CrossSchemaSys
       group: SERVICE_REPLACEMENTS
       properties:
         key: hdi-sys-service
         service: ~{sys-service-name}   
+        
+    - name: CrossSchemaSysBi
+      group: SERVICE_REPLACEMENTS
+      properties:
+        key: hdi-sys-bi-service
+        service: ~{sys-bi-service-name}   
+        
     - name: user-container
       group: SERVICE_REPLACEMENTS
       properties:
@@ -68,4 +77,11 @@ resources:
    parameters:
      service-name: CROSS_SCHEMA_SYS
    properties:
-     sys-service-name: ${service-name}    
+     sys-service-name: ${service-name}  
+     
+ - name: CrossSchemaSysBi
+   type: org.cloudfoundry.existing-service
+   parameters:
+     service-name: CROSS_SCHEMA_SYS_BI
+   properties:
+     sys-bi-service-name: ${service-name}       
