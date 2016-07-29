@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="SALES_ORDER_HEADER_W_BUYER" applyPrivilegeType="NONE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALES_ORDER_HEADER_W_BUYER" applyPrivilegeType="NONE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALES_ORDER_"/>
 <localVariables/>
 <variableMappings/>
@@ -7,8 +7,8 @@
   <DataSource id="SO.Header">
     <resourceUri>SO.Header</resourceUri>
   </DataSource>
-  <DataSource id="BUYER">
-    <resourceUri>BUYER</resourceUri>
+  <DataSource id="sap.hana.democontent.epm.models::BUYER">
+    <resourceUri>sap.hana.democontent.epm.models::BUYER</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews>
@@ -107,7 +107,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="TAXAMOUNT" source="TAXAMOUNT"/>
     </input>
-    <input node="BUYER">
+    <input node="sap.hana.democontent.epm.models::BUYER">
       <mapping xsi:type="Calculation:AttributeMapping" target="BUILDING" source="BUILDING"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYNAME" source="COMPANYNAME"/>
@@ -246,7 +246,7 @@
       <upperLeftCorner x="20" y="30"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="BUYER" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+    <shape modelObjectName="sap.hana.democontent.epm.models::BUYER" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="30"/>
       <rectangleSize width="250"/>
     </shape>

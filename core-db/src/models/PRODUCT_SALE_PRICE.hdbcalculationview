@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="PRODUCT_SALE_PRICE" applyPrivilegeType="NONE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="sap.hana.democontent.epm.models::PRODUCT_SALE_PRICE" applyPrivilegeType="NONE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="PRODUCT_SALE_PRICE"/>
 <localVariables>
   <variable id="PRODUCT_ID" parameter="true">
@@ -26,19 +26,19 @@
   <attributes>
     <attribute id="PRODUCTID" order="1" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="PRODUCTID"/>
-      <keyMapping schemaName="46YGU2YJMQBA9Q5K_SHINE_2_SHINE_HDI_CONTAINER" columnObjectName="product_sale_price" columnName="PRODUCTID"/>
+      <keyMapping schemaName="" columnObjectName="product_sale_price" columnName="PRODUCTID"/>
     </attribute>
     <attribute id="CATEGORY" order="2" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CATEGORY"/>
-      <keyMapping schemaName="46YGU2YJMQBA9Q5K_SHINE_2_SHINE_HDI_CONTAINER" columnObjectName="product_sale_price" columnName="CATEGORY"/>
+      <keyMapping schemaName="" columnObjectName="product_sale_price" columnName="CATEGORY"/>
     </attribute>
     <attribute id="PRICE" order="3" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="PRICE"/>
-      <keyMapping schemaName="46YGU2YJMQBA9Q5K_SHINE_2_SHINE_HDI_CONTAINER" columnObjectName="product_sale_price" columnName="PRICE"/>
+      <keyMapping schemaName="" columnObjectName="product_sale_price" columnName="PRICE"/>
     </attribute>
     <attribute id="SALEPRICE" order="4" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="SALEPRICE"/>
-      <keyMapping schemaName="46YGU2YJMQBA9Q5K_SHINE_2_SHINE_HDI_CONTAINER" columnObjectName="product_sale_price" columnName="SALEPRICE"/>
+      <keyMapping schemaName="" columnObjectName="product_sale_price" columnName="SALEPRICE"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>

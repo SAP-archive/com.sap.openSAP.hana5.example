@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="PROD" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="" schemaVersion="3.0" defaultClient="crossClient" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::PROD" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="" schemaVersion="3.0" defaultClient="crossClient" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="PROD"/>
 <localVariables/>
 <variableMappings/>

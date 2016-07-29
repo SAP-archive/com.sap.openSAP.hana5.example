@@ -27,7 +27,7 @@ select company_name, region, sales, orders, sales_rank, order_rank, discount fro
 		        	  THEN 2.5
 		        	  else 0
 		        	  end as discount
-		              from "SALES_ORDER_RANKING"
+		              from "sap.hana.democontent.epm.models::SALES_ORDER_RANKING"
 		              where DATE_SQL between :IP_FR_DTE and :IP_TO_DTE
 		                and "REGION" = :IP_REGION
 		              group by "COMPANYNAME", "REGION" 

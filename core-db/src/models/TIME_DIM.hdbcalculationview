@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="TIME_DIM" applyPrivilegeType="NONE" dataCategory="DEFAULT" dimensionType="STANDARD" schemaVersion="3.0" defaultClient="crossClient" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::TIME_DIM" applyPrivilegeType="NONE" dataCategory="DEFAULT" dimensionType="STANDARD" schemaVersion="3.0" defaultClient="crossClient" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="TIME_DIM"/>
 <localVariables/>
 <variableMappings/>

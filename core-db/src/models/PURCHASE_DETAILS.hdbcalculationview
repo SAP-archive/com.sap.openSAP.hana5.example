@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="PURCHASE_DETAILS" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="sap.hana.democontent.epm.models::PURCHASE_DETAILS" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED">
   <origin/>
   <descriptions defaultDescription="PURCHASE_DETAILS"/>
   <localVariables>
@@ -24,7 +24,7 @@
     </DataSource>
     <DataSource id="BUYER" type="CALCULATION_VIEW">
       <viewAttributes allViewAttributes="true"/>
-      <resourceUri>BUYER</resourceUri>
+      <resourceUri>sap.hana.democontent.epm.models::BUYER</resourceUri>
     </DataSource>
   </dataSources>
   <calculationViews>

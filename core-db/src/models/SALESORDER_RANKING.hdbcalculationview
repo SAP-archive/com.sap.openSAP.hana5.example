@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="SALESORDER_RANKING" applyPrivilegeType="SQL_ANALYTIC_PRIVILEGE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALESORDER_RANKING" applyPrivilegeType="SQL_ANALYTIC_PRIVILEGE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALESORDER_RANKING"/>
 <localVariables>
   <variable id="IP_FR_DTE" parameter="true">
@@ -41,8 +41,8 @@
 </localVariables>
 <variableMappings/>
 <dataSources>
-  <DataSource id="SALESORDER_RANKING_SQL">
-    <resourceUri>SALESORDER_RANKING_SQL</resourceUri>
+  <DataSource id="sap.hana.democontent.epm.models::SALESORDER_RANKING_SQL">
+    <resourceUri>sap.hana.democontent.epm.models::SALESORDER_RANKING_SQL</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews>
@@ -65,7 +65,7 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="SALESORDER_RANKING_SQL">
+    <input node="sap.hana.democontent.epm.models::SALESORDER_RANKING_SQL">
       <mapping xsi:type="Calculation:AttributeMapping" target="COMPANY_NAME" source="COMPANY_NAME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ORDERS" source="ORDERS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ORDER_RANK" source="ORDER_RANK"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="PURCHASE_ORDERS" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::PURCHASE_ORDERS" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="PURCHASE_ORDERS"/>
 <localVariables>
   <variable id="IP_O_TARGET_CURRENCY" parameter="true">
@@ -19,8 +19,8 @@
   <DataSource id="PO.Item">
     <resourceUri>PO.Item</resourceUri>
   </DataSource>
-  <DataSource id="PRODUCTS">
-    <resourceUri>PRODUCTS</resourceUri>
+  <DataSource id="sap.hana.democontent.epm.models::PRODUCTS">
+    <resourceUri>sap.hana.democontent.epm.models::PRODUCTS</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews>
@@ -149,7 +149,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_PRODUCTID" source="PRODUCT_PRODUCTID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="GROSSAMOUNT" source="GROSSAMOUNT"/>
     </input>
-    <input node="PRODUCTS">
+    <input node="sap.hana.democontent.epm.models::PRODUCTS">
       <mapping xsi:type="Calculation:AttributeMapping" target="Product_Category" source="Product_Category"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="Product_Currency" source="Product_Currency"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="Product_Desciption" source="Product_Desciption"/>
@@ -309,7 +309,7 @@
       <upperLeftCorner x="20" y="30"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="PRODUCTS" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+    <shape modelObjectName="sap.hana.democontent.epm.models::PRODUCTS" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="30"/>
       <rectangleSize width="250"/>
     </shape>

@@ -64,6 +64,9 @@ resources:
    type: com.sap.xs.uaa
    parameters:
     config-path: xs-security.json
+ 
+ - name: openSAP5-ex-scheduler
+   type: com.sap.xs.job-scheduler
     
  - name: CrossSchemaService
    type: org.cloudfoundry.existing-service

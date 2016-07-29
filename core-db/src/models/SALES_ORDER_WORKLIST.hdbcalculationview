@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="SALES_ORDER_WORKLIST" applyPrivilegeType="SQL_ANALYTIC_PRIVILEGE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALES_ORDER_WORKLIST" applyPrivilegeType="SQL_ANALYTIC_PRIVILEGE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALES_ORDER_WORKLIST"/>
 <localVariables/>
 <variableMappings/>
@@ -10,11 +10,11 @@
   <DataSource id="SO.Item">
     <resourceUri>SO.Item</resourceUri>
   </DataSource>
-  <DataSource id="PROD">
-    <resourceUri>PROD</resourceUri>
+  <DataSource id="sap.hana.democontent.epm.models::PROD">
+    <resourceUri>sap.hana.democontent.epm.models::PROD</resourceUri>
   </DataSource>
-  <DataSource id="BUYER">
-    <resourceUri>BUYER</resourceUri>
+  <DataSource id="sap.hana.democontent.epm.models::BUYER">
+    <resourceUri>sap.hana.democontent.epm.models::BUYER</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews>
@@ -119,7 +119,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITY" source="QUANTITY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITYUNIT" source="QUANTITYUNIT"/>
     </input>
-    <input node="PROD">
+    <input node="sap.hana.democontent.epm.models::PROD">
       <mapping xsi:type="Calculation:AttributeMapping" target="TYPECODE" source="PRODUCT_TYPECODE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CATEGORY" source="PRODUCT_CATEGORY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTNAME" source="PRODUCT_NAME"/>
@@ -195,7 +195,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTNAME" source="PRODUCTNAME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTDESC" source="PRODUCTDESC"/>
     </input>
-    <input node="BUYER">
+    <input node="sap.hana.democontent.epm.models::BUYER">
       <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYNAME" source="COMPANYNAME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="POSTALCODE" source="POSTALCODE"/>
@@ -302,7 +302,7 @@
       <upperLeftCorner x="20" y="30"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="PROD" modelObjectNameSpace="Product" modelObjectType="JoinNodeInput">
+    <shape modelObjectName="sap.hana.democontent.epm.models::PROD" modelObjectNameSpace="Product" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="620" y="30"/>
       <rectangleSize width="250"/>
     </shape>
@@ -314,7 +314,7 @@
       <upperLeftCorner x="20" y="30"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="BUYER" modelObjectNameSpace="Partner" modelObjectType="JoinNodeInput">
+    <shape modelObjectName="sap.hana.democontent.epm.models::BUYER" modelObjectNameSpace="Partner" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="30"/>
       <rectangleSize width="250"/>
     </shape>

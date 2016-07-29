@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="PO_HEADER_EN" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="2.3" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::PO_HEADER_EN" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="2.3" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="PO_HEADER_EN"/>
 <localVariables/>
 <variableMappings/>
@@ -20,10 +20,10 @@
     <resourceUri>PO.Header</resourceUri>
   </DataSource>
   <DataSource id="BUYER" type="CALCULATION_VIEW">
-    <resourceUri>BUYER</resourceUri>
+    <resourceUri>sap.hana.democontent.epm.models::BUYER</resourceUri>
   </DataSource>
   <DataSource id="PO_ITEM" type="CALCULATION_VIEW">
-    <resourceUri>PO_ITEM</resourceUri>
+    <resourceUri>sap.hana.democontent.epm.models::PO_ITEM</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews>
