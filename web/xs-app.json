@@ -52,7 +52,7 @@
 			"default": "$XSAPPNAME.Display"
 		},
 		"replace": {
-			"pathSuffixes": ["index.html"],
+			"pathSuffixes": ["index.html","odataTest.html"],
 			"vars": ["ui5liburl"]
 		}
 	}]

@@ -1,0 +1,33 @@
+<core:View
+	controllerName="sap.xs.chat.view.App"
+	xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" >
+	<ScrollContainer
+    height="100%"
+    width="100%"
+    horizontal="true"
+    vertical="true" >
+    <Panel 
+	   headerText="Node.js WebSocket Chat"
+	   expandable="true"
+	   expanded="true">
+        <l:VerticalLayout
+            class="sapUiContentPadding"
+            width="100%">
+        <l:content>            
+	        <Input id="uName" value="{/user}" />
+        </l:content>
+         <l:content>
+	        <TextArea id="chatInfo" value="{/chat}" cols="60" rows="8" editable="false" />
+        </l:content>
+        <l:content>
+	        <Input id="message" value="{/message}" placeholder="Enter Chat Text Here..." />
+        </l:content>
+        </l:VerticalLayout>
+	   <Button text="Send" press="sendMsg" />
+	</Panel>   
+	
+   </ScrollContainer>
+</core:View>
