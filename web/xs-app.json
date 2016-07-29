@@ -1,0 +1,59 @@
+{
+	"welcomeFile": "index.html",
+	"authenticationMethod": "route",
+	"websockets": {
+		"enabled": true
+	},
+	"logout": {
+		"logoutEndpoint": "/logout",
+		"logoutPage": "/"
+	},
+	"routes": [{
+		"source": "/node(.*)",
+		"destination": "core-js",
+		"csrfProtection": true,
+		"authenticationType": "xsuaa",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"POST": ["$XSAPPNAME.Display", "$XSAPPNAME.Create"],
+			"PUT": ["$XSAPPNAME.Display", "$XSAPPNAME.Create"],
+			"DELETE": ["$XSAPPNAME.Display", "$XSAPPNAME.Delete"],
+			"default": "$XSAPPNAME.Display"
+		}
+	}, {
+		"source": "(.*)(.xsjs)",
+		"destination": "core-js",
+		"csrfProtection": true,
+		"authenticationType": "xsuaa",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"POST": ["$XSAPPNAME.Display", "$XSAPPNAME.Create"],
+			"PUT": ["$XSAPPNAME.Display", "$XSAPPNAME.Create"],
+			"DELETE": ["$XSAPPNAME.Display", "$XSAPPNAME.Delete"],
+			"default": "$XSAPPNAME.Display"
+		}
+	}, {
+		"source": "(.*)(.xsodata)",
+		"destination": "core-js",
+		"authenticationType": "xsuaa",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"POST": ["$XSAPPNAME.Display", "$XSAPPNAME.Create"],
+			"PUT": ["$XSAPPNAME.Display", "$XSAPPNAME.Create"],
+			"DELETE": ["$XSAPPNAME.Display", "$XSAPPNAME.Delete"],
+			"default": "$XSAPPNAME.Display"
+		}
+	}, {
+		"source": "/(.*)",
+		"localDir": "resources",
+		"authenticationType": "xsuaa",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"default": "$XSAPPNAME.Display"
+		},
+		"replace": {
+			"pathSuffixes": ["index.html"],
+			"vars": ["ui5liburl"]
+		}
+	}]
+}

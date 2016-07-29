@@ -43,6 +43,42 @@ modules:
       properties:
         TARGET_CONTAINER: ~{user-container-name}
 
+ - name: openSAP5-ex-web
+   type: html5
+   path: web
+   provides: 
+      - name: web
+        properties:
+          ui-url: "${default-url}"
+   parameters: 
+       host: web 
+       register-service-url: true 
+       service-name: web 
+       service-url: "${default-url}"          
+   requires:
+      - name: openSAP5-ex-uaa
+      - name: ui5-lib
+        properties:
+          ui5liburl: ~{url}
+      - name: core-js
+        group: destinations
+        properties:
+          name: core-js
+          url: ~{url}
+          forwardAuthToken: true          
+
+ - name: openSAP5-ex-core-js
+   type: nodejs
+   path: core-js
+   provides: 
+     - name: core-js
+       properties:
+         url: "${default-url}"
+   requires:
+      - name: openSAP5-ex-uaa
+      - name: container
+      - name: openSAP5-ex-core-db
+
 resources:
  - name: container
    properties:
@@ -87,4 +123,11 @@ resources:
    parameters:
      service-name: CROSS_SCHEMA_SYS_BI
    properties:
-     sys-bi-service-name: ${service-name}       
+     sys-bi-service-name: ${service-name} 
+     
+ - name: ui5-lib
+   type: configuration 
+   parameters:
+      ID: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_SAPUI5_FESV2:sapui5_fesv2 # Specifies the the ID of the provider MTA.
+      name: sapui5_fesv2
+      version: "=1.38.3"     # The version (range) of the provider MTA.     

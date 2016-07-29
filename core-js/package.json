@@ -1,0 +1,16 @@
+{
+	"dependencies": {
+		"sap-xssec": "^0.6.0",
+		"sap-xsenv": "^1.2.3",
+		"sap-xsjs": "^1.7.0"
+	},
+	"description": "",
+	"files": [],
+	"main": "server.js",
+	"name": "core-js",
+	"scripts": {
+		"start": "node server.js",
+		"test": "node testrun.js"
+	},
+	"version": "1.0.0"
+}
