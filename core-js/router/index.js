@@ -9,4 +9,7 @@ module.exports = function(app,server) {
 	app.use("/node/xml", require("./routes/xml")());
 	app.use("/node/zip", require("./routes/zip")());
 	app.use("/node/cds", require("./routes/cds")());
+	app.use("/replicate", require("./routes/datagen")());
+	app.use("/reset", require("./routes/reset")());
+	app.use("/get", require("./routes/get")());
 };

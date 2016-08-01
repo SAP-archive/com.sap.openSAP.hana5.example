@@ -16,5 +16,11 @@
       "object": "TABLES",
       "schema": "SYS"
     }
+  },
+  "M_TABLES": {
+    "target": {
+      "object": "M_TABLES",
+      "schema": "SYS"
+    }
   }
 }

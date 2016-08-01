@@ -8,6 +8,12 @@
           "type": "VIEW",
           "privileges":["SELECT"]
         },
+		{ 
+          "schema":"SYS",
+          "name": "M_TABLES",
+          "type": "VIEW",
+          "privileges":["SELECT"]
+        },        
         { 
           "schema":"SYS",
           "name": "TABLES",
@@ -30,6 +36,12 @@
           "type": "VIEW",          
           "privileges":["SELECT"]
         },
+		{ 
+          "schema":"SYS",
+          "name": "M_TABLES",
+          "type": "VIEW",
+          "privileges":["SELECT"]
+        },             
         { 
           "schema":"SYS",
           "name": "TABLES",
