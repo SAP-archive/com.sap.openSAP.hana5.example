@@ -1,7 +1,7 @@
-$.import("xsjs", "messages");
-var MESSAGES = $.xsjs.messages;
-$.import("xsjs", "session");
-var SESSIONINFO = $.xsjs.session;
+$.import("sap.hana.democontent.epm.services", "messages");
+var MESSAGES = $.sap.hana.democontent.epm.services.messages;
+$.import("sap.hana.democontent.epm.services", "session");
+var SESSIONINFO = $.sap.hana.democontent.epm.services.session;
 
 function getFilter() {
     function createFilterEntry(rs, attribute, obj) {

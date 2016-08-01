@@ -1,5 +1,5 @@
-$.import("xsjs", "messages");
-var MESSAGES = $.xsjs.messages;
+$.import("sap.hana.democontent.epm.services", "messages");
+var MESSAGES = $.sap.hana.democontent.epm.services.messages;
 
 
 function deletePO() {
