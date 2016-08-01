@@ -14,22 +14,22 @@
 <calculationViews>
   <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
     <viewAttributes>
-      <viewAttribute id="SALESORDERID"><descriptions/><descriptions/>
+      <viewAttribute id="SALESORDERID"><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="SALESORDERID"/>
       </viewAttribute>
-      <viewAttribute id="HISTORY_CREATEDAT"><descriptions/><descriptions/>
+      <viewAttribute id="HISTORY_CREATEDAT"><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="HISTORY_CREATEDAT"/>
       </viewAttribute>
-      <viewAttribute id="PARTNERID"><descriptions/><descriptions/>
+      <viewAttribute id="PARTNERID"><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PARTNER_PARTNERID"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERITEM"><descriptions/><descriptions/>
+      <viewAttribute id="SALESORDERITEM"><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="SALESORDERITEM"/>
       </viewAttribute>
-      <viewAttribute id="NETAMOUNT"><descriptions/><descriptions/>
+      <viewAttribute id="NETAMOUNT"><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="NETAMOUNT"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTID"><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCTID"><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_PRODUCTID"/>
       </viewAttribute>
     </viewAttributes>
@@ -131,7 +131,7 @@
     </shape>
     <shape modelObjectName="SO.Header" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="20" y="38"/>
-      <rectangleSize width="266.7666015625"/>
+      <rectangleSize width="266"/>
     </shape>
     <shape modelObjectName="SO.Item" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="30"/>

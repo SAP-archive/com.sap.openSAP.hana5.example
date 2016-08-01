@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALESORDER_BASKET_ANALYSIS" applyPrivilegeType="SQL_ANALYTIC_PRIVILEGE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALESORDER_BASKET_ANALYSIS" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALESORDER_BASKET_ANALYSIS"/>
 <localVariables/>
 <variableMappings/>
@@ -17,19 +17,19 @@
 <calculationViews>
   <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
     <viewAttributes>
-      <viewAttribute id="SALESORDERID">
+      <viewAttribute id="SALESORDERID"><descriptions/>
         <descriptions defaultDescription="SALESORDERID"/>
       </viewAttribute>
-      <viewAttribute id="History_CREATEDAT">
+      <viewAttribute id="History_CREATEDAT"><descriptions/>
         <descriptions defaultDescription="HISTORY_CREATEDAT"/>
       </viewAttribute>
-      <viewAttribute id="NETAMOUNT">
+      <viewAttribute id="NETAMOUNT"><descriptions/>
         <descriptions defaultDescription="NETAMOUNT"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERITEM">
+      <viewAttribute id="SALESORDERITEM"><descriptions/>
         <descriptions defaultDescription="SALESORDERITEM"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTID">
+      <viewAttribute id="PRODUCTID"><descriptions/>
         <descriptions defaultDescription="PRODUCT_PRODUCTID"/>
       </viewAttribute>
     </viewAttributes>
@@ -48,22 +48,22 @@
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="inner">
     <viewAttributes>
-      <viewAttribute id="CATEGORY">
+      <viewAttribute id="CATEGORY"><descriptions/>
         <descriptions defaultDescription="CATEGORY"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTID">
+      <viewAttribute id="PRODUCTID"><descriptions/>
         <descriptions defaultDescription="PRODUCTID"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERITEM">
+      <viewAttribute id="SALESORDERITEM"><descriptions/>
         <descriptions defaultDescription="SALESORDERITEM"/>
       </viewAttribute>
-      <viewAttribute id="NETAMOUNT">
+      <viewAttribute id="NETAMOUNT"><descriptions/>
         <descriptions defaultDescription="NETAMOUNT"/>
       </viewAttribute>
-      <viewAttribute id="History_CREATEDAT">
+      <viewAttribute id="History_CREATEDAT"><descriptions/>
         <descriptions defaultDescription="HISTORY_CREATEDAT"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERID">
+      <viewAttribute id="SALESORDERID"><descriptions/>
         <descriptions defaultDescription="SALESORDERID"/>
       </viewAttribute>
     </viewAttributes>
@@ -83,19 +83,19 @@
   </calculationView>
   <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
     <viewAttributes>
-      <viewAttribute id="CATEGORY">
+      <viewAttribute id="CATEGORY"><descriptions/>
         <descriptions defaultDescription="CATEGORY"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERITEM">
+      <viewAttribute id="SALESORDERITEM"><descriptions/>
         <descriptions defaultDescription="SALESORDERITEM"/>
       </viewAttribute>
-      <viewAttribute id="NETAMOUNT">
+      <viewAttribute id="NETAMOUNT"><descriptions/>
         <descriptions defaultDescription="NETAMOUNT"/>
       </viewAttribute>
-      <viewAttribute id="History_CREATEDAT">
+      <viewAttribute id="History_CREATEDAT"><descriptions/>
         <descriptions defaultDescription="HISTORY_CREATEDAT"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERID">
+      <viewAttribute id="SALESORDERID"><descriptions/>
         <descriptions defaultDescription="SALESORDERID"/>
       </viewAttribute>
     </viewAttributes>
@@ -164,7 +164,7 @@
     </shape>
     <shape modelObjectName="SO.Header" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="20" y="34"/>
-      <rectangleSize width="266.7666015625"/>
+      <rectangleSize width="266"/>
     </shape>
     <shape modelObjectName="SO.Item" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="30"/>
@@ -180,7 +180,7 @@
     </shape>
     <shape modelObjectName="MD.Products" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="34"/>
-      <rectangleSize width="266.7666015625"/>
+      <rectangleSize width="266"/>
     </shape>
     <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
       <upperLeftCorner x="196" y="165"/>

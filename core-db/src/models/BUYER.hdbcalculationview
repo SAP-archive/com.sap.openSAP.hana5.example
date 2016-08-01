@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.2" id="sap.hana.democontent.epm.models::BUYER" defaultClient="crossClient" defaultLanguage="$$language$$" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Projection">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="sap.hana.democontent.epm.models::BUYER" defaultClient="crossClient" defaultLanguage="$$language$$" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Projection" applyPrivilegeType="NONE">
   <descriptions defaultDescription="Buyer Join"/>
   <localVariables/>
   <variableMappings/>
   <dataSources>
-    <DataSource id="MD.Addresses" type="DATA_BASE_TABLE">
+    <DataSource id="MD.Addresses">
       <resourceUri>MD.Addresses</resourceUri>
     </DataSource>
-    <DataSource id="MD.BusinessPartner" type="DATA_BASE_TABLE">
+    <DataSource id="MD.BusinessPartner">
       <resourceUri>MD.BusinessPartner</resourceUri>
     </DataSource>
   </dataSources>
@@ -25,10 +25,10 @@
         <viewAttribute id="EMAILADDRESS"/>
         <viewAttribute id="COMPANYNAME"/>
         <viewAttribute id="LEGALFORM"/>
-        <viewAttribute hidden="true" id="JOIN$ADDRESSID$ADDRESSES.ADDRESSID"/>
+        <viewAttribute id="JOIN$ADDRESSID$ADDRESSES.ADDRESSID" hidden="true"/>
       </viewAttributes>
       <calculatedViewAttributes/>
-      <input node="#MD.Addresses">
+      <input node="MD.Addresses">
         <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="POSTALCODE" source="POSTALCODE"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="STREET" source="STREET"/>
@@ -37,7 +37,7 @@
         <mapping xsi:type="Calculation:AttributeMapping" target="REGION" source="REGION"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ADDRESSID$ADDRESSES.ADDRESSID" source="ADDRESSID"/>
       </input>
-      <input node="#MD.BusinessPartner">
+      <input node="MD.BusinessPartner">
         <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERID" source="PARTNERID"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERROLE" source="PARTNERROLE"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="EMAILADDRESS" source="EMAILADDRESS"/>
@@ -54,7 +54,7 @@
         <descriptions defaultDescription="Partner ID"/>
         <keyMapping columnObjectName="Join_1" columnName="PARTNERID"/>
       </attribute>
-      <attribute id="PARTNERROLE" order="2" attributeHierarchyActive="false" displayAttribute="false">
+      <attribute id="PARTNERROLE" order="2" attributeHierarchyActive="false" displayAttribute="false" semanticType="empty">
         <descriptions defaultDescription="Partner Role"/>
         <keyMapping columnObjectName="Join_1" columnName="PARTNERROLE"/>
       </attribute>
@@ -66,7 +66,7 @@
         <descriptions defaultDescription="Company Name"/>
         <keyMapping columnObjectName="Join_1" columnName="COMPANYNAME"/>
       </attribute>
-      <attribute id="LEGALFORM" order="5" attributeHierarchyActive="false" displayAttribute="false">
+      <attribute id="LEGALFORM" order="5" attributeHierarchyActive="false" displayAttribute="false" semanticType="empty">
         <descriptions defaultDescription="Legal Form"/>
         <keyMapping columnObjectName="Join_1" columnName="LEGALFORM"/>
       </attribute>
@@ -105,9 +105,7 @@
     </privateDataFoundation>
     <baseMeasures/>
     <calculatedMeasures/>
-    <restrictedMeasures/>
-    <localDimensions/>
-  </logicalModel>
+    <restrictedMeasures/></logicalModel>
   <layout>
     <shapes>
       <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
@@ -117,6 +115,15 @@
       <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
         <upperLeftCorner x="40" y="210"/>
         <rectangleSize height="-1" width="-1"/>
+      </shape>
+    
+      <shape modelObjectName="MD.Addresses" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="20" y="30"/>
+        <rectangleSize width="250"/>
+      </shape>
+      <shape modelObjectName="MD.BusinessPartner" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+        <upperLeftCorner x="320" y="30"/>
+        <rectangleSize width="250"/>
       </shape>
     </shapes>
   </layout>

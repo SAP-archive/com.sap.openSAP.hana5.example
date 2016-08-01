@@ -23,46 +23,46 @@
 <calculationViews>
   <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
     <viewAttributes>
-      <viewAttribute id="ADDRESSES_ADDRESSID"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="ADDRESSES_ADDRESSID"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="ADDRESSES_ADDRESSID"/>
       </viewAttribute>
-      <viewAttribute id="COMPANYNAME"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="COMPANYNAME"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="COMPANYNAME"/>
       </viewAttribute>
-      <viewAttribute id="CURRENCY"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="CURRENCY"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="CURRENCY"/>
       </viewAttribute>
-      <viewAttribute id="EMAILADDRESS"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="EMAILADDRESS"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="EMAILADDRESS"/>
       </viewAttribute>
-      <viewAttribute id="FAXNUMBER"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="FAXNUMBER"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="FAXNUMBER"/>
       </viewAttribute>
-      <viewAttribute id="HISTORY_CHANGEDAT"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="HISTORY_CHANGEDAT"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="HISTORY_CHANGEDAT"/>
       </viewAttribute>
-      <viewAttribute id="HISTORY_CHANGEDBY_EMPLOYEEID"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="HISTORY_CHANGEDBY_EMPLOYEEID"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="HISTORY_CHANGEDBY_EMPLOYEEID"/>
       </viewAttribute>
-      <viewAttribute id="HISTORY_CREATEDAT"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="HISTORY_CREATEDAT"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="HISTORY_CREATEDAT"/>
       </viewAttribute>
-      <viewAttribute id="HISTORY_CREATEDBY_EMPLOYEEID"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="HISTORY_CREATEDBY_EMPLOYEEID"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="HISTORY_CREATEDBY_EMPLOYEEID"/>
       </viewAttribute>
-      <viewAttribute id="LEGALFORM"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="LEGALFORM"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="LEGALFORM"/>
       </viewAttribute>
-      <viewAttribute id="PARTNERID"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PARTNERID"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PARTNERID"/>
       </viewAttribute>
-      <viewAttribute id="PARTNERROLE"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PARTNERROLE"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PARTNERROLE"/>
       </viewAttribute>
-      <viewAttribute id="PHONENUMBER"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PHONENUMBER"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PHONENUMBER"/>
       </viewAttribute>
-      <viewAttribute id="WEBADDRESS"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="WEBADDRESS"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="WEBADDRESS"/>
       </viewAttribute>
     </viewAttributes>
@@ -86,43 +86,43 @@
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Product_BP" joinType="inner">
     <viewAttributes>
-      <viewAttribute id="PRODUCTID"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCTID"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCTID"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_TYPECODE"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_TYPECODE"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="TYPECODE"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_CATEGORY"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_CATEGORY"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="CATEGORY"/>
       </viewAttribute>
-      <viewAttribute id="NAMEID"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="NAMEID"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="NAMEID"/>
       </viewAttribute>
-      <viewAttribute id="DESCID"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="DESCID"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="DESCID"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_WEIGHTMEASURE"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_WEIGHTMEASURE"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="WEIGHTMEASURE"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_WEIGHTUNIT"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_WEIGHTUNIT"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="WEIGHTUNIT"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_CURRENCY"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_CURRENCY"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="CURRENCY"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_PRICE"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_PRICE"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRICE"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTPICURL"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCTPICURL"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCTPICURL"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_ID"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_ID"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PARTNERID"/>
       </viewAttribute>
-      <viewAttribute id="ADDRESSES_ADDRESSID"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="ADDRESSES_ADDRESSID"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="ADDRESSES_ADDRESSID"/>
       </viewAttribute>
-      <viewAttribute id="COMPANYNAME"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="COMPANYNAME"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="COMPANYNAME"/>
       </viewAttribute>
     </viewAttributes>
@@ -149,67 +149,67 @@
   </calculationView>
   <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
     <viewAttributes>
-      <viewAttribute id="CATEGORY"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="CATEGORY"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="CATEGORY"/>
       </viewAttribute>
-      <viewAttribute id="DESCID"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="DESCID"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="DESCID"/>
       </viewAttribute>
-      <viewAttribute id="NAMEID"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="NAMEID"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="NAMEID"/>
       </viewAttribute>
-      <viewAttribute id="PRICE"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRICE"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRICE"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTID"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCTID"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCTID"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTPICURL"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCTPICURL"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCTPICURL"/>
       </viewAttribute>
-      <viewAttribute id="TYPECODE"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="TYPECODE"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="TYPECODE"/>
       </viewAttribute>
-      <viewAttribute id="WEIGHTMEASURE"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="WEIGHTMEASURE"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="WEIGHTMEASURE"/>
       </viewAttribute>
-      <viewAttribute id="WEIGHTUNIT"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="WEIGHTUNIT"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="WEIGHTUNIT"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_PARTNERID"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_PARTNERID"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_PARTNERID"/>
       </viewAttribute>
-      <viewAttribute id="CURRENCY"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="CURRENCY"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="CURRENCY"/>
       </viewAttribute>
-      <viewAttribute id="DEPTH"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="DEPTH"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="DEPTH"/>
       </viewAttribute>
-      <viewAttribute id="DIMENSIONUNIT"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="DIMENSIONUNIT"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="DIMENSIONUNIT"/>
       </viewAttribute>
-      <viewAttribute id="HEIGHT"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="HEIGHT"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="HEIGHT"/>
       </viewAttribute>
-      <viewAttribute id="HISTORY_CHANGEDAT"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="HISTORY_CHANGEDAT"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="HISTORY_CHANGEDAT"/>
       </viewAttribute>
-      <viewAttribute id="HISTORY_CHANGEDBY_EMPLOYEEID"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="HISTORY_CHANGEDBY_EMPLOYEEID"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="HISTORY_CHANGEDBY_EMPLOYEEID"/>
       </viewAttribute>
-      <viewAttribute id="HISTORY_CREATEDAT"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="HISTORY_CREATEDAT"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="HISTORY_CREATEDAT"/>
       </viewAttribute>
-      <viewAttribute id="HISTORY_CREATEDBY_EMPLOYEEID"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="HISTORY_CREATEDBY_EMPLOYEEID"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="HISTORY_CREATEDBY_EMPLOYEEID"/>
       </viewAttribute>
-      <viewAttribute id="QUANTITYUNIT"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="QUANTITYUNIT"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="QUANTITYUNIT"/>
       </viewAttribute>
-      <viewAttribute id="TAXTARIFFCODE"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="TAXTARIFFCODE"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="TAXTARIFFCODE"/>
       </viewAttribute>
-      <viewAttribute id="WIDTH"><descriptions/><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="WIDTH"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="WIDTH"/>
       </viewAttribute>
     </viewAttributes>
@@ -240,58 +240,58 @@
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Address" joinType="inner">
     <viewAttributes>
-      <viewAttribute id="PRODUCTID"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCTID"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCTID"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_TYPECODE"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_TYPECODE"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_TYPECODE"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_CATEGORY"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_CATEGORY"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_CATEGORY"/>
       </viewAttribute>
-      <viewAttribute id="DESCID"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="DESCID"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="DESCID"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_CURRENCY"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_CURRENCY"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_CURRENCY"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_WEIGHTUNIT"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_WEIGHTUNIT"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_WEIGHTUNIT"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_WEIGHTMEASURE"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_WEIGHTMEASURE"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_WEIGHTMEASURE"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_PRICE"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_PRICE"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_PRICE"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTPICURL"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCTPICURL"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCTPICURL"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_ID"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_ID"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_ID"/>
       </viewAttribute>
-      <viewAttribute id="COMPANYNAME"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="COMPANYNAME"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="COMPANYNAME"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_CITY"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_CITY"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="CITY"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_POSTALCODE"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_POSTALCODE"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="POSTALCODE"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_STREET"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_STREET"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="STREET"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_BUILDING"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_BUILDING"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="BUILDING"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_COUNTRY"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_COUNTRY"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="COUNTRY"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_REGION"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_REGION"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="REGION"/>
       </viewAttribute>
-      <viewAttribute id="NAMEID"><descriptions/>
+      <viewAttribute id="NAMEID"><descriptions/><descriptions/>
         <descriptions defaultDescription="NAMEID"/>
       </viewAttribute>
       <viewAttribute id="JOIN$ADDRESSES_ADDRESSID$ADDRESSID" hidden="true"/>
@@ -325,58 +325,58 @@
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Product_Name" joinType="textTable" cardinality="C1_1" languageColumn="LANGUAGE">
     <viewAttributes>
-      <viewAttribute id="PRODUCTID"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCTID"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCTID"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_TYPECODE"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_TYPECODE"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_TYPECODE"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_CATEGORY"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_CATEGORY"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_CATEGORY"/>
       </viewAttribute>
-      <viewAttribute id="DESCID"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="DESCID"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="DESCID"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_CURRENCY"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_CURRENCY"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_CURRENCY"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_WEIGHTUNIT"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_WEIGHTUNIT"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_WEIGHTUNIT"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_WEIGHTMEASURE"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_WEIGHTMEASURE"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_WEIGHTMEASURE"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_PRICE"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_PRICE"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_PRICE"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTPICURL"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCTPICURL"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCTPICURL"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_ID"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_ID"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_ID"/>
       </viewAttribute>
-      <viewAttribute id="COMPANYNAME"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="COMPANYNAME"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="COMPANYNAME"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_CITY"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_CITY"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_CITY"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_POSTALCODE"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_POSTALCODE"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_POSTALCODE"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_STREET"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_STREET"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_STREET"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_BUILDING"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_BUILDING"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_BUILDING"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_COUNTRY"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_COUNTRY"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_COUNTRY"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_REGION"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="SUPPLIER_REGION"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_REGION"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_NAME"><descriptions/><descriptions/><descriptions/>
+      <viewAttribute id="PRODUCT_NAME"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="TEXT"/>
       </viewAttribute>
       <viewAttribute id="JOIN$NAMEID$TEXTID" hidden="true"/>
@@ -410,58 +410,58 @@
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Product_Desc" joinType="inner">
     <viewAttributes>
-      <viewAttribute id="PRODUCTID"><descriptions/>
+      <viewAttribute id="PRODUCTID"><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCTID"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_TYPECODE"><descriptions/>
+      <viewAttribute id="PRODUCT_TYPECODE"><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_TYPECODE"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_CATEGORY"><descriptions/>
+      <viewAttribute id="PRODUCT_CATEGORY"><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_CATEGORY"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_CURRENCY"><descriptions/>
+      <viewAttribute id="PRODUCT_CURRENCY"><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_CURRENCY"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_WEIGHTUNIT"><descriptions/>
+      <viewAttribute id="PRODUCT_WEIGHTUNIT"><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_WEIGHTUNIT"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_WEIGHTMEASURE"><descriptions/>
+      <viewAttribute id="PRODUCT_WEIGHTMEASURE"><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_WEIGHTMEASURE"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_PRICE"><descriptions/>
+      <viewAttribute id="PRODUCT_PRICE"><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_PRICE"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTPICURL"><descriptions/>
+      <viewAttribute id="PRODUCTPICURL"><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCTPICURL"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_ID"><descriptions/>
+      <viewAttribute id="SUPPLIER_ID"><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_ID"/>
       </viewAttribute>
-      <viewAttribute id="COMPANYNAME"><descriptions/>
+      <viewAttribute id="COMPANYNAME"><descriptions/><descriptions/>
         <descriptions defaultDescription="COMPANYNAME"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_CITY"><descriptions/>
+      <viewAttribute id="SUPPLIER_CITY"><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_CITY"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_POSTALCODE"><descriptions/>
+      <viewAttribute id="SUPPLIER_POSTALCODE"><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_POSTALCODE"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_STREET"><descriptions/>
+      <viewAttribute id="SUPPLIER_STREET"><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_STREET"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_BUILDING"><descriptions/>
+      <viewAttribute id="SUPPLIER_BUILDING"><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_BUILDING"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_COUNTRY"><descriptions/>
+      <viewAttribute id="SUPPLIER_COUNTRY"><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_COUNTRY"/>
       </viewAttribute>
-      <viewAttribute id="SUPPLIER_REGION"><descriptions/>
+      <viewAttribute id="SUPPLIER_REGION"><descriptions/><descriptions/>
         <descriptions defaultDescription="SUPPLIER_REGION"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_NAME"><descriptions/>
+      <viewAttribute id="PRODUCT_NAME"><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_NAME"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_DESCRIPTION"><descriptions/>
+      <viewAttribute id="PRODUCT_DESCRIPTION"><descriptions/><descriptions/>
         <descriptions defaultDescription="TEXT"/>
       </viewAttribute>
       <viewAttribute id="JOIN$DESCID$TEXTID" hidden="true"/>
@@ -516,11 +516,11 @@
       <descriptions defaultDescription="PRODUCT_WEIGHTUNIT"/>
       <keyMapping columnObjectName="Product_Desc" columnName="PRODUCT_WEIGHTUNIT"/>
     </attribute>
-    <attribute id="PRODUCT_WEIGHTMEASURE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="PRODUCT_WEIGHTMEASURE" order="6" displayAttribute="false" attributeHierarchyActive="false" semanticType="empty">
       <descriptions defaultDescription="PRODUCT_WEIGHTMEASURE"/>
       <keyMapping columnObjectName="Product_Desc" columnName="PRODUCT_WEIGHTMEASURE"/>
     </attribute>
-    <attribute id="PRODUCT_PRICE" order="7" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="PRODUCT_PRICE" order="7" displayAttribute="false" attributeHierarchyActive="false" semanticType="empty">
       <descriptions defaultDescription="PRODUCT_PRICE"/>
       <keyMapping columnObjectName="Product_Desc" columnName="PRODUCT_PRICE"/>
     </attribute>

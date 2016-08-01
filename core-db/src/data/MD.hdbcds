@@ -48,11 +48,9 @@ Type HistT {
         LEGALFORM: EPM.BusinessKey;
         HISTORY: HistT;
         CURRENCY: EPM.CurrencyT;
+    } technical configuration {
+    	partition by HASH  (PARTNERID) Partitions GET_NUM_SERVERS();
     };
-    //    crashes the DI Deployer :(
-//    } technical configuration {
-//    	partition by range (PARTNERID) ( Partition 1 <= VALUES < 2, partition 2 <= values < 3, partition others);
-//    };
  
     Entity Employees {
         key  EMPLOYEEID: EPM.BusinessKey;
