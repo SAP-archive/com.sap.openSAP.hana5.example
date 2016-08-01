@@ -1,7 +1,7 @@
 /*eslint no-console: 0, no-unused-vars: 0, dot-notation: 0, no-use-before-define: 0, no-redeclare: 0*/
 "use strict";
 
-$.import("xsjs", "session");
+$.import("user.xsjs", "session");
 var SESSIONINFO = $.xsjs.session;
 
 /**

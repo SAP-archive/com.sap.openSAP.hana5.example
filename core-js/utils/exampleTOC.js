@@ -41,8 +41,8 @@ module.exports = {
    	"<a href=\"/xsodata/purchaseOrders.xsodata/POHeader?$format=json&$top=10\">purchaseOrders.xsodata/POHeader</a> Purchase Orders Service - Header Data</br>" +    	
 	"<a href=\"/xsodata/purchaseOrders.xsodata/POHeader?$format=json&$top=10&$expand=POItem\">purchaseOrders.xsodata/POHeader/?$expand=POItem</a> Purchase Orders Service - Header Data with Expanded Items</br>" +    	
 
-   	"<a href=\"/xsodata/user2.xsodata/?$format=json\">user2.xsodata</a> User Service</br>" +
-   	"<a href=\"/xsodata/user2.xsodata/$metadata\">user2.xsodata/$metadata</a> User Service Metadata </br>";   	
+   	"<a href=\"/user/xsodata/user2.xsodata/?$format=json\">user2.xsodata</a> User Service</br>" +
+   	"<a href=\"/user/xsodata/user2.xsodata/$metadata\">user2.xsodata/$metadata</a> User Service Metadata </br>";   	
 	
    	return tableOfContents;
    	

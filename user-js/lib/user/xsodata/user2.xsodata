@@ -1,5 +1,5 @@
 service namespace "com.sap.openSAP.hana5.example.services"{
 	"User.Details" as "Users"
 	create using 
-	"xsjs:usersCreateMethod.xsjslib::usersCreate";
+	"user.xsjs:usersCreateMethod.xsjslib::usersCreate";
 }

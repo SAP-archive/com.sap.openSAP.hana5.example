@@ -5,17 +5,11 @@ var express = require("express");
 module.exports = function() {
 	var app = express.Router();
 
-	app.get("/", function(req, res) {
-		var output = "<H1>Node-CDS Examples - Temporarily Disabled While Waiting on Node.js Ver 6 Patch</H1></br>" +
-			require(global.__base + "utils/exampleTOC").fill();
-		res.type("text/html").status(200).send(output);
-	});
-	
-/*	var cds = require("sap-cds");
+	var cds = require("sap-cds");
 	var client = null;
 	var oEmployee = null;
 	cds.$importEntities([{
-		$entity: MD.Employees"
+		$entity: "MD.Employees"
 	}], function(error, entities) {
 		oEmployee = entities["MD.Employees"];
 	});
@@ -120,6 +114,6 @@ module.exports = function() {
 		});
 
 	});
-*/
+
 	return app;
 };

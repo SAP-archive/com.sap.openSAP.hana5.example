@@ -41,7 +41,9 @@ module.exports = {
         function execute(callback){
         	wss.broadcast("Database Connected #1");
         	client.exec("select TOP 25 * from \"PO.Header\"", 
-        	             function(err,res){callback(null,err,res);});
+        	             function(err,res){
+        	             	if (err){ return ("ERROR: " + err); }
+        	             	callback(null,err,res);});
 
         },
 
@@ -89,7 +91,9 @@ module.exports = {
         function execute(callback){
         	wss.broadcast("Database Connected #2");
         	client.exec("select TOP 25 * from \"PO.Item\"", 
-        	              function(err,res){callback(null,err,res);});
+        	              function(err,res){
+        	              	if (err){ return ("ERROR: " + err); }
+        	              	callback(null,err,res);});
 
         },
 
