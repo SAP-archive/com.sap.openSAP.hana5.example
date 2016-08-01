@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>ETags and null value demo</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+		
+	    <!-- <script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" -->
+		<script id="sap-ui-bootstrap" src="{{{ui5liburl}}}/resources/sap-ui-core.js"
+				data-sap-ui-libs="sap.m"
+				data-sap-ui-xx-bindingSyntax="complex"
+				data-sap-ui-theme="sap_bluecrystal"
+				 data-sap-ui-resourceroots='{
+				"shine.usercrud.etagsdemo": "./"
+				}'
+				>
+		</script>
+		<!-- add sap.ui.table,sap.ui.ux3 and/or other libraries to 'data-sap-ui-libs' if required -->
+
+		<script>
+		
+			
+				sap.ui.getCore().attachInit(function() {
+					new sap.m.Shell({
+						title: "UserCRUD ETags demo",
+						app: new sap.ui.core.ComponentContainer({
+							height : "100%",
+							name : "shine.usercrud.etagsdemo"
+						})
+					}).placeAt("content");
+				}); 
+				
+				
+		</script>
+
+	</head>
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+</html>

@@ -22,5 +22,11 @@
       "object": "M_TABLES",
       "schema": "SYS"
     }
+  },
+  "SERIES_GENERATE_TIMESTAMP": {
+    "target": {
+      "object": "SERIES_GENERATE_TIMESTAMP",
+      "schema": "SYS"
+    }
   }
 }

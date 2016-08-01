@@ -1,0 +1,37 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		title="{i18n>ENTER_USER_DETAILS}"
+		class="sapUiPopupWithPadding" >
+		<content>
+			<f:SimpleForm id="idUserUpdateForm"
+		      maxContainerCols="1"
+		      editable="true"
+		      layout="ResponsiveGridLayout"
+		      labelSpanL="3"
+		      labelSpanM="3"
+		      emptySpanL="4"
+		      emptySpanM="4"
+		      columnsL="1"
+		      columnsM="1"
+		      class="editableForm">
+		      <f:content>
+		        <Label text="{i18n>FIRSTNAME}" />
+		        <Input id="idDgFirstName" value="" />
+		        <Label text="{i18n>LASTNAME}" />
+		        <Input id="idDgLastName" value="" />
+		        <Label text="{i18n>EMAIL}" />
+		        <Input id="idDgEMail" value="" />		        
+		      </f:content>
+			</f:SimpleForm>
+		</content>
+		<beginButton>
+			<Button text="{i18n>OK}" press="onCloseDialog" />
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>CANCEL}" press="onCloseDialog" />
+		</endButton>		
+	</Dialog>
+</core:FragmentDefinition>

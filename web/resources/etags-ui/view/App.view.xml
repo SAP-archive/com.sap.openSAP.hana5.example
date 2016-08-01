@@ -1,0 +1,100 @@
+<mvc:View
+    controllerName="shine.usercrud.etagsdemo.view.App"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout"
+  	xmlns:f="sap.ui.layout.form"
+	xmlns:u="sap.ui.unified"
+	displayBlock="true"
+	xmlns="sap.m">
+	<u:Shell>
+      <u:headItems>
+        <u:ShellHeadItem
+          tooltip="{i18n>HOMETOOLTIP}"
+          icon="sap-icon://home"
+          press="handlePressHome" />
+      </u:headItems>
+      <u:content>
+        <IconTabBar
+	    class="iconTabBarPaddingTop"
+	    id="idUserCRUDTabBar"
+	    upperCase="false"
+	    expanded="{device>/isNoPhone}">
+		    <items>
+		      <IconTabFilter text="{i18n>USERCRUDHEADER}">
+		       	<Panel expandable="true" expanded="true">
+			    <headerToolbar>
+			      <Toolbar height="2rem">
+			        <ToolbarSpacer />
+			        <Button icon="sap-icon://sys-help" press="handleInfoHelp" id="usercrud" />
+			      </Toolbar>
+			    </headerToolbar>
+			    <content>		        
+		        <l:VerticalLayout>
+					<Toolbar>     
+		        		<Button type="Emphasized" id="idCreateUser" text="{i18n>CREATEUSER}"
+				        	press="onOpenDialog" />  
+						<Button type="Emphasized" id="idUpdateUser" text="{i18n>UPDATEUSER}"
+			        		press="onOpenDialog" />	
+			    		<Button type="Emphasized" id="idDeleteUser" text="{i18n>DELETEUSER}"
+			        		press="deleteUser" />
+			        	<ToolbarSpacer/>
+			        	<Button id="idDeleteUserDetails" icon="sap-icon://sys-cancel" press="clearUserDetailsLogs" tooltip="{i18n>CLEAR_USER_DETAILS}"/>
+			        	<ToggleButton id="idFilterUser" icon="sap-icon://filter" tooltip="{i18n>APPLY_FILTER}"
+			        		press="filterNullValue" />
+      				</Toolbar> 			        
+	   				<Table id="idUserCRUDTable"
+					    inset="false"
+					    mode="SingleSelect"
+						growing="true"
+						items="{
+					      path: '/UserDetails',
+					      sorter: {
+					        path: 'UserId',
+					        descending: true
+					      }
+					    }">
+					    <columns>
+					      <Column>
+					        <Text text="{i18n>PERSONNO}" />
+					      </Column>					    
+					      <Column>
+					        <Text text="{i18n>FIRSTNAME}" />
+					      </Column>
+					      <Column>
+					        <Text text="{i18n>LASTNAME}" />
+					      </Column>					      
+					      <Column
+					        minScreenWidth="Tablet"
+					        demandPopin="false">
+					        <Text text="{i18n>EMAIL}" />
+					      </Column>					      
+					    </columns>
+					    <items>
+					      <ColumnListItem>
+					        <cells>
+					          <ObjectIdentifier
+					            title="{UserId}"
+					            class="sapMTableContentMargin" />
+					          <ObjectIdentifier
+					            title="{FirstName}"
+					            class="sapMTableContentMargin" />
+					          <ObjectIdentifier
+					            title="{LastName}"
+					            class="sapMTableContentMargin" />					            
+					          <ObjectIdentifier
+					            title="{Email}"
+					            class="sapMTableContentMargin" />					            
+					        </cells>
+					      </ColumnListItem>			      
+					    </items>
+					  </Table>			        	 						        					        
+		        </l:VerticalLayout> 
+		        </content>
+		        </Panel>
+		      </IconTabFilter>
+		    </items>
+		</IconTabBar>
+	  </u:content>
+    </u:Shell>
+</mvc:View>

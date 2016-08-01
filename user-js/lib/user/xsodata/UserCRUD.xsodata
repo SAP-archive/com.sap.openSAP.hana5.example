@@ -1,0 +1,8 @@
+service namespace "com.sap.openSAP.hana5.example.servicesa" {
+    "UserData.User"
+	as "UserDetails" concurrencytoken;
+}
+settings {  
+ support null;
+ metadata cache-control "max-age= 604800";
+ } 
