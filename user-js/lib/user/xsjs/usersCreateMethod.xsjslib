@@ -2,7 +2,7 @@
 "use strict";
 
 $.import("user.xsjs", "session");
-var SESSIONINFO = $.xsjs.session;
+var SESSIONINFO = $.user.xsjs.session;
 
 /**
 @param {connection} Connection - The SQL connection used in the OData request
@@ -19,13 +19,13 @@ function usersCreate(param){
 
 
 	//Validate Email
-	if(!validateEmail(User.Details[0].E_MAIL)){
-		throw "Invalid email for "  + User.Details[0].FIRSTNAME +  
-        " No Way! E-Mail must be valid and " + User.Details[0].E_MAIL + " has problems";
+	if(!validateEmail(User.Details[0].Email)){
+		throw "Invalid email for "  + User.Details[0].FirstName +  
+        " No Way! E-Mail must be valid and " + User.Details[0].Email + " has problems";
 	} 
 
 	//Get Next Personnel Number
-	pStmt = param.connection.prepareStatement("select \"purchaseOrderSeqId\".NEXTVAL from dummy"); 
+	pStmt = param.connection.prepareStatement("select \"userSeqId\".NEXTVAL from dummy"); 
 	var rs = pStmt.executeQuery();
 	var PersNo = "";
 	while (rs.next()) {
@@ -36,16 +36,17 @@ function usersCreate(param){
 	for( var i = 0; i<2; i++){
 		var pStmt;
 		if(i<1){
-			pStmt = param.connection.prepareStatement("insert into \"User.Details\" values(?,?,?,?)" );			
+			pStmt = param.connection.prepareStatement("insert into \"UserData.User\" values(?,?,?,?,?)" );			
 		}else{
 			pStmt = param.connection.prepareStatement("TRUNCATE TABLE \"" + after + "\"" );
 			pStmt.executeUpdate();
 			pStmt.close();
-			pStmt = param.connection.prepareStatement("insert into \"" + after + "\" values(?,?,?,?)" );		
+			pStmt = param.connection.prepareStatement("insert into \"" + after + "\" values(?,?,?,?,?)" );		
 		}
 		pStmt.setString(1, PersNo.toString());
-		pStmt.setString(2, User.Details[0].FIRSTNAME.toString());		pStmt.setString(3, User.Details[0].LASTNAME.toString());	
-		pStmt.setString(4, User.Details[0].E_MAIL.toString());	
+		pStmt.setString(2, User.Details[0].FirstName.toString());		pStmt.setString(3, User.Details[0].LastName.toString());	
+		pStmt.setString(4, User.Details[0].Email.toString());	
+		pStmt.setString(5, "");
 		pStmt.executeUpdate();
 		pStmt.close();
 	}

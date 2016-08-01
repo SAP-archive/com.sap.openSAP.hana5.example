@@ -5,9 +5,14 @@ sap.ui.core.UIComponent.extend("opensap.odataBasic.Component", {
 		jQuery.sap.require("sap.m.MessageBox");
 		jQuery.sap.require("sap.m.MessageToast");		
 		
-	    var oModel = new sap.ui.model.odata.ODataModel(
-		          "/user/xsodata/user2.xsodata/", true);
-	  	    oModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+		
+		var oParams = {};
+		oParams.json = true;
+		oParams.defaultBindingMode = sap.ui.model.BindingMode.TwoWay;
+		oParams.defaultUpdateMethod = "PUT";
+		oParams.useBatch = false;
+	    var oModel = new sap.ui.model.odata.v2.ODataModel(
+		          "/user/xsodata/user2.xsodata/", oParams);
 	  		oModel.attachRejectChange(this,function(oEvent){
 	  		    sap.m.MessageBox.alert("You are already editing another Entry! Please submit or reject your pending changes!");
 			});

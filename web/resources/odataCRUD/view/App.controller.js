@@ -8,10 +8,11 @@
  		var oModel = sap.ui.getCore().getModel("userModel");
  		var result = this.getView().getModel().getData();
  		var oEntry = {};
- 		oEntry.PERS_NO = "0000000000";
- 		oEntry.FIRSTNAME = result.FirstName;
- 		oEntry.LASTNAME = result.LastName;
- 		oEntry.E_MAIL = result.Email;
+ 		oEntry.UserId = "0000000000";
+ 		oEntry.FirstName = result.FirstName;
+ 		oEntry.LastName = result.LastName;
+ 		oEntry.Email = result.Email;
+ 		oEntry.ZMYNEW1 = "";
 
  		oModel.setHeaders({
  			"content-type": "application/json;charset=utf-8"
@@ -23,6 +24,7 @@
 
  	callUserUpdate: function() {
  		var oModel = sap.ui.getCore().getModel("userModel");
+ 		oModel.setHeaders({"content-type" : "application/json;charset=utf-8"});
  		oModel.submitChanges(
  			function() {
  				sap.m.MessageToast.show("Update successful");
@@ -35,7 +37,15 @@
  	onErrorCall: function(oError) {
  		if (oError.response.statusCode === 500 || oError.response.statusCode === 400) {
  			var errorRes = JSON.parse(oError.response.body);
- 			sap.m.MessageBox.alert(errorRes.error.innererror);
+ 			if (!errorRes.error.innererror){
+ 			 	sap.m.MessageBox.alert(errorRes.error.message.value);	
+ 			}else{
+ 				if (!errorRes.error.innererror.message){
+ 					sap.m.MessageBox.alert(errorRes.error.innererror.toString());
+ 				}else{
+ 					sap.m.MessageBox.alert(errorRes.error.innererror.message);
+ 				}
+ 			}
  			return;
  		} else {
  			sap.m.MessageBox.alert(oError.response.statusText);

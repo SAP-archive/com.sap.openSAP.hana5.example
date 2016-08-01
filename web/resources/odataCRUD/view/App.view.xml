@@ -16,7 +16,7 @@
 			<Button text="Update Changes" press="callUserUpdate"/>
 		</Panel>
 		<Panel headerText="User List" expandable="true" expanded="true">
-			<Table tableId="userTable" growingThreshold="10" growing="true" items="{ path: 'userModel&gt;/Users', sorter: { path: 'PERS_NO' }}">
+			<Table tableId="userTable" growingThreshold="10" growing="true" items="{ path: 'userModel&gt;/Users', sorter: { path: 'UserId' }}">
 				<columns>
 					<Column>
 						<header><Label text="User ID"/></header>
@@ -34,10 +34,10 @@
 				<items>
 					<ColumnListItem>
 						<cells>
-							<Input value="{path: 'userModel&gt;PERS_NO'}" name="PERS_NO" editable="false"/>
-							<Input value="{path: 'userModel&gt;FIRSTNAME'}" name="FIRSTNAME"/>
-							<Input value="{path: 'userModel&gt;LASTNAME'}" name="LASTNAME"/>
-							<Input value="{path: 'userModel&gt;E_MAIL'}" name="E_MAIL"/>
+							<Input value="{path: 'userModel&gt;UserId'}" name="PERS_NO" editable="false"/>
+							<Input value="{path: 'userModel&gt;FirstName'}" name="FIRSTNAME"/>
+							<Input value="{path: 'userModel&gt;LastName'}" name="LASTNAME"/>
+							<Input value="{path: 'userModel&gt;Email'}" name="E_MAIL"/>
 						</cells>
 					</ColumnListItem>
 				</items>

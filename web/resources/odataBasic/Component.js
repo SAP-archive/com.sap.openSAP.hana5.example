@@ -16,7 +16,7 @@ sap.ui.core.UIComponent.extend("opensap.odataBasic.Component", {
 
 		var oView = sap.ui.view({
 			id: "app",
-			viewName: "sap.shineNext.odataBasic.view.App",
+			viewName: "opensap.odataBasic.view.App",
 			type: "JS",
 			viewData: settings
 		});
