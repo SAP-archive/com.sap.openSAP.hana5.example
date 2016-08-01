@@ -3,18 +3,18 @@
 
 var excel = $.require("node-xlsx");
 var conn = $.hdb.getConnection();
-/*var query = "SELECT FROM PO.Item { " +
+var query = "SELECT FROM PO.Item { " +
 	" PURCHASEORDERID as \"PurchaseOrderItemId\", " +
 	" PURCHASEORDERITEM as \"ItemPos\", " +
 	" PRODUCT.PRODUCTID as \"ProductID\", " +
 	" GROSSAMOUNT as \"Amount\" " +
-	" } ";*/
-var query = "SELECT "  +
+	" } ";
+/*var query = "SELECT "  +
 	" PURCHASEORDERID as \"PurchaseOrderItemId\", " +
 	" PURCHASEORDERITEM as \"ItemPos\", " +
 	" \"PRODUCT.PRODUCTID\" as \"ProductID\", " +
 	" GROSSAMOUNT as \"Amount\" " +
-	"FROM \"PO.Item\" ";	
+	"FROM \"PO.Item\" ";	*/
 var rs = conn.executeQuery(query);
 
 var body = "";

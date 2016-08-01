@@ -63,9 +63,15 @@ modules:
       - name: core-js
         group: destinations
         properties:
-          name: core-js
+          name: core-backend
           url: ~{url}
           forwardAuthToken: true          
+      - name: user-js
+        group: destinations
+        properties:
+          name: user-backend
+          url: ~{url}
+          forwardAuthToken: true  
 
  - name: openSAP5-ex-core-js
    type: nodejs
@@ -79,6 +85,20 @@ modules:
       - name: container
       - name: openSAP5-ex-core-db
 
+
+ - name: openSAP5-ex-user-js
+   type: nodejs
+   path: user-js
+   provides: 
+     - name: user-js
+       properties:
+         url: "${default-url}"
+   requires:
+      - name: openSAP5-ex-uaa
+      - name: user-container
+      - name: openSAP5-ex-user-db
+      - name: openSAP5-ex-scheduler
+      
 resources:
  - name: container
    properties:

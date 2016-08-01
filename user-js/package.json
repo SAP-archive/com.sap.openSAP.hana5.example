@@ -8,27 +8,18 @@
 		"sap-xsenv": "1.2.2",
 		"sap-xsjs": "1.6.4",
 		"sap-hdbext": "2.0.4",
-		"sap-textbundle": "latest",
 		"sap-logging": "~1.4",
 		"sap-jobs-client": "~1.0.9",
 		"express": "~4.14",
 		"passport": "~0.3.2",
-		"async": "latest",
-		"ws": "latest",
-		"accept-language-parser": "latest",
-		"node-xlsx": "~0.7.1",
-		"node-zip": "~1.1.1",
-		"xmldoc": "~0.5.1",
-		"winston": "~2.2",
-		"body-parser": "~1.15"
+		"async": "latest"
 	},
-	"description": "",
+	"devDependencies": {},
 	"files": [],
 	"main": "server.js",
-	"name": "core-js",
+	"name": "user-js",
 	"scripts": {
-		"start": "node server.js",
-		"test": "node testrun.js"
+		"start": "node server.js"
 	},
 	"version": "1.0.0"
 }

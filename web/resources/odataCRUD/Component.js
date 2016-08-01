@@ -6,7 +6,7 @@ sap.ui.core.UIComponent.extend("opensap.odataBasic.Component", {
 		jQuery.sap.require("sap.m.MessageToast");		
 		
 	    var oModel = new sap.ui.model.odata.ODataModel(
-		          "/xsodata/user2.xsodata/", true);
+		          "/user/xsodata/user2.xsodata/", true);
 	  	    oModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
 	  		oModel.attachRejectChange(this,function(oEvent){
 	  		    sap.m.MessageBox.alert("You are already editing another Entry! Please submit or reject your pending changes!");

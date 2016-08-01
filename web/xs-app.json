@@ -10,7 +10,7 @@
 	},
 	"routes": [{
 		"source": "/node(.*)",
-		"destination": "core-js",
+		"destination": "core-backend",
 		"csrfProtection": true,
 		"authenticationType": "xsuaa",
 		"scope": {
@@ -20,9 +20,50 @@
 			"DELETE": ["$XSAPPNAME.Display", "$XSAPPNAME.Delete"],
 			"default": "$XSAPPNAME.Display"
 		}
+	},
+	{
+		"source": "/sap/hana/democontent/epm/services/",
+		"destination": "core-backend"
+	},
+	{
+		"source": "/get/(.*)",
+		"destination": "core-backend",
+		"scope": "$XSAPPNAME.DataGenerator"
 	}, {
+		"source": "/reset/(.*)",
+		"destination": "core-backend",
+		"scope": "$XSAPPNAME.DataGenerator"
+	}, {
+		"source": "/replicate/(.*)",
+		"destination": "core-backend",
+		"scope": "$XSAPPNAME.DataGenerator"
+	}, {
+		"source": "/jobs/(.*)",
+		"destination": "user-backend"
+	}, {
+		"source": "/schedules/(.*)",
+		"destination": "user-backend"
+	}, {
+		"source": "/jobactivity/(.*)",
+		"destination": "user-backend",
+		"authenticationType": "basic"
+	}, 
+	{
+		"source": "/user/(.*)",
+		"destination": "user-backend"
+	},
+	{
+		"source": "^/admin-ui/(.*)",
+		"localDir": "resources",
+		"scope": "$XSAPPNAME.DataGenerator",
+		"replace": {
+			"pathSuffixes": ["index.html"],
+			"vars": ["ui5liburl"]
+		}
+	},
+	{
 		"source": "(.*)(.xsjs)",
-		"destination": "core-js",
+		"destination": "core-backend",
 		"csrfProtection": true,
 		"authenticationType": "xsuaa",
 		"scope": {
@@ -34,7 +75,7 @@
 		}
 	}, {
 		"source": "(.*)(.xsodata)",
-		"destination": "core-js",
+		"destination": "core-backend",
 		"authenticationType": "xsuaa",
 		"scope": {
 			"GET": "$XSAPPNAME.Display",
@@ -52,7 +93,7 @@
 			"default": "$XSAPPNAME.Display"
 		},
 		"replace": {
-			"pathSuffixes": ["index.html","odataTest.html"],
+			"pathSuffixes": ["index.html", "odataTest.html"],
 			"vars": ["ui5liburl"]
 		}
 	}]
