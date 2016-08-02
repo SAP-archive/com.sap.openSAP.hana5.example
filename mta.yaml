@@ -99,7 +99,7 @@ modules:
       - name: openSAP5-ex-user-db
       - name: openSAP5-ex-scheduler
 
-# - name: user-java
+# - name: openSAP5-ex-user-java
 #   type: java.tomee
 #   path: user-java/target/user-java-1.1.13.war
 #   provides: 

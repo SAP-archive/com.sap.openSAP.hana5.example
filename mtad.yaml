@@ -1,0 +1,104 @@
+_schema-version: "2.0.0"
+ID: OPENSAP_HANA5_EXAMPLE
+version: 1.12.1
+
+modules:
+  - name: openSAP5-ex-web
+    type: javascript.nodejs
+    path: web/
+    provides: 
+      - name: web
+        properties:
+          ui-url: "${default-url}"
+    requires:
+      - name: openSAP5-ex-uaa
+      - name: core-js
+        group: destinations
+        properties:
+          name: core-backend
+          url: ~{url}
+          forwardAuthToken: true 
+      - name: user-js
+        group: destinations
+        properties:
+          name: user-backend
+          url: ~{url}
+          forwardAuthToken: true
+      - name: user-java
+        group: destinations
+        properties:
+          name: user-java-backend
+          url: ~{url}
+          forwardAuthToken: true
+
+    parameters: 
+       host: web 
+       register-service-url: true 
+       service-name: web 
+       service-url: "${default-url}"
+        
+  - name: openSAP5-ex-core-js
+    type: javascript.nodejs
+    path: core-js/
+    provides: 
+      - name: core-js
+        properties:
+          url: "${default-url}"
+    properties: 
+      HANA_SERVICE_NAME: openSAP5-ex-container
+      UAA_SERVICE_NAME: openSAP5-ex-uaa
+    requires:
+      - name: openSAP5-ex-uaa
+      - name: openSAP5-ex-container
+      - name: openSAP5-ex-core-db
+      
+  - name: openSAP5-ex-user-js
+    type: javascript.nodejs
+    path: user-js/
+    provides: 
+      - name: user-js
+        properties:
+          url: "${default-url}"
+    requires:
+      - name: openSAP5-ex-uaa
+      - name: openSAP5-ex-scheduler
+      - name: openSAP5-ex-user-db
+      - name: openSAP5-ex-user-container
+      
+  - name: openSAP5-ex-user-java
+    type: java.tomee
+    path: sap-xsac-shine-user-java.war
+    provides: 
+      - name: user-java
+        properties:
+          url: "${default-url}"
+    requires:
+      - name: openSAP5-ex-uaa
+      - name: openSAP5-ex-user-db
+      - name: openSAP5-ex-user-container
+      
+  - name: openSAP5-ex-core-db
+    type: com.sap.xs.hdi
+    requires:
+      - name: openSAP5-ex-container
+      
+  - name: openSAP5-ex-user-db
+    type: com.sap.xs.hdi
+    path: user-db
+    requires:
+     - name: openSAP5-ex-user-container
+
+resources:
+  - name: openSAP5-ex-container
+    type: com.sap.xs.hdi-container
+    
+  - name: openSAP5-ex-user-container
+    type: com.sap.xs.hdi-container
+    
+  - name: openSAP5-ex-scheduler
+    type: com.sap.xs.job-scheduler
+    
+  - name: openSAP5-ex-uaa
+    type: com.sap.xs.uaa-space
+    parameters:
+     config-path: xs-security.json

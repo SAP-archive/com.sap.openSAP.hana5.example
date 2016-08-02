@@ -1,0 +1,41 @@
+---
+applications:
+- name: openSAP5-ex-core-db
+  path: core-db
+  memory: 256M
+  no-route: true
+  services:
+    - openSAP5-ex-container
+
+- name: openSAP5-ex-core-js
+  port: 49010
+  path: core-js
+  memory: 512M
+  services:
+    - openSAP5-ex-container
+    - openSAP5-ex-uaa
+
+- name: openSAP5-ex-user-js
+  port: 49040
+  memory: 256M
+  path: user-js/
+  services:
+    - openSAP5-ex-user-conatiner
+    - openSAP5-ex-uaa
+    - openSAP5-ex-scheduler
+
+- name: openSAP5-ex-web
+  port: 49020
+  path: web
+  memory: 768M
+  env:
+    destinations: >
+      [
+        {"name":"core-backend", "url":"http://<xsa-host>:49010", "forwardAuthToken": true},
+        {"name":"user-backend", "url":"http://<xsa-host>:49040", "forwardAuthToken": true}
+      ]
+  services:
+    - openSAP5-ex-uaa
+  env:
+    HANA_SERVICE_NAME: openSAP5-ex-container
+    UAA_SERVICE_NAME: openSAP5-ex-uaa
