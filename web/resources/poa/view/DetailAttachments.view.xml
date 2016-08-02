@@ -1,0 +1,20 @@
+<core:View
+	controllerName="sap.shineNext.poa.view.DetailAttachments"
+	xmlns="sap.m"
+	xmlns:commons="sap.ui.commons"
+	xmlns:form="sap.ui.commons.form"
+	xmlns:layout="sap.ui.commons.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" >
+	<List
+		id="list"
+		showSeparators="None"
+		items="{path:'Attachments'}" >
+		<StandardListItem
+			title="{Title}, {Size}"
+			icon="{path:'Type', formatter:'sap.shineNext.poa.util.Formatter.AttachmentIcon'}"
+			description="{Description}"
+			iconInset="false"
+			info="{path:'CreatedAt', formatter:'sap.shineNext.poa.util.Formatter.Date'}" />
+	</List>
+</core:View>

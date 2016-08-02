@@ -1,0 +1,286 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Sales Reporting Dashboard</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <!-- <script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" -->
+		<script id="sap-ui-bootstrap" src="{{{ui5liburl}}}/resources/sap-ui-core.js"
+			data-sap-ui-libs="sap.m,sap.makit"
+			data-sap-ui-theme="sap_bluecrystal" >
+		</script>
+		<!-- add sap.ui.table,sap.ui.ux3 and/or other libraries to 'data-sap-ui-libs' if required -->
+		<script>
+			jQuery.sap.require("jquery.sap.history");
+			
+			//define helper function for navigation back
+			function navBack() {
+				jQuery.sap.history.back();
+			}
+
+			// define helper function for navigating to page
+			function navToPage(id, writeHistory, navType) {
+
+				if(MakitApp === undefined) {
+					return;
+				}
+				// tell app to navigate in the right direction
+				(navType === jQuery.sap.history.NavType.Back) ? MakitApp.back() : MakitApp.to(id);
+				
+				// write browser history
+				if (writeHistory === undefined || writeHistory) {
+					var bookmarkable = false;
+					var stateData = {id: id};
+					jQuery.sap.history.addHistory(HISTORY_PATH_PAGE, stateData, bookmarkable);
+				}
+				
+				// log
+				jQuery.sap.log.info("navToPage '" + id + "' (" + writeHistory + "," + navType + ")");
+			}
+		
+			var HISTORY_PATH_PAGE = "page";
+			var MakitApp = undefined;
+			MakitApp = new sap.m.App("makitApp", {
+				initialPage : "mainPage",
+				homeIcon : {
+					'phone' : 'img/57_iPhone_Desktop_Launch.png',
+					'phone@2' : 'img/114_iPhone-Retina_Web_Clip.png',
+					'tablet' : 'img/72_iPad_Desktop_Launch.png',
+					'tablet@2' : 'img/144_iPad_Retina_Web_Clip.png',
+					'favicon' : 'img/favicon.ico',
+					'precomposed': false
+				}
+			});
+			
+			//StandardListItem
+			var oMainList = new sap.m.List("mainList");
+			var oMainPage = new sap.m.Page("mainPage", { title : "Sales Reporting Dashboard" });
+			var oListItem1 = new sap.m.StandardListItem("itmSalesByRegion", {title:"Sales by Region", icon:"img/pie_chart_icon.png", type: sap.m.ListType.Active, press: function(){ navToPage("SalesByRegion", true);}});
+			var oListItem2 = new sap.m.StandardListItem("itmSalesByCountry", {title:"Sales by Country", icon:"img/ms_bar_chart_icon.png", type: sap.m.ListType.Active, press: function(){ navToPage("SalesByCountry", true);}});
+			var oListItem3 = new sap.m.StandardListItem("itmSalesRank", {title:"Sales Rank by Company", icon:"img/ms_bar_chart_icon.png", type: sap.m.ListType.Active, press: function(){ navToPage("SalesRank", true);}});
+			var oListItem4 = new sap.m.StandardListItem("itmProductSales", {title:"Product Category Sales Year to Year", icon:"img/ms_bar_chart_icon.png", type: sap.m.ListType.Active, press: function(){ navToPage("ProductSales", true);}});
+
+
+			oMainList.addItem(oListItem1).addItem(oListItem2).addItem(oListItem3).addItem(oListItem4);
+			oMainPage.addContent(oMainList);
+			
+	
+			//Sales by Region Pie Chart Data model
+	  	    var oModel = new sap.ui.model.odata.ODataModel("/sap/hana/democontent/epm/services/salesByRegion.xsodata/", true);
+	  	    
+	  		var oChart = new sap.makit.Chart({
+	  			width : "100%",
+	  			height: "80%",
+	  			type : sap.makit.ChartType.Pie,
+	  			
+	  			valueAxis: new sap.makit.ValueAxis({}),
+	  			maxSliceCount: 3,
+	  			categoryAxis: new sap.makit.CategoryAxis({}),
+	  			category : new sap.makit.Category({
+	  				column : "REGION",
+	 				displayName : "Region"
+	  			}),
+	  			values : [new sap.makit.Value({
+	  				expression : "TOTAL_SALES",
+	 				displayName : "Total Sales",
+	  				format : "currency",
+	  			})],
+	  		});
+	  		oChart.addColumn(new sap.makit.Column({name:"REGION", value:"{REGION}", text: "Region"}));
+	  		oChart.addColumn(new sap.makit.Column({name:"TOTAL_SALES", value:"{TOTAL_SALES}", type:"number"}));
+	  		oChart.setModel(oModel);
+	  		oChart.bindRows("/SalesByRegion");
+	  		
+	  		var oBar = new sap.m.Bar({ 
+	  			contentLeft: [new sap.m.Button({text: "Back", type:sap.m.ButtonType.Back, press: function(){navBack();}})],	
+	  			contentMiddle: [new sap.m.Label({text: "Sales by Region"})]
+	  		});
+	  		
+	  		var oPage1 = new sap.m.Page("SalesByRegion", {
+	  			title : "Sales by Region",
+	  			customHeader : oBar 
+	  		});
+	  		oPage1.addContent(oChart);
+	  		
+	  		
+	  	//Sales by Country Bar Chart Data model
+	  	    var oModel = new sap.ui.model.odata.ODataModel("/sap/hana/democontent/epm/services/salesByCountry.xsodata/", true);
+	  	    
+	  		var oChart = new sap.makit.Chart({
+	  			width : "100%",
+	  			height: "80%",
+	  			type : sap.makit.ChartType.Column,
+	  			
+	  			showRangeSelector : true,
+	  			showTableView : false,
+	  			showTotalValue : true,
+	  			lineThickness : 2,
+	  			categoryAxis: new sap.makit.CategoryAxis({displayLastLabel:true}),
+	  			category : new sap.makit.Category({
+	  				column : "COUNTRY",
+	  				displayName : "Country"
+	  			}),
+	  			values : [new sap.makit.Value({
+	  				expression : "TOTAL_SALES",
+	  				format : "currency",
+	  				displayName : "Total Sales"	  				
+	  	    	})],
+	  		});
+	  		oChart.addColumn(new sap.makit.Column({name:"COUNTRY", value:"{COUNTRY}", }));
+	  		oChart.addColumn(new sap.makit.Column({name:"TOTAL_SALES", value:"{TOTAL_SALES}", type:"number"}));
+	  		oChart.setModel(oModel);
+	  		oChart.bindRows("/SalesByCountry");
+	  		
+	  		var oBar = new sap.m.Bar({ 
+	  			contentLeft: [new sap.m.Button({text: "Back", type:sap.m.ButtonType.Back, press: function(){navBack();}})],	
+	  			contentMiddle: [new sap.m.Label({text: "Sales by Country"})]
+	  		});
+	  		
+	  		var oPage2 = new sap.m.Page("SalesByCountry", {
+	  			title : "Sales by Country",
+	  			customHeader : oBar 
+	  		});
+	  		oPage2.addContent(oChart);
+	  		
+	  	//Sales Rank Bubble Chart Data model
+	  	    var oModel = new sap.ui.model.odata.ODataModel("/sap/hana/democontent/epm/services/salesSalesRank.xsodata/", true);
+	  	    var sort1 = new sap.ui.model.Sorter("SALES");
+	  		var oChart = new sap.makit.Chart({
+	  			width : "100%",
+	  			height: "80%",
+	  			type : sap.makit.ChartType.Bubble,
+	  			
+	  			showRangeSelector : true,
+	  			showTableView : false,
+	  			showTotalValue : true,
+	  			lineThickness : 2,
+	  			categoryAxis: new sap.makit.CategoryAxis({displayLastLabel:true}),
+	  			category : new sap.makit.Category({
+	  				column : "COMPANY_NAME",	  				
+	  				displayName : "Company"
+	  			}),
+	  			values : [new sap.makit.Value({
+	  				expression : "SALES",
+	  				format : "currency",	  				
+	  				displayName : "Total Sales"	  				
+	  	    	}),
+	  			
+	  			],
+	  			valueBubble : new sap.makit.ValueBubble({
+	  				style: sap.makit.ValueBubbleStyle.FloatTop,
+	  				showCategoryText: true
+	  			}),
+	  		});
+	  		oChart.addColumn(new sap.makit.Column({name:"COMPANY_NAME", value:"{COMPANY_NAME}", }));
+	  		oChart.addColumn(new sap.makit.Column({name:"SALES_RANK", value:"{SALES_RANK}", type:"number"}));  		
+	  		oChart.addColumn(new sap.makit.Column({name:"SALES", value:"{SALES}", type:"number"}));	  		
+	  		oChart.addColumn(new sap.makit.Column({name:"ORDERS", value:"{ORDERS}", type:"number"}));
+	  		oChart.setModel(oModel);
+	  		oModel.setSizeLimit(10);
+	  		oChart.bindRows({
+	  			path: "/salesRank",
+	  			sorter: sort1
+	  		 });
+	  			  		
+	  		var oBar = new sap.m.Bar({ 
+	  			contentLeft: [new sap.m.Button({text: "Back", type:sap.m.ButtonType.Back, press: function(){navBack();}})],	
+	  			contentMiddle: [new sap.m.Label({text: "Sales Rank by Company"})]
+	  		});
+	  		
+	  		var oPage3 = new sap.m.Page("SalesRank", {
+	  			title : "Sales Rank by Company",
+	  			customHeader : oBar 
+	  		});
+	  		oPage3.addContent(oChart);
+	  		
+	  	//Product Category Sales Year to Year Bar Chart Data model
+	  	    var oModel = new sap.ui.model.odata.ODataModel("/sap/hana/democontent/epm/services/salesYearCompare.xsodata/", true);
+	  	    var sort1 = new sap.ui.model.Sorter("TOTAL_SALES");
+	  	    var currentYear =  new Date().getFullYear();
+	  	    var previousYear = new Date().getFullYear() - 1;
+	  	    
+	  		var oChart = new sap.makit.CombinationChart({
+	  			width : "100%",
+	  			height: "80%",
+	  			legendPosition : sap.makit.LegendPosition.Right,
+	  			categoryAxis: new sap.makit.CategoryAxis({displayAll:true}),
+	  			categoryRegions : new sap.makit.Category({
+	  				column : "PRODUCT_CATEGORY",
+	  				displayName : "Product Category"
+	  			}),
+	  			showRangeSelector: false,
+	  			showTableValue: false,	  			
+	  		});
+	  		
+	  		var layer1 = new sap.makit.Layer({
+	  			type : sap.makit.ChartType.Line,
+	  			values : [new sap.makit.Value({
+	  				expression : "YEAR1_NET_AMOUNT", format : "currency", displayName : "Sales for "+previousYear
+	  			})],
+	  		});
+	  		var layer2 = new sap.makit.Layer({
+	  			type : sap.makit.ChartType.Line,
+	  			values : [new sap.makit.Value({
+	  				expression : "YEAR2_NET_AMOUNT", format : "currency", displayName : "Sales for "+currentYear
+	  			})],
+	  		});	  		
+	  		
+	  		oChart.addLayer(layer1);
+	  		oChart.addLayer(layer2);
+	  		
+	  		layer1.addColumn(new sap.makit.Column({name:"PRODUCT_CATEGORY", value:"{Product_Category}", }));
+	  		layer1.addColumn(new sap.makit.Column({name:"YEAR1_NET_AMOUNT", value:"{YEAR1_NET_AMOUNT}", type:"number"}));
+	  		layer2.addColumn(new sap.makit.Column({name:"PRODUCT_CATEGORY", value:"{Product_Category}", }));
+	  		layer2.addColumn(new sap.makit.Column({name:"YEAR2_NET_AMOUNT", value:"{YEAR2_NET_AMOUNT}", type:"number"}));	  		
+	  		layer1.setModel(oModel);
+	  		layer2.setModel(oModel);	  		
+	  		var bindString = "/InputParams(IP_YEAR_1='"+
+				previousYear +
+				"',IP_YEAR_2='" +
+			    currentYear +
+			    "')/Results";	  		
+	  		layer1.bindRows(bindString,sort1);
+	  		layer2.bindRows(bindString,sort1);	  		
+	  		
+	  		var oBar = new sap.m.Bar({ 
+	  			contentLeft: [new sap.m.Button({text: "Back", type:sap.m.ButtonType.Back, press: function(){navBack();}})],	
+	  			contentMiddle: [new sap.m.Label({text: "Product Category Sales Year to Year"})]
+	  		});
+	  		
+	  		var oPage4 = new sap.m.Page("ProductSales", {
+	  			title : "Product Category Sales Year to Year",
+	  			customHeader : oBar 
+	  		});
+	  		oPage4.addContent(oChart);
+	  		
+
+	  		
+	  		MakitApp.addPage(oMainPage).addPage(oPage1).addPage(oPage2).addPage(oPage3).addPage(oPage4);
+			MakitApp.placeAt("body");
+			
+			// init history management as the last step 
+			// (app and pages need to be instantiated at this stage)
+			jQuery.sap.history({
+				routes: [{
+					path: HISTORY_PATH_PAGE,
+					handler: function(params, navType) {
+						
+						// This handler is executed when you navigate back to the history state on the path "page"
+						if (!params || !params.id) {
+							jQuery.sap.log.error("invalid page parameter: " + params);
+						} else {
+							navToPage(params.id, false, navType);
+						}
+					}
+				}],
+				defaultHandler: function(navType) {
+					// The default handler is executed when you navigate back to the history state with an empty hash
+					navToPage("mainPage", false, navType);
+				}
+			});
+
+		</script>
+	</head>
+	<body id="body" class="sapUiBody">
+		<div id="content1" style="width:100%; height: 500px;"></div>
+	</body>
+</html>

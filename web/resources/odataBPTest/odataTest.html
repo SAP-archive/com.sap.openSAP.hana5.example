@@ -1,0 +1,655 @@
+<!DOCTYPE HTML>
+<html>
+       <head>
+              <meta http-equiv="X-UA-Compatible" content="IE=edge">
+			  <title>Business Partners OData Test</title>
+			  <link type="image/x-icon" href="/images/favicon.ico" rel="shortcut icon">
+        	  <link type="image/x-icon" href="/images/favicon.ico" rel="icon">			  
+	    	  <!-- <script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" -->
+			  <script id="sap-ui-bootstrap" src="{{{ui5liburl}}}/resources/sap-ui-core.js"
+                      data-sap-ui-libs="sap.ui.ux3,sap.ui.commons,sap.ui.table"
+                      data-sap-ui-theme="sap_bluecrystal" >
+              </script>
+              <!-- add sap.ui.table,sap.ui.ux3 and/or other libraries to 'data-sap-ui-libs' if required -->
+			  <script>
+		    
+			 /*   var aUrl = '/sap/hana/democontent/epmNext/services/session.xsjs?cmd=getSessionInfo';
+               var gUserName = '';
+			 	onLoadSession(
+				    		JSON.parse(jQuery.ajax({
+				    		       url: aUrl,
+				    		       method: 'GET',
+				    		       dataType: 'json',
+				    		       async: false}).responseText));
+
+				function onLoadSession(myJSON){
+					for( var i = 0; i<myJSON.session.length; i++)
+				     {
+					   gUserName = myJSON.session[i].UserName;
+				     }
+				} */
+				
+			  /*************** Hijacking for Gold Reflection *************/
+	   			if (sap.ui.getCore().getConfiguration().getTheme() == "sap_goldreflection" || "sap_bluecrystal") { // this line is a hack, the rest of this coding is what a BusyIndicator hijacker could do
+	   				sap.ui.core.BusyIndicator.attachOpen(function(oEvent) {
+	   					$Busy = oEvent.getParameter("$Busy");
+	   					iBusyPageWidth = jQuery(document.body).width();
+	   					$Busy.css("top", "0").css("width", iBusyPageWidth + "px");
+	   					bBusyAnimate = true;
+	   					iBusyLeft = $Busy[0].offsetLeft;
+	   					window.setTimeout(animationStep, iBusyTimeStep);
+	   				});
+	   				sap.ui.core.BusyIndicator.attachClose(function(oEvent) {
+	   					bBusyAnimate = false;
+	   				});
+	   			}
+
+	   			var bBusyAnimate = false;
+	   			var iBusyLeft = 0;
+	   			var iBusyDelta = 60;
+	   			var iBusyTimeStep = 50;
+	   			var iBusyWidth = 500;
+	   			var iBusyPageWidth;
+	   			var $Busy;
+
+	   			function animationStep() {
+	   				if (bBusyAnimate) {
+	   					iBusyLeft += iBusyDelta;
+	   					if (iBusyLeft > iBusyPageWidth) {
+	   						iBusyLeft = -iBusyWidth;
+	   					}
+	   					$Busy.css("background-position", iBusyLeft + "px 0px");
+	   					window.setTimeout(animationStep, iBusyTimeStep);
+	   				}
+	   			}
+	   			/*************** END of Hijacking for Gold Reflection *************/
+	   			
+	   			function onErrorCall(oError){
+	   	    	 sap.ui.core.BusyIndicator.hide();	    	 
+	   	   	 	 if(oError.response.statusCode == '500'){
+	   	   	 		     var errorRes = JSON.parse(oError.response.body);
+	   		    		 sap.ui.commons.MessageBox.show(errorRes.error.message.value, 
+	   		    				 "ERROR",
+	   		    				 "Service Call Error" );	
+	   		    		return;	
+	   	   	 	 }
+	   	   	  	 else{
+	   			         sap.ui.commons.MessageBox.show(oError.response.statusText, 
+	   		    				 "ERROR",
+	   		    				 "Service Call Error" );	
+	   		    		return;	
+	   	   	 	 }
+	   	   		}	
+		
+		
+	 	 function handleExitShell(oEvent){
+	 	        alert("Logout Button has been clicked.\nThe application can now do whatever is required.\nThis example page will just clear the screen.");
+	 	        oEvent.getSource().forceInvalidation();
+	 	        oEvent.getSource().destroy();
+	 	        sap.ui.getCore().applyChanges();
+	 	        jQuery(document.body).html("<span>Logout had been pressed, screen has been cleared.</span>");
+	 	      }
+	 	      
+	 	 function handlePersonalizeShell(oEvent){
+	 	    	  sap.ui.getCore().byId("myShell").openPersonalizationDialog();
+	 	      }
+	 	      
+	 	 function handlePersonalizeShellChange(oEvent){
+	 		        var data = oEvent.getParameter("settings"); // retrieve the personalization data object
+	 		        // ...now persist this data on the server or wherever personalization data is stored
+	 		        // (in-browser is not enough because the user wants his settings when logging in from another browser as well)
+	 		        // browser-only:
+	 		        if (JSON && window["localStorage"]) { // only in browsers with native JSON and offline storage support
+	 		          var string = JSON.stringify(data);
+	 		          localStorage.setItem("sapUiShellTestSettings", string);
+	 		        }
+	 		  }
+	 		  
+	 	function createShell(oShell) {
+
+	 
+	 		var oUserTxt = new sap.ui.commons.TextView({
+	 			tooltip : "Welcome" 
+	 		});
+	 		oShell.addHeaderItem(oUserTxt);
+	 		oUserTxt.setText("Welcome");	
+	 		oShell.addHeaderItem(new sap.ui.commons.Button({
+	 			text : "Personalize",
+	 			tooltip : "Personalize",
+	 			press : handlePersonalizeShell
+	 		}));
+
+	 		oShell.addHeaderItem(new sap.ui.commons.MenuButton({
+	 			text : "Help",
+	 			tooltip : "Help Menu",
+	 			menu : new sap.ui.commons.Menu("menu1", {
+	 				items : [ new sap.ui.commons.MenuItem("menuitem1", {
+	 					text : "Help"
+	 				}), new sap.ui.commons.MenuItem("menuitem2", {
+	 					text : "Report Incident"
+	 				}), new sap.ui.commons.MenuItem("menuitem3", {
+	 					text : "About"
+	 				}) ]
+	 			})
+	 		})); 
+	 	}
+
+	 	function buildShellPersonalization(oShell) {
+	 		// EXPERIMENTAL - THIS WILL CHANGE!!
+	 		oShell._getPersonalization().attachPersonalizationChange(
+	 				handlePersonalizeShellChange);
+	 		// initialize settings
+	 		if (JSON && window["localStorage"]) { // only in browsers with native JSON
+	 			// and offline storage support
+	 			var sSettings = localStorage.getItem("sapUiShellTestSettings");
+	 			if (sSettings) {
+	 				oShell.initializePersonalization(JSON.parse(sSettings));
+	 			}
+	 		}
+	 	}
+		
+			oSimpleView = new sap.ui.commons.layout.MatrixLayout();
+			oCreateView = new sap.ui.commons.layout.MatrixLayout();
+			//oMultiView = new sap.ui.commons.layout.MatrixLayout();
+	
+		//Simple View Rendering
+		function oDataFailed(oControlEvent){
+   		 sap.ui.commons.MessageBox.show("Bad Entity Definition", 
+   				 "ERROR",
+   				 "OData Service Call Error" );
+			
+		}
+		
+		function callSimpleService(){
+			  var oTable = sap.ui.getCore().byId("tblHeader");
+			  oTable.removeAllColumns();
+			  oTable.removeAllRows();
+		   	  var oModel = new sap.ui.model.odata.ODataModel(sap.ui.getCore().byId("val1").getValue(), false);
+		   	  oModel.attachEvent("requestFailed",oDataFailed)
+		   	  
+		   	  var oMeta = oModel.getServiceMetadata();
+	          var oControl;
+	          
+	          if(!oMeta){
+		    		 sap.ui.commons.MessageBox.show('Bad Service Definition', 
+   		    				 "ERROR",
+   		    				 "Service Call Error" );	
+	          }
+	          else{
+		   	  for ( var i = 0; i < oMeta.dataServices.schema[0].entityType[0].property.length; i++) {
+		   		  var property = oMeta.dataServices.schema[0].entityType[0].property[i];
+		   		  
+		          oControl = new sap.ui.commons.TextField().bindProperty("value",property.name);
+		          oTable.addColumn(new sap.ui.table.Column({label:new sap.ui.commons.Label({text: property.name}), template: oControl, sortProperty: property.name, filterProperty: property.name, filterOperator: sap.ui.model.FilterOperator.EQ, flexible: true, width: "125px" }));
+		     
+		   	  }		   	  
+		   	  oTable.setModel(oModel);
+	          }		   	  
+		   	  oTable.bindRows(sap.ui.getCore().byId("val2").getValue());
+	 	}
+		
+		
+   		      var searchPanel = new sap.ui.commons.Panel().setText('Simple Service Selections');
+   		      var layoutNew = new sap.ui.commons.layout.MatrixLayout({width:"auto"});   		      
+   		      searchPanel.addContent(layoutNew);
+
+   		   	  var urlBP = "/sap/hana/democontent/epm/services/businessPartners2.xsodata";
+   		   	   		   	  
+   		      var oVal1 = new sap.ui.commons.TextField("val1",{tooltip: "Service Path", width: "500px", editable:true, value: urlBP });
+   		      var oVal2 = new sap.ui.commons.TextField("val2",{tooltip: "Entity Name", width: "200px", editable:true, value: "/Buyer"});
+   		      
+   		   	  var oExcButton = new sap.ui.commons.Button({
+ 	          text : "Execute Service",
+ 	          press : callSimpleService });
+   		      layoutNew.createRow(new sap.ui.commons.Label({text: "Service Path: "}), oVal1 ); //oExcButton );   
+   		   	  layoutNew.createRow(new sap.ui.commons.Label({text: "Entity Name: "}), oVal2, oExcButton ); 
+   		   	  oSimpleView.createRow(searchPanel);	
+		
+ 			  //Header Table Panel
+   		      var tablePanel = new sap.ui.commons.Panel().setText('Business Partner Data');
+   		      var layoutTbl = new sap.ui.commons.layout.MatrixLayout({width:"auto"});
+   		      tablePanel.addContent(layoutTbl);
+   		      var oControl; 
+   		      oTable = new sap.ui.table.Table("tblHeader",{tableId: "tblHeader", 
+   	    	    visibleRowCount: 5});  
+   	   	 	  layoutTbl.createRow(oTable);
+   		   	  oSimpleView.createRow(tablePanel);	
+
+		//Creation View Rendering
+		function onSuccessCall(){
+			  var oTable = sap.ui.getCore().byId("tblUsers");	
+			  var oFilters = [new sap.ui.model.Filter("Id", sap.ui.model.FilterOperator.GT, '1000000099' )];  
+		   	  oTable.bindRows({path: sap.ui.getCore().byId("val3_2").getValue(), filters: oFilters });	
+		}
+		function callUserService(){
+			 var oTable = sap.ui.getCore().byId("tblUsers");
+			  oTable.removeAllColumns();
+			  oTable.removeAllRows();
+		   	  var oModel = new sap.ui.model.odata.ODataModel(sap.ui.getCore().byId("val3_1").getValue(), true);
+		   	  oModel.attachEvent("requestFailed",oDataFailed)
+		   	  
+		   	  var oMeta = oModel.getServiceMetadata();
+	          var oControl;
+	          
+	          if(!oMeta){
+		    		 sap.ui.commons.MessageBox.show('Bad Service Definition', 
+  		    				 "ERROR",
+  		    				 "Service Call Error" );	
+	          }
+	          else{
+		   	  for ( var i = 0; i < oMeta.dataServices.schema[0].entityType[0].property.length; i++) {
+		   		  var property = oMeta.dataServices.schema[0].entityType[0].property[i];
+		   		  
+		          oControl = new sap.ui.commons.TextField().bindProperty("value",property.name);
+		          oTable.addColumn(new sap.ui.table.Column({label:new sap.ui.commons.Label({text: property.name}), template: oControl, sortProperty: property.name, filterProperty: property.name, filterOperator: sap.ui.model.FilterOperator.EQ, flexible: true, width: "125px" }));
+		     
+		   	  }		
+		   	  		   	  
+		   	  oTable.setModel(oModel);
+
+	
+	          }	
+	          
+	          //Call Update Service
+	            var aUrl = sap.ui.getCore().byId("val3_1").getValue()+sap.ui.getCore().byId("val3_2").getValue();
+	            var oEntry = {};
+	            oEntry.Id = "0000000000";
+			    oEntry.City = sap.ui.getCore().byId("city").getValue();
+			    oEntry.Country = sap.ui.getCore().byId("country").getSelectedKey();
+			    oEntry.Region = sap.ui.getCore().byId("region").getValue();
+	            oEntry.CompanyName = sap.ui.getCore().byId("company").getValue();
+	            oEntry.EmailAddress = sap.ui.getCore().byId("email").getValue();
+
+				oModel.setHeaders({"content-type" : "application/json;charset=utf-8"});
+				oModel.create(sap.ui.getCore().byId("val3_2").getValue(), oEntry, null, onSuccessCall, onErrorCall);
+
+		}
+		
+ 		      var searchPanel = new sap.ui.commons.Panel().setText('Create Service Selections');
+   		      var layoutNew = new sap.ui.commons.layout.MatrixLayout({width:"auto"});   		      
+   		      searchPanel.addContent(layoutNew);
+
+   		      var urlUser = "/sap/hana/democontent/epm/services/businessPartners2.xsodata";
+	    	  
+   		      var oVal1 = new sap.ui.commons.TextField("val3_1",{tooltip: "Service Path", width: "500px", editable:true, value: urlUser });
+   		      var oVal2 = new sap.ui.commons.TextField("val3_2",{tooltip: "Entity Name", width: "200px", editable:true, value: "/Buyer"});
+   		      
+   		   	  var oExcButton = new sap.ui.commons.Button({
+ 	          text : "Execute Service",
+ 	          press : callUserService });
+   		      layoutNew.createRow(new sap.ui.commons.Label({text: "Service Path: "}), oVal1 ); //oExcButton );   
+   		   	  layoutNew.createRow(new sap.ui.commons.Label({text: "Entity Name: "}), oVal2 ); //, oExcButton ); 
+   		   	  oCreateView.createRow(searchPanel);	
+		
+   		   	  var updatePanel = new sap.ui.commons.Panel("updPanel").setText('New Business Partner Details');
+		      var layoutNew = new sap.ui.commons.layout.MatrixLayout({width:"auto"}); 
+		      
+	 
+   		      var oVal1 = new sap.ui.commons.TextField("company",{tooltip: "First Name", width: "200px", editable:true, maxLength: 80});
+   		      var oVal3 = new sap.ui.commons.TextField("email",{tooltip: "Email", width: "200px", editable:true, maxLength: 255});  
+   		      var oVal4 = new sap.ui.commons.TextField("city",{tooltip: "City", width: "200px", editable:true, maxLength: 40}); 
+
+ 		     // var oVal6 = new sap.ui.commons.TextField("region",{tooltip: "Region", width: "200px", editable:true, maxLength: 4}); 	
+ 		      
+ 		  // Create a DropdownBox
+ 		     var oVal6 = new sap.ui.commons.DropdownBox("region",{tooltip: "Region", width: "200px", editable:true});
+ 		     var oItem = new sap.ui.core.ListItem("AFR");
+ 		     oItem.setText("AFR");
+ 		     oVal6.addItem(oItem);
+ 		     oItem = new sap.ui.core.ListItem("AMER");
+ 		     oItem.setText("AMER");
+ 		     oVal6.addItem(oItem);
+ 		     oItem = new sap.ui.core.ListItem("APJ");
+ 		     oItem.setText("APJ");
+ 		     oVal6.addItem(oItem);
+ 		     oItem = new sap.ui.core.ListItem("EMEA");
+ 		     oItem.setText("EMEA");
+ 		     oVal6.addItem(oItem);
+ 		     oVal6.setValue("AFR");
+ 		     
+ 		      
+ 		     //JSON Data Model
+ 		     var oCountries = new sap.ui.model.json.JSONModel();
+ 		     oCountries.setSizeLimit(500);
+ 		     oCountries.setData({
+ 		    	 countries: [ 
+  {name: 'Afghanistan', code: 'AF'}, 
+  {name: 'Aland Islands', code: 'AX'}, 
+  {name: 'Albania', code: 'AL'}, 
+  {name: 'Algeria', code: 'DZ'}, 
+  {name: 'American Samoa', code: 'AS'}, 
+  {name: 'AndorrA', code: 'AD'}, 
+  {name: 'Angola', code: 'AO'}, 
+  {name: 'Anguilla', code: 'AI'}, 
+  {name: 'Antarctica', code: 'AQ'}, 
+  {name: 'Antigua and Barbuda', code: 'AG'}, 
+  {name: 'Argentina', code: 'AR'}, 
+  {name: 'Armenia', code: 'AM'}, 
+  {name: 'Aruba', code: 'AW'}, 
+  {name: 'Australia', code: 'AU'}, 
+  {name: 'Austria', code: 'AT'}, 
+  {name: 'Azerbaijan', code: 'AZ'}, 
+  {name: 'Bahamas', code: 'BS'}, 
+  {name: 'Bahrain', code: 'BH'}, 
+  {name: 'Bangladesh', code: 'BD'}, 
+  {name: 'Barbados', code: 'BB'}, 
+  {name: 'Belarus', code: 'BY'}, 
+  {name: 'Belgium', code: 'BE'}, 
+  {name: 'Belize', code: 'BZ'}, 
+  {name: 'Benin', code: 'BJ'}, 
+  {name: 'Bermuda', code: 'BM'}, 
+  {name: 'Bhutan', code: 'BT'}, 
+  {name: 'Bolivia', code: 'BO'}, 
+  {name: 'Bosnia and Herzegovina', code: 'BA'}, 
+  {name: 'Botswana', code: 'BW'}, 
+  {name: 'Bouvet Island', code: 'BV'}, 
+  {name: 'Brazil', code: 'BR'}, 
+  {name: 'British Indian Ocean Territory', code: 'IO'}, 
+  {name: 'Brunei Darussalam', code: 'BN'}, 
+  {name: 'Bulgaria', code: 'BG'}, 
+  {name: 'Burkina Faso', code: 'BF'}, 
+  {name: 'Burundi', code: 'BI'}, 
+  {name: 'Cambodia', code: 'KH'}, 
+  {name: 'Cameroon', code: 'CM'}, 
+  {name: 'Canada', code: 'CA'}, 
+  {name: 'Cape Verde', code: 'CV'}, 
+  {name: 'Cayman Islands', code: 'KY'}, 
+  {name: 'Central African Republic', code: 'CF'}, 
+  {name: 'Chad', code: 'TD'}, 
+  {name: 'Chile', code: 'CL'}, 
+  {name: 'China', code: 'CN'}, 
+  {name: 'Christmas Island', code: 'CX'}, 
+  {name: 'Cocos (Keeling) Islands', code: 'CC'}, 
+  {name: 'Colombia', code: 'CO'}, 
+  {name: 'Comoros', code: 'KM'}, 
+  {name: 'Congo', code: 'CG'}, 
+  {name: 'Congo, The Democratic Republic of the', code: 'CD'}, 
+  {name: 'Cook Islands', code: 'CK'}, 
+  {name: 'Costa Rica', code: 'CR'}, 
+  {name: 'Cote D\'Ivoire', code: 'CI'}, 
+  {name: 'Croatia', code: 'HR'}, 
+  {name: 'Cuba', code: 'CU'}, 
+  {name: 'Cyprus', code: 'CY'}, 
+  {name: 'Czech Republic', code: 'CZ'}, 
+  {name: 'Denmark', code: 'DK'}, 
+  {name: 'Djibouti', code: 'DJ'}, 
+  {name: 'Dominica', code: 'DM'}, 
+  {name: 'Dominican Republic', code: 'DO'}, 
+  {name: 'Ecuador', code: 'EC'}, 
+  {name: 'Egypt', code: 'EG'}, 
+  {name: 'El Salvador', code: 'SV'}, 
+  {name: 'Equatorial Guinea', code: 'GQ'}, 
+  {name: 'Eritrea', code: 'ER'}, 
+  {name: 'Estonia', code: 'EE'}, 
+  {name: 'Ethiopia', code: 'ET'}, 
+  {name: 'Falkland Islands (Malvinas)', code: 'FK'}, 
+  {name: 'Faroe Islands', code: 'FO'}, 
+  {name: 'Fiji', code: 'FJ'}, 
+  {name: 'Finland', code: 'FI'}, 
+  {name: 'France', code: 'FR'}, 
+  {name: 'French Guiana', code: 'GF'}, 
+  {name: 'French Polynesia', code: 'PF'}, 
+  {name: 'French Southern Territories', code: 'TF'}, 
+  {name: 'Gabon', code: 'GA'}, 
+  {name: 'Gambia', code: 'GM'}, 
+  {name: 'Georgia', code: 'GE'}, 
+  {name: 'Germany', code: 'DE'}, 
+  {name: 'Ghana', code: 'GH'}, 
+  {name: 'Gibraltar', code: 'GI'}, 
+  {name: 'Greece', code: 'GR'}, 
+  {name: 'Greenland', code: 'GL'}, 
+  {name: 'Grenada', code: 'GD'}, 
+  {name: 'Guadeloupe', code: 'GP'}, 
+  {name: 'Guam', code: 'GU'}, 
+  {name: 'Guatemala', code: 'GT'}, 
+  {name: 'Guernsey', code: 'GG'}, 
+  {name: 'Guinea', code: 'GN'}, 
+  {name: 'Guinea-Bissau', code: 'GW'}, 
+  {name: 'Guyana', code: 'GY'}, 
+  {name: 'Haiti', code: 'HT'}, 
+  {name: 'Heard Island and Mcdonald Islands', code: 'HM'}, 
+  {name: 'Holy See (Vatican City State)', code: 'VA'}, 
+  {name: 'Honduras', code: 'HN'}, 
+  {name: 'Hong Kong', code: 'HK'}, 
+  {name: 'Hungary', code: 'HU'}, 
+  {name: 'Iceland', code: 'IS'}, 
+  {name: 'India', code: 'IN'}, 
+  {name: 'Indonesia', code: 'ID'}, 
+  {name: 'Iran, Islamic Republic Of', code: 'IR'}, 
+  {name: 'Iraq', code: 'IQ'}, 
+  {name: 'Ireland', code: 'IE'}, 
+  {name: 'Isle of Man', code: 'IM'}, 
+  {name: 'Israel', code: 'IL'}, 
+  {name: 'Italy', code: 'IT'}, 
+  {name: 'Jamaica', code: 'JM'}, 
+  {name: 'Japan', code: 'JP'}, 
+  {name: 'Jersey', code: 'JE'}, 
+  {name: 'Jordan', code: 'JO'}, 
+  {name: 'Kazakhstan', code: 'KZ'}, 
+  {name: 'Kenya', code: 'KE'}, 
+  {name: 'Kiribati', code: 'KI'}, 
+  {name: 'Korea, Democratic People\'S Republic of', code: 'KP'}, 
+  {name: 'Korea, Republic of', code: 'KR'}, 
+  {name: 'Kuwait', code: 'KW'}, 
+  {name: 'Kyrgyzstan', code: 'KG'}, 
+  {name: 'Lao People\'S Democratic Republic', code: 'LA'}, 
+  {name: 'Latvia', code: 'LV'}, 
+  {name: 'Lebanon', code: 'LB'}, 
+  {name: 'Lesotho', code: 'LS'}, 
+  {name: 'Liberia', code: 'LR'}, 
+  {name: 'Libyan Arab Jamahiriya', code: 'LY'}, 
+  {name: 'Liechtenstein', code: 'LI'}, 
+  {name: 'Lithuania', code: 'LT'}, 
+  {name: 'Luxembourg', code: 'LU'}, 
+  {name: 'Macao', code: 'MO'}, 
+  {name: 'Macedonia, The Former Yugoslav Republic of', code: 'MK'}, 
+  {name: 'Madagascar', code: 'MG'}, 
+  {name: 'Malawi', code: 'MW'}, 
+  {name: 'Malaysia', code: 'MY'}, 
+  {name: 'Maldives', code: 'MV'}, 
+  {name: 'Mali', code: 'ML'}, 
+  {name: 'Malta', code: 'MT'}, 
+  {name: 'Marshall Islands', code: 'MH'}, 
+  {name: 'Martinique', code: 'MQ'}, 
+  {name: 'Mauritania', code: 'MR'}, 
+  {name: 'Mauritius', code: 'MU'}, 
+  {name: 'Mayotte', code: 'YT'}, 
+  {name: 'Mexico', code: 'MX'}, 
+  {name: 'Micronesia, Federated States of', code: 'FM'}, 
+  {name: 'Moldova, Republic of', code: 'MD'}, 
+  {name: 'Monaco', code: 'MC'}, 
+  {name: 'Mongolia', code: 'MN'}, 
+  {name: 'Montserrat', code: 'MS'}, 
+  {name: 'Morocco', code: 'MA'}, 
+  {name: 'Mozambique', code: 'MZ'}, 
+  {name: 'Myanmar', code: 'MM'}, 
+  {name: 'Namibia', code: 'NA'}, 
+  {name: 'Nauru', code: 'NR'}, 
+  {name: 'Nepal', code: 'NP'}, 
+  {name: 'Netherlands', code: 'NL'}, 
+  {name: 'Netherlands Antilles', code: 'AN'}, 
+  {name: 'New Caledonia', code: 'NC'}, 
+  {name: 'New Zealand', code: 'NZ'}, 
+  {name: 'Nicaragua', code: 'NI'}, 
+  {name: 'Niger', code: 'NE'}, 
+  {name: 'Nigeria', code: 'NG'}, 
+  {name: 'Niue', code: 'NU'}, 
+  {name: 'Norfolk Island', code: 'NF'}, 
+  {name: 'Northern Mariana Islands', code: 'MP'}, 
+  {name: 'Norway', code: 'NO'}, 
+  {name: 'Oman', code: 'OM'}, 
+  {name: 'Pakistan', code: 'PK'}, 
+  {name: 'Palau', code: 'PW'}, 
+  {name: 'Palestinian Territory, Occupied', code: 'PS'}, 
+  {name: 'Panama', code: 'PA'}, 
+  {name: 'Papua New Guinea', code: 'PG'}, 
+  {name: 'Paraguay', code: 'PY'}, 
+  {name: 'Peru', code: 'PE'}, 
+  {name: 'Philippines', code: 'PH'}, 
+  {name: 'Pitcairn', code: 'PN'}, 
+  {name: 'Poland', code: 'PL'}, 
+  {name: 'Portugal', code: 'PT'}, 
+  {name: 'Puerto Rico', code: 'PR'}, 
+  {name: 'Qatar', code: 'QA'}, 
+  {name: 'Reunion', code: 'RE'}, 
+  {name: 'Romania', code: 'RO'}, 
+  {name: 'Russian Federation', code: 'RU'}, 
+  {name: 'RWANDA', code: 'RW'}, 
+  {name: 'Saint Helena', code: 'SH'}, 
+  {name: 'Saint Kitts and Nevis', code: 'KN'}, 
+  {name: 'Saint Lucia', code: 'LC'}, 
+  {name: 'Saint Pierre and Miquelon', code: 'PM'}, 
+  {name: 'Saint Vincent and the Grenadines', code: 'VC'}, 
+  {name: 'Samoa', code: 'WS'}, 
+  {name: 'San Marino', code: 'SM'}, 
+  {name: 'Sao Tome and Principe', code: 'ST'}, 
+  {name: 'Saudi Arabia', code: 'SA'}, 
+  {name: 'Senegal', code: 'SN'}, 
+  {name: 'Serbia and Montenegro', code: 'CS'}, 
+  {name: 'Seychelles', code: 'SC'}, 
+  {name: 'Sierra Leone', code: 'SL'}, 
+  {name: 'Singapore', code: 'SG'}, 
+  {name: 'Slovakia', code: 'SK'}, 
+  {name: 'Slovenia', code: 'SI'}, 
+  {name: 'Solomon Islands', code: 'SB'}, 
+  {name: 'Somalia', code: 'SO'}, 
+  {name: 'South Africa', code: 'ZA'}, 
+  {name: 'South Georgia and the South Sandwich Islands', code: 'GS'}, 
+  {name: 'Spain', code: 'ES'}, 
+  {name: 'Sri Lanka', code: 'LK'}, 
+  {name: 'Sudan', code: 'SD'}, 
+  {name: 'Suriname', code: 'SR'}, 
+  {name: 'Svalbard and Jan Mayen', code: 'SJ'}, 
+  {name: 'Swaziland', code: 'SZ'}, 
+  {name: 'Sweden', code: 'SE'}, 
+  {name: 'Switzerland', code: 'CH'}, 
+  {name: 'Syrian Arab Republic', code: 'SY'}, 
+  {name: 'Taiwan, Province of China', code: 'TW'}, 
+  {name: 'Tajikistan', code: 'TJ'}, 
+  {name: 'Tanzania, United Republic of', code: 'TZ'}, 
+  {name: 'Thailand', code: 'TH'}, 
+  {name: 'Timor-Leste', code: 'TL'}, 
+  {name: 'Togo', code: 'TG'}, 
+  {name: 'Tokelau', code: 'TK'}, 
+  {name: 'Tonga', code: 'TO'}, 
+  {name: 'Trinidad and Tobago', code: 'TT'}, 
+  {name: 'Tunisia', code: 'TN'}, 
+  {name: 'Turkey', code: 'TR'}, 
+  {name: 'Turkmenistan', code: 'TM'}, 
+  {name: 'Turks and Caicos Islands', code: 'TC'}, 
+  {name: 'Tuvalu', code: 'TV'}, 
+  {name: 'Uganda', code: 'UG'}, 
+  {name: 'Ukraine', code: 'UA'}, 
+  {name: 'United Arab Emirates', code: 'AE'}, 
+  {name: 'United Kingdom', code: 'GB'}, 
+  {name: 'United States', code: 'US'}, 
+  {name: 'United States Minor Outlying Islands', code: 'UM'}, 
+  {name: 'Uruguay', code: 'UY'}, 
+  {name: 'Uzbekistan', code: 'UZ'}, 
+  {name: 'Vanuatu', code: 'VU'}, 
+  {name: 'Venezuela', code: 'VE'}, 
+  {name: 'Viet Nam', code: 'VN'}, 
+  {name: 'Virgin Islands, British', code: 'VG'}, 
+  {name: 'Virgin Islands, U.S.', code: 'VI'}, 
+  {name: 'Wallis and Futuna', code: 'WF'}, 
+  {name: 'Western Sahara', code: 'EH'}, 
+  {name: 'Yemen', code: 'YE'}, 
+  {name: 'Zambia', code: 'ZM'}, 
+  {name: 'Zimbabwe', code: 'ZW'} 
+],
+editable: true,
+tooltip: "Countries"});
+ 		     sap.ui.getCore().setModel(oCountries);
+ 		 // Create a DropdownBox
+ 		   // var oVal5 = new sap.ui.commons.TextField("country"); 
+ 		    var oVal5 = new sap.ui.commons.DropdownBox("country",{tooltip: "Country", width: "200px", editable:true});
+ 		    oVal5.setModel(oCountries);
+ 		    var oItemTemplate1 = new sap.ui.core.ListItem();
+ 		    oItemTemplate1.bindProperty("text", "name");
+ 		    oItemTemplate1.bindProperty("key",  "code"); 		    
+ 		    oVal5.bindItems("/countries", oItemTemplate1);
+ 		    oVal5.setSelectedKey('AF');
+ 		     
+ 		     
+ 		      
+   		      var oExcButton = new sap.ui.commons.Button({
+   	 	          text : "Execute Service",
+   	 	          press : callUserService });
+   		   	  
+   		      layoutNew.createRow(new sap.ui.commons.Label({text: "Company: "}), oVal1 ); //oExcButton );  
+   		      layoutNew.createRow(new sap.ui.commons.Label({text: "City: "}), oVal4 );  
+   		      layoutNew.createRow(new sap.ui.commons.Label({text: "Country: "}), oVal5 );    
+   		      layoutNew.createRow(new sap.ui.commons.Label({text: "Region: "}), oVal6 );    		      
+   		      layoutNew.createRow(new sap.ui.commons.Label({text: "Email: "}), oVal3, oExcButton );    		      
+		      updatePanel.addContent(layoutNew);
+   		   	  oCreateView.createRow(updatePanel);			      
+   		   	  
+ 			  //User Table Panel
+   		      var tablePanel = new sap.ui.commons.Panel().setText('Business Partners');
+   		      var layoutTbl = new sap.ui.commons.layout.MatrixLayout({width:"auto"});
+   		      tablePanel.addContent(layoutTbl);
+   		      var oControl; 
+   		      oTable = new sap.ui.table.Table("tblUsers",{tableId: "tblUsers", 
+   	    	    visibleRowCount: 10});  
+   	   	 	  layoutTbl.createRow(oTable);
+   		   	  oCreateView.createRow(tablePanel);	
+   		   	  
+			
+			
+	 	function buildShellNavigation(oShell) {
+	 		var WI = sap.ui.ux3.NavigationItem;
+	 		oShell.addWorksetItem(new WI("wi_home", {
+	 			key : "wi_home",
+	 			text : 'Simple Read' }));
+// 	 		oShell.addWorksetItem(new WI("wi_multi", {
+// 	 			key : "wi_multi",
+// 	 			text : 'Multi-Entity Read' }));	
+	 		oShell.addWorksetItem(new WI("wi_create", {
+	 			key : "wi_create",
+	 			text : 'Creation' }));	
+	 		
+	 		oShell.attachEvent("worksetItemSelected", function(oEvent){
+	 			var oLayout = new sap.ui.commons.layout.MatrixLayout();	
+	 	    	var sId = oEvent.getParameter("id");
+	 			switch (sId) {
+	 			case "wi_home":
+	 				oShell.setContent(oLayout.createRow(oSimpleView));
+	 				break;
+// 	 			case "wi_multi":
+// 	 				oShell.setContent(oLayout.createRow(oMultiView));
+// 	 				break;	
+	 			case "wi_create":
+	 				oShell.setContent(oLayout.createRow(oCreateView));
+	 				break;				
+	 			}
+	 		});  	 				
+	 	}
+
+	 	
+	 			oShell = new sap.ui.ux3.Shell("myShell", {
+	 				appIcon : "/images/sap_18.png",
+	 				appIconTooltip : "SAP",
+	 				appTitle : "Business Partners OData Test",
+	 				showInspectorTool : false,
+	 				showFeederTool : false,
+	 				showSearchTool : false
+	 			});
+
+	 			oShell.attachLogout(handleExitShell);
+
+	 			createShell(oShell);
+	 			buildShellPersonalization(oShell);
+	 			buildShellNavigation(oShell);
+
+	 			var oLayout = new sap.ui.commons.layout.MatrixLayout();		
+	 			
+	 			oLayout.createRow(oSimpleView);   		
+	 			oShell.setContent(oLayout);		
+	 			
+	 			oShell.placeAt("content");	 		  
+			  </script>
+			  
+       </head>
+       <body class="sapUiBody" role="application">
+              <div id="content"></div>
+              			  

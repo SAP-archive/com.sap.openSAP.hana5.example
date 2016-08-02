@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta charset="UTF-8">
+		<title>Business Partners</title>
+	    <!-- <script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" -->
+		<script id="sap-ui-bootstrap" src="{{{ui5liburl}}}/resources/sap-ui-core.js"
+			data-sap-ui-theme="sap_bluecrystal"
+			data-sap-ui-xx-bindingSyntax="complex"
+			data-sap-ui-resourceroots='{
+				"sap.shineNext.partners": "./",
+				"view": "./view" }'				
+			data-sap-ui-libs="sap.m">
+		</script>
+		<script>		
+		new sap.m.Shell({
+			app : new sap.ui.core.ComponentContainer({
+				name : "sap.shineNext.partners"
+			})
+		}).placeAt("content");
+			
+		</script>
+	</head>
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+	</html>

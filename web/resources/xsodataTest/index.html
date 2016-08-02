@@ -1,0 +1,437 @@
+<!DOCTYPE HTML>
+<html>
+       <head>
+              <meta http-equiv="X-UA-Compatible" content="IE=edge">
+			  <title>XSODATA Tests</title>
+	    	  <!-- <script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" -->
+			  <script id="sap-ui-bootstrap" src="{{{ui5liburl}}}/resources/sap-ui-core.js"
+                      data-sap-ui-libs="sap.ui.ux3,sap.ui.commons,sap.ui.table"
+                      data-sap-ui-theme="sap_bluecrystal" >
+              </script>
+              <!-- add sap.ui.table,sap.ui.ux3 and/or other libraries to 'data-sap-ui-libs' if required -->
+			  <script>
+				
+			  /*************** Hijacking for Gold Reflection *************/
+	   			if (sap.ui.getCore().getConfiguration().getTheme() == "sap_goldreflection" || "sap_bluecrystal") { // this line is a hack, the rest of this coding is what a BusyIndicator hijacker could do
+	   				sap.ui.core.BusyIndicator.attachOpen(function(oEvent) {
+	   					$Busy = oEvent.getParameter("$Busy");
+	   					iBusyPageWidth = jQuery(document.body).width();
+	   					$Busy.css("top", "0").css("width", iBusyPageWidth + "px");
+	   					bBusyAnimate = true;
+	   					iBusyLeft = $Busy[0].offsetLeft;
+	   					window.setTimeout(animationStep, iBusyTimeStep);
+	   				});
+	   				sap.ui.core.BusyIndicator.attachClose(function(oEvent) {
+	   					bBusyAnimate = false;
+	   				});
+	   			}
+
+	   			var bBusyAnimate = false;
+	   			var iBusyLeft = 0;
+	   			var iBusyDelta = 60;
+	   			var iBusyTimeStep = 50;
+	   			var iBusyWidth = 500;
+	   			var iBusyPageWidth;
+	   			var $Busy;
+
+	   			function animationStep() {
+	   				if (bBusyAnimate) {
+	   					iBusyLeft += iBusyDelta;
+	   					if (iBusyLeft > iBusyPageWidth) {
+	   						iBusyLeft = -iBusyWidth;
+	   					}
+	   					$Busy.css("background-position", iBusyLeft + "px 0px");
+	   					window.setTimeout(animationStep, iBusyTimeStep);
+	   				}
+	   			}
+	   			/*************** END of Hijacking for Gold Reflection *************/
+	   			
+	   			function onErrorCall(jqXHR, textStatus, errorThrown){
+	   	    	 sap.ui.core.BusyIndicator.hide();	    	 
+	   	   	 	 if(jqXHR.status == '500'){
+	   		    		 sap.ui.commons.MessageBox.show(jqXHR.responseText, 
+	   		    				 "ERROR",
+	   		    				 "Service Call Error" );	
+	   		    		return;	
+	   	   	 	 }
+	   	   	  	 else{
+	   			         sap.ui.commons.MessageBox.show(jqXHR.responseText, 
+	   		    				 "ERROR",
+	   		    				 "Service Call Error" );	
+	   		    		return;	
+	   	   	 	 }
+	   	   		}	
+		
+		
+	 	 function handleExitShell(oEvent){
+	 	        alert("Logout Button has been clicked.\nThe application can now do whatever is required.\nThis example page will just clear the screen.");
+	 	        oEvent.getSource().forceInvalidation();
+	 	        oEvent.getSource().destroy();
+	 	        sap.ui.getCore().applyChanges();
+	 	        jQuery(document.body).html("<span>Logout had been pressed, screen has been cleared.</span>");
+	 	      }
+	 	      
+	 	 function handlePersonalizeShell(oEvent){
+	 	    	  sap.ui.getCore().byId("myShell").openPersonalizationDialog();
+	 	      }
+	 	      
+	 	 function handlePersonalizeShellChange(oEvent){
+	 		        var data = oEvent.getParameter("settings"); // retrieve the personalization data object
+	 		        // ...now persist this data on the server or wherever personalization data is stored
+	 		        // (in-browser is not enough because the user wants his settings when logging in from another browser as well)
+	 		        // browser-only:
+	 		        if (JSON && window["localStorage"]) { // only in browsers with native JSON and offline storage support
+	 		          var string = JSON.stringify(data);
+	 		          localStorage.setItem("sapUiShellTestSettings", string);
+	 		        }
+	 		  }
+	 		  
+	 	function createShell(oShell) {
+
+	 		var oUserTxt = new sap.ui.commons.TextView({
+	 			tooltip : "Welcome" 
+	 		});
+	 		oShell.addHeaderItem(oUserTxt);
+	 		oShell.addHeaderItem(new sap.ui.commons.Button({
+	 			text : "Personalize",
+	 			tooltip : "Personalize",
+	 			press : handlePersonalizeShell
+	 		}));
+
+	 		oShell.addHeaderItem(new sap.ui.commons.MenuButton({
+	 			text : "Help",
+	 			tooltip : "Help Menu",
+	 			menu : new sap.ui.commons.Menu("menu1", {
+	 				items : [ new sap.ui.commons.MenuItem("menuitem1", {
+	 					text : "Help"
+	 				}), new sap.ui.commons.MenuItem("menuitem2", {
+	 					text : "Report Incident"
+	 				}), new sap.ui.commons.MenuItem("menuitem3", {
+	 					text : "About"
+	 				}) ]
+	 			})
+	 		})); 
+	 	}
+
+	 	function buildShellPersonalization(oShell) {
+	 		// EXPERIMENTAL - THIS WILL CHANGE!!
+	 		oShell._getPersonalization().attachPersonalizationChange(
+	 				handlePersonalizeShellChange);
+	 		// initialize settings
+	 		if (JSON && window["localStorage"]) { // only in browsers with native JSON
+	 			// and offline storage support
+	 			var sSettings = localStorage.getItem("sapUiShellTestSettings");
+	 			if (sSettings) {
+	 				oShell.initializePersonalization(JSON.parse(sSettings));
+	 			}
+	 		}
+	 	}
+		
+			oSimpleView = new sap.ui.commons.layout.MatrixLayout();
+			oCreateView = new sap.ui.commons.layout.MatrixLayout();
+			oMultiView = new sap.ui.commons.layout.MatrixLayout();
+	
+		//Simple View Rendering
+		function oDataFailed(oControlEvent){
+   		 sap.ui.commons.MessageBox.show("Bad Entity Definition", 
+   				 "ERROR",
+   				 "OData Service Call Error" );
+			
+		}
+		
+		function callSimpleService(){
+			  var oTable = sap.ui.getCore().byId("tblHeader");
+			  oTable.removeAllColumns();
+			  oTable.removeAllRows();
+		   	  var oModel = new sap.ui.model.odata.ODataModel(sap.ui.getCore().byId("val1").getValue(), false);
+		   	  oModel.attachEvent("requestFailed",oDataFailed)
+		   	  
+		   	  var oMeta = oModel.getServiceMetadata();
+	          var oControl;
+	          
+	          if(!oMeta){
+		    		 sap.ui.commons.MessageBox.show('Bad Service Definition', 
+   		    				 "ERROR",
+   		    				 "Service Call Error" );	
+	          }
+	          else{
+		   	  for ( var i = 0; i < oMeta.dataServices.schema[0].entityType[0].property.length; i++) {
+		   		  var property = oMeta.dataServices.schema[0].entityType[0].property[i];
+		   		  
+		          oControl = new sap.ui.commons.TextField().bindProperty("value",property.name);
+		          oTable.addColumn(new sap.ui.table.Column({label:new sap.ui.commons.Label({text: property.name}), template: oControl, sortProperty: property.name, filterProperty: property.name, filterOperator: sap.ui.model.FilterOperator.EQ, flexible: true, width: "125px" }));
+		     
+		   	  }		   	  
+		   	  oTable.setModel(oModel);
+	          }		   	  
+		   	  oTable.bindRows(sap.ui.getCore().byId("val2").getValue());
+	 	}
+		
+		
+   		      var searchPanel = new sap.ui.commons.Panel().setText('Simple Service Selections');
+   		      var layoutNew = new sap.ui.commons.layout.MatrixLayout({width:"auto"});   		      
+   		      searchPanel.addContent(layoutNew);
+
+   		      var oVal1 = new sap.ui.commons.TextField("val1",{tooltip: "Service Path", width: "500px", editable:true, value: "/sap/hana/democontent/epm/services/businessPartners.xsodata"});
+   		      var oVal2 = new sap.ui.commons.TextField("val2",{tooltip: "Entity Name", width: "200px", editable:true, value: "/BusinessPartners"});
+   		      
+   		   	  var oExcButton = new sap.ui.commons.Button({
+ 	          text : "Execute Service",
+ 	          press : callSimpleService });
+   		      layoutNew.createRow(new sap.ui.commons.Label({text: "Service Path: "}), oVal1 ); //oExcButton );   
+   		   	  layoutNew.createRow(new sap.ui.commons.Label({text: "Entity Name: "}), oVal2, oExcButton ); 
+   		   	  oSimpleView.createRow(searchPanel);	
+		
+ 			  //Header Table Panel
+   		      var tablePanel = new sap.ui.commons.Panel().setText('Business Partner Data');
+   		      var layoutTbl = new sap.ui.commons.layout.MatrixLayout({width:"auto"});
+   		      tablePanel.addContent(layoutTbl);
+   		      var oControl; 
+   		      oTable = new sap.ui.table.Table("tblHeader",{tableId: "tblHeader", 
+   	    	    visibleRowCount: 5});  
+   	   	 	  layoutTbl.createRow(oTable);
+   		   	  oSimpleView.createRow(tablePanel);	
+		
+		//Multi View Rendering
+		      function callMultiService(){
+		    	  var oTable = sap.ui.getCore().byId("tblPOHeader");
+		    	  var oTableItem = sap.ui.getCore().byId("tblPOItem");		    	  
+				  oTable.removeAllColumns();
+				  oTable.removeAllRows();
+				  oTableItem.removeAllColumns();
+				  oTableItem.removeAllRows();
+				  
+			   	  var oModel = new sap.ui.model.odata.ODataModel(sap.ui.getCore().byId("val2_1").getValue(), false);
+			   	  oModel.attachEvent("requestFailed",oDataFailed)
+			   	  
+			   	  var oMeta = oModel.getServiceMetadata();
+		          var oControl;
+		          
+		          if(!oMeta){
+			    		 sap.ui.commons.MessageBox.show('Bad Service Definition', 
+	   		    				 "ERROR",
+	   		    				 "Service Call Error" );	
+		          }
+		          else{
+			   	  for ( var i = 0; i < oMeta.dataServices.schema[0].entityType[0].property.length; i++) {
+			   		  var property = oMeta.dataServices.schema[0].entityType[0].property[i];
+			   		  
+			          oControl = new sap.ui.commons.TextField().bindProperty("value",property.name);
+			          oTable.addColumn(new sap.ui.table.Column({label:new sap.ui.commons.Label({text: property.name}), template: oControl, sortProperty: property.name, filterProperty: property.name, filterOperator: sap.ui.model.FilterOperator.EQ, flexible: true, width: "125px" }));
+			     
+			   	  }		   	  
+			   	  oTable.setModel(oModel);
+			   	  for ( var i = 0; i < oMeta.dataServices.schema[0].entityType[1].property.length; i++) {
+			   		  var property = oMeta.dataServices.schema[0].entityType[1].property[i];
+			   		  
+			          oControl = new sap.ui.commons.TextField().bindProperty("value",property.name);
+			          oTableItem.addColumn(new sap.ui.table.Column({label:new sap.ui.commons.Label({text: property.name}), template: oControl, sortProperty: property.name, filterProperty: property.name, filterOperator: sap.ui.model.FilterOperator.EQ, flexible: true, width: "125px" }));
+			     
+			   	  }		   	  
+			   	  oTable.setModel(oModel);	
+			   	  oTableItem.setModel(oModel);
+		          }		   	  
+			   	  oTable.bindRows(sap.ui.getCore().byId("val2_2").getValue());			
+		}
+		function onRowSelect(oEvent){
+			var data = oEvent.getSource().getModel();
+			var oTable = oEvent.getSource();
+			var poId = data.getProperty("PurchaseOrderId",oTable.getContextByIndex(oTable.getSelectedIndex()));
+			
+			var oTableItems = sap.ui.getCore().byId("tblPOItem");
+			var ContextItem = sap.ui.getCore().byId("val2_2").getValue()+"(PurchaseOrderId='"+poId+"')"+sap.ui.getCore().byId("val2_3").getValue();
+			oTableItems.bindRows(ContextItem);
+		}
+		
+   		      var searchPanel = new sap.ui.commons.Panel().setText('Multi-Entity Service Selections');
+   		      var layoutNew = new sap.ui.commons.layout.MatrixLayout({width:"auto"});   		      
+   		      searchPanel.addContent(layoutNew);
+
+   		      var oVal1 = new sap.ui.commons.TextField("val2_1",{tooltip: "Service Path", width: "500px", editable:true, value: "/sap/hana/democontent/epm/services/poWorklistJoin.xsodata"});
+   		      var oVal2 = new sap.ui.commons.TextField("val2_2",{tooltip: "Header Entity Name", width: "200px", editable:true, value: "/PurchaseOrderHeader"});
+   		      var oVal3 = new sap.ui.commons.TextField("val2_3",{tooltip: "Item Entity Name", width: "200px", editable:true, value: "/PurchaseOrderItem"});
+   		      
+   		   	  var oExcButton = new sap.ui.commons.Button({
+ 	          text : "Execute Service",
+ 	          press : callMultiService });
+   		      layoutNew.createRow(new sap.ui.commons.Label({text: "Service Path: "}), oVal1 ); //oExcButton );   
+   		   	  layoutNew.createRow(new sap.ui.commons.Label({text: "Header Entity Name: "}), oVal2 ); 
+ 		   	  layoutNew.createRow(new sap.ui.commons.Label({text: "Item Entity Name: "}), oVal3, oExcButton );   		   	  
+   		   	  oMultiView.createRow(searchPanel);	
+		
+ 			  //Header Table Panel
+   		      var tablePanel = new sap.ui.commons.Panel().setText('PO Header Data');
+   		      var layoutTbl = new sap.ui.commons.layout.MatrixLayout({width:"auto"});
+   		      tablePanel.addContent(layoutTbl);
+   		      var oControl; 
+   		      oTable = new sap.ui.table.Table("tblPOHeader",{tableId: "tblPOHeader", 
+   		    	  rowSelectionChange: onRowSelect,
+                  selectionMode: sap.ui.table.SelectionMode.Single,
+   	    	    visibleRowCount: 5});  
+   	   	 	  layoutTbl.createRow(oTable);
+   		   	  oMultiView.createRow(tablePanel);		
+		
+ 			  //Item Table Panel
+   		      var tablePanel = new sap.ui.commons.Panel().setText('PO Item Data');
+   		      var layoutTbl = new sap.ui.commons.layout.MatrixLayout({width:"auto"});
+   		      tablePanel.addContent(layoutTbl);
+   		      var oControl; 
+   		      oTable = new sap.ui.table.Table("tblPOItem",{tableId: "tblPOItem", 
+   	    	    visibleRowCount: 5});  
+   	   	 	  layoutTbl.createRow(oTable);
+   		   	  oMultiView.createRow(tablePanel);	   		   	  
+		
+		
+		//Creation View Rendering
+		function onSuccessCall(){
+			  var oTable = sap.ui.getCore().byId("tblUsers");			
+		   	  oTable.bindRows(sap.ui.getCore().byId("val3_2").getValue());	
+		}
+		function callUserService(){
+			 var oTable = sap.ui.getCore().byId("tblUsers");
+			  oTable.removeAllColumns();
+			  oTable.removeAllRows();
+		   	  var oModel = new sap.ui.model.odata.ODataModel(sap.ui.getCore().byId("val3_1").getValue(), false);
+		   	  oModel.attachEvent("requestFailed",oDataFailed)
+		   	  
+		   	  var oMeta = oModel.getServiceMetadata();
+	          var oControl;
+	          
+	          if(!oMeta){
+		    		 sap.ui.commons.MessageBox.show('Bad Service Definition', 
+  		    				 "ERROR",
+  		    				 "Service Call Error" );	
+	          }
+	          else{
+		   	  for ( var i = 0; i < oMeta.dataServices.schema[0].entityType[0].property.length; i++) {
+		   		  var property = oMeta.dataServices.schema[0].entityType[0].property[i];
+		   		  
+		          oControl = new sap.ui.commons.TextField().bindProperty("value",property.name);
+		          oTable.addColumn(new sap.ui.table.Column({label:new sap.ui.commons.Label({text: property.name}), template: oControl, sortProperty: property.name, filterProperty: property.name, filterOperator: sap.ui.model.FilterOperator.EQ, flexible: true, width: "125px" }));
+		     
+		   	  }		   	  
+		   	  oTable.setModel(oModel);
+	          }	
+	          
+	          //Call Update Service
+	            var aUrl = sap.ui.getCore().byId("val3_1").getValue()+sap.ui.getCore().byId("val3_2").getValue();
+	            var jsonData = { PERS_NO: "0000000000",
+	            		         FIRSTNAME: sap.ui.getCore().byId("fName").getValue(),
+	            		         LASTNAME: sap.ui.getCore().byId("lName").getValue(),
+	            		         E_MAIL: sap.ui.getCore().byId("email").getValue() };
+	            
+	            var dataString = JSON.stringify(jsonData);
+				jQuery.ajax({
+					type: "POST",
+					dataType: "text",
+					contentType: 'application/json;charset=utf-8',
+					url: aUrl,
+					data: dataString,
+					success: onSuccessCall,
+					error: onErrorCall	
+				})
+	          
+	           
+	          
+		
+		}
+		
+ 		      var searchPanel = new sap.ui.commons.Panel().setText('CRUD Service Selections');
+   		      var layoutNew = new sap.ui.commons.layout.MatrixLayout({width:"auto"});   		      
+   		      searchPanel.addContent(layoutNew);
+
+   		      var oVal1 = new sap.ui.commons.TextField("val3_1",{tooltip: "Service Path", width: "500px", editable:true, value: "/user/xsodata/user.xsodata"});
+   		      var oVal2 = new sap.ui.commons.TextField("val3_2",{tooltip: "Entity Name", width: "200px", editable:true, value: "/Users"});
+   		      
+   		   	  var oExcButton = new sap.ui.commons.Button({
+ 	          text : "Execute Service",
+ 	          press : callUserService });
+   		      layoutNew.createRow(new sap.ui.commons.Label({text: "Service Path: "}), oVal1 ); //oExcButton );   
+   		   	  layoutNew.createRow(new sap.ui.commons.Label({text: "Entity Name: "}), oVal2 ); //, oExcButton ); 
+   		   	  oCreateView.createRow(searchPanel);	
+		
+   		   	  var updatePanel = new sap.ui.commons.Panel("updPanel").setText('New User Record Details');
+		      var layoutNew = new sap.ui.commons.layout.MatrixLayout({width:"auto"}); 
+		      
+   		      var oVal1 = new sap.ui.commons.TextField("fName",{tooltip: "First Name", width: "200px", editable:true});
+   		      var oVal2 = new sap.ui.commons.TextField("lName",{tooltip: "Last Name", width: "200px", editable:true});
+   		      var oVal3 = new sap.ui.commons.TextField("email",{tooltip: "Email", width: "200px", editable:true});   		      
+   		      var oExcButton = new sap.ui.commons.Button({
+   	 	          text : "Execute Service",
+   	 	          press : callUserService });
+   		   	  
+   		      layoutNew.createRow(new sap.ui.commons.Label({text: "First Name: "}), oVal1 ); //oExcButton );  
+   		      layoutNew.createRow(new sap.ui.commons.Label({text: "Last Name: "}), oVal2 ); //oExcButton ); 
+   		      layoutNew.createRow(new sap.ui.commons.Label({text: "Email: "}), oVal3, oExcButton );    		      
+		      updatePanel.addContent(layoutNew);
+   		   	  oCreateView.createRow(updatePanel);			      
+   		   	  
+ 			  //User Table Panel
+   		      var tablePanel = new sap.ui.commons.Panel().setText('User Data');
+   		      var layoutTbl = new sap.ui.commons.layout.MatrixLayout({width:"auto"});
+   		      tablePanel.addContent(layoutTbl);
+   		      var oControl; 
+   		      oTable = new sap.ui.table.Table("tblUsers",{tableId: "tblUsers", 
+   	    	    visibleRowCount: 10});  
+   	   	 	  layoutTbl.createRow(oTable);
+   		   	  oCreateView.createRow(tablePanel);	
+   		   	  
+			
+			
+	 	function buildShellNavigation(oShell) {
+	 		var WI = sap.ui.ux3.NavigationItem;
+	 		oShell.addWorksetItem(new WI("wi_home", {
+	 			key : "wi_home",
+	 			text : 'Simple Read' }));
+	 		oShell.addWorksetItem(new WI("wi_multi", {
+	 			key : "wi_multi",
+	 			text : 'Multi-Entity Read' }));	
+	 		oShell.addWorksetItem(new WI("wi_create", {
+	 			key : "wi_create",
+	 			text : 'Creation' }));	
+	 		
+	 		oShell.attachEvent("worksetItemSelected", function(oEvent){
+	 			var oLayout = new sap.ui.commons.layout.MatrixLayout();	
+	 	    	var sId = oEvent.getParameter("id");
+	 			switch (sId) {
+	 			case "wi_home":
+	 				oShell.setContent(oLayout.createRow(oSimpleView));
+	 				break;
+	 			case "wi_multi":
+	 				oShell.setContent(oLayout.createRow(oMultiView));
+	 				break;	
+	 			case "wi_create":
+	 				oShell.setContent(oLayout.createRow(oCreateView));
+	 				break;				
+	 			}
+	 		});  	 				
+	 	}
+
+	 	
+	 			oShell = new sap.ui.ux3.Shell("myShell", {
+	 				appIcon : "/images/sap_18.png",
+	 				appIconTooltip : "SAP",
+	 				appTitle : "XSODATA Tests",
+	 				showInspectorTool : false,
+	 				showFeederTool : false,
+	 				showSearchTool : false
+	 			});
+
+	 			oShell.attachLogout(handleExitShell);
+
+	 			createShell(oShell);
+	 			buildShellPersonalization(oShell);
+	 			buildShellNavigation(oShell);
+
+	 			var oLayout = new sap.ui.commons.layout.MatrixLayout();		
+	 			
+	 			oLayout.createRow(oSimpleView);   		
+	 			oShell.setContent(oLayout);		
+	 			
+	 			oShell.placeAt("content");	 		  
+			  </script>
+			  
+       </head>
+       <body class="sapUiBody" role="application">
+              <div id="content"></div>
+              			  

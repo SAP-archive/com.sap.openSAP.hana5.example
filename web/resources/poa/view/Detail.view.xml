@@ -1,0 +1,122 @@
+<core:View
+	controllerName="sap.shineNext.poa.view.Detail"
+	xmlns="sap.m"
+	xmlns:commons="sap.ui.commons"
+	xmlns:form="sap.ui.commons.form"
+	xmlns:layout="sap.ui.commons.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" >
+	<Page
+		id="page"
+		class="sapUiFioriObjectPage"
+		title=" {i18n>detailTitle}"
+		showNavButton="{device>/isPhone}"
+		navButtonPress="handleNavBack" >
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button
+						text="{i18n>approveButtonText}"
+						icon="sap-icon://accept"
+						enabled="{cfg>/actionsEnabled}"
+						press="handleApprove" />
+					<Button
+						text="{i18n>rejectButtonText}"
+						icon="sap-icon://decline"
+						enabled="{cfg>/actionsEnabled}"
+						press="handleReject" />
+					<Button
+						icon="sap-icon://forward"
+						enabled="{cfg>/actionsEnabled}"
+						press="handleForward" />
+				</contentRight>
+			</Bar>
+		</footer>
+		<content>
+			<ObjectHeader
+				title="{PURCHASEORDERID}"
+				number="{GROSSAMOUNT}"
+				numberUnit="{CURRENCY}" >
+				<attributes>
+					<ObjectAttribute
+						text="{path:'HISTORY_CREATEDAT', formatter:'sap.shineNext.poa.util.Formatter.Date'}" />
+					<ObjectAttribute
+						text="{HISTORY_CREATEDBY_EMPLOYEEID}" />
+				</attributes>
+				<firstStatus>
+					<ObjectStatus
+						text="{ORDERINGSTATUSDESC}"
+						state="{
+							path:'ORDERINGSTATUSDESC',
+							formatter:'sap.shineNext.poa.util.Formatter.StatusState'
+						}" />
+				</firstStatus>
+			</ObjectHeader>
+			<IconTabBar
+				expanded="{device>/isNoPhone}"
+				select="handleTabSelect" >
+				<items>
+					<IconTabFilter
+						key="Info"
+						icon="sap-icon://hint">
+						<mvc:XMLView viewName="view.DetailInfo"></mvc:XMLView>
+					</IconTabFilter>
+					<IconTabFilter
+						key="Notes"
+						icon="sap-icon://notes">
+						<!-- content is lazy loaded -->
+					</IconTabFilter>
+					<IconTabFilter
+						key="Attachments"
+						icon="sap-icon://attachment">
+						<!-- content is lazy loaded -->
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+			<Table
+				id="lineItemList"
+				headerText="{i18n>lineItemTableHeader}"
+				items="{path:'PurchaseOrder_Items'}" >
+				<columns>
+					<Column>
+						<header><Label text="Product" /></header>
+					</Column>
+					<Column
+						width="4em"
+						minScreenWidth="Tablet"
+						demandPopin="true"
+						hAlign="Center">
+						<header><Label text="Quantity" /></header>
+					</Column>
+					<Column
+						width="7em"
+						minScreenWidth="Tablet"
+						demandPopin="true"
+						hAlign="Center" >
+						<header><Label text="Delivery Date" /></header>
+					</Column>
+					<Column
+						hAlign="Right" >
+						<header><Label text="Price" /></header>
+					</Column>
+				</columns>
+				<ColumnListItem
+					type="Navigation"
+					press="handleLineItemPress" >
+					<cells>
+						<ObjectIdentifier
+							title="{PURCHASEORDERITEM}"
+							text="{ProductName}"/>
+							<Text
+								text="{path:'QUANTITY', formatter:'sap.shineNext.poa.util.Formatter.Quantity'}"/>
+							<Text
+								text="{path:'DELIVERYDATE', formatter:'sap.shineNext.poa.util.Formatter.Date'}"/>
+						<ObjectNumber
+							number="{GROSSAMOUNT}"
+							numberUnit="{CURRENCY}" />
+					</cells>
+				</ColumnListItem>
+			</Table>
+		</content>
+	</Page>
+</core:View>

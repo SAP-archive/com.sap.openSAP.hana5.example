@@ -1,0 +1,5 @@
+<SelectDialog xmlns="sap.m" id="RecipientDialog" title="{i18n&gt;recipientHelpDialogTitle}" noDataText="{i18n&gt;recipientHelpDialogNoData}"
+	filterPath="LastName" items="{employee&gt;/Employees}" close="closeRecipientDialog">
+	<StandardListItem icon="{employee&gt;Thumbnail}" iconInset="false" title="{employee&gt;LastName}, {employee&gt;FirstName}"
+		description="{employee&gt;Department}"/>
+</SelectDialog>

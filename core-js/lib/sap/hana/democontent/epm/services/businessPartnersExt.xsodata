@@ -1,0 +1,9 @@
+service namespace "com.sap.openSAP.hana5.example.services" { 
+	"sap.hana.democontent.epmNext.models::BUYER"
+	as "BusinessPartners"
+	keys("PARTNERID");	
+}
+
+annotations {
+   enable OData4SAP;
+}

@@ -1,0 +1,45 @@
+<core:View
+	controllerName="sap.shineNext.poa.view.LineItem"
+	xmlns="sap.m"
+	xmlns:me="sap.me"
+	xmlns:commons="sap.ui.commons"
+	xmlns:form="sap.ui.commons.form"
+	xmlns:layout="sap.ui.commons.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" >
+	<Page
+		id="page"
+		title=" {i18n>lineItemTitle}"
+		showNavButton="true"
+		navButtonPress="handleNavBack" >
+		<footer>
+			<Bar>
+			</Bar>
+		</footer>
+		<content>
+			<ObjectHeader
+				title="{PURCHASEORDERITEM}"
+				number="{GROSSAMOUNT}"
+				numberUnit="{CURRENCY}" >
+				<attributes>
+					<ObjectAttribute
+						text="{ProductName}" />
+				</attributes>
+			</ObjectHeader>
+			<form:SimpleForm
+				id="form"
+				minWidth="1024"
+				maxContainerCols="2" >
+				<commons:Title text="Delivery on" />
+					<Label text="Plant:"/>
+					<Text text="SAP AG"/>
+					<Label text="Street:"/>
+					<Text text="Dietmar-Hopp-Allee"/>
+					<Label text="City:"/>
+					<Text text="Walldorf"/>
+					<Label text="Country:"/>
+					<Text text="Germany"/>
+			</form:SimpleForm>
+		</content>
+	</Page>
+</core:View>

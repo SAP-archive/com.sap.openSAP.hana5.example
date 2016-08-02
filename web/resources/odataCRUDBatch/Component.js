@@ -12,7 +12,7 @@ sap.ui.core.UIComponent.extend("opensap.odataBasic.Component", {
 		oParams.defaultUpdateMethod = "PUT";
 		oParams.useBatch = false;
 	    var oModel = new sap.ui.model.odata.v2.ODataModel(
-		          "/user/xsodata/user2.xsodata/", oParams);
+		          "/user/xsodata/userBeforeExit.xsodata/", oParams);
 	  		oModel.attachRejectChange(this,function(oEvent){
 	  		    sap.m.MessageBox.alert("You are already editing another Entry! Please submit or reject your pending changes!");
 			});
@@ -26,8 +26,8 @@ sap.ui.core.UIComponent.extend("opensap.odataBasic.Component", {
 
 		var settings = {
 				ID: "odataBasic",
-				title: "OData CRUD Exercise",
-				description: "SHINE service for OData CRUD Exercise"
+				title: "OData CRUD Batch Exercise",
+				description: "SHINE service for OData CRUD Batch Exercise"
 			};
 		
 		var oView = sap.ui.view({

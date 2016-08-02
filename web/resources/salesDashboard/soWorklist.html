@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	    <title>Sales Dashboard</title>
+	   	<link type="image/x-icon" href="/images/favicon.ico" rel="shortcut icon">
+        <link type="image/x-icon" href="/images/favicon.ico" rel="icon"> 
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		        
+        <link rel="stylesheet" type="text/css" href="index.css">
+
+	    <!-- <script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" -->
+		<script id="sap-ui-bootstrap" src="{{{ui5liburl}}}/resources/sap-ui-core.js"
+				data-sap-ui-libs="sap.ui.commons, sap.ui.ux3, sap.ui.table, sap.viz"
+				data-sap-ui-theme="sap_bluecrystal">
+		</script>
+		<!-- add sap.ui.table,sap.ui.ux3 and/or other libraries to 'data-sap-ui-libs' if required -->
+		
+		<script>
+			sap.isSingle = true;
+		</script>
+		<script src="sales_dashboard/global.js"></script>
+		<script src="js/app.js"></script>
+
+	</head>
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+</html>

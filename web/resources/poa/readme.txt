@@ -1,0 +1,1 @@
+To simulate different devices, use the sap-ui-xx-fakeOS URL parameter with values iphone, ipad, android, windows, blackberry
