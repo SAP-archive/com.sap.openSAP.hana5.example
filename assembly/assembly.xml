@@ -66,13 +66,6 @@
 				<exclude>pom.xml</exclude>
 			</excludes>
 		</fileSet>
-		<fileSet>
-			<directory>../src</directory>
-			<outputDirectory>web/resources</outputDirectory>
-			<includes>
-				<include>**/*.zip</include>
-			</includes>
-		</fileSet>
 	</fileSets>
 	<dependencySets>
 		<dependencySet>
