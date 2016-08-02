@@ -1,4 +1,4 @@
-var SESSION = $.import("sap.hana.democontent.epmNext.services", "session");
+var SESSION = $.import("sap.hana.democontent.epm.services", "session");
 
 var conn = $.db.getConnection();
 var pstmt;

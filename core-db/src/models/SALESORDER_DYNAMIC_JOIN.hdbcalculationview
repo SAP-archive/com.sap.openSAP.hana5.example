@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALESORDER_DYNAMIC_JOIN" applyPrivilegeType="SQL_ANALYTIC_PRIVILEGE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALESORDER_DYNAMIC_JOIN" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALESORDER_DYNAMIC_JOIN"/>
 <localVariables/>
 <variableMappings/>
@@ -14,19 +14,19 @@
 <calculationViews>
   <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
     <viewAttributes>
-      <viewAttribute id="SALES" aggregationType="sum">
+      <viewAttribute id="SALES" aggregationType="sum"><descriptions/>
         <descriptions defaultDescription="NETAMOUNT"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTID">
+      <viewAttribute id="PRODUCTID"><descriptions/>
         <descriptions defaultDescription="PRODUCTID"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_NAME">
+      <viewAttribute id="PRODUCT_NAME"><descriptions/>
         <descriptions defaultDescription="PRODUCT_NAME"/>
       </viewAttribute>
-      <viewAttribute id="COUNTRY">
+      <viewAttribute id="COUNTRY"><descriptions/>
         <descriptions defaultDescription="COUNTRY"/>
       </viewAttribute>
-      <viewAttribute id="REGION">
+      <viewAttribute id="REGION"><descriptions/>
         <descriptions defaultDescription="REGION"/>
       </viewAttribute>
     </viewAttributes>
@@ -41,13 +41,13 @@
   </calculationView>
   <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_2">
     <viewAttributes>
-      <viewAttribute id="TOTAL_SALES" aggregationType="sum">
+      <viewAttribute id="TOTAL_SALES" aggregationType="sum"><descriptions/>
         <descriptions defaultDescription="NETAMOUNT"/>
       </viewAttribute>
-      <viewAttribute id="COUNTRY">
+      <viewAttribute id="COUNTRY"><descriptions/>
         <descriptions defaultDescription="COUNTRY"/>
       </viewAttribute>
-      <viewAttribute id="REGION">
+      <viewAttribute id="REGION"><descriptions/>
         <descriptions defaultDescription="REGION"/>
       </viewAttribute>
     </viewAttributes>
@@ -60,22 +60,22 @@
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
     <viewAttributes>
-      <viewAttribute id="SALES">
+      <viewAttribute id="SALES"><descriptions/>
         <descriptions defaultDescription="SALES"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTID">
+      <viewAttribute id="PRODUCTID"><descriptions/>
         <descriptions defaultDescription="PRODUCTID"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCT_NAME">
+      <viewAttribute id="PRODUCT_NAME"><descriptions/>
         <descriptions defaultDescription="PRODUCT_NAME"/>
       </viewAttribute>
-      <viewAttribute id="COUNTRY">
+      <viewAttribute id="COUNTRY"><descriptions/>
         <descriptions defaultDescription="COUNTRY"/>
       </viewAttribute>
-      <viewAttribute id="REGION">
+      <viewAttribute id="REGION"><descriptions/>
         <descriptions defaultDescription="REGION"/>
       </viewAttribute>
-      <viewAttribute id="TOTAL_SALES">
+      <viewAttribute id="TOTAL_SALES"><descriptions/>
         <descriptions defaultDescription="TOTAL_SALES"/>
       </viewAttribute>
     </viewAttributes>

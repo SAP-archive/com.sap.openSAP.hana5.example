@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALES_OVERVIEW_WO_CURR_CONV_OPT" applyPrivilegeType="SQL_ANALYTIC_PRIVILEGE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALES_OVERVIEW_WO_CURR_CONV_OPT" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALES_OVERVIEW_WO_CURR_CONV_OPT"/>
 <localVariables/>
 <variableMappings/>
@@ -14,46 +14,46 @@
 <calculationViews>
   <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
     <viewAttributes>
-      <viewAttribute id="LIFECYCLESTATUS">
+      <viewAttribute id="LIFECYCLESTATUS"><descriptions/>
         <descriptions defaultDescription="LIFECYCLESTATUS"/>
       </viewAttribute>
-      <viewAttribute id="BILLINGSTATUS">
+      <viewAttribute id="BILLINGSTATUS"><descriptions/>
         <descriptions defaultDescription="BILLINGSTATUS"/>
       </viewAttribute>
-      <viewAttribute id="DELIVERYSTATUS">
+      <viewAttribute id="DELIVERYSTATUS"><descriptions/>
         <descriptions defaultDescription="DELIVERYSTATUS"/>
       </viewAttribute>
-      <viewAttribute id="HISTORY_CREATEDBY">
+      <viewAttribute id="HISTORY_CREATEDBY"><descriptions/>
         <descriptions defaultDescription="HISTORY_CREATEDBY_EMPLOYEEID"/>
       </viewAttribute>
-      <viewAttribute id="POSTING_DATE">
+      <viewAttribute id="POSTING_DATE"><descriptions/>
         <descriptions defaultDescription="HISTORY_CREATEDAT"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERID">
+      <viewAttribute id="SALESORDERID"><descriptions/>
         <descriptions defaultDescription="SALESORDERID"/>
       </viewAttribute>
-      <viewAttribute id="PARTNERID">
+      <viewAttribute id="PARTNERID"><descriptions/>
         <descriptions defaultDescription="PARTNER_PARTNERID"/>
       </viewAttribute>
-      <viewAttribute id="CURRENCY">
+      <viewAttribute id="CURRENCY"><descriptions/>
         <descriptions defaultDescription="CURRENCY"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERITEM">
+      <viewAttribute id="SALESORDERITEM"><descriptions/>
         <descriptions defaultDescription="SALESORDERITEM"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTID">
+      <viewAttribute id="PRODUCTID"><descriptions/>
         <descriptions defaultDescription="PRODUCT_PRODUCTID"/>
       </viewAttribute>
-      <viewAttribute id="NETAMOUNT">
+      <viewAttribute id="NETAMOUNT"><descriptions/>
         <descriptions defaultDescription="NETAMOUNT"/>
       </viewAttribute>
-      <viewAttribute id="TAXAMOUNT">
+      <viewAttribute id="TAXAMOUNT"><descriptions/>
         <descriptions defaultDescription="TAXAMOUNT"/>
       </viewAttribute>
-      <viewAttribute id="QUANTITY">
+      <viewAttribute id="QUANTITY"><descriptions/>
         <descriptions defaultDescription="QUANTITY"/>
       </viewAttribute>
-      <viewAttribute id="QUANTITYUNIT">
+      <viewAttribute id="QUANTITYUNIT"><descriptions/>
         <descriptions defaultDescription="QUANTITYUNIT"/>
       </viewAttribute>
     </viewAttributes>

@@ -3,7 +3,7 @@ var purchaseOrder = $.import("xsjs.JavaScriptBasics", "purchaseOrder");
 function objectsAdv(){
 	var body = '';
 	var inputPO = $.request.parameters.get('po');
-	inputPO = typeof inputPO !== 'undefined' ? inputPO : '0300000000'; 
+	inputPO = typeof inputPO !== 'undefined' ? inputPO : '300000000'; 
 	
 	body += '<b>Object Advanced</b><br>';
 	var po = new purchaseOrder.header(inputPO);

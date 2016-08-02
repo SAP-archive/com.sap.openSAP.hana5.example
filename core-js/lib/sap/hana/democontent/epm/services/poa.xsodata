@@ -6,7 +6,7 @@ service namespace "com.sap.openSAP.hana5.example.services" {
 	navigates ("PO_Supplier" as "Supplier", "PO_Notes" as "Notes", 
 	           "PO_Attachments" as "Attachments", "PO_Item" as "PurchaseOrder_Items");
 	
-	"MD.BuyerView"
+	"MDViews.BuyerView"
 	as "Supplier"
 	keys ("Id");
 
@@ -18,7 +18,7 @@ service namespace "com.sap.openSAP.hana5.example.services" {
 	as "Attachments"
 	keys ("NOTEID");
 	
-	"sap.hana.democontent.epmNext.models::PO_ITEM"
+	"sap.hana.democontent.epm.models::PO_ITEM"
 	as "PurchaseOrder_Items"
 	keys ("PURCHASEORDERID","PURCHASEORDERITEM")
 	navigates ("PO_Item" as "PurchaseOrder_Items");

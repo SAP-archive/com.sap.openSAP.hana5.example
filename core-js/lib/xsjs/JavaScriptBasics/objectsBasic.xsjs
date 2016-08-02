@@ -2,7 +2,7 @@ var purchaseOrder = $.import("xsjs.JavaScriptBasics", "purchaseOrderBasic");
 
 function getObjectsJSON(){
 	var inputPO = $.request.parameters.get('po');
-	inputPO = typeof inputPO !== 'undefined' ? inputPO : '0300000000'; 
+	inputPO = typeof inputPO !== 'undefined' ? inputPO : '300000000'; 
 	var po = new purchaseOrder.getHeader(inputPO);
 	var poJson = {"purchaseOrder": po};
 	

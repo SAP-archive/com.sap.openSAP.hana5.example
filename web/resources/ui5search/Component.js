@@ -30,7 +30,7 @@ sap.ui.core.UIComponent.extend("sap.shine.esh.Component", {
 			title: {	name:"title", type:"string", defaultValue:"Products Search in SHINE" },			
 			description: {	name:"description", type:"string", defaultValue:"SHINE service for OData search" },	
 			url: {	name:"url", type:"string", defaultValue:"/sap/hana/democontent/epm/ui5search/services/productTexts.xsodata" },
-			schema: {	name:"schema", type:"string", defaultValue:"sap.hana.democontent.epm" },
+			schema: {	name:"schema", type:"string", defaultValue:"com.sap.openSAP.hana5.example.services" },
 			entitySet: {	name:"entitySet", type:"string", defaultValue:"PRODUCTS_TEXT" }
 		}
 

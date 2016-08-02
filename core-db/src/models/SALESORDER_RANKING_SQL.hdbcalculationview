@@ -1,32 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="sap.hana.democontent.epm.models::SALESORDER_RANKING_SQL" applyPrivilegeType="SQL_ANALYTIC_PRIVILEGE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="sap.hana.democontent.epm.models::SALESORDER_RANKING_SQL" applyPrivilegeType="NONE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALESORDER_RANKING_SQL"/>
 <localVariables>
   <variable id="IP_FR_DTE" parameter="true">
     <descriptions defaultDescription=" "/>
     <variableProperties datatype="DATE" length="0">
       <valueDomain type="empty"/>
-      <selection/>
+      <selection multiLine="false"/>
     </variableProperties>
   </variable>
   <variable id="IP_TO_DTE" parameter="true">
     <descriptions defaultDescription=" "/>
     <variableProperties datatype="DATE" length="0">
       <valueDomain type="empty"/>
-      <selection/>
+      <selection multiLine="false"/>
     </variableProperties>
   </variable>
 </localVariables>
-<variableMappings>
-  <mapping xsi:type="Variable:VariableMapping" dataSource="#sales_ranking">
-    <targetVariable name="IP_FR_DTE" resourceUri="undefined::sales_ranking"/>
-    <localVariable>IP_FR_DTE</localVariable>
-  </mapping>
-  <mapping xsi:type="Variable:VariableMapping" dataSource="#sales_ranking">
-    <targetVariable name="IP_TO_DTE" resourceUri="undefined::sales_ranking"/>
-    <localVariable>IP_TO_DTE</localVariable>
-  </mapping>
-</variableMappings>
+<variableMappings/>
 <dataSources>
   <DataSource id="sales_ranking" type="TABLE_FUNCTION">
     <resourceUri>sales_ranking</resourceUri>

@@ -44,7 +44,7 @@ context MDViews {
         ADDRESSES.COUNTRY as "Country",
         ADDRESSES.REGION as "Region",
         HISTORY.CREATEDBY.LOGINNAME as "CreatedBy"
-   } where PARTNERROLE = '01';
+   } where PARTNERROLE = '1';
  
     define view SupplierView as SELECT from MD.BusinessPartner {
         PARTNERID as "Id",
@@ -57,7 +57,7 @@ context MDViews {
         ADDRESSES.COUNTRY as "Country",
         ADDRESSES.REGION as "Region",
         HISTORY.CREATEDBY.LOGINNAME as "CreatedBy"
-   }  where PARTNERROLE = '02';
+   }  where PARTNERROLE = '2';
   
    define view BPAddrExt as select from MD.BusinessPartner {
    	PARTNERID,

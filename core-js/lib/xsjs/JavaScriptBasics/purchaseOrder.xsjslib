@@ -106,7 +106,7 @@ header.prototype = new base();
 
 function buyer(partnerId) {
 
-	query = 'SELECT * FROM "MD.BuyerView" '
+	query = 'SELECT * FROM "MDViews.BuyerView" '
 			+ ' WHERE "Id" = ?';
 	pstmt = conn.prepareStatement(query);
 	pstmt.setString(1, partnerId);
@@ -149,7 +149,7 @@ item.prototype = new base();
 
 function product(productId) {
 
-	query = 'SELECT * FROM "MD.ProductView" '
+	query = 'SELECT * FROM "MDViews.ProductView" '
 			+ ' WHERE "Product_Id" = ?';
 	pstmt = conn.prepareStatement(query);
 	pstmt.setString(1, productId);

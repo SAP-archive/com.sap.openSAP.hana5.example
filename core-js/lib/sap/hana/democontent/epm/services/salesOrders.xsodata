@@ -8,10 +8,10 @@ service namespace "com.sap.openSAP.hana5.example.services"  {
    keys ("PARTNERID");
  
    
-   "sap.hana.democontent.epm.models::SALES_OVERVIEW_WO_CURR_CONV_OPT" 
-   as "SalesOrderItem" 
-   keys generate local "ID"
-   aggregates always;	
+//   "sap.hana.democontent.epm.models::SALES_OVERVIEW_WO_CURR_CONV_OPT" 
+//   as "SalesOrderItem" 
+//   keys generate local "ID"
+//   aggregates always;	
    
       association "SO_Partner" principal "SalesOrderHeader"("PARTNER.PARTNERID")
      multiplicity "1" dependent "Buyer"("PARTNERID") multiplicity "1";

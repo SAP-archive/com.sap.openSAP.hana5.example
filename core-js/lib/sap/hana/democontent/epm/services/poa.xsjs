@@ -1,7 +1,7 @@
-$.import("sap.hana.democontent.epmNext.services", "messages");
-var MESSAGES = $.sap.hana.democontent.epmNext.services.messages;
-$.import("sap.hana.democontent.epmNext.services", "session");
-var SESSIONINFO = $.sap.hana.democontent.epmNext.services.session;
+$.import("sap.hana.democontent.epm.services", "messages");
+var MESSAGES = $.sap.hana.democontent.epm.services.messages;
+$.import("sap.hana.democontent.epm.services", "session");
+var SESSIONINFO = $.sap.hana.democontent.epm.services.session;
 
 function getEmployees(){
 	function createEmployeeEntry(rs) {
@@ -9,7 +9,7 @@ function getEmployees(){
 			"FirstName" : rs.FIRST,
 			"LastName" : rs.LAST,
 			"Department" : "Approving Department",
-			"Thumbnail" : rs.EMPLOYEEPICURL,
+			"Thumbnail" : rs.EMPLOYEEPICURL
 		};
 	}
 

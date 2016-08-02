@@ -4,7 +4,7 @@ jQuery.sap.declare("sap.shineNext.odataMetaExt.Component");
 sap.ui.core.UIComponent.extend("sap.shineNext.odataMetaExt.Component", {
 	init: function(){
  
-	      var oModel = new sap.ui.model.odata.ODataModel("/sap/hana/democontent/epmNext/services/businessPartnersExt.xsodata/", true);
+	      var oModel = new sap.ui.model.odata.ODataModel("/sap/hana/democontent/epm/services/businessPartnersExt.xsodata/", true);
           sap.ui.getCore().setModel(oModel, "bpModel");  
           
 		sap.ui.core.UIComponent.prototype.init.apply(this, arguments);

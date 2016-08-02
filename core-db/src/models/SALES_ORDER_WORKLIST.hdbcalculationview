@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALES_ORDER_WORKLIST" applyPrivilegeType="SQL_ANALYTIC_PRIVILEGE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALES_ORDER_WORKLIST" applyPrivilegeType="NONE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALES_ORDER_WORKLIST"/>
 <localVariables/>
 <variableMappings/>
@@ -20,31 +20,31 @@
 <calculationViews>
   <calculationView xsi:type="Calculation:JoinView" id="Sales" joinType="inner">
     <viewAttributes>
-      <viewAttribute id="SALESORDERID"><descriptions/>
+      <viewAttribute id="SALESORDERID"><descriptions/><descriptions/>
         <descriptions defaultDescription="SALESORDERID"/>
       </viewAttribute>
-      <viewAttribute id="PARTNERID"><descriptions/>
+      <viewAttribute id="PARTNERID"><descriptions/><descriptions/>
         <descriptions defaultDescription="PARTNER_PARTNERID"/>
       </viewAttribute>
-      <viewAttribute id="LIFECYCLESTATUS"><descriptions/>
+      <viewAttribute id="LIFECYCLESTATUS"><descriptions/><descriptions/>
         <descriptions defaultDescription="LIFECYCLESTATUS"/>
       </viewAttribute>
-      <viewAttribute id="CURRENCY"><descriptions/>
+      <viewAttribute id="CURRENCY"><descriptions/><descriptions/>
         <descriptions defaultDescription="CURRENCY"/>
       </viewAttribute>
-      <viewAttribute id="GROSSAMOUNT"><descriptions/>
+      <viewAttribute id="GROSSAMOUNT"><descriptions/><descriptions/>
         <descriptions defaultDescription="GROSSAMOUNT"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERITEM"><descriptions/>
+      <viewAttribute id="SALESORDERITEM"><descriptions/><descriptions/>
         <descriptions defaultDescription="SALESORDERITEM"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTID"><descriptions/>
+      <viewAttribute id="PRODUCTID"><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_PRODUCTID"/>
       </viewAttribute>
-      <viewAttribute id="QUANTITY"><descriptions/>
+      <viewAttribute id="QUANTITY"><descriptions/><descriptions/>
         <descriptions defaultDescription="QUANTITY"/>
       </viewAttribute>
-      <viewAttribute id="QUANTITYUNIT"><descriptions/>
+      <viewAttribute id="QUANTITYUNIT"><descriptions/><descriptions/>
         <descriptions defaultDescription="QUANTITYUNIT"/>
       </viewAttribute>
     </viewAttributes>
@@ -67,43 +67,43 @@
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Product" joinType="inner">
     <viewAttributes>
-      <viewAttribute id="SALESORDERID"><descriptions/>
+      <viewAttribute id="SALESORDERID"><descriptions/><descriptions/>
         <descriptions defaultDescription="SALESORDERID"/>
       </viewAttribute>
-      <viewAttribute id="PARTNERID"><descriptions/>
+      <viewAttribute id="PARTNERID"><descriptions/><descriptions/>
         <descriptions defaultDescription="PARTNERID"/>
       </viewAttribute>
-      <viewAttribute id="LIFECYCLESTATUS"><descriptions/>
+      <viewAttribute id="LIFECYCLESTATUS"><descriptions/><descriptions/>
         <descriptions defaultDescription="LIFECYCLESTATUS"/>
       </viewAttribute>
-      <viewAttribute id="CURRENCY"><descriptions/>
+      <viewAttribute id="CURRENCY"><descriptions/><descriptions/>
         <descriptions defaultDescription="CURRENCY"/>
       </viewAttribute>
-      <viewAttribute id="GROSSAMOUNT"><descriptions/>
+      <viewAttribute id="GROSSAMOUNT"><descriptions/><descriptions/>
         <descriptions defaultDescription="GROSSAMOUNT"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERITEM"><descriptions/>
+      <viewAttribute id="SALESORDERITEM"><descriptions/><descriptions/>
         <descriptions defaultDescription="SALESORDERITEM"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTID"><descriptions/>
+      <viewAttribute id="PRODUCTID"><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCTID"/>
       </viewAttribute>
-      <viewAttribute id="QUANTITY"><descriptions/>
+      <viewAttribute id="QUANTITY"><descriptions/><descriptions/>
         <descriptions defaultDescription="QUANTITY"/>
       </viewAttribute>
-      <viewAttribute id="QUANTITYUNIT"><descriptions/>
+      <viewAttribute id="QUANTITYUNIT"><descriptions/><descriptions/>
         <descriptions defaultDescription="QUANTITYUNIT"/>
       </viewAttribute>
-      <viewAttribute id="TYPECODE">
+      <viewAttribute id="TYPECODE"><descriptions/>
         <descriptions defaultDescription="PRODUCT_TYPECODE"/>
       </viewAttribute>
-      <viewAttribute id="CATEGORY">
+      <viewAttribute id="CATEGORY"><descriptions/>
         <descriptions defaultDescription="PRODUCT_CATEGORY"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTNAME">
+      <viewAttribute id="PRODUCTNAME"><descriptions/>
         <descriptions defaultDescription="PRODUCT_NAME"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTDESC">
+      <viewAttribute id="PRODUCTDESC"><descriptions/>
         <descriptions defaultDescription="PRODUCT_DESCRIPTION"/>
       </viewAttribute>
     </viewAttributes>
@@ -130,52 +130,52 @@
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Partner" joinType="inner">
     <viewAttributes>
-      <viewAttribute id="SALESORDERID">
+      <viewAttribute id="SALESORDERID"><descriptions/>
         <descriptions defaultDescription="SALESORDERID"/>
       </viewAttribute>
-      <viewAttribute id="PARTNERID">
+      <viewAttribute id="PARTNERID"><descriptions/>
         <descriptions defaultDescription="PARTNERID"/>
       </viewAttribute>
-      <viewAttribute id="LIFECYCLESTATUS">
+      <viewAttribute id="LIFECYCLESTATUS"><descriptions/>
         <descriptions defaultDescription="LIFECYCLESTATUS"/>
       </viewAttribute>
-      <viewAttribute id="CURRENCY">
+      <viewAttribute id="CURRENCY"><descriptions/>
         <descriptions defaultDescription="CURRENCY"/>
       </viewAttribute>
-      <viewAttribute id="GROSSAMOUNT">
+      <viewAttribute id="GROSSAMOUNT"><descriptions/>
         <descriptions defaultDescription="GROSSAMOUNT"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERITEM">
+      <viewAttribute id="SALESORDERITEM"><descriptions/>
         <descriptions defaultDescription="SALESORDERITEM"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTID">
+      <viewAttribute id="PRODUCTID"><descriptions/>
         <descriptions defaultDescription="PRODUCTID"/>
       </viewAttribute>
-      <viewAttribute id="QUANTITY">
+      <viewAttribute id="QUANTITY"><descriptions/>
         <descriptions defaultDescription="QUANTITY"/>
       </viewAttribute>
-      <viewAttribute id="QUANTITYUNIT">
+      <viewAttribute id="QUANTITYUNIT"><descriptions/>
         <descriptions defaultDescription="QUANTITYUNIT"/>
       </viewAttribute>
-      <viewAttribute id="TYPECODE">
+      <viewAttribute id="TYPECODE"><descriptions/>
         <descriptions defaultDescription="TYPECODE"/>
       </viewAttribute>
-      <viewAttribute id="CATEGORY">
+      <viewAttribute id="CATEGORY"><descriptions/>
         <descriptions defaultDescription="CATEGORY"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTNAME">
+      <viewAttribute id="PRODUCTNAME"><descriptions/>
         <descriptions defaultDescription="PRODUCTNAME"/>
       </viewAttribute>
-      <viewAttribute id="PRODUCTDESC">
+      <viewAttribute id="PRODUCTDESC"><descriptions/>
         <descriptions defaultDescription="PRODUCTDESC"/>
       </viewAttribute>
-      <viewAttribute id="COMPANYNAME">
+      <viewAttribute id="COMPANYNAME"><descriptions/>
         <descriptions defaultDescription="COMPANYNAME"/>
       </viewAttribute>
-      <viewAttribute id="CITY">
+      <viewAttribute id="CITY"><descriptions/>
         <descriptions defaultDescription="CITY"/>
       </viewAttribute>
-      <viewAttribute id="POSTALCODE">
+      <viewAttribute id="POSTALCODE"><descriptions/>
         <descriptions defaultDescription="POSTALCODE"/>
       </viewAttribute>
     </viewAttributes>
@@ -288,7 +288,7 @@
     </shape>
     <shape modelObjectName="SO.Header" modelObjectNameSpace="Sales" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="20" y="38"/>
-      <rectangleSize width="266.7666015625"/>
+      <rectangleSize width="266"/>
     </shape>
     <shape modelObjectName="SO.Item" modelObjectNameSpace="Sales" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="30"/>

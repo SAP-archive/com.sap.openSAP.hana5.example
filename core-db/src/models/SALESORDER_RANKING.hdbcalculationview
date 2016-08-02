@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALESORDER_RANKING" applyPrivilegeType="SQL_ANALYTIC_PRIVILEGE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALESORDER_RANKING" applyPrivilegeType="NONE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALESORDER_RANKING"/>
 <localVariables>
   <variable id="IP_FR_DTE" parameter="true">
     <descriptions defaultDescription="IP_FR_DTE"/>
-    <variableProperties datatype="NVARCHAR" length="8" scale="null" mandatory="false">
+    <variableProperties datatype="NVARCHAR" length="8" scale="NaN" mandatory="false">
       <valueDomain type="empty"/>
       <selection multiLine="false"/>
       <derivationRule inputEnabled="true">
@@ -22,7 +22,7 @@
   </variable>
   <variable id="IP_TO_DTE" parameter="true">
     <descriptions defaultDescription="IP_TO_DTE"/>
-    <variableProperties datatype="NVARCHAR" length="8" scale="null" mandatory="false">
+    <variableProperties datatype="NVARCHAR" length="8" scale="NaN" mandatory="false">
       <valueDomain type="empty"/>
       <selection multiLine="false"/>
       <derivationRule inputEnabled="true">
@@ -48,19 +48,19 @@
 <calculationViews>
   <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
     <viewAttributes>
-      <viewAttribute id="COMPANY_NAME">
+      <viewAttribute id="COMPANY_NAME"><descriptions/>
         <descriptions defaultDescription="COMPANY_NAME"/>
       </viewAttribute>
-      <viewAttribute id="ORDERS">
+      <viewAttribute id="ORDERS"><descriptions/>
         <descriptions defaultDescription="ORDERS"/>
       </viewAttribute>
-      <viewAttribute id="ORDER_RANK">
+      <viewAttribute id="ORDER_RANK"><descriptions/>
         <descriptions defaultDescription="ORDER_RANK"/>
       </viewAttribute>
-      <viewAttribute id="SALES">
+      <viewAttribute id="SALES"><descriptions/>
         <descriptions defaultDescription="SALES"/>
       </viewAttribute>
-      <viewAttribute id="SALES_RANK">
+      <viewAttribute id="SALES_RANK"><descriptions/>
         <descriptions defaultDescription="SALES_RANK"/>
       </viewAttribute>
     </viewAttributes>

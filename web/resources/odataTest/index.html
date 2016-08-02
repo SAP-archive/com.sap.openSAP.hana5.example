@@ -143,7 +143,7 @@
 			  var oTable = sap.ui.getCore().byId("tblHeader");
 			  oTable.removeAllColumns();
 			  oTable.removeAllRows();
-		   	  var oModel = new sap.ui.model.odata.ODataModel(sap.ui.getCore().byId("val1").getValue(), false);
+		   	  var oModel = new sap.ui.model.odata.ODataModel(sap.ui.getCore().byId("val1").getValue(), true);
 		   	  oModel.attachEvent("requestFailed",oDataFailed)
 		   	  
 		   	  var oMeta = oModel.getServiceMetadata();
@@ -201,7 +201,7 @@
 				  oTableItem.removeAllColumns();
 				  oTableItem.removeAllRows();
 				  
-			   	  var oModel = new sap.ui.model.odata.ODataModel(sap.ui.getCore().byId("val2_1").getValue(), false);
+			   	  var oModel = new sap.ui.model.odata.ODataModel(sap.ui.getCore().byId("val2_1").getValue(), true);
 			   	  oModel.attachEvent("requestFailed",oDataFailed)
 			   	  
 			   	  var oMeta = oModel.getServiceMetadata();
@@ -291,7 +291,7 @@
 			 var oTable = sap.ui.getCore().byId("tblUsers");
 			  oTable.removeAllColumns();
 			  oTable.removeAllRows();
-		   	  var oModel = new sap.ui.model.odata.ODataModel(sap.ui.getCore().byId("val3_1").getValue(), false);
+		   	  var oModel = new sap.ui.model.odata.ODataModel(sap.ui.getCore().byId("val3_1").getValue(), true);
 		   	  oModel.attachEvent("requestFailed",oDataFailed)
 		   	  
 		   	  var oMeta = oModel.getServiceMetadata();

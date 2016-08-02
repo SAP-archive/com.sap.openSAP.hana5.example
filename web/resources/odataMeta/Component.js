@@ -6,7 +6,7 @@ sap.ui.core.UIComponent.extend("sap.shineNext.odataMeta.Component", {
 		jQuery.sap.require("sap.m.MessageBox");
 		jQuery.sap.require("sap.m.MessageToast");		
   
-	      var oModel = new sap.ui.model.odata.ODataModel("/sap/hana/democontent/epmNext/services/businessPartners.xsodata/", true);
+	      var oModel = new sap.ui.model.odata.ODataModel("/sap/hana/democontent/epm/services/businessPartners.xsodata/", true);
           sap.ui.getCore().setModel(oModel, "bpModel");  
           
 		sap.ui.core.UIComponent.prototype.init.apply(this, arguments);

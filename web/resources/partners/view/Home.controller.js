@@ -41,7 +41,7 @@ sap.ui.controller("sap.shineNext.partners.view.Home", {
 			
 			// update model
 			var newItem = view.inputCreate.getController().getResultItem();
-			var oModel = sap.ui.getCore().getModel();
+			var oModel = sap.ui.getCore().getModel("bpModel");
 	
 			oModel.setHeaders({"content-type" : "application/json;charset=utf-8"});
 			oModel.create('/Buyer', newItem, null, function() {
