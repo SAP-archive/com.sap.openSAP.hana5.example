@@ -43,6 +43,17 @@ context Util {
         THUMBNAIL: EPM.LString;      
     };   
 
+    Entity SeriesData {
+    	key setid:Integer;
+		key t: UTCTimestamp;
+		FACTOR: Decimal(9, 6);
+		series(
+		series key(setid)
+		period for series(t)  
+		equidistant increment by interval 1 hour  
+		)     
+    }; 
+    
 	entity MySeriesEntity {
 		key setId : Integer;
 		key t : UTCTimestamp;
@@ -54,6 +65,14 @@ context Util {
 		)
 	};    
   
+    //for SHINE 10.3
+    temporary Entity DataGenerationTime {
+        STARTTIME: Integer64;
+        ENDTIME: Integer64;
+    } technical configuration {
+		row store;
+	};
+    
     Entity Attachments {
         key  NOTEID: EPM.BusinessKey;
         LINKID: EPM.BusinessKey;        

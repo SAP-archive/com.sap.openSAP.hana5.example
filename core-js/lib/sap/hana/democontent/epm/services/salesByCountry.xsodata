@@ -1,0 +1,11 @@
+service namespace "com.sap.openSAP.hana5.example.services"  { 
+   "sap.hana.democontent.epm.models::SALESORDER_DYNAMIC_JOIN" 
+    as "SalesByCountry" with ("COUNTRY", "TOTAL_SALES", "SALES", "SHARE_SALES")   
+	keys generate local "ID"
+    aggregates always;	 
+}
+
+
+settings {
+    metadata cache-control "max-age= 604800";
+}

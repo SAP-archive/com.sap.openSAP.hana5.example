@@ -76,7 +76,14 @@ context Procedures {
       COMPANYNAME: String(80);
       PRODUCTID: String(10);      	
       };
-    
+
+    table type tt_tax_calculation_out {
+      PARTNERID: String(10);
+      COMPANYNAME: String(80);
+      PRODUCTID: String(10);
+      TAX: Decimal(15,3);
+      };
+      
     table type tt_variable{
         SESSIONID: String(32);
         NAME: String(30);
