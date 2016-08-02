@@ -1,0 +1,12 @@
+.searchBar {
+	width: 80% !important;
+	margin-left: 10%;
+}
+
+.controlGrid {
+	margin-left: 10%;
+}
+
+.sapMILILabel{
+    white-space: normal !important;
+} 

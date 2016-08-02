@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>Full-text Search with SAPUI5, ODATA, and CDS</title>
+
+	<link rel="stylesheet" type="text/css" href="explorer.css">
+
+
+	    <!-- <script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" -->
+	<script id="sap-ui-bootstrap" src="{{{ui5liburl}}}/resources/sap-ui-core.js"
+			data-sap-ui-libs="sap.ui.commons,sap.m"
+			data-sap-ui-theme="sap_bluecrystal"
+			data-sap-ui-resourceroots='{
+				"sap.shine.esh": "./",
+				"fragment": "./fragment",
+				"util": "./util"
+			}'
+			data-sap-ui-xx-bindingSyntax="complex">
+	</script>
+
+	<script type="text/javascript">
+		new sap.m.Shell({
+				app : new sap.ui.core.ComponentContainer({
+					name : "sap.shine.esh"
+				})
+			}).placeAt("content");
+	</script>
+</head>
+
+<body class="sapUiBody" role="application">
+	<div id="content"></div>
+</body>
+
+</html>

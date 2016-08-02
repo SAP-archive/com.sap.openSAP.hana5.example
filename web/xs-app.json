@@ -22,8 +22,15 @@
 		}
 	},
 	{
-		"source": "/sap/hana/democontent/epm/services/",
-		"destination": "core-backend"
+		"source": "/sap/hana/democontent/epm/(.*)",
+		"destination": "core-backend",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"POST": ["$XSAPPNAME.Display", "$XSAPPNAME.Create"],
+			"PUT": ["$XSAPPNAME.Display", "$XSAPPNAME.Create"],
+			"DELETE": ["$XSAPPNAME.Display", "$XSAPPNAME.Delete"],
+			"default": "$XSAPPNAME.Display"
+		}
 	},
 	{
 		"source": "/get/(.*)",

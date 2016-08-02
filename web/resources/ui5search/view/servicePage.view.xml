@@ -1,0 +1,79 @@
+<sap.ui.core.mvc:View controllerName="sap.shine.esh.view.servicePage"
+    xmlns="sap.m"
+    xmlns:sap.ui.layout="sap.ui.layout"
+    xmlns:sap.ui.core="sap.ui.core"
+    xmlns:sap.ui.core.mvc="sap.ui.core.mvc" >
+    <App id="app--explorer" defaultTransitionName="slide" backgroundImage="images/fernglas.jpeg">
+        <pages>
+            <Page id="page1" title="{i18n>title}">
+                <content>
+                    <SearchField id="app--productsearchsearchBar" class="searchBar" width="100%" placeholder="{i18n>searchplaceholder}" search="handleSearch"></SearchField>
+                    <VBox direction="Column">
+                        <items>
+                            <sap.ui.layout:Grid class="controlGrid" hSpacing="0">
+                                <sap.ui.layout:content>
+                                    <SegmentedButton selectedButton="app--productsearch-tableButton">
+                                        <layoutData>
+                                            <sap.ui.layout:GridData span="L12 M12 S12" spanL="0" spanM="0" spanS="0" indentL="0" indentM="0" indentS="0" visibleL="false" visibleM="false" spanLarge="0" spanMedium="0" spanSmall="0" indentLarge="0" indentMedium="0" indentSmall="0" visibleOnLarge="false" visibleOnMedium="false"></sap.ui.layout:GridData>
+                                        </layoutData>
+                                        <buttons>
+                                            <Button id="app--productsearch-tableButton" text="{i18n>buttontable}"></Button>
+                                            <Button id="app--productsearch-facetsButton" text="{i18n>buttonfacets}"></Button>
+                                        </buttons>
+                                    </SegmentedButton>
+                                    <Select id="app--productsearchsortBySelector" change="handleSortChange">
+                                        <layoutData>
+                                            <sap.ui.layout:GridData span="L6 M6 S12" spanL="0" spanM="0" spanS="0" indentL="0" indentM="0" indentS="0" spanLarge="0" spanMedium="0" spanSmall="0" indentLarge="0" indentMedium="0" indentSmall="0"></sap.ui.layout:GridData>
+                                        </layoutData>
+                                    </Select>
+                                    <SegmentedButton id="app--productsearch-ascDscSegButtons" selectedButton="app--productsearch-ascendingButton" select="handleSortChange">
+                                        <layoutData>
+                                            <sap.ui.layout:GridData span="L6 M6 S12" spanL="0" spanM="0" spanS="0" indentL="0" indentM="0" indentS="0" spanLarge="0" spanMedium="0" spanSmall="0" indentLarge="0" indentMedium="0" indentSmall="0"></sap.ui.layout:GridData>
+                                        </layoutData>
+                                        <buttons>
+                                            <Button id="app--productsearch-ascendingButton" text="{i18n>buttonascending}"></Button>
+                                            <Button id="app--productsearch-descendingButton" text="{i18n>buttondescending}"></Button>
+                                        </buttons>
+                                    </SegmentedButton>
+                                </sap.ui.layout:content>
+                            </sap.ui.layout:Grid>
+                        </items>
+                    </VBox>
+                    <sap.ui.layout:Grid id="app--productsearch-tableFacetContainer">
+                        <sap.ui.layout:content>
+                            <List id="app--productsearch-facetList" headerText="{i18n>facetlisttext}" noDataText="{i18n>facetlistnodatatext}" items="{facets>/facets}">
+                                <layoutData>
+                                    <sap.ui.layout:GridData span="L3 M3 S12" spanL="0" spanM="0" spanS="0" indentL="0" indentM="0" indentS="0" visibleS="false" spanLarge="0" spanMedium="0" spanSmall="0" indentLarge="0" indentMedium="0" indentSmall="0" visibleOnSmall="false"></sap.ui.layout:GridData>
+                                </layoutData>
+                                <items>
+                                    <CustomListItem id="app--productsearch-facet" counter="0">
+                                        <content>
+                                            <Label text="{facets>@com.sap.vocabularies.Common.v1.Label}"></Label>
+                                            <List noDataText="{i18n>facetlistnodatatext}" items="{facets>Items}">
+                                                <items>
+                                                    <InputListItem label="{facets>Label} ({facets>_Count})">
+                                                        <content>
+                                                            <CheckBox select="filterByFacet"></CheckBox>
+                                                        </content>
+                                                    </InputListItem>
+                                                </items>
+                                            </List>
+                                        </content>
+                                    </CustomListItem>
+                                </items>
+                            </List>
+                        <Table id="app--productsearch-resultTable" mode="SingleSelectMaster" noDataText="No data" growing="true" growingThreshold="50">
+                                <layoutData>
+                                    <sap.ui.layout:GridData span="L9 M9 S12" spanL="0" spanM="0" spanS="0" indentL="0" indentM="0" indentS="0" spanLarge="0" spanMedium="0" spanSmall="0" indentLarge="0" indentMedium="0" indentSmall="0"></sap.ui.layout:GridData>
+                                </layoutData>
+						</Table>                                
+                        </sap.ui.layout:content>
+                    </sap.ui.layout:Grid>
+                </content>
+                <headerContent>
+                    <Button icon="sap-icon://hint" press="handleInfoPopover"></Button>
+                </headerContent>
+            </Page>
+        </pages>
+    </App>
+</sap.ui.core.mvc:View>

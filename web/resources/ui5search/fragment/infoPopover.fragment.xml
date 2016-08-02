@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Popover title="Information" placement="Bottom"
+		enableScrolling="false">
+		<content>
+			<f:SimpleForm maxContainerCols="1">
+				<f:content>
+					<Label text="Service URL" design="Bold" visible="true"></Label>
+					<html:a href='/sap/hana/democontent/epm/ui5search/services/productTexts.xsodata' target='_blank'>/sap/hana/democontent/epm/ui5search/services/productTexts.xsodata</html:a>
+					<Label text="Selected Schema" design="Bold" visible="true"></Label>
+					<Text text="sap.hana.democontent.epm"></Text>
+					<Label text="Selected Entityset" design="Bold" visible="true"></Label>
+					<Text text="PRODUCTS_TEXT"></Text>
+					<Label text="Description" design="Bold" visible="true"></Label>
+					<Text text="SHINE service for OData search" align="justify"></Text>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+	</Popover>
+</core:FragmentDefinition>
