@@ -61,9 +61,9 @@ module.exports = {
 
 		//Add SQLCC
 		try {
-			options.hana.sqlcc = {
-				"com.sap.openSAP.hana5.example.sqlcc_config": "CROSS_SCHEMA_SFLIGHT"
-			};
+			options.hana.sqlcc = xsenv.getServices({
+				"xsjs.sqlcc_config": "CROSS_SCHEMA_SFLIGHT"
+			});
 		} catch (err) {
 			console.error(err);
 		}

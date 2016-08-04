@@ -1,4 +1,4 @@
-var connection = $.hdb.getConnection({"sqlcc": "com.sap.openSAP.hana5.example.sqlcc_config", "pool": true });
+var connection = $.hdb.getConnection({"sqlcc": "xsjs.sqlcc_config", "pool": true });
 
 var query = "SELECT CURRENT_USER FROM \"DUMMY\"";  
 var rs = connection.executeQuery(query);

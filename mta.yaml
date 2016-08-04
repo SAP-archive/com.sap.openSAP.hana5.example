@@ -84,8 +84,9 @@ modules:
       - name: openSAP5-ex-uaa
       - name: container
       - name: openSAP5-ex-core-db
-
-
+      - name: sap.hana.democontent.epm.services.images
+      - name: CROSS_SCHEMA_SFLIGHT
+      
  - name: openSAP5-ex-user-js
    type: nodejs
    path: user-js
@@ -98,6 +99,7 @@ modules:
       - name: user-container
       - name: openSAP5-ex-user-db
       - name: openSAP5-ex-scheduler
+
 
 # - name: openSAP5-ex-user-java
 #   type: java.tomee
@@ -136,13 +138,25 @@ resources:
  
  - name: openSAP5-ex-scheduler
    type: com.sap.xs.job-scheduler
-    
+
+ - name: sap.hana.democontent.epm.services.images
+   type: org.cloudfoundry.existing-service
+   parameters:
+     service-name: sap.hana.democontent.epm.services.images
+   properties:
+     xshttpdest-images-service-name: ${service-name}
+     
  - name: CrossSchemaService
    type: org.cloudfoundry.existing-service
    parameters:
      service-name: CROSS_SCHEMA_SFLIGHT
    properties:
      sflight-service-name: ${service-name}
+
+ - name: CROSS_SCHEMA_SFLIGHT
+   type: org.cloudfoundry.existing-service
+   parameters:
+     service-name: CROSS_SCHEMA_SFLIGHT
 
  - name: CrossSchemaSys
    type: org.cloudfoundry.existing-service
