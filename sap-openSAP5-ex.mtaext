@@ -1,0 +1,25 @@
+_schema-version: '2.0'
+ID: com.sap.openSAP.hana5.example-config1
+extends: com.sap.openSAP.hana5.example
+
+ - name: container
+   parameters: 
+     config:
+       schema: OPENSAP_HANA5_EXAMPLE
+      
+ - name: user-container
+   parameters: 
+     config:
+       schema: OPENSAP_HANA5_USER_EXAMPLE
+
+ - name: CrossSchemaService
+   parameters:
+     service-name: CROSS_SCHEMA_SFLIGHT
+
+ - name: CrossSchemaSys
+   parameters:
+     service-name: CROSS_SCHEMA_SYS
+
+ - name: CrossSchemaSysBi
+   parameters:
+     service-name: CROSS_SCHEMA_SYS_BI
