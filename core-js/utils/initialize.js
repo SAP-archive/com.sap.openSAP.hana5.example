@@ -35,7 +35,8 @@ module.exports = {
 		var xsenv = require("sap-xsenv");		
 		var options = xsjs.extend({
 			//	anonymous : true, // remove to authenticate calls
-			redirectUrl: "/index.xsjs"
+			redirectUrl: "/index.xsjs",
+			context: { base: global.__base, env: process.env, answer: 42 }
 		});
 
 		//configure HANA
