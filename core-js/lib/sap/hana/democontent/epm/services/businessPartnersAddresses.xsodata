@@ -12,8 +12,8 @@ service  {
 	
  association "ToAddresses" principal "BusinessPartners"("ADDRESSES.ADDRESSID")
 	  multiplicity "1" 
-	  dependent "Addresses"("ADDRESSID") multiplicity "1" 
-	  over "sap.hana.democontent.epmNext.data::MD.Addresses" 
+	  dependent "Addresses"("ADDRESSID") multiplicity "1"
+		   over "MD.Addresses"
            principal("ADDRESSID") dependent ("ADDRESSID")
            update using "sap.hana.democontent.epmNext.services:businessPartnersAddresses.xsjslib::assocation_create_exit";	
 }
