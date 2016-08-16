@@ -34,55 +34,55 @@ sap.ui.controller("sap.shineNext.odataDeep.view.App", {
 		 
 		 var body = '';
 		 
-		 body += '--batch' + '\n';		 
-	     body +='Content-Type:multipart/mixed;boundary=changeset' + '\n';	     
-	     body +='Content-Transfer-Encoding:binary'+ '\n';
-	     body +='\n';
+		 body += '--batch' + '\r\n';		 
+	     body +='Content-Type:multipart/mixed;boundary=changeset' + '\r\n';	     
+	     body +='Content-Transfer-Encoding:binary'+ '\r\n';
+	     body +='\r\n';
 	     
-	     body += '--changeset' + '\n';	     
-	     body += 'Content-Type:application/http' + '\n';
-		 body += 'Content-Transfer-Encoding:binary\n';	     
-		 body += 'Content-ID: 1\n';
-	     body +='\n';
+	     body += '--changeset' + '\r\n';	     
+	     body += 'Content-Type:application/http' + '\r\n';
+		 body += 'Content-Transfer-Encoding:binary\r\n';	     
+		 body += 'Content-ID: 1\r\n';
+	     body +='\r\n';
 	     
-		 body += 'POST BusinessPartners HTTP/1.1\n';
-		 body += "Content-Type: application/json\n";	
+		 body += 'POST BusinessPartners HTTP/1.1\r\n';
+		 body += "Content-Type: application/json\r\n";	
 		 var jsonBP = JSON.stringify(oBusinessPartner);
-		 body += "Content-Length:" + jsonBP.length +'\n';
-	     body +='\n';
-		 body += jsonBP + '\n';
-	     body += '--changeset' + '\n';
+		 body += "Content-Length:" + jsonBP.length +'\r\n';
+	     body +='\r\n';
+		 body += jsonBP + '\r\n';
+	     body += '--changeset' + '\r\n';
 		 
-	     body += 'Content-Type:application/http' + '\n';
-		 body += 'Content-Transfer-Encoding:binary\n';	     
-		 body += 'Content-ID: 2\n';
-	     body +='\n';
+	     body += 'Content-Type:application/http' + '\r\n';
+		 body += 'Content-Transfer-Encoding:binary\r\n';	     
+		 body += 'Content-ID: 2\r\n';
+	     body +='\r\n';
 		 
-		 body += 'POST Addresses HTTP/1.1\n';
-		 body += "Content-Type:application/json\n";
+		 body += 'POST Addresses HTTP/1.1\r\n';
+		 body += "Content-Type:application/json\r\n";
 		 var jsonAdd = JSON.stringify(oAddress);
-		 body += "Content-Length:" + jsonAdd.length +'\n';
-	     body +='\n';
+		 body += "Content-Length:" + jsonAdd.length +'\r\n';
+	     body +='\r\n';
 		 
-		 body += jsonAdd + '\n';
-	     body += '--changeset' + '\n';	     
+		 body += jsonAdd + '\r\n';
+	     body += '--changeset' + '\r\n';	     
 		 
-	     body += 'Content-Type:application/http' + '\n';
-		 body += 'Content-Transfer-Encoding:binary\n';
-	     body +='\n';
+	     body += 'Content-Type:application/http' + '\r\n';
+		 body += 'Content-Transfer-Encoding:binary\r\n';
+	     body +='\r\n';
 	     
-		 body += 'PUT $1/$links/AddRef HTTP/1.1\n';
-		 body += "Content-Type:application/json\n";
+		 body += 'PUT $1/$links/AddRef HTTP/1.1\r\n';
+		 body += "Content-Type:application/json\r\n";
 		 var jsonLink = JSON.stringify(oLink);
-		 body += "Content-Length:" + jsonLink.length +'\n';
-	     body +='\n';
+		 body += "Content-Length:" + jsonLink.length +'\r\n';
+	     body +='\r\n';
 	     
-		 body += jsonLink + '\n';
+		 body += jsonLink + '\r\n';
 		 
-	     body += '--changeset' + '--\n';	     
-	     body +='\n';
+	     body += '--changeset' + '--\r\n';	     
+	     body +='\r\n';
     
-		 body += '--batch' + '--\n';	  		 
+		 body += '--batch' + '--\r\n';	  		 
 	     
          xhr.onload = function() { };
 		 xhr.send(body);
