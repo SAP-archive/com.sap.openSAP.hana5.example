@@ -47,7 +47,7 @@ module.exports = {
 				}
 			}));
 		} catch (err) {
-			console.error(err);
+			console.log("[WARN]", err.message);
 		}
 
 		try {
@@ -57,7 +57,7 @@ module.exports = {
 				}
 			}));
 		} catch (err) {
-			console.error(err);
+			console.log("[WARN]", err.message);
 		}
 
 		//Add SQLCC
@@ -66,7 +66,7 @@ module.exports = {
 				"xsjs.sqlcc_config": "CROSS_SCHEMA_SFLIGHT"
 			});
 		} catch (err) {
-			console.error(err);
+			console.log("[WARN]", err.message);
 		}
 
 		// configure UAA
@@ -77,7 +77,7 @@ module.exports = {
 				}
 			}));
 		} catch (err) {
-			console.error(err);
+			console.log("[WARN]", err.message);
 		}
 
 		// start server
