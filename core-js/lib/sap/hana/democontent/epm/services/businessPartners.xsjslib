@@ -2,11 +2,11 @@ $.import("sap.hana.democontent.epmNext.services", "session");
 var SESSIONINFO = $.sap.hana.democontent.epmNext.services.session;
 
 function bpCreateBuyer(param) {
-	bpCreateBusinessPartner(param,'01');
+	bpCreateBusinessPartner(param,'1');
 }
 
 function bpCreateSupplier(param) {
-	bpCreateBusinessPartner(param,'02');
+	bpCreateBusinessPartner(param,'2');
 }
 
 function bpCreateBusinessPartner(param,partnerRole){
@@ -17,12 +17,10 @@ function bpCreateBusinessPartner(param,partnerRole){
 	
 	
 	var afterTable = param.afterTableName;
-	afterTable = '"' + afterTable + '"';
 	//Get Input New Record Values
-	var InputBP = XSDS.$defineEntity("Details", afterTable, {
-	    Id : { $key: true }
-	});
-	var input = InputBP.$findAll(); 
+	var	pStmt = param.connection.prepareStatement("select * from \"" + afterTable + "\"");	 
+	var input = SESSIONINFO.recordSetToJSON(pStmt.executeQuery(), "Details");
+	pStmt.close();
 	
 	//Validate Email
 	if(!validateEmail(input[0].EmailAddress)){
