@@ -44,7 +44,7 @@ modules:
         TARGET_CONTAINER: ~{user-container-name}
 
  - name: openSAP5-ex-web
-   type: html5
+   type: html5 
    path: web
    provides: 
       - name: web
@@ -201,4 +201,6 @@ resources:
      url: https://hanapm:4300/sap/ui5/1
    properties:
      xsc-ui5-service-name: ${service-name}
-     url: ${url}     
+     url: ${url}
+     
+     
