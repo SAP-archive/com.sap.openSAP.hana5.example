@@ -47,7 +47,7 @@ The code can be imported to SAP Web IDE for SAP HANA version SP12 and up.
 - Navigate to File->Git->Clone repository
 
 
-- Enter the URL of the repository [https://github.com/SAP/com.sap.openSAP.hana5.templates](https://github.com/SAP/com.sap.openSAP.hana5.templates "https://github.com/SAP/com.sap.openSAP.hana5.templates") 
+- Enter the URL of the repository [https://github.com/SAP/com.sap.openSAP.hana5.example](https://github.com/SAP/com.sap.openSAP.hana5.example "https://github.com/SAP/com.sap.openSAP.hana5.example") 
 - Click Ok button
 
 ##Getting Help
