@@ -8,7 +8,7 @@ BEGIN
 /***************************** 
 	Write your procedure logic 
  *****************************/
- declare lv_pers_no string;
+declare lv_pers_no string;
 declare lv_firstname string;
 declare lv_lastname string;
 declare lv_e_mail string;

@@ -1,35 +1,34 @@
 {
-	"engines": {
-		"node": "^0.12.7 || ^4.4.0 ",
-		"npm": "^2.11.x"
-	},
-	"dependencies": {
-		"sap-xssec": "0.5.4",
-		"sap-xsenv": "1.2.2",
-		"sap-xsjs": "1.7.0",
-		"sap-cds": "1.0.10",
-		"sap-hdbext": "2.0.4",
-		"sap-textbundle": "latest",
-		"sap-logging": "~1.4",
-		"sap-jobs-client": "~1.0.9",
-		"express": "~4.14",
-		"passport": "~0.3.2",
-		"async": "latest",
-		"ws": "1.1.0",
-		"accept-language-parser": "latest",
-		"node-xlsx": "~0.7.1",
-		"node-zip": "~1.1.1",
-		"xmldoc": "~0.5.1",
-		"winston": "~2.2",
-		"body-parser": "~1.15"
-	},
-	"description": "",
-	"files": [],
-	"main": "server.js",
-	"name": "core-js",
-	"scripts": {
-		"start": "node server.js",
-		"test": "node testrun.js"
-	},
-	"version": "1.0.0"
+  "engines": {
+    "node": "^0.12.7 || ^4.4.0 ",
+    "npm": "^2.11.x"
+  },
+  "dependencies": {
+	"sap-xssec": "0.7.0",
+    "sap-xsenv": "1.2.3",
+    "sap-xsjs": "1.9.0",
+    "sap-hdbext": "3.0.0",
+    "sap-cds": "1.0.10",
+    "sap-textbundle": "latest",
+    "sap-logging": "~1.4",
+    "express": "~4.14",
+    "passport": "~0.3.2",
+    "async": "latest",
+    "ws": "1.1.1",
+    "accept-language-parser": "latest",
+    "node-xlsx": "~0.7.2",
+    "node-zip": "~1.1.1",
+    "xmldoc": "~0.5.1",
+    "winston": "~2.2",
+    "body-parser": "~1.15"
+  },
+  "description": "",
+  "files": [],
+  "main": "server.js",
+  "name": "core-js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node testrun.js"
+  },
+  "version": "1.0.0"
 }

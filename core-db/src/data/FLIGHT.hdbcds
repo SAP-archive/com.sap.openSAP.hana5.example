@@ -2,35 +2,42 @@ using SFLIGHT as FLIGHTTBL;
 using SBOOK;
 
 context FLIGHT {
-	define view SflightView as SELECT from FLIGHTTBL
-	mixin {
-	  SBOOKLink: Association[*] to SBOOK on SBOOKLink.MANDT  = $projection.Client
-	                                    and SBOOKLink.CARRID = $projection.CarrierId
-	                                    and SBOOKLink.CONNID = $projection.ConnectionId
-	                                    and SBOOKLink.FLDATE = $projection.FlightDate;
-	}
-	into {
-		MANDT as "Client",
-		CARRID as "CarrierId",
-		CONNID as "ConnectionId",
-		FLDATE as "FlightDate",
-		PRICE  as "Price",
-		CURRENCY as "Currency",
-		PLANETYPE as "PlaneType",
-		SBOOKLink as "Bookings"
-	};
-	
-	define view SflightExt as select from SflightView{
-	  "Client",
-	  "CarrierId",
-	  "ConnectionId",
-	  "FlightDate",
-	  "Bookings".BOOKID as "BookingId",
-	  "Price",
-	  "Currency",
-	  "PlaneType",
-	  "Bookings".CUSTOMID as "CustomerId",
-	  "Bookings".CUSTTYPE as "CustomerType",
-	  "Bookings".PASSNAME as "PassengerName"
-	} with structured privilege check;  
+   define view SflightView as
+      select from FLIGHTTBL
+      mixin
+      {
+         SBOOKLink : association [ * ] to SBOOK on
+            SBOOKLink.MANDT      = $projection.Client
+            and SBOOKLink.CARRID = $projection.CarrierId
+            and SBOOKLink.CONNID = $projection.ConnectionId
+            and SBOOKLink.FLDATE = $projection.FlightDate;
+      }
+      into
+      {
+         MANDT     as "Client",
+         CARRID    as "CarrierId",
+         CONNID    as "ConnectionId",
+         FLDATE    as "FlightDate",
+         PRICE     as "Price",
+         CURRENCY  as "Currency",
+         PLANETYPE as "PlaneType",
+         SBOOKLink as "Bookings"
+      };
+
+   define view SflightExt as
+      select from SflightView
+      {
+         "Client",
+         "CarrierId",
+         "ConnectionId",
+         "FlightDate",
+         "Bookings".BOOKID   as "BookingId",
+         "Price",
+         "Currency",
+         "PlaneType",
+         "Bookings".CUSTOMID as "CustomerId",
+         "Bookings".CUSTTYPE as "CustomerType",
+         "Bookings".PASSNAME as "PassengerName"
+      } with structured privilege check;
+
 };
