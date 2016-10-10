@@ -79,14 +79,15 @@ module.exports = function() {
 	//Simple Database Call Stored Procedure
 	app.get("/example3", function(req, res) {
 		var client = req.db;
-		//(Schema, Procedure, callback)
-		client.loadProcedure(null, "get_po_header_data", function(err, sp) {
+		var hdbext = require("sap-hdbext");
+		//(client, Schema, Procedure, callback)
+		hdbext.loadProcedure(client, null, "get_po_header_data", function(err, sp) {
 			if (err) {
 				res.type("text/plain").status(500).send("ERROR: " + err.toString());
 				return;
 			}
 			//(Input Parameters, callback(errors, Output Scalar Parameters, [Output Table Parameters])
-			sp.exec({}, function(err, parameters, results) {
+			sp({}, function(err, parameters, results) {
 				if (err) {
 					res.type("text/plain").status(500).send("ERROR: " + err.toString());
 				}
@@ -101,6 +102,7 @@ module.exports = function() {
 	//Database Call Stored Procedure With Inputs
 	app.get("/example4/:partnerRole?", function(req, res) {
 		var client = req.db;
+		var hdbext = require("sap-hdbext");
 		var partnerRole = req.params.partnerRole;
 		var inputParams = "";
 		if (typeof partnerRole === "undefined" || partnerRole === null) {
@@ -110,14 +112,14 @@ module.exports = function() {
 				IM_PARTNERROLE: partnerRole
 			};
 		}
-		//(Schema, Procedure, callback)
-		client.loadProcedure(null, "get_bp_addresses_by_role", function(err, sp) {
+		//(cleint, Schema, Procedure, callback)
+		hdbext.loadProcedure(client, null, "get_bp_addresses_by_role", function(err, sp) {
 			if (err) {
 				res.type("text/plain").status(500).send("ERROR: " + err.toString());
 				return;
 			}
 			//(Input Parameters, callback(errors, Output Scalar Parameters, [Output Table Parameters])
-			sp.exec(inputParams, function(err, parameters, results) {
+			sp(inputParams, function(err, parameters, results) {
 				if (err) {
 					res.type("text/plain").status(500).send("ERROR: " + err.toString());
 				}
@@ -132,6 +134,7 @@ module.exports = function() {
 	//Call 2 Database Stored Procedures in Parallel
 	app.get("/example5/", function(req, res) {
 		var client = req.db;
+		var hdbext = require("sap-hdbext");
 		var inputParams = {
 			IM_PARTNERROLE: "1"
 		};
@@ -139,10 +142,10 @@ module.exports = function() {
 		async.parallel([
 
 			function(cb) {
-				client.loadProcedure(null, "get_po_header_data", function(err, sp) {
+				hdbext.loadProcedure(client, null, "get_po_header_data", function(err, sp) {
 					if(err){ cb(err); return; }
 					//(Input Parameters, callback(errors, Output Scalar Parameters, [Output Table Parameters])
-					sp.exec(inputParams, function(err, parameters, results) {
+					sp(inputParams, function(err, parameters, results) {
 						result.EX_TOP_3_EMP_PO_COMBINED_CNT = results;
 						cb();
 					});
@@ -150,11 +153,11 @@ module.exports = function() {
 
 			},
 			function(cb) {
-				//(Schema, Procedure, callback)            		
-				client.loadProcedure(null, "get_bp_addresses_by_role", function(err, sp) {
+				//(client, Schema, Procedure, callback)            		
+				hdbext.loadProcedure(client, null, "get_bp_addresses_by_role", function(err, sp) {
 					if(err){ cb(err); return; }
 					//(Input Parameters, callback(errors, Output Scalar Parameters, [Output Table Parameters])
-					sp.exec(inputParams, function(err, parameters, results) {
+					sp(inputParams, function(err, parameters, results) {
 						result.EX_BP_ADDRESSES = results;
 						cb();
 					});
