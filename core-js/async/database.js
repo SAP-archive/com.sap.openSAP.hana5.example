@@ -12,7 +12,7 @@ var pool = hdb.getPool(hanaOptions.hana);
 
 module.exports = {
 	callHANA: function(wss) {
-		pool.acquire(function(error, client) {
+		pool.acquire(null, function(error, client) {
 			if (error) {
 				console.error(error);
 			}
@@ -39,7 +39,7 @@ module.exports = {
 
 	callHANA1: function(cb, wss) {
 		//hdb.createConnection(hanaService, function(error, client) {
-		pool.acquire(function(error, client) {
+		pool.acquire(null, function(error, client) {
 			if (error) {
 				console.error(error);
 			}
@@ -94,7 +94,7 @@ module.exports = {
 	callHANA2: function(cb, wss) {
 
 			//hdb.createConnection(hanaService, function(error, client) {
-			pool.acquire(function(error, client) {
+			pool.acquire(null, function(error, client) {
 				if (error) {
 					console.error(error);
 				}
