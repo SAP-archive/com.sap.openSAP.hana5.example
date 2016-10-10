@@ -21,26 +21,31 @@ module.exports = {
 		}).uaa));
 		app.use(logging.expressMiddleware(appContext));
 		app.use(passport.initialize());
-
+		var hanaOptions = xsenv.getServices({
+			hana: {
+				tag: "hana"
+			}
+		});
 		app.use(
 			passport.authenticate("JWT", {
 				session: false
 			}),
-			xsHDBConn.middleware(xsenv.getServices({
-				hana: {
-					tag: "hana"
-				}
-			})));
+			xsHDBConn.middleware(hanaOptions.hana)
+		);
 		return app;
 	},
 
 	initXSJS: function(app) {
 		var xsjs = require("sap-xsjs");
-		var xsenv = require("sap-xsenv");		
+		var xsenv = require("sap-xsenv");
 		var options = xsjs.extend({
 			//	anonymous : true, // remove to authenticate calls
 			redirectUrl: "/index.xsjs",
-			context: { base: global.__base, env: process.env, answer: 42 }
+			context: {
+				base: global.__base,
+				env: process.env,
+				answer: 42
+			}
 		});
 
 		//configure HANA

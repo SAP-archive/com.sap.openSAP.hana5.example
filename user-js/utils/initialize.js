@@ -22,15 +22,17 @@ module.exports = {
 		app.use(logging.expressMiddleware(appContext));
 		app.use(passport.initialize());
 
+		var hanaOptions = xsenv.getServices({
+			hana: {
+				tag: "hana"
+			}
+		});
 		app.use(
 			passport.authenticate("JWT", {
 				session: false
 			}),
-			xsHDBConn.middleware(xsenv.getServices({
-				hana: {
-					tag: "hana"
-				}
-			})));
+			xsHDBConn.middleware(hanaOptions.hana)
+		);
 		return app;
 	},
 
