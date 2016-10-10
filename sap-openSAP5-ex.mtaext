@@ -1,4 +1,4 @@
-_schema-version: '2.0'
+_schema-version: '3.1.0'
 ID: com.sap.openSAP.hana5.example-config1
 extends: com.sap.openSAP.hana5.example
 
@@ -15,11 +15,35 @@ extends: com.sap.openSAP.hana5.example
  - name: CrossSchemaService
    parameters:
      service-name: CROSS_SCHEMA_SFLIGHT
-
+     config:
+        host: ${default-domain}
+        port: 3<Instance##>15|13
+        user: <USERNAME>
+        password: <PASSWORD>
+        driver: com.sap.db.jdbc.Driver
+        tags: hana
+        schema: SFLIGHT
+        
  - name: CrossSchemaSys
    parameters:
      service-name: CROSS_SCHEMA_SYS
-
+     config:
+        host: ${default-domain}
+        port: 3<Instance##>15|13
+        user: <USERNAME>
+        password: <PASSWORD>
+        driver: com.sap.db.jdbc.Driver
+        tags: hana
+        schema: SYS
+        
  - name: CrossSchemaSysBi
    parameters:
      service-name: CROSS_SCHEMA_SYS_BI
+     config:
+        host: ${default-domain}
+        port: 3<Instance##>15|13
+        user: <USERNAME>
+        password: <PASSWORD>
+        driver: com.sap.db.jdbc.Driver
+        tags: hana
+        schema: _SYS_BI

@@ -1,8 +1,13 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-undef: 0, no-shadow: 0*/
 "use strict";
-var hdb = require("sap-hdbext");	
+var hdb = require("sap-hdbext");
+var xsenv = require("sap-xsenv");
 var async = require("async");
-var pool = hdb.createPool();
+var pool = hdb.getPool(xsenv.getServices({
+				hana: {
+					tag: "hana"
+				}
+			}));
 
 module.exports = {
 	callHANA: function(wss){

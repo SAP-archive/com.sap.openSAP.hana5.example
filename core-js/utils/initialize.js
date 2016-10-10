@@ -26,7 +26,11 @@ module.exports = {
 			passport.authenticate("JWT", {
 				session: false
 			}),
-			xsHDBConn.middleware());
+			xsHDBConn.middleware(xsenv.getServices({
+				hana: {
+					tag: "hana"
+				}
+			})));
 		return app;
 	},
 
