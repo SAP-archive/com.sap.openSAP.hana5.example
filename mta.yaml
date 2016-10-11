@@ -106,20 +106,20 @@ modules:
       - name: openSAP5-ex-user-db
       - name: openSAP5-ex-scheduler
 
+ - name: openSAP5-ex-user-java
+   type: java
+   path: user-java
+   provides: 
+     - name: user-java
+       properties:
+         url: "${default-url}"
+   requires:
+     - name: openSAP5-ex-uaa
+     - name: user-container     
+     - name: openSAP5-ex-scheduler
+     - name: openSAP5-ex-user-db
 
-# - name: openSAP5-ex-user-java
-#   type: java.tomee
-#   path: user-java/target/user-java-1.1.13.war
-#   provides: 
-#     - name: user-java
-#       properties:
-#         url: "${default-url}"
-#   requires:
-#     - name: openSAP5-ex-uaa
-#     - name: openSAP5-ex-scheduler
-#     - name: openSAP5-ex-user-db
-#     - name: suser-container
-      
+
 resources:
  - name: container
    properties:
