@@ -259,10 +259,10 @@
 			    oEntry.Region = sap.ui.getCore().byId("region").getValue();
 	            oEntry.CompanyName = sap.ui.getCore().byId("company").getValue();
 	            oEntry.EmailAddress = sap.ui.getCore().byId("email").getValue();
-	            oEntry.PostalCode = "";
-	            oEntry.Street = "";
-	            oEntry.Building = "";
-	            oEntry.CreatedBy = "";
+	            //oEntry.PostalCode = "";
+	            //oEntry.Street = "";
+	            //oEntry.Building = "";
+	            //oEntry.CreatedBy = "";
 
 				oModel.setHeaders({"content-type" : "application/json;charset=utf-8"});
 				oModel.create(sap.ui.getCore().byId("val3_2").getValue(), oEntry, null, onSuccessCall, onErrorCall);
