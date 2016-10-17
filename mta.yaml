@@ -122,6 +122,7 @@ modules:
        properties:
          url: "${default-url}"
    requires:
+     - name: openSAP5-ex-uaa
      - name: user-container
        properties:
           JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml:
