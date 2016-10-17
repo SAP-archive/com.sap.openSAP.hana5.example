@@ -183,7 +183,7 @@ resources:
    parameters:
       ID: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_SAPUI5_FESV2:sapui5_fesv2 # Specifies the the ID of the provider MTA.
       name: sapui5_fesv2
-      version: "=1.38.3"     # The version (range) of the provider MTA.     
+      version: "=1.38.10"     # The version (range) of the provider MTA.     
       
  - name: EXTERNAL_UI5
    type: org.cloudfoundry.user-provided-service
