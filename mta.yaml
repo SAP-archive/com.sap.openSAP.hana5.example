@@ -34,7 +34,9 @@ modules:
       properties:
         key: hdi-user-service
         service: ~{user-container-name}  
-        
+    
+    - name: openSAP5-ex-user-db    
+    
  - name: openSAP5-ex-user-db
    type: hdb
    path: user-db
@@ -78,6 +80,12 @@ modules:
           name: user-backend
           url: ~{url}
           forwardAuthToken: true  
+      - name: user_java
+        group: destinations
+        properties:
+          name: user-java-backend
+          url: ~{url}
+          forwardAuthToken: true  
 
  - name: openSAP5-ex-core-js
    type: nodejs
@@ -108,17 +116,17 @@ modules:
 
  - name: openSAP5-ex-user-java
    type: java
-   path: user-java
+   path: user_java
    provides: 
-     - name: user-java
+     - name: user_java
        properties:
          url: "${default-url}"
    requires:
-     - name: openSAP5-ex-uaa
-     - name: user-container     
-     - name: openSAP5-ex-scheduler
+     - name: user-container
+       properties:
+          JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml:
+             {"service_name_for_DefaultDB" : "~{user-container-name}"}]'     
      - name: openSAP5-ex-user-db
-
 
 resources:
  - name: container

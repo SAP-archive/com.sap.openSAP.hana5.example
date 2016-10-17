@@ -52,6 +52,11 @@
       }
     },
     {
+      "source": "^/java/odata/v4/(.*)",
+      "destination": "user-java-backend"
+    },
+
+    {
       "source": "/get/(.*)",
       "destination": "core-backend",
       "scope": "$XSAPPNAME.DataGenerator"
