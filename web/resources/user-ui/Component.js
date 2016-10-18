@@ -18,7 +18,9 @@ sap.ui.core.UIComponent.extend("shine.democontent.epm.usercrud.Component",{
                name : "User xsodata",
                //TODO: change the url of the service..
                //serviceUrl : "/sap/hana/democontent/epm/services/user.xsodata"
-               serviceUrl : "/java/odata/v4/sap.hana.democontent.epm.data._.UserData/"
+               //"/java/odata/v4/" + namespace + "._." + context
+               //serviceUrl : "/java/odata/v4/sap.hana.democontent.epm.data._.UserData/"
+               serviceUrl : "/java/odata/v4/UserData/"
            }
        }
    },
