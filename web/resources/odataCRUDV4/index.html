@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <style>
+        .mobile-list-item {
+            padding: 0.5em;
+        }
+        .paddingAll {
+            padding: 5px;
+        }
+        .alignText {
+            line-height: 2.5;
+            margin-right: 1em;
+            margin-left: 1em;            
+        }
+        .iconPadding {
+            margin-left: 2.5rem;
+            line-height: 2 !important;
+        }
+    </style>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>OData V4 CRUD Exercise</title>
+   		<link type="image/x-icon" href="/images/favicon.ico" rel="shortcut icon">
+        <link type="image/x-icon" href="/images/favicon.ico" rel="icon"> 
+	    <!-- <script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" -->
+	<script id="sap-ui-bootstrap" src="{{{ui5liburl}}}/resources/sap-ui-core.js"
+		data-sap-ui-theme="sap_bluecrystal"
+		data-sap-ui-xx-bindingSyntax="complex"
+		data-sap-ui-resourceroots='{
+				"opensap.odataBasic": "./",
+				"view": "./view" }'		
+		data-sap-ui-libs="sap.m, sap.me">
+	</script>
+	
+	<script>
+	
+	new sap.m.Shell({
+		app : new sap.ui.core.ComponentContainer({
+			name : "opensap.odataBasic"
+		})
+	}).placeAt("content");
+		
+	</script>
+</head>
+<body class="sapUiBody" role="application">
+	<div id="content"></div>
+</body>
+</html>
