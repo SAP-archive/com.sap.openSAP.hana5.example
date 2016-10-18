@@ -1,6 +1,6 @@
-core-js
-user-js
+core_js
 web
-user-db
-core-db
+core_db
+user_db
 user_java
+user_js

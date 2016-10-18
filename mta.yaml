@@ -1,11 +1,11 @@
 _schema-version: '2.0'
 ID: com.sap.openSAP.hana5.example
-version: 2.0.2
+version: 2.0.5
 
 modules:
  - name: openSAP5-ex-core-db
    type: hdb
-   path: core-db
+   path: core_db
    requires:
     - name: container
       properties:
@@ -39,7 +39,7 @@ modules:
     
  - name: openSAP5-ex-user-db
    type: hdb
-   path: user-db
+   path: user_db
    requires:
     - name: user-container
       properties:
@@ -68,13 +68,13 @@ modules:
     #  - name: XSC_UI5
     #    properties:
     #      ui5liburl: ~{url}     
-      - name: core-js
+      - name: core_js
         group: destinations
         properties:
           name: core-backend
           url: ~{url}
           forwardAuthToken: true   
-      - name: user-js
+      - name: user_js
         group: destinations
         properties:
           name: user-backend
@@ -89,9 +89,9 @@ modules:
 
  - name: openSAP5-ex-core-js
    type: nodejs
-   path: core-js
+   path: core_js
    provides: 
-     - name: core-js
+     - name: core_js
        properties:
          url: "${default-url}"
    requires:
@@ -103,9 +103,9 @@ modules:
       
  - name: openSAP5-ex-user-js
    type: nodejs
-   path: user-js
+   path: user_js
    provides: 
-     - name: user-js
+     - name: user_js
        properties:
          url: "${default-url}"
    requires:
