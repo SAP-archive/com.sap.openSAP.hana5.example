@@ -21,14 +21,31 @@
 	}, {
 		"name": "xs_authorization.write",
 		"description": "Write authorization information to UAA"
+	}, {
+		"name": "$XSAPPNAME.ODATASERVICEUSER",
+		"description": "Enter"
+	},
+	{
+		"name": "$XSAPPNAME.ODATASERVICEADMIN",
+		"description": "Enter"
 	}],
 	"role-templates": [{
 		"name": "Viewer",
 		"description": "View all records",
-		"scope-references": ["$XSAPPNAME.Display"]
+		"scope-references": [
+			"$XSAPPNAME.Display"
+		]
 	}, {
 		"name": "Editor",
 		"description": "Edit and Delete records",
-		"scope-references": ["$XSAPPNAME.Create", "$XSAPPNAME.Edit", "$XSAPPNAME.Delete", "$XSAPPNAME.Display", "$XSAPPNAME.DataGenerator"]
+		"scope-references": [
+			"$XSAPPNAME.Create",
+			"$XSAPPNAME.Edit",
+			"$XSAPPNAME.Delete",
+			"$XSAPPNAME.Display",
+			"$XSAPPNAME.DataGenerator",
+		    "$XSAPPNAME.ODATASERVICEUSER",
+		    "$XSAPPNAME.ODATASERVICEADMIN"
+		]
 	}]
 }

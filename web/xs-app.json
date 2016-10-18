@@ -53,7 +53,8 @@
     },
     {
       "source": "^/java/odata/v4/(.*)",
-      "destination": "user-java-backend"
+      "destination": "user-java-backend",
+      "authenticationType": "xsuaa"
     },
 
     {
