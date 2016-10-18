@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema Namespace="com.sap.openSAP.hana5.example.services" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+			xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="BusinessPartnersType" sap:label="Business Partners" sap:semantics="aggregate">
+				<Key>
+					<PropertyRef Name="PARTNERID"/>
+				</Key>
+				<Property Name="PARTNERID" Type="Edm.String" MaxLength="10" sap:label="Partner ID Upd."/>
+				<Property Name="PARTNERROLE" Type="Edm.String" MaxLength="3" sap:label="Partner Role" sap:required-in-filter="true"/>
+				<Property Name="EMAILADDRESS" Type="Edm.String" MaxLength="255" sap:label="Email Address"/>
+				<Property Name="COMPANYNAME" Type="Edm.String" MaxLength="80" sap:label="Company Name"/>
+				<Property Name="LEGALFORM" Type="Edm.String" MaxLength="10" sap:label="Legal Form"/>
+				<Property Name="CITY" Type="Edm.String" MaxLength="40" sap:label="City"/>
+				<Property Name="POSTALCODE" Type="Edm.String" MaxLength="10" sap:label="Postal Code"/>
+				<Property Name="BUILDING" Type="Edm.String" MaxLength="10" sap:label="Building"/>
+				<Property Name="STREET" Type="Edm.String" MaxLength="60" sap:label="Street"/>
+				<Property Name="COUNTRY" Type="Edm.String" MaxLength="3" sap:label="Country"/>
+				<Property Name="REGION" Type="Edm.String" MaxLength="4" sap:label="Region"/>
+			</EntityType>
+			<EntityType Name="PartnerRolesType">
+				<Key>
+					<PropertyRef Name="PARTNERROLE"/>
+				</Key>
+				<Property Name="PARTNERROLE" Type="Edm.String" MaxLength="3" sap:label="Partner Role" sap:text="PARTNERDESC" />
+				<Property Name="PARTNERDESC" Type="Edm.String" MaxLength="40" sap:label="Partner Description"/>
+			</EntityType>
+			<Annotations Target="com.sap.openSAP.hana5.example.services.BusinessPartnersType/PARTNERROLE"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Partner Role"/>
+						<PropertyValue Property="CollectionPath" String="PartnerRoles"/>
+						<PropertyValue Property="SearchSupported" Bool="true"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PARTNERROLE"/>
+									<PropertyValue Property="ValueListProperty" String="PARTNERROLE"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="PARTNERDESC"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="com.sap.openSAP.hana5.example.services.BusinessPartnersType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.UI.v1.LineItem">
+					<Collection>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="PARTNERID"/>
+							<Annotation Term="com.sap.vocabularies.UI.v1.Importance" EnumMember="com.sap.vocabularies.UI.v1.ImportanceType/High"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="PARTNERROLE"/>
+							<PropertyValue Property="required-in=filter" String="true"/>
+							<Annotation Term="com.sap.vocabularies.UI.v1.Importance" EnumMember="com.sap.vocabularies.UI.v1.ImportanceType/Medium"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="COMPANYNAME"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="REGION"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="CITY"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="COUNTRY"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="LEGALFORM"/>
+							<Annotation Term="com.sap.vocabularies.UI.v1.Importance" EnumMember="com.sap.vocabularies.UI.v1.ImportanceType/Low"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

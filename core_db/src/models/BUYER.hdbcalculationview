@@ -4,30 +4,31 @@
   <localVariables/>
   <variableMappings/>
   <dataSources>
-    <DataSource id="MD.Addresses">
+    <DataSource id="MD.Addresses" partitionedExecution="false">
       <resourceUri>MD.Addresses</resourceUri>
     </DataSource>
-    <DataSource id="MD.BusinessPartner">
+    <DataSource id="MD.BusinessPartner" partitionedExecution="false">
       <resourceUri>MD.BusinessPartner</resourceUri>
     </DataSource>
   </dataSources>
   <calculationViews>
-    <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner" partitionedExecution="false">
       <viewAttributes>
-        <viewAttribute id="CITY"/>
-        <viewAttribute id="POSTALCODE"/>
-        <viewAttribute id="STREET"/>
-        <viewAttribute id="BUILDING"/>
-        <viewAttribute id="COUNTRY"/>
-        <viewAttribute id="REGION"/>
-        <viewAttribute id="PARTNERID"/>
-        <viewAttribute id="PARTNERROLE"/>
-        <viewAttribute id="EMAILADDRESS"/>
-        <viewAttribute id="COMPANYNAME"/>
-        <viewAttribute id="LEGALFORM"/>
-        <viewAttribute id="JOIN$ADDRESSID$ADDRESSES.ADDRESSID" hidden="true"/>
+        <viewAttribute id="CITY" measureType="simple"/>
+        <viewAttribute id="POSTALCODE" measureType="simple"/>
+        <viewAttribute id="STREET" measureType="simple"/>
+        <viewAttribute id="BUILDING" measureType="simple"/>
+        <viewAttribute id="COUNTRY" measureType="simple"/>
+        <viewAttribute id="REGION" measureType="simple"/>
+        <viewAttribute id="PARTNERID" measureType="simple"/>
+        <viewAttribute id="PARTNERROLE" measureType="simple"/>
+        <viewAttribute id="EMAILADDRESS" measureType="simple"/>
+        <viewAttribute id="COMPANYNAME" measureType="simple"/>
+        <viewAttribute id="LEGALFORM" measureType="simple"/>
+        <viewAttribute id="JOIN$ADDRESSID$ADDRESSES.ADDRESSID" hidden="true" measureType="simple"/>
       </viewAttributes>
       <calculatedViewAttributes/>
+      <restrictedViewAttributes/>
       <input node="MD.Addresses">
         <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
         <mapping xsi:type="Calculation:AttributeMapping" target="POSTALCODE" source="POSTALCODE"/>
@@ -56,6 +57,8 @@
       </attribute>
       <attribute id="PARTNERROLE" order="2" attributeHierarchyActive="false" displayAttribute="false" semanticType="empty">
         <descriptions defaultDescription="Partner Role"/>
+        <externalLikeStructureName>sap.hana.democontent.epm.models::GET_PARTNER_ROLES</externalLikeStructureName>
+        <externalLikeElementName>PARTNERROLE</externalLikeElementName>
         <keyMapping columnObjectName="Join_1" columnName="PARTNERROLE"/>
       </attribute>
       <attribute id="EMAILADDRESS" order="3" attributeHierarchyActive="false" displayAttribute="false">

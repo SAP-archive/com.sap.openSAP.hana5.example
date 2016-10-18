@@ -34,9 +34,7 @@ modules:
       properties:
         key: hdi-user-service
         service: ~{user-container-name}  
-    
-    - name: openSAP5-ex-user-db    
-    
+
  - name: openSAP5-ex-user-db
    type: hdb
    path: user_db
