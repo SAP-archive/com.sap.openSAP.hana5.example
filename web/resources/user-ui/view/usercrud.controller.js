@@ -39,7 +39,7 @@ sap.ui.controller("shine.democontent.epm.usercrud.view.usercrud", {
                     $.ajax({
                         type: "GET",
                         async: false,
-                        url: "/user/odata/v4/sap.hana.democontent.epm.data._.UserData/User",
+                        url: "/java/odata/v4/UserData/",
                         contentType: "application/json",
                         headers: {
                             'x-csrf-token': 'Fetch'
@@ -52,7 +52,7 @@ sap.ui.controller("shine.democontent.epm.usercrud.view.usercrud", {
                         }
                     });
                     
-                    var aUrl = '/user/odata/v4/sap.hana.democontent.epm.data._.UserData/User';
+                    var aUrl = "/java/odata/v4/UserData/";
                     jQuery.ajax({
                         url: aUrl,
                         method: 'POST',
