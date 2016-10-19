@@ -10,8 +10,9 @@ function bpCreateSupplier(param) {
 }
 
 function bpCreateBusinessPartner(param,partnerRole){
-	
-	var XSDS = $.require("sap-cds").xsjs(param.connectio);
+	//Remove for testing
+/*	
+	var XSDS = $.require("sap-cds").xsjs(param.connection);
 	//XSDS.Transaction.conn = param.connection;
 	XSDS.Transaction.$setAutoCommit(false);
 	
@@ -56,7 +57,7 @@ function bpCreateBusinessPartner(param,partnerRole){
 	 ADDRESSES: newAddress,
 	 HISTORY: { CREATEDBY: employee, CREATEDAT: new Date(), CHANGEDBY: employee, CHANGEDAT: new Date() }
     });
-	newBP.$save();
+	newBP.$save();*/
 	
 }
 
