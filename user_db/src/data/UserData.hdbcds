@@ -3,12 +3,16 @@ using annotations.OData;
 
 @OData.publish : true
 context UserData {
-
-     Entity User {
-        key UserId: Integer;
-        FirstName: String(40);
-        LastName: String(40);
-        Email: String(255);
-     };        
-
+   entity User {
+      key UserId    : Integer;
+          FirstName : String(40);
+          LastName  : String(40);
+          Email     : String(255);
+   };
+   entity User2 {
+      key UserId    : Integer;
+          FirstName : String(40);
+          LastName  : String(40);
+          Email     : String(255);
+   };
 };

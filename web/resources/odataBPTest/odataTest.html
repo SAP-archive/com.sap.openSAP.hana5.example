@@ -68,7 +68,12 @@
 	   	    	 sap.ui.core.BusyIndicator.hide();	    	 
 	   	   	 	 if(oError.response.statusCode == '500'){
 	   	   	 		     var errorRes = JSON.parse(oError.response.body);
-	   		    		 sap.ui.commons.MessageBox.show(errorRes.error.message.value, 
+	   	   	 		     var errorOutput = '';
+	   	   	 		     errorOutput = errorRes.error.innererror;
+	   	   	 		     if(typeof errorOutput === 'object'){
+	   	   	 		     	errorOutput = errorRes.error.message.value;
+	   	   	 		     }
+	   		    		 sap.ui.commons.MessageBox.show(errorOutput, 
 	   		    				 "ERROR",
 	   		    				 "Service Call Error" );	
 	   		    		return;	

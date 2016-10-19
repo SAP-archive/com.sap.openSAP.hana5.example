@@ -27,7 +27,7 @@ else
                       
    insert into "UserData.User" 
              values ("userSeqId".NEXTVAL, lv_firstname, 
-                     lv_lastname, lv_e_mail,'');
+                     lv_lastname, lv_e_mail);
                      
  end if; 
   

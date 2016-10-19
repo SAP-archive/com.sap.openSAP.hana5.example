@@ -13,7 +13,7 @@
 		oEntry.FirstName = result.FirstName;
 		oEntry.LastName = result.LastName;
 		oEntry.Email = result.Email;
-		oEntry.ZMYNEW1 = "";
+		//oEntry.ZMYNEW1 = "";
 
 		oModel.setHeaders({
 			"content-type": "application/json;charset=utf-8"

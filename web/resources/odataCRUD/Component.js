@@ -9,7 +9,7 @@ sap.ui.core.UIComponent.extend("opensap.odataBasic.Component", {
 		var oParams = {};
 		oParams.json = true;
 		oParams.defaultBindingMode = sap.ui.model.BindingMode.TwoWay;
-		//oParams.defaultUpdateMethod = "PUT";
+		oParams.defaultUpdateMethod = "PUT";
 		oParams.useBatch = false;
 	    var oModel = new sap.ui.model.odata.v2.ODataModel(
 		          "/user/xsodata/user2.xsodata/", oParams);
