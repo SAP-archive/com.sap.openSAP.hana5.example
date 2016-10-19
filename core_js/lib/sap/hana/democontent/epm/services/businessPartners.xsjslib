@@ -1,5 +1,5 @@
-$.import("sap.hana.democontent.epmNext.services", "session");
-var SESSIONINFO = $.sap.hana.democontent.epmNext.services.session;
+//$.import("sap.hana.democontent.epm.services", "session");
+//var SESSIONINFO = $.sap.hana.democontent.epm.services.session;
 
 function bpCreateBuyer(param) {
 	bpCreateBusinessPartner(param,'1');
