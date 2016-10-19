@@ -12,19 +12,19 @@ modules:
           ui-url: "${default-url}"
     requires:
       - name: openSAP5-ex-uaa
-      - name: core-js
+      - name: core_js
         group: destinations
         properties:
           name: core-backend
           url: ~{url}
           forwardAuthToken: true 
-      - name: user-js
+      - name: user_js
         group: destinations
         properties:
           name: user-backend
           url: ~{url}
           forwardAuthToken: true
-      - name: user-java
+      - name: user_java
         group: destinations
         properties:
           name: user-java-backend
@@ -39,9 +39,9 @@ modules:
         
   - name: openSAP5-ex-core-js
     type: javascript.nodejs
-    path: core-js/
+    path: core_js/
     provides: 
-      - name: core-js
+      - name: core_js
         properties:
           url: "${default-url}"
     properties: 
@@ -54,9 +54,9 @@ modules:
       
   - name: openSAP5-ex-user-js
     type: javascript.nodejs
-    path: user-js/
+    path: user_js/
     provides: 
-      - name: user-js
+      - name: user_js
         properties:
           url: "${default-url}"
     requires:
@@ -67,9 +67,9 @@ modules:
       
   - name: openSAP5-ex-user-java
     type: java.tomee
-    path: sap-xsac-shine-user-java.war
+    path: user_java/
     provides: 
-      - name: user-java
+      - name: user_java
         properties:
           url: "${default-url}"
     requires:
@@ -79,12 +79,13 @@ modules:
       
   - name: openSAP5-ex-core-db
     type: com.sap.xs.hdi
+    path: core_db    
     requires:
       - name: openSAP5-ex-container
       
   - name: openSAP5-ex-user-db
     type: com.sap.xs.hdi
-    path: user-db
+    path: user_db
     requires:
      - name: openSAP5-ex-user-container
 

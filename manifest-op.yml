@@ -1,7 +1,7 @@
 ---
 applications:
 - name: openSAP5-ex-core-db
-  path: core-db
+  path: core_db
   memory: 256M
   no-route: true
   services:
@@ -9,7 +9,7 @@ applications:
 
 - name: openSAP5-ex-core-js
   port: 49010
-  path: core-js
+  path: core_js
   memory: 512M
   services:
     - openSAP5-ex-container
@@ -18,7 +18,7 @@ applications:
 - name: openSAP5-ex-user-js
   port: 49040
   memory: 256M
-  path: user-js/
+  path: user_js/
   services:
     - openSAP5-ex-user-conatiner
     - openSAP5-ex-uaa
