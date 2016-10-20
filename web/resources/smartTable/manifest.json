@@ -1,36 +1,35 @@
 {
-	"_version": "1.1.0",
-
-	"start_url": "index.html",
-
-	"sap.app": {
-		"dataSources": {
-			"mainServiceAnnotation": {
-				"uri": "/smartTable/mockserver/metadata.xml",
-				"type": "ODataAnnotation"
-			},
-			"mainService": {
-				"uri": "/sap/hana/democontent/epm/services/businessPartnersExt.xsodata/",
-				"type": "OData",
-				"settings": { 
-					"annotations": [ "mainServiceAnnotation" ],
-					"localUri": "./mockserver/metadata.xml",
-					"odataVersion": "2.0"
-				}
-			}
-		}
-	},
-	"sap.ui5": {
-		"models": {
-			"": {
-				"dataSource": "mainService",
-				"type": "sap.ui.model.odata.v2.ODataModel"
-			}
-		},
-		"config": {
-            "sapFiori2Adaptation": true
-		},
-		"rootView": "sap.openSAP.smarttable.view.SmartTable",
-		"handleValidation": true
-	}
+  "_version": "1.1.0",
+  "start_url": "index.html",
+  "sap.app": {
+    "dataSources": {
+      "mainServiceAnnotation": {
+        "uri": "./annotations/metadata.xml",
+        "type": "ODataAnnotation"
+      },
+      "mainService": {
+        "uri": "/sap/hana/democontent/epm/services/businessPartnersExt.xsodata/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "mainServiceAnnotation"
+          ],
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui5": {
+    "models": {
+      "": {
+        "dataSource": "mainService",
+        "type": "sap.ui.model.odata.v2.ODataModel"
+      }
+    },
+    "config": {
+      "sapFiori2Adaptation": true
+    },
+    "rootView": "sap.openSAP.smarttable.view.SmartTable",
+    "handleValidation": true
+  }
 }
