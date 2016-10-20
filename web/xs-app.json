@@ -31,6 +31,25 @@
         "default": "$XSAPPNAME.Display"
       }
     },
+  {
+      "source": "/sap/bc/lrep(.*)",
+      "destination": "core-backend",
+      "csrfProtection": true,
+      "authenticationType": "xsuaa",
+      "scope": {
+        "GET": "$XSAPPNAME.Display",
+        "POST": [
+          "$XSAPPNAME.Display"
+        ],
+        "PUT": [
+          "$XSAPPNAME.Display"
+        ],
+        "DELETE": [
+          "$XSAPPNAME.Display"
+        ],
+        "default": "$XSAPPNAME.Display"
+      }
+    },    
     {
       "source": "/sap/hana/democontent/epm/(.*)",
       "destination": "core-backend",
@@ -56,7 +75,6 @@
       "destination": "user-java-backend",
       "authenticationType": "xsuaa"
     },
-
     {
       "source": "/get/(.*)",
       "destination": "core-backend",
@@ -85,7 +103,6 @@
       "destination": "user-backend",
       "authenticationType": "basic"
     },
-
     {
       "source": "/user/(.*)",
       "destination": "user-backend"

@@ -13,7 +13,7 @@ sap.ui.core.UIComponent.extend("sap.openSAP.smarttable.Component", {
 	}
 });
 
-// enable variant management without ABAP backend
+/*// enable variant management without ABAP backend
 jQuery.sap.require("sap.ui.fl.FakeLrepConnector");
 var FakeLrepConnector = sap.ui.fl.FakeLrepConnector;
 FakeLrepConnector.enableFakeConnector("./annotations/component-changes.json");
@@ -106,4 +106,4 @@ FakeLrepConnector.prototype.deleteChange = function(params, isVariant) {
 		response: undefined,
 		status: 'nocontent'
 	});
-};
+};*/

@@ -12,4 +12,5 @@ module.exports = function(app,server) {
 	 app.use("/replicate", require("./routes/datagen")());
 	 app.use("/reset", require("./routes/reset")());
 	 app.use("/get", require("./routes/get")());
+	 app.use("/sap/bc/lrep", require("./routes/lrep")());
 };
