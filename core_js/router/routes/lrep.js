@@ -1,7 +1,6 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, new-cap: 0*/
 "use strict";
 var express = require("express");
-var async = require("async");
 
 function upsertVariant(req, res) {
 	var body = req.body;

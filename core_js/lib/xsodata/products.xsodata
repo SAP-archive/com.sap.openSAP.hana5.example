@@ -1,0 +1,3 @@
+service namespace "com.sap.openSAP.hana5.example.services" { 
+   "MDViews.ProductsConsumption" as "Products" keys("Product_Id");
+}

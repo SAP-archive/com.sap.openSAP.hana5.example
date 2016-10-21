@@ -1,0 +1,29 @@
+context annotations {
+   annotation OData {
+      publish : Boolean;
+   }
+   annotation EndUserText {
+      label :       array of {
+         language : String(2);
+         text :     String(60);
+      };
+      quickInfo :   array of {
+         language : String(2);
+         text :     String(60);
+      };
+   }
+
+   type Importance : String(10) enum {
+      Low    = 'Low';
+      Medium = 'Medium';
+      High   = 'High';
+   };
+
+   annotation UI {
+      lineItem {
+         position :   Integer;
+         exclude :    Boolean;
+         importance : Importance;
+      };
+   }
+};

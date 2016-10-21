@@ -13,4 +13,5 @@ module.exports = function(app,server) {
 	 app.use("/reset", require("./routes/reset")());
 	 app.use("/get", require("./routes/get")());
 	 app.use("/sap/bc/lrep", require("./routes/lrep")());
+	 app.use("/node/annotations", require("./routes/annotations")());
 };
