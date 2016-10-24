@@ -133,94 +133,149 @@ context MDViews {
    define view ProductsConsumption as
       select from MD.Products
       {
-         @UI.lineItem.importance : Importance.High
-         @EndUserText.label      : [ {
-                                       language : 'EN',
-                                       text : 'Product ID'
-                                    }, {
-                                       language : 'DE',
-                                       text : 'Produkt ID'
-                                    } ]
-         @EndUserText.quickInfo  : [ {
-                                       language : 'EN',
-                                       text : 'Product ID Quick'
-                                    }, {
-                                       language : 'DE',
-                                       text : 'Produkt ID Schnell'
-                                    } ]
+         @UI.lineItem           : [ {
+                                      importance : Importance.High
+                                   } ]
+         @UI.fieldGroup         : [ {
+                                      position : 10
+                                   } ]
+         @EndUserText.label     : [ {
+                                      language : 'EN',
+                                      text : 'Product ID'
+                                   }, {
+                                      language : 'DE',
+                                      text : 'Produkt ID'
+                                   } ]
+         @EndUserText.quickInfo : [ {
+                                      language : 'EN',
+                                      text : 'Product ID Quick'
+                                   }, {
+                                      language : 'DE',
+                                      text : 'Produkt ID Schnell'
+                                   } ]
          PRODUCTID                     as "Product_Id",
 
-         @UI.lineItem.importance : Importance.High
-         @EndUserText.label      : [ {
-                                       language : 'EN',
-                                       text : 'Product Category'
-                                    } ]
+         @UI.lineItem       : [ {
+                                  importance : Importance.High
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 20
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Product Category'
+                               } ]
          CATEGORY                      as "Product_Category",
 
-         @UI.lineItem.importance : Importance.Medium
-         @EndUserText.label      : [ {
-                                       language : 'EN',
-                                       text : 'Currency'
-                                    } ]
+         @UI.lineItem       : [ {
+                                  importance : Importance.Medium
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Currency'
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 30
+                               } ]
          CURRENCY                      as "Product_Currency",
 
-         @UI.lineItem.importance : Importance.Medium
-         @EndUserText.label      : [ {
-                                       language : 'EN',
-                                       text : 'Product Price'
-                                    } ]
+         @UI.lineItem       : [ {
+                                  importance : Importance.Medium
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Product Price'
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  exclude : true
+                               } ]
          PRICE                         as "Product_Price",
 
-         @UI.lineItem.importance : Importance.Low
-         @EndUserText.label      : [ {
-                                       language : 'EN',
-                                       text : 'Type Code'
-                                    } ]
+         @UI.lineItem       : [ {
+                                  importance : Importance.Medium
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Type Code'
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 40
+                               } ]
          TYPECODE                      as "Product_TypeCode",
 
-         @UI.lineItem.importance : Importance.Low
-         @EndUserText.label      : [ {
-                                       language : 'EN',
-                                       text : 'Weight'
-                                    } ]
+         @UI.lineItem       : [ {
+                                  importance : Importance.Medium
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Weight'
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  exclude : true
+                               } ]
          WEIGHTMEASURE                 as "Product_WeightMeasure",
 
-         @UI.lineItem.importance : Importance.Low
-         @EndUserText.label      : [ {
-                                       language : 'EN',
-                                       text : 'Weight Unit'
-                                    } ]
+         @UI.lineItem       : [ {
+                                  importance : Importance.Low
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Weight Unit'
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  exclude : true
+                               } ]
          WEIGHTUNIT                    as "Product_WeightUnit",
 
-         @UI.lineItem.importance : Importance.Medium
-         @EndUserText.label      : [ {
-                                       language : 'EN',
-                                       text : 'Supplier ID'
-                                    } ]
+         @UI.lineItem       : [ {
+                                  importance : Importance.Medium
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Supplier ID'
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 50
+                               } ]
          SUPPLIER.PARTNERID            as "Supplier_Id",
 
-         @UI.lineItem.importance : Importance.High
-         @EndUserText.label      : [ {
-                                       language : 'EN',
-                                       text : 'Supplier'
-                                    } ]
+         @UI.lineItem       : [ {
+                                  importance : Importance.High
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Supplier'
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 60
+                               } ]
          SUPPLIER.COMPANYNAME          as "Supplier_CompanyName",
 
-         @UI.lineItem.importance : Importance.Medium
-         @EndUserText.label      : [ {
-                                       language : 'EN',
-                                       text : 'Supplier City'
-                                    } ]
+         @UI.lineItem       : [ {
+                                  importance : Importance.Medium
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Supplier City'
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 70
+                               } ]
          SUPPLIER.ADDRESSES.CITY       as "Supplier_City",
          SUPPLIER.ADDRESSES.POSTALCODE as "Supplier_PostalCode",
          SUPPLIER.ADDRESSES.STREET     as "Supplier_Street",
          SUPPLIER.ADDRESSES.BUILDING   as "Supplier_Building",
 
-         @UI.lineItem.importance : Importance.Medium
-         @EndUserText.label      : [ {
-                                       language : 'EN',
-                                       text : 'Supplier Country'
-                                    } ]
+         @UI.lineItem       : [ {
+                                  importance : Importance.Medium
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Supplier Country'
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 80
+                               } ]
          SUPPLIER.ADDRESSES.COUNTRY    as "Supplier_Country"
       };
 
