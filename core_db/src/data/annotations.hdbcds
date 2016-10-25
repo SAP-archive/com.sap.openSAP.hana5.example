@@ -12,6 +12,19 @@ context annotations {
          text :     String(60);
       };
    }
+   annotation valueList {
+      collectionPath :       String(255);
+      searchSupported :      Boolean;
+      parameterInOut :       array of {
+         localDataProperty : String(255);
+         valueListProperty : String(255);
+         label :             String(60);
+      };
+      parameterDisplayOnly : array of {
+         valueListProperty : String(255);
+         label :             String(60);
+      };
+   }
 
    type InnvocationD : String(255);
    type elementRef : String(255);

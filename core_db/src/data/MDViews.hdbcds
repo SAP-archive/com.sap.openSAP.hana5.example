@@ -6,6 +6,10 @@ using MD;
 using annotations.UI as UI;
 using annotations.Importance;
 using annotations.EndUserText;
+using annotations.valueList;
+using "sap.hana.democontent.epm.models::GET_PARTNER_ROLES" as getPartnerRoles;
+using "sap.hana.democontent.epm.models::GET_COUNTRIES" as getCountries;
+using "sap.hana.democontent.epm.models::PRODUCTS" as PRODUCTS;
 
 context MDViews {
    define view BPView as
@@ -77,6 +81,62 @@ context MDViews {
       where
          PARTNERROLE = '1';
 
+   define view partnerRoles as
+      select from getPartnerRoles
+      {
+         @UI.lineItem       : [ {
+                                  importance : Importance.High
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 10
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Partner Role'
+                               } ]
+         PARTNERROLE,
+
+         @UI.lineItem       : [ {
+                                  importance : Importance.High
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 20
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Role Description'
+                               } ]
+         PARTNERDESC
+      };
+
+   define view counties as
+      select from getCountries
+      {
+         @UI.lineItem       : [ {
+                                  importance : Importance.High
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 10
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Country Name'
+                               } ]
+         NAME,
+
+         @UI.lineItem       : [ {
+                                  importance : Importance.High
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 20
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Country Code'
+                               } ]
+         CODE
+      };
+
    define view SupplierView as
       select from MD.BusinessPartner
       {
@@ -117,8 +177,8 @@ context MDViews {
       select from     MD.Products as prod
       {
          PRODUCTID as "Product_Id",
-         (select from PO.Item as a   {
-            SUM("GROSSAMOUNT") as SUM
+         (select from PO.Item as a       {
+            sum("GROSSAMOUNT") as SUM
          }
          where
             a.PRODUCT.PRODUCTID = prod.PRODUCTID
@@ -153,6 +213,37 @@ context MDViews {
          PO_ORDERS
       };
 
+   define view ProductsValueHelp as
+      select from PRODUCTS
+      {
+         @UI.lineItem       : [ {
+                                  importance : Importance.High
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 10
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Product ID'
+                               }, {
+                                  language : 'DE',
+                                  text : 'Produkt ID'
+                               } ]
+         "Product_Id",
+
+         @UI.lineItem       : [ {
+                                  importance : Importance.High
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 20
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Product Name'
+                               } ]
+         "Product_Name"
+      };
+
    define view ProductsConsumption as
       select from MD.Products
       {
@@ -176,6 +267,17 @@ context MDViews {
                                       language : 'DE',
                                       text : 'Produkt ID Schnell'
                                    } ]
+         @valueList             : {
+                                     collectionPath : 'ProductsVH',
+                                     searchSupported : false,
+                                     parameterInOut : [ {
+                                        localDataProperty : 'Product_Id',
+                                        valueListProperty : 'Product_Id'
+                                     } ],
+                                     parameterDisplayOnly : [ {
+                                        valueListProperty : 'Product_Name'
+                                     } ]
+                                  }
          PRODUCTID                     as "Product_Id",
 
          @UI.lineItem       : [ {
@@ -299,6 +401,17 @@ context MDViews {
          @UI.fieldGroup     : [ {
                                   position : 80
                                } ]
+         @valueList         : {
+                                 collectionPath : 'Countries',
+                                 searchSupported : false,
+                                 parameterInOut : [ {
+                                    localDataProperty : 'Supplier_Country',
+                                    valueListProperty : 'CODE'
+                                 } ],
+                                 parameterDisplayOnly : [ {
+                                    valueListProperty : 'NAME'
+                                 } ]
+                              }
          SUPPLIER.ADDRESSES.COUNTRY    as "Supplier_Country"
       };
 

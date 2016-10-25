@@ -102,6 +102,74 @@ function buildLineItem(xml, cdsAnnotationValues) {
 	}
 }
 
+function buildValueList(xml, cdsAnnotationValues, target) {
+
+	for (var i = 0; i < cdsAnnotationValues.length; i++) {
+		if (typeof cdsAnnotationValues[i].valueList !== 'undefined') {
+
+			var annotations = subElement(xml.schema, 'Annotations');
+			annotations.set('xmlns', 'http://docs.oasis-open.org/odata/ns/edm');
+			annotations.set('Target', target+'/'+cdsAnnotationValues[i].ELEMENT_NAME);
+			
+			var annotation = subElement(annotations, 'Annotation');
+			annotation.set('Term', 'com.sap.vocabularies.Common.v1.ValueList');
+		    
+		    var record = subElement(annotation, 'Record');
+		    
+			var collectionPath = subElement(record, 'PropertyValue' );
+			collectionPath.set('Property', 'CollectionPath');
+			collectionPath.set('String', cdsAnnotationValues[i].valueList.collectionPath);
+			
+			if (typeof cdsAnnotationValues[i].valueList.searchSupported !== 'undefined') {
+				var searchSupported = subElement(record, 'PropertyValue');
+				searchSupported.set('Property', 'SearchSupported');
+				searchSupported.set('Bool', cdsAnnotationValues[i].valueList.searchSupported);
+			}
+			
+			var parameters = subElement(record, 'PropertyValue');
+			parameters.set('Property', 'Parameters');
+			
+			var collection = subElement(parameters, 'Collection');
+			
+			for (var pi = 0; pi < cdsAnnotationValues[i].valueList.parameterInOut.length; pi++) {
+				var recordInOut = subElement(collection, 'Record');
+				recordInOut.set('Type', 'com.sap.vocabularies.Common.v1.ValueListParameterInOut');
+				if (typeof cdsAnnotationValues[i].valueList.parameterInOut[pi].localDataProperty !== 'undefined') {
+					var localDataProperty = subElement(recordInOut, 'PropertyValue');
+					localDataProperty.set('Property', 'LocalDataProperty');
+					localDataProperty.set('PropertyPath', cdsAnnotationValues[i].valueList.parameterInOut[pi].localDataProperty);
+				}
+				if (typeof cdsAnnotationValues[i].valueList.parameterInOut[pi].valueListProperty !== 'undefined') {
+					var valueListProperty = subElement(recordInOut, 'PropertyValue');
+					valueListProperty.set('Property', 'ValueListProperty');
+					valueListProperty.set('String', cdsAnnotationValues[i].valueList.parameterInOut[pi].valueListProperty);
+				}	
+				
+				if (typeof cdsAnnotationValues[i].valueList.parameterInOut[pi].label !== 'undefined') {
+					var label = subElement(recordInOut, 'PropertyValue');
+					label.set('Property', 'Label');
+					label.set('String', cdsAnnotationValues[i].valueList.parameterInOut[pi].label);
+				}
+			}
+
+			for (var pi2 = 0; pi2 < cdsAnnotationValues[i].valueList.parameterDisplayOnly.length; pi2++) {
+				var recordDisplayOnly = subElement(collection, 'Record');
+				recordDisplayOnly.set('Type', 'com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly');
+				if (typeof cdsAnnotationValues[i].valueList.parameterDisplayOnly[pi2].valueListProperty !== 'undefined') {
+					var valueListProperty2 = subElement(recordDisplayOnly, 'PropertyValue');
+					valueListProperty2.set('Property', 'ValueListProperty');
+					valueListProperty2.set('String', cdsAnnotationValues[i].valueList.parameterDisplayOnly[pi2].valueListProperty);
+				}
+				if (typeof cdsAnnotationValues[i].valueList.parameterDisplayOnly[pi2].label !== 'undefined') {
+					var label2 = subElement(recordDisplayOnly, 'PropertyValue');
+					label2.set('Property', 'Label');
+					label2.set('String', cdsAnnotationValues[i].valueList.parameterDisplayOnly[pi2].label);
+				}
+			}
+		}
+	}
+}
+
 function buildFieldGroup(xml, cdsAnnotationValues) {
 	xml.fieldGroup = subElement(xml.annotationTarget, 'Annotation');
 	xml.fieldGroup.set('Term', 'com.sap.vocabularies.UI.v1.FieldGroup');
@@ -212,6 +280,11 @@ function flattenCDSAnnotationVaules(results, locale) {
 
 		}
 
+		if (results[i].ANNOTATION_NAME === "annotations.valueList") {
+			value = JSON.parse(results[i].VALUE);
+			getValueByKey('ELEMENT_NAME', results[i].ELEMENT_NAME, cdsAnnotationValues).valueList = value.value;
+		}
+
 	}
 	return cdsAnnotationValues;
 }
@@ -222,6 +295,7 @@ function buildAnnotationXML(res, results, target, req) {
 	var xml = buildXMLHeader();
 	buildAnnotationTarget(xml, target);
 	var cdsAnnotationValues = flattenCDSAnnotationVaules(results, locale);
+	buildValueList(xml, cdsAnnotationValues, target);
 	buildLineItem(xml, cdsAnnotationValues);
 	buildFieldGroup(xml, cdsAnnotationValues);
 
