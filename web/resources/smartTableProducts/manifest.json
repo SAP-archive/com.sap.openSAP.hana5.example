@@ -14,7 +14,15 @@
       "productsVHAnnotation": {
         "uri": "/node/annotations/com.sap.openSAP.hana5.example.services.ProductsVHType/MDViews.ProductsValueHelp/",
         "type": "ODataAnnotation"
-      },      
+      }, 
+      "productCatVHAnnotation": {
+        "uri": "/node/annotations/com.sap.openSAP.hana5.example.services.ProductCatVhType/MDViews.productCategoryVH/",
+        "type": "ODataAnnotation"
+      }, 
+      "supplierVHAnnotation": {
+        "uri": "/node/annotations/com.sap.openSAP.hana5.example.services.SupplierVhType/MDViews.SupplierViewVH/",
+        "type": "ODataAnnotation"
+      },       
       "mainService": {
         "uri": "/xsodata/products.xsodata/",
         "type": "OData",
@@ -22,6 +30,8 @@
           "annotations": [
           	"countriesAnnotation",
           	"productsVHAnnotation",
+          	"productCatVHAnnotation",
+          	"supplierVHAnnotation",
             "mainServiceAnnotation"
           ],
           "odataVersion": "2.0"

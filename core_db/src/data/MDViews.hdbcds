@@ -154,6 +154,34 @@ context MDViews {
       where
          PARTNERROLE = '2';
 
+   define view SupplierViewVH as
+      select from SupplierView
+      {
+         @UI.lineItem       : [ {
+                                  importance : Importance.High
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 10
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Supplier ID'
+                               } ]
+         "Id"   as "Supplier_Id",
+
+         @UI.lineItem       : [ {
+                                  importance : Importance.High
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 20
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Supplier Name'
+                               } ]
+         "CompanyName" as "Supplier_CompanyName"
+      };
+
    define view BPAddrExt as
       select from MD.BusinessPartner
       {
@@ -244,6 +272,22 @@ context MDViews {
          "Product_Name"
       };
 
+   define view productCategoryVH as
+      select from MD.Products distinct
+      {
+         @UI.lineItem       : [ {
+                                  importance : Importance.High
+                               } ]
+         @UI.fieldGroup     : [ {
+                                  position : 10
+                               } ]
+         @EndUserText.label : [ {
+                                  language : 'EN',
+                                  text : 'Product Category'
+                               } ]
+         CATEGORY as "Product_Category"
+      };
+
    define view ProductsConsumption as
       select from MD.Products
       {
@@ -290,6 +334,14 @@ context MDViews {
                                   language : 'EN',
                                   text : 'Product Category'
                                } ]
+         @valueList         : {
+                                 collectionPath : 'ProductCatVh',
+                                 searchSupported : false,
+                                 parameterInOut : [ {
+                                    localDataProperty : 'Product_Category',
+                                    valueListProperty : 'Product_Category'
+                                 } ]
+                              }
          CATEGORY                      as "Product_Category",
 
          @UI.lineItem       : [ {
@@ -362,6 +414,17 @@ context MDViews {
          @UI.fieldGroup     : [ {
                                   position : 50
                                } ]
+         @valueList         : {
+                                 collectionPath : 'SupplierVH',
+                                 searchSupported : false,
+                                 parameterInOut : [ {
+                                    localDataProperty : 'Supplier_Id',
+                                    valueListProperty : 'Supplier_Id'
+                                 } ],
+                                 parameterDisplayOnly : [ {
+                                    valueListProperty : 'Supplier_CompanyName'
+                                 } ]
+                              }
          SUPPLIER.PARTNERID            as "Supplier_Id",
 
          @UI.lineItem       : [ {
