@@ -102,6 +102,29 @@ context MDViews {
          round(ADDRESSES.POINT.st_distance(new st_point(8.644072, 49.292910), 'meter') / 1000, 1) as distFromWDF03
       };
 
+   define view NewYorkEmployees as
+      select from MD.Employees as emp
+      {
+         NAME.FIRST,
+         NAME.LAST,
+         ADDRESSES.ADDRESSID as "ADDID",
+         ADDRESSES.CITY      as CITY
+      }
+      where
+         'New York' = ADDRESSES.CITY;
+
+   define view ProductViewSub as
+      select from     MD.Products as prod
+      {
+         PRODUCTID as "Product_Id",
+         (select from PO.Item as a   {
+            SUM("GROSSAMOUNT") as SUM
+         }
+         where
+            a.PRODUCT.PRODUCTID = prod.PRODUCTID
+         )         as PO_SUM
+      };
+
    define view ProductView as
       select from MD.Products
       mixin
