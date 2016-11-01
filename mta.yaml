@@ -1,6 +1,6 @@
 _schema-version: '2.0'
 ID: com.sap.openSAP.hana5.example
-version: 2.0.5
+version: 2.0.6
 
 modules:
  - name: openSAP5-ex-core-db
@@ -126,6 +126,9 @@ modules:
           JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml:
              {"service_name_for_DefaultDB" : "~{user-container-name}"}]'     
      - name: openSAP5-ex-user-db
+
+
+ 
 
 resources:
  - name: container
