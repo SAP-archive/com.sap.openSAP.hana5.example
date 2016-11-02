@@ -1,6 +1,7 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, new-cap: 0, quotes: 0*/
 "use strict";
 var express = require("express");
+var async = require("async");
 var et = require('elementtree');
 var XML = et.XML;
 var ElementTree = et.ElementTree;
@@ -63,53 +64,53 @@ function buildLineItem(xml, cdsAnnotationValues) {
 	xml.lineItem = subElement(xml.annotationTarget, 'Annotation');
 	xml.lineItem.set('Term', 'com.sap.vocabularies.UI.v1.LineItem');
 	var collection = subElement(xml.lineItem, 'Collection');
-	for (var i = 0; i < cdsAnnotationValues.length; i++) {
 
-		//Line Item
-		if (typeof cdsAnnotationValues[i].lineItem !== 'undefined') {
+	async.each(cdsAnnotationValues, function(cdsAnnotationValue, callback) {
+		if (typeof cdsAnnotationValue.lineItem !== 'undefined') {
 			var record = subElement(collection, 'Record');
 			record.set('Type', 'com.sap.vocabularies.UI.v1.DataField');
 
 			var propertyValue = subElement(record, 'PropertyValue');
 			propertyValue.set('Property', 'Value');
-			propertyValue.set('Path', cdsAnnotationValues[i].ELEMENT_NAME);
+			propertyValue.set('Path', cdsAnnotationValue.ELEMENT_NAME);
 
-			if (typeof cdsAnnotationValues[i].Label !== 'undefined') {
+			if (typeof cdsAnnotationValue.Label !== 'undefined') {
 				var label = subElement(record, 'PropertyValue');
 				label.set('Property', 'Label');
-				label.set('String', cdsAnnotationValues[i].Label);
+				label.set('String', cdsAnnotationValue.Label);
 			}
 
-			if (typeof cdsAnnotationValues[i].quickInfo !== 'undefined') {
+			if (typeof cdsAnnotationValue.quickInfo !== 'undefined') {
 				var quick = subElement(record, 'PropertyValue');
 				quick.set('Property', 'QuickInfo');
-				quick.set('String', cdsAnnotationValues[i].quickInfo);
+				quick.set('String', cdsAnnotationValue.quickInfo);
 			}
-			if (typeof cdsAnnotationValues[i].lineItem.importance !== 'undefined') {
+			if (typeof cdsAnnotationValue.lineItem.importance !== 'undefined') {
 				var importance = subElement(record, 'Annotation');
 				importance.set('Term', 'com.sap.vocabularies.UI.v1.Importance');
-				importance.set('EnumMember', 'com.sap.vocabularies.UI.v1.ImportanceType/' + cdsAnnotationValues[i].lineItem.importance);
+				importance.set('EnumMember', 'com.sap.vocabularies.UI.v1.ImportanceType/' + cdsAnnotationValue.lineItem.importance);
 			}
 
-			if (typeof cdsAnnotationValues[i].lineItem.position !== 'undefined') {
+			if (typeof cdsAnnotationValue.lineItem.position !== 'undefined') {
 				var position = subElement(record, 'PropertyValue');
 				position.set('Property', 'Position');
-				position.set('String', cdsAnnotationValues[i].lineItem.position);
+				position.set('String', cdsAnnotationValue.lineItem.position);
 			}
-
 		}
+		callback();
+	}, function(err) {
 
-	}
+	});
 }
 
 function buildValueList(xml, cdsAnnotationValues, target) {
 
-	for (var i = 0; i < cdsAnnotationValues.length; i++) {
-		if (typeof cdsAnnotationValues[i].valueList !== 'undefined') {
+	async.each(cdsAnnotationValues, function(cdsAnnotationValue, callback) {
+		if (typeof cdsAnnotationValue.valueList !== 'undefined') {
 
 			var annotations = subElement(xml.schema, 'Annotations');
 			annotations.set('xmlns', 'http://docs.oasis-open.org/odata/ns/edm');
-			annotations.set('Target', target + '/' + cdsAnnotationValues[i].ELEMENT_NAME);
+			annotations.set('Target', target + '/' + cdsAnnotationValue.ELEMENT_NAME);
 
 			var annotation = subElement(annotations, 'Annotation');
 			annotation.set('Term', 'com.sap.vocabularies.Common.v1.ValueList');
@@ -118,12 +119,12 @@ function buildValueList(xml, cdsAnnotationValues, target) {
 
 			var collectionPath = subElement(record, 'PropertyValue');
 			collectionPath.set('Property', 'CollectionPath');
-			collectionPath.set('String', cdsAnnotationValues[i].valueList.collectionPath);
+			collectionPath.set('String', cdsAnnotationValue.valueList.collectionPath);
 
-			if (typeof cdsAnnotationValues[i].valueList.searchSupported !== 'undefined') {
+			if (typeof cdsAnnotationValue.valueList.searchSupported !== 'undefined') {
 				var searchSupported = subElement(record, 'PropertyValue');
 				searchSupported.set('Property', 'SearchSupported');
-				searchSupported.set('Bool', cdsAnnotationValues[i].valueList.searchSupported);
+				searchSupported.set('Bool', cdsAnnotationValue.valueList.searchSupported);
 			}
 
 			var parameters = subElement(record, 'PropertyValue');
@@ -131,45 +132,51 @@ function buildValueList(xml, cdsAnnotationValues, target) {
 
 			var collection = subElement(parameters, 'Collection');
 
-			for (var pi = 0; pi < cdsAnnotationValues[i].valueList.parameterInOut.length; pi++) {
+			async.each(cdsAnnotationValue.valueList.parameterInOut, function(parameterInOut, callback) {
 				var recordInOut = subElement(collection, 'Record');
 				recordInOut.set('Type', 'com.sap.vocabularies.Common.v1.ValueListParameterInOut');
-				if (typeof cdsAnnotationValues[i].valueList.parameterInOut[pi].localDataProperty !== 'undefined') {
+				if (typeof parameterInOut.localDataProperty !== 'undefined') {
 					var localDataProperty = subElement(recordInOut, 'PropertyValue');
 					localDataProperty.set('Property', 'LocalDataProperty');
-					localDataProperty.set('PropertyPath', cdsAnnotationValues[i].valueList.parameterInOut[pi].localDataProperty);
+					localDataProperty.set('PropertyPath', parameterInOut.localDataProperty);
 				}
-				if (typeof cdsAnnotationValues[i].valueList.parameterInOut[pi].valueListProperty !== 'undefined') {
+				if (typeof parameterInOut.valueListProperty !== 'undefined') {
 					var valueListProperty = subElement(recordInOut, 'PropertyValue');
 					valueListProperty.set('Property', 'ValueListProperty');
-					valueListProperty.set('String', cdsAnnotationValues[i].valueList.parameterInOut[pi].valueListProperty);
+					valueListProperty.set('String', parameterInOut.valueListProperty);
 				}
 
-				if (typeof cdsAnnotationValues[i].valueList.parameterInOut[pi].label !== 'undefined') {
+				if (typeof parameterInOut.label !== 'undefined') {
 					var label = subElement(recordInOut, 'PropertyValue');
 					label.set('Property', 'Label');
-					label.set('String', cdsAnnotationValues[i].valueList.parameterInOut[pi].label);
+					label.set('String', parameterInOut.label);
 				}
-			}
+				callback();
+			}, function(err) {
 
-			if (typeof cdsAnnotationValues[i].valueList.parameterDisplayOnly !== 'undefined') {
-				for (var pi2 = 0; pi2 < cdsAnnotationValues[i].valueList.parameterDisplayOnly.length; pi2++) {
+			});
+
+			if (typeof cdsAnnotationValue.valueList.parameterDisplayOnly !== 'undefined') {
+				for (var pi2 = 0; pi2 < cdsAnnotationValue.valueList.parameterDisplayOnly.length; pi2++) {
 					var recordDisplayOnly = subElement(collection, 'Record');
 					recordDisplayOnly.set('Type', 'com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly');
-					if (typeof cdsAnnotationValues[i].valueList.parameterDisplayOnly[pi2].valueListProperty !== 'undefined') {
+					if (typeof cdsAnnotationValue.valueList.parameterDisplayOnly[pi2].valueListProperty !== 'undefined') {
 						var valueListProperty2 = subElement(recordDisplayOnly, 'PropertyValue');
 						valueListProperty2.set('Property', 'ValueListProperty');
-						valueListProperty2.set('String', cdsAnnotationValues[i].valueList.parameterDisplayOnly[pi2].valueListProperty);
+						valueListProperty2.set('String', cdsAnnotationValue.valueList.parameterDisplayOnly[pi2].valueListProperty);
 					}
-					if (typeof cdsAnnotationValues[i].valueList.parameterDisplayOnly[pi2].label !== 'undefined') {
+					if (typeof cdsAnnotationValue.valueList.parameterDisplayOnly[pi2].label !== 'undefined') {
 						var label2 = subElement(recordDisplayOnly, 'PropertyValue');
 						label2.set('Property', 'Label');
-						label2.set('String', cdsAnnotationValues[i].valueList.parameterDisplayOnly[pi2].label);
+						label2.set('String', cdsAnnotationValue.valueList.parameterDisplayOnly[pi2].label);
 					}
 				}
 			}
 		}
-	}
+		callback();
+	}, function(err) {
+
+	});
 }
 
 function buildFieldGroup(xml, cdsAnnotationValues) {
@@ -186,108 +193,111 @@ function buildFieldGroup(xml, cdsAnnotationValues) {
 	filterData.set('Property', 'Data');
 
 	var collection = subElement(filterData, 'Collection');
-	for (var i = 0; i < cdsAnnotationValues.length; i++) {
-		if (typeof cdsAnnotationValues[i].fieldGroup !== 'undefined') {
+	async.each(cdsAnnotationValues, function(cdsAnnotationValue, callback) {
+		if (typeof cdsAnnotationValue.fieldGroup !== 'undefined') {
 			var recordInner = subElement(collection, 'Record');
 			recordInner.set('Type', 'com.sap.vocabularies.UI.v1.DataField');
 
 			var propertyValue = subElement(recordInner, 'PropertyValue');
 			propertyValue.set('Property', 'Value');
-			propertyValue.set('Path', cdsAnnotationValues[i].ELEMENT_NAME);
+			propertyValue.set('Path', cdsAnnotationValue.ELEMENT_NAME);
 
-			if (typeof cdsAnnotationValues[i].Label !== 'undefined') {
+			if (typeof cdsAnnotationValue.Label !== 'undefined') {
 				var label = subElement(recordInner, 'PropertyValue');
 				label.set('Property', 'Label');
-				label.set('String', cdsAnnotationValues[i].Label);
+				label.set('String', cdsAnnotationValue.Label);
 			}
 
-			if (typeof cdsAnnotationValues[i].quickInfo !== 'undefined') {
+			if (typeof cdsAnnotationValue.quickInfo !== 'undefined') {
 				var quick = subElement(recordInner, 'PropertyValue');
 				quick.set('Property', 'QuickInfo');
-				quick.set('String', cdsAnnotationValues[i].quickInfo);
+				quick.set('String', cdsAnnotationValue.quickInfo);
 			}
-			if (typeof cdsAnnotationValues[i].fieldGroup.importance !== 'undefined') {
+			if (typeof cdsAnnotationValue.fieldGroup.importance !== 'undefined') {
 				var importance = subElement(recordInner, 'Annotation');
 				importance.set('Term', 'com.sap.vocabularies.UI.v1.Importance');
-				importance.set('EnumMember', 'com.sap.vocabularies.UI.v1.ImportanceType/' + cdsAnnotationValues[i].lineItem.importance);
+				importance.set('EnumMember', 'com.sap.vocabularies.UI.v1.ImportanceType/' + cdsAnnotationValue.lineItem.importance);
 			}
 
-			if (typeof cdsAnnotationValues[i].fieldGroup.position !== 'undefined') {
+			if (typeof cdsAnnotationValue.fieldGroup.position !== 'undefined') {
 				var position = subElement(recordInner, 'PropertyValue');
 				position.set('Property', 'Position');
-				position.set('Integer', cdsAnnotationValues[i].fieldGroup.position);
+				position.set('Integer', cdsAnnotationValue.fieldGroup.position);
 			}
 
-			if (typeof cdsAnnotationValues[i].fieldGroup.exclude !== 'undefined') {
+			if (typeof cdsAnnotationValue.fieldGroup.exclude !== 'undefined') {
 				var exclude = subElement(recordInner, 'PropertyValue');
 				exclude.set('Property', 'Exclude');
-				exclude.set('Boolean', cdsAnnotationValues[i].fieldGroup.exclude);
+				exclude.set('Boolean', cdsAnnotationValue.fieldGroup.exclude);
 			}
 		}
+		callback();
+	}, function(err) {
 
-	}
+	});
 }
 
 function flattenCDSAnnotationVaules(results, locale) {
 	var cdsAnnotationValues = [];
-	var i = 0;
-	var value = '';
-	var temp = '';
-
-	for (i = 0; i < results.length; i++) {
-		if (!getValueByKey('ELEMENT_NAME', results[i].ELEMENT_NAME, cdsAnnotationValues)) {
+	async.each(results, function(result, callback) {
+		if (!getValueByKey('ELEMENT_NAME', result.ELEMENT_NAME, cdsAnnotationValues)) {
 			cdsAnnotationValues.push({
-				ELEMENT_NAME: results[i].ELEMENT_NAME
+				ELEMENT_NAME: result.ELEMENT_NAME
 			});
 		}
-	}
+		callback();
+	}, function(err) {
+		async.each(results, function(result, callback) {
+			var value = '';
+			var temp = '';
+			if (result.ANNOTATION_NAME === "annotations.EndUserText") {
+				value = JSON.parse(result.VALUE);
 
-	for (i = 0; i < results.length; i++) {
-		if (results[i].ANNOTATION_NAME === "annotations.EndUserText") {
-			value = JSON.parse(results[i].VALUE);
-
-			if (typeof value.value.label !== 'undefined') {
-				temp = getValueByKey('language', locale, value.value.label);
-				if (temp) {
-					getValueByKey('ELEMENT_NAME', results[i].ELEMENT_NAME, cdsAnnotationValues).Label = temp.text;
-				} else {
-					temp = getValueByKey('language', 'EN', value.value.label);
+				if (typeof value.value.label !== 'undefined') {
+					temp = getValueByKey('language', locale, value.value.label);
 					if (temp) {
-						getValueByKey('ELEMENT_NAME', results[i].ELEMENT_NAME, cdsAnnotationValues).Label = temp.text;
+						getValueByKey('ELEMENT_NAME', result.ELEMENT_NAME, cdsAnnotationValues).Label = temp.text;
+					} else {
+						temp = getValueByKey('language', 'EN', value.value.label);
+						if (temp) {
+							getValueByKey('ELEMENT_NAME', result.ELEMENT_NAME, cdsAnnotationValues).Label = temp.text;
+						}
+					}
+				}
+
+				if (typeof value.value.quickInfo !== 'undefined') {
+					temp = getValueByKey('language', locale, value.value.quickInfo);
+					if (temp) {
+						getValueByKey('ELEMENT_NAME', result.ELEMENT_NAME, cdsAnnotationValues).quickInfo = temp.text;
+					} else {
+						temp = getValueByKey('language', 'EN', value.value.quickInfo);
+						if (temp) {
+							getValueByKey('ELEMENT_NAME', result.ELEMENT_NAME, cdsAnnotationValues).quickInfo = temp.text;
+						}
 					}
 				}
 			}
 
-			if (typeof value.value.quickInfo !== 'undefined') {
-				temp = getValueByKey('language', locale, value.value.quickInfo);
-				if (temp) {
-					getValueByKey('ELEMENT_NAME', results[i].ELEMENT_NAME, cdsAnnotationValues).quickInfo = temp.text;
-				} else {
-					temp = getValueByKey('language', 'EN', value.value.quickInfo);
-					if (temp) {
-						getValueByKey('ELEMENT_NAME', results[i].ELEMENT_NAME, cdsAnnotationValues).quickInfo = temp.text;
-					}
+			if (result.ANNOTATION_NAME === "annotations.UI") {
+				value = JSON.parse(result.VALUE);
+				if (typeof value.value.fieldGroup !== 'undefined') {
+					getValueByKey('ELEMENT_NAME', result.ELEMENT_NAME, cdsAnnotationValues).fieldGroup = value.value.fieldGroup[0];
 				}
-			}
-		}
+				if (typeof value.value.lineItem !== 'undefined') {
+					getValueByKey('ELEMENT_NAME', result.ELEMENT_NAME, cdsAnnotationValues).lineItem = value.value.lineItem[0];
+				}
 
-		if (results[i].ANNOTATION_NAME === "annotations.UI") {
-			value = JSON.parse(results[i].VALUE);
-			if (typeof value.value.fieldGroup !== 'undefined') {
-				getValueByKey('ELEMENT_NAME', results[i].ELEMENT_NAME, cdsAnnotationValues).fieldGroup = value.value.fieldGroup[0];
-			}
-			if (typeof value.value.lineItem !== 'undefined') {
-				getValueByKey('ELEMENT_NAME', results[i].ELEMENT_NAME, cdsAnnotationValues).lineItem = value.value.lineItem[0];
 			}
 
-		}
+			if (result.ANNOTATION_NAME === "annotations.valueList") {
+				value = JSON.parse(result.VALUE);
+				getValueByKey('ELEMENT_NAME', result.ELEMENT_NAME, cdsAnnotationValues).valueList = value.value;
+			}
+			callback();
+		}, function(err) {
 
-		if (results[i].ANNOTATION_NAME === "annotations.valueList") {
-			value = JSON.parse(results[i].VALUE);
-			getValueByKey('ELEMENT_NAME', results[i].ELEMENT_NAME, cdsAnnotationValues).valueList = value.value;
-		}
-
-	}
+		});
+	});
 	return cdsAnnotationValues;
 }
 
