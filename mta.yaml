@@ -1,6 +1,6 @@
 _schema-version: '2.0'
 ID: com.sap.openSAP.hana5.example
-version: 2.0.6
+version: 2.0.7
 
 modules:
  - name: openSAP5-ex-core-db
@@ -191,9 +191,9 @@ resources:
  - name: ui5-lib
    type: configuration 
    parameters:
-      ID: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_SAPUI5_FESV2:sapui5_fesv2 # Specifies the the ID of the provider MTA.
-      name: sapui5_fesv2
-      version: "=1.38.10"     # The version (range) of the provider MTA.     
+      ID: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_SAPUI5_FESV3:sapui5_fesv3 # Specifies the the ID of the provider MTA.
+      name: sapui5_fesv3
+      version: "=1.40.12"     # The version (range) of the provider MTA.     
       
  - name: EXTERNAL_UI5
    type: org.cloudfoundry.user-provided-service
