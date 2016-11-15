@@ -147,6 +147,9 @@
         },
         "hdbpublicsynonym" : {
             "plugin_name" : "com.sap.hana.di.publicsynonym"
+        },
+        "hdbsysbicsynonym" : {
+        	"plugin_name"   : "com.sap.hana.di.sysbicsynonym"
         }
     }
 }
