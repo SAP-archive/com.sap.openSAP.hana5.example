@@ -150,6 +150,9 @@
         },
         "hdbsysbicsynonym" : {
         	"plugin_name"   : "com.sap.hana.di.sysbicsynonym"
-        }
+        },
+        "hdblogicalschema" : {
+        	"plugin_name"   : "com.sap.hana.di.logicalschema"
+        } 
     }
 }
