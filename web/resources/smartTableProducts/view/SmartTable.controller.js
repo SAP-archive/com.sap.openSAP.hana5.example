@@ -12,7 +12,6 @@ sap.ui.controller("sap.openSAP.smarttableProducts.view.SmartTable", {
 				processor: oMessageProcessor
 			})
 		);
-
 	},
 
 	onSemanticEmailPress: function(oEvent) {
