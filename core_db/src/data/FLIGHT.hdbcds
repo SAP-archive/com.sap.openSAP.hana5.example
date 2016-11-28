@@ -1,16 +1,16 @@
 using SFLIGHT as FLIGHTTBL;
-using SBOOK;
+using SBOOK as BOOKINGS;
 
 context FLIGHT {
    define view SflightView as
       select from FLIGHTTBL
       mixin
       {
-         SBOOKLink : association [ * ] to SBOOK on
-            SBOOKLink.MANDT      = $projection.Client
-            and SBOOKLink.CARRID = $projection.CarrierId
-            and SBOOKLink.CONNID = $projection.ConnectionId
-            and SBOOKLink.FLDATE = $projection.FlightDate;
+         SBOOKLink : association [ * ] to BOOKINGS on
+            SBOOKLink.MANDT      = FLIGHTTBL.MANDT //$projection.Client
+            and SBOOKLink.CARRID = FLIGHTTBL.CARRID //$projection.CarrierId
+            and SBOOKLink.CONNID = FLIGHTTBL.CONNID //$projection.ConnectionId
+            and SBOOKLink.FLDATE = FLIGHTTBL.FLDATE; //$projection.FlightDate;
       }
       into
       {
@@ -18,10 +18,13 @@ context FLIGHT {
          CARRID    as "CarrierId",
          CONNID    as "ConnectionId",
          FLDATE    as "FlightDate",
-         PRICE     as "Price",
-         CURRENCY  as "Currency",
-         PLANETYPE as "PlaneType",
-         SBOOKLink as "Bookings"
+         PRICE            as "Price",
+         CURRENCY         as "Currency",
+         PLANETYPE        as "PlaneType",
+         SBOOKLink.BOOKID as "BookingId",
+         SBOOKLink.CUSTOMID as "CustomerId",
+         SBOOKLink.CUSTTYPE as "CustomerType",
+         SBOOKLink.PASSNAME as "PassengerName"
       };
 
    define view SflightExt as
@@ -31,13 +34,13 @@ context FLIGHT {
          "CarrierId",
          "ConnectionId",
          "FlightDate",
-         "Bookings".BOOKID   as "BookingId",
+         "BookingId",
          "Price",
          "Currency",
          "PlaneType",
-         "Bookings".CUSTOMID as "CustomerId",
-         "Bookings".CUSTTYPE as "CustomerType",
-         "Bookings".PASSNAME as "PassengerName"
+         "CustomerId",
+         "CustomerType",
+         "PassengerName"
       } with structured privilege check;
 
 };
