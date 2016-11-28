@@ -1,13 +1,12 @@
 {
   "engines": {
-    "node": "^0.12.7 || ^4.4.0 || ^6.0.0",
-    "npm": "^2.11.x"
+    "node": "4.x || 6.x"
   },
   "dependencies": {
-    "sap-xssec": "0.8.0",
+    "sap-xssec": "0.9.1",
     "sap-xsenv": "1.2.4",
-    "sap-xsjs": "1.11.2",
-    "sap-hdbext": "4.1.3",
+    "sap-xsjs": "1.11.3",
+    "sap-hdbext": "4.2.0",
     "sap-logging": "~2.0",
     "sap-jobs-client": "~1.0.11",
     "express": "~4.14",

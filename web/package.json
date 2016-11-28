@@ -4,7 +4,7 @@
     "node": ">=4.0.0 <7.0.0"
   },
   "dependencies": {
-    "approuter": "2.3.2"
+    "approuter": "2.4.0"
   },
   "scripts": {
     "start": "node node_modules/approuter/approuter.js"
