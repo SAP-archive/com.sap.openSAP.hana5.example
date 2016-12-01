@@ -1,5 +1,4 @@
 using Core;
-using annotations.OData;
 
 @OData.publish : true
 context UserData {
