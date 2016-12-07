@@ -1,7 +1,0 @@
-<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
-	<Panel headerText="PO Item Data" expandable="true" expanded="true">
-		<content>
-			<Table id="tblPOItem" growingThreshold="5" growing="true"/>
-		</content>
-	</Panel>
-</core:FragmentDefinition>
