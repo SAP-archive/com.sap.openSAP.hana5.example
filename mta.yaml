@@ -127,9 +127,6 @@ modules:
              {"service_name_for_DefaultDB" : "~{user-container-name}"}]'     
      - name: openSAP5-ex-user-db
 
-
- 
-
 resources:
  - name: container
    properties:

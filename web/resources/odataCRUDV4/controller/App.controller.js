@@ -13,8 +13,6 @@ sap.ui.define([
 			var oConfig = this.getOwnerComponent().getModel("config");
 			var userName = oConfig.getProperty("/UserName");
 			var userModel = this.getOwnerComponent().getModel("userModel");
-			var oTable = this.getView().byId("userTable");
-			oTable.setModel(userModel);
 		},
 
 		callUserService: function() {
@@ -26,9 +24,6 @@ sap.ui.define([
 			oEntry.LastName = result.LastName;
 			oEntry.Email = result.Email;
 
-			oModel.setHeaders({
-				"content-type": "application/json;charset=utf-8"
-			});
 			var mParams = {};
 			mParams.success = function() {
 				sap.m.MessageToast.show("Create successful");
@@ -39,9 +34,6 @@ sap.ui.define([
 
 		callUserUpdate: function() {
 			var oModel = this.getOwnerComponent().getModel("userModel");
-			oModel.setHeaders({
-				"content-type": "application/json;charset=utf-8"
-			});
 
 			var mParams = {};
 			mParams.error = function() {

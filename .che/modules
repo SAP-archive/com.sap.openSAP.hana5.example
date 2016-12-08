@@ -2,5 +2,6 @@ core_js
 web
 core_db
 user_js
+javaTest
 user_db
 user_java

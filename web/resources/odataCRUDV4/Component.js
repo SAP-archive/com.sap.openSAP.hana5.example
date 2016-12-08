@@ -1,44 +1,50 @@
-/*eslint no-undef: 0, no-unused-vars: 0*/
-jQuery.sap.declare("opensap.odataBasic.Component");
-sap.ui.core.UIComponent.extend("opensap.odataBasic.Component", {
-	init: function(){
-		jQuery.sap.require("sap.m.MessageBox");
-		jQuery.sap.require("sap.m.MessageToast");		
-		
-		
-		var oParams = {};
-		oParams.serviceUrl = "/java/odata/v4/UserData/";
-		oParams.synchronizationMode= "None";
-		//oParams.json = true;
-		//oParams.defaultBindingMode = sap.ui.model.BindingMode.TwoWay;
-		//oParams.defaultUpdateMethod = "PUT";
-		//oParams.useBatch = false;
-	    var oModel = new sap.ui.model.odata.v4.ODataModel(oParams);
-	  	//	oModel.attachRejectChange(this,function(oEvent){
-	  	//	    sap.m.MessageBox.alert("You are already editing another Entry! Please submit or reject your pending changes!");
-		//	});
-	  		
-	    sap.ui.getCore().setModel(oModel, "userModel");  
-	          
-		sap.ui.core.UIComponent.prototype.init.apply(this, arguments);
-	},
-	
-	createContent: function() {
+/*eslint no-console: 0, no-unused-vars: 0, no-use-before-define: 0, no-redeclare: 0*/
+sap.ui.define([
+	"sap/ui/core/UIComponent",
+	"sap/ui/Device",
+	"opensap/odataBasic/model/models"
+], function(UIComponent, Device, models) {
+	"use strict";
 
-		var settings = {
-				ID: "odataBasic",
-				title: "OData V4 CRUD Exercise",
-				description: "SHINE service for OData V4 CRUD Exercise"
-			};
-		
-		var oView = sap.ui.view({
-			id: "app",
-			viewName: "opensap.odataBasic.view.App",
-			type: "XML",
-			viewData: settings
-		});
-		
-		 oView.setModel(sap.ui.getCore().getModel("userModel"), "userModel");   
-		return oView;
-	}
+	return UIComponent.extend("opensap.odataBasic.Component", {
+
+		metadata: {
+			manifest: "json"
+		},
+
+		init: function() {
+			jQuery.sap.require("sap.m.MessageBox");
+			jQuery.sap.require("sap.m.MessageToast");
+
+			this.setModel(models.createDeviceModel(), "device");
+
+			sap.ui.core.UIComponent.prototype.init.apply(
+				this, arguments);
+			this.getSessionInfo();
+		},
+
+		destroy: function() {
+			// call the base component's destroy function
+			UIComponent.prototype.destroy.apply(this, arguments);
+		},
+
+		getSessionInfo: function() {
+			var aUrl = "/xsjs/exercisesMaster.xsjs?cmd=getSessionInfo";
+			this.onLoadSession(
+				JSON.parse(jQuery.ajax({
+					url: aUrl,
+					method: "GET",
+					dataType: "json",
+					async: false
+				}).responseText));
+		},
+
+		onLoadSession: function(myJSON) {
+			for (var i = 0; i < myJSON.session.length; i++) {
+				var config = this.getModel("config");
+				config.setProperty("/UserName", myJSON.session[i].UserName);
+			}
+		}
+	});
+
 });
