@@ -1,48 +1,71 @@
-<core:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" controllerName="opensap.odataBasic.view.App">
-	<ScrollContainer height="100%" width="100%" horizontal="true" vertical="true">
-		<Panel headerText="New User Record Details" expandable="true" expanded="true">
-			<List width="400px">
-				<InputListItem label="First Name">
-					<Input id="fName" value="{/FirstName}"/>
-				</InputListItem>
-				<InputListItem label="Last Name">
-					<Input id="lName" value="{/LastName}"/>
-				</InputListItem>
-				<InputListItem label="Email">
-					<Input id="email" value="{/Email}"/>
-				</InputListItem>
-			</List>
-			<Button text="Create Record" press="callUserService"/>
-			<Button text="Update Changes" press="callUserUpdate"/>
-			<Button text="Create with Batch Dialog" press="onBatchDialogPress"/>
-		</Panel>
-		<Panel headerText="User List" expandable="true" expanded="true">
-			<Table tableId="userTable" growingThreshold="10" growing="true" items="{ path: 'userModel&gt;/Users', sorter: { path: 'UserId' }}">
-				<columns>
-					<Column>
-						<header><Label text="User ID"/></header>
-					</Column>
-					<Column>
-						<header><Label text="First Name"/></header>
-					</Column>
-					<Column>
-						<header><Label text="Last Name"/></header>
-					</Column>
-					<Column>
-						<header><Label text="Email"/></header>
-					</Column>
-				</columns>
-				<items>
-					<ColumnListItem>
-						<cells>
-							<Input value="{path: 'userModel&gt;UserId'}" name="PERS_NO" editable="false"/>
-							<Input value="{path: 'userModel&gt;FirstName'}" name="FIRSTNAME"/>
-							<Input value="{path: 'userModel&gt;LastName'}" name="LASTNAME"/>
-							<Input value="{path: 'userModel&gt;Email'}" name="E_MAIL"/>
-						</cells>
-					</ColumnListItem>
-				</items>
-			</Table>
-		</Panel>
-	</ScrollContainer>
+<core:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core" xmlns:smartTable="sap.ui.comp.smarttable"
+	controllerName="opensap.odataBasic.controller.App">
+	<u:Shell id="myShell" icon="/images/sap_18.png">
+		<u:user>
+			<u:ShellHeadUserItem image="sap-icon://person-placeholder" username="{config>/UserName}"/>
+		</u:user>
+		<u:content>
+			<ScrollContainer height="100%" width="100%" horizontal="true" vertical="true">
+				<Panel headerText="New User Record Details" expandable="true" expanded="true">
+					<List width="400px">
+						<InputListItem label="{i18n>FName}">
+							<Input id="fName" value="{/FirstName}"/>
+						</InputListItem>
+						<InputListItem label="{i18n>LName}">
+							<Input id="lName" value="{/LastName}"/>
+						</InputListItem>
+						<InputListItem label="{i18n>EMail}">
+							<Input id="email" value="{/Email}"/>
+						</InputListItem>
+					</List>
+					<Button text="{i18n>B3}" press="callUserService"/>
+					<Button text="{i18n>B4}" press="callUserUpdate"/>
+					<Button text="{i18n>B5}" press="onBatchDialogPress"/>
+				</Panel>
+				<VBox fitContainer="true">
+					<smartTable:SmartTable id="userTable" header="{i18n>UList}" editable="true" entitySet="Users" showRowCount="true" enableAutoBinding="true"
+						showFullScreenButton="true" tableType="Table">
+						<Table>
+							<columns>
+								<Column id="UserId">
+									<customData>
+										<core:CustomData key="p13nData" value='\{"columnKey": "UserId", "leadingProperty": "UserId", "sortProperty": "UserId", "columnIndex":"1"}'/>
+									</customData>
+									<Text text="{i18n>UserId}"/>
+								</Column>
+								<Column id="FirstName">
+									<customData>
+										<core:CustomData key="p13nData" value='\{"columnKey": "FirstName", "leadingProperty": "FirstName", "maxLength": "40","columnIndex":"2"}'/>
+									</customData>
+									<Text text="{i18n>FName}"/>
+								</Column>
+								<Column id="LastName">
+									<customData>
+										<core:CustomData key="p13nData" value='\{"columnKey": "LastName", "leadingProperty": "LastName", "maxLength": "40","columnIndex":"3"}'/>
+									</customData>
+									<Text text="{i18n>LName}"/>
+								</Column>
+								<Column id="Email">
+									<customData>
+										<core:CustomData key="p13nData" value='\{"columnKey": "Email", "leadingProperty": "Email", "maxLength": "40","columnIndex":"4"}'/>
+									</customData>
+									<Text text="{i18n>EMail}"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Input value="{UserId}" name="PERS_NO" editable="false"/>
+										<Input value="{FirstName}" name="FIRSTNAME"/>
+										<Input value="{LastName}" name="LASTNAME"/>
+										<Input value="{Email}" name="E_MAIL"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</smartTable:SmartTable>
+				</VBox>
+			</ScrollContainer>
+		</u:content>
+	</u:Shell>
 </core:View>
