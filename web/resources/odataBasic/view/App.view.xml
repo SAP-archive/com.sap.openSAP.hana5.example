@@ -1,0 +1,16 @@
+<core:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core"
+	xmlns:smartTable="sap.ui.comp.smarttable" controllerName="opensap.odataBasic.controller.App">
+	<u:Shell id="myShell" icon="/images/sap_18.png">
+		<u:user>
+			<u:ShellHeadUserItem image="sap-icon://person-placeholder" username="{config>/UserName}"/>
+		</u:user>
+		<u:content>
+			<smartTable:SmartTable id="bpTable" header="{i18n>UList}" editable="false" showRowCount="true" enableAutoBinding="true"
+				showFullScreenButton="true" tableType="Table">
+				<smartTable:layoutData>
+					<FlexItemData growFactor="1" baseSize="0%"/>
+				</smartTable:layoutData>
+			</smartTable:SmartTable>
+		</u:content>
+	</u:Shell>
+</core:View>
