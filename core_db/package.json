@@ -1,7 +1,8 @@
 {
   "name": "deploy",
   "dependencies": {
-    "sap-hdi-deploy": "2.2.0"
+    "sap-hdi-deploy": "2.2.0",
+    "sap-ui-annotations": "1.0.0"
   },
   "scripts": {
     "start": "node node_modules/sap-hdi-deploy/deploy.js"
