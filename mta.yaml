@@ -1,8 +1,16 @@
 _schema-version: '2.0'
 ID: com.sap.openSAP.hana5.example
-version: 2.0.7
+version: 2.0.9
 
 modules:
+ - name: openSAP5-ex-user-db
+   type: hdb
+   path: user_db
+   requires:
+    - name: user-container
+      properties:
+        TARGET_CONTAINER: ~{user-container-name}
+        
  - name: openSAP5-ex-core-db
    type: hdb
    path: core_db
@@ -34,56 +42,6 @@ modules:
       properties:
         key: hdi-user-service
         service: ~{user-container-name}  
-
- - name: openSAP5-ex-user-db
-   type: hdb
-   path: user_db
-   requires:
-    - name: user-container
-      properties:
-        TARGET_CONTAINER: ~{user-container-name}
-
- - name: openSAP5-ex-web
-   type: html5 
-   path: web
-   provides: 
-      - name: web
-        properties:
-          ui-url: "${default-url}"
-   parameters: 
-       host: web 
-       register-service-url: true 
-       service-name: web 
-       service-url: "${default-url}"          
-   requires:
-      - name: openSAP5-ex-uaa
-      - name: ui5-lib
-        properties:
-          ui5liburl: ~{url}      
-    #  - name: EXTERNAL_UI5
-    #    properties:
-    #      ui5liburl: ~{url}
-    #  - name: XSC_UI5
-    #    properties:
-    #      ui5liburl: ~{url}     
-      - name: core_js
-        group: destinations
-        properties:
-          name: core-backend
-          url: ~{url}
-          forwardAuthToken: true   
-      - name: user_js
-        group: destinations
-        properties:
-          name: user-backend
-          url: ~{url}
-          forwardAuthToken: true  
-      - name: user_java
-        group: destinations
-        properties:
-          name: user-java-backend
-          url: ~{url}
-          forwardAuthToken: true  
 
  - name: openSAP5-ex-core-js
    type: nodejs
@@ -127,15 +85,53 @@ modules:
              {"service_name_for_DefaultDB" : "~{user-container-name}"}]'     
      - name: openSAP5-ex-user-db
 
-resources:
- - name: container
-   properties:
-     container-name: ${service-name}
-   type: com.sap.xs.hdi-container
+ - name: openSAP5-ex-web
+   type: html5 
+   path: web
+   provides: 
+      - name: web
+        properties:
+          ui-url: "${default-url}"
    parameters: 
-     config:
-       schema: OPENSAP_HANA5_EXAMPLE
-      
+       host: web 
+       register-service-url: true 
+       service-name: web 
+       service-url: "${default-url}"          
+   requires:
+      - name: openSAP5-ex-uaa
+      - name: ui5-lib
+        properties:
+          ui5liburl: ~{url}      
+    #  - name: EXTERNAL_UI5
+    #    properties:
+    #      ui5liburl: ~{url}
+    #  - name: XSC_UI5
+    #    properties:
+    #      ui5liburl: ~{url}     
+      - name: core_js
+        group: destinations
+        properties:
+          name: core-backend
+          url: ~{url}
+          forwardAuthToken: true   
+      - name: user_js
+        group: destinations
+        properties:
+          name: user-backend
+          url: ~{url}
+          forwardAuthToken: true  
+      - name: user_java
+        group: destinations
+        properties:
+          name: user-java-backend
+          url: ~{url}
+          forwardAuthToken: true  
+
+
+ 
+
+resources:
+
  - name: user-container
    properties:
      user-container-name: ${service-name}
@@ -144,6 +140,14 @@ resources:
      config:
        schema: OPENSAP_HANA5_USER_EXAMPLE
        
+ - name: container
+   properties:
+     container-name: ${service-name}
+   type: com.sap.xs.hdi-container
+   parameters: 
+     config:
+       schema: OPENSAP_HANA5_EXAMPLE
+
  - name: openSAP5-ex-uaa
    type: com.sap.xs.uaa
    parameters:
