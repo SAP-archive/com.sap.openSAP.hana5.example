@@ -6,7 +6,7 @@
 	"type": "application",
 	"resources": "resources.json",
   	"i18n": "i18n/i18n.properties",
-  	"id": "exerciseAsync",
+  	"id": "exerciseChat",
   	"title": "{{appTitle}}",
   	"description": "{{appDescription}}",
   	"applicationVersion": {
@@ -41,7 +41,7 @@
       "sapFiori2Adaptation": true
     },
     "rootView": {
-    	"viewName": "sap.xs.exerciseAsync.view.App",
+    	"viewName": "sap.xs.chat.view.App",
     	"type": "XML",
     	"id": "app"
     },

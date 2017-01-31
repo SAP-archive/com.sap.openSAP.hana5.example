@@ -4,31 +4,46 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<title>Node.js Web Sockets Chat</title>
 	    <!-- <script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" -->
 	<script id="sap-ui-bootstrap" src="{{{ui5liburl}}}/resources/sap-ui-core.js"
 		data-sap-ui-theme="sap_belize"
 		data-sap-ui-xx-bindingSyntax="complex"
+		data-sap-ui-compatVersion="edge"
+		data-sap-ui-preload="async"
+		data-sap-ui-language="en"
 		data-sap-ui-resourceroots='{
 				"sap.xs.chat": "./",
 				"view": "./view" }'			
-		data-sap-ui-libs="sap.m, sap.me">
+		data-sap-ui-libs="sap.m,sap.ui.comp,sap.ui.core,sap.ui.layout">
 	</script>
 	
 	<script>
       // WS handling
       jQuery.sap.require("sap.ui.core.ws.WebSocket");  
-      //var connection = new sap.ui.core.ws.WebSocket('ws://localhost:3080');
-      var connection = new sap.ui.core.ws.WebSocket('/node/chatServer');      
+      var connection = new sap.ui.core.ws.WebSocket('/node/chatServer');  
 	</script>
 
 	<script>
 	
-	new sap.m.Shell({
-		app : new sap.ui.core.ComponentContainer({
-			name : "sap.xs.chat"
-		})
-	}).placeAt("content");
+			sap.ui.getCore().attachInit(function () {
+				var ComponentContainer = new sap.ui.core.ComponentContainer({
+            		height : "100%"
+            	});
+            	
+            	new sap.m.Shell({
+            		app: ComponentContainer,
+            		showLogout: true
+            	}).placeAt("content");
+            	
+            	var oComponent = sap.ui.component({
+            		id: "comp",
+            		name: "sap.xs.chat",
+            		manifestFirst: true,
+            		async: true
+            	}).then(function(oComponent){
+            		ComponentContainer.setComponent(oComponent);
+            	});
+		});
 		
 	</script>
 </head>
