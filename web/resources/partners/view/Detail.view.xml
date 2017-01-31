@@ -1,4 +1,4 @@
-<core:View controllerName="sap.shineNext.partners.view.Detail" xmlns="sap.m"
+<core:View controllerName="sap.shineNext.partners.controller.Detail" xmlns="sap.m"
 	xmlns:core="sap.ui.core" xmlns:h="http://www.w3.org/1999/xhtml">
 	<Page
 		title="{name}"

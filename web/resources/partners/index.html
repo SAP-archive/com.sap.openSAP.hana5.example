@@ -8,18 +8,35 @@
 		<script id="sap-ui-bootstrap" src="{{{ui5liburl}}}/resources/sap-ui-core.js"
 			data-sap-ui-theme="sap_belize"
 			data-sap-ui-xx-bindingSyntax="complex"
+			data-sap-ui-compatVersion="edge"
+			data-sap-ui-preload="async"
+			data-sap-ui-language="en"
 			data-sap-ui-resourceroots='{
 				"sap.shineNext.partners": "./",
 				"view": "./view" }'				
-			data-sap-ui-libs="sap.m">
+			data-sap-ui-libs="sap.m,sap.ui.comp,sap.ui.core,sap.ui.layout">
 		</script>
-		<script>		
-		new sap.m.Shell({
-			app : new sap.ui.core.ComponentContainer({
-				name : "sap.shineNext.partners"
-			})
-		}).placeAt("content");
-			
+		<script>
+		
+		sap.ui.getCore().attachInit(function () {
+				var ComponentContainer = new sap.ui.core.ComponentContainer({
+            		height : "100%"
+            	});
+            	
+            	new sap.m.Shell({
+            		app: ComponentContainer,
+            		showLogout: true
+            	}).placeAt("content");
+            	
+            	var oComponent = sap.ui.component({
+            		id: "comp",
+            		name: "sap.shineNext.partners",
+            		manifestFirst: true,
+            		async: true
+            	}).then(function(oComponent){
+            		ComponentContainer.setComponent(oComponent);
+            	});
+		});
 		</script>
 	</head>
 	<body class="sapUiBody" role="application">

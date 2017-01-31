@@ -2,7 +2,7 @@
 sap.ui.jsview("sap.shineNext.partners.view.Home", {
 
 	getControllerName: function() {
-		return "sap.shineNext.partners.view.Home";
+		return "sap.shineNext.partners.controller.Home";
 	},
 	
 	createContent : function(oCon) {

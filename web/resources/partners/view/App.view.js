@@ -1,7 +1,7 @@
 sap.ui.jsview("sap.shineNext.partners.view.App", {
 
 	getControllerName: function () {
-		return "sap.shineNext.partners.view.App";
+		return "sap.shineNext.partners.controller.App";
 	},
 
 	createContent : function (oController) {
