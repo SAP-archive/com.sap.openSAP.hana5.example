@@ -1,33 +1,51 @@
-jQuery.sap.declare("opensap.excelUpload.Component");
+/*eslint no-console: 0, no-unused-vars: 0, no-use-before-define: 0, no-redeclare: 0*/
+sap.ui.define([
+	"sap/ui/core/UIComponent",
+	"sap/ui/Device",
+	"opensap/excelUpload/model/models"
+], function(UIComponent, Device, models) {
+	"use strict";
 
-sap.ui.core.UIComponent.extend("opensap.excelUpload.Component", {
+	return UIComponent.extend("opensap.excelUpload.Component", {
+
+	metadata: {
+		manifest: "json"
+	},
 
 	init: function(){
 		jQuery.sap.require("sap.m.MessageBox");
 		jQuery.sap.require("sap.m.MessageToast");		
 		
-	    var oModel = new sap.ui.model.odata.ODataModel(
-		          "/xsodata/user2.xsodata/", true);
-	    sap.ui.getCore().setModel(oModel, "userModel");  
-		sap.ui.core.UIComponent.prototype.init.apply(this, arguments);
-	},
-	
-	createContent: function() {
+		this.setModel(models.createDeviceModel(), "device");
 
-		var settings = {
-				ID: "excelUpload",
-				title: "Excel Upload Exercise",
-				description: "Excel Upload Exercise"
-			};
-		
-		var oView = sap.ui.view({
-			id: "app",
-			viewName: "opensap.excelUpload.view.App",
-			type: "XML",
-			viewData: settings
-		});
-		
-		 oView.setModel(sap.ui.getCore().getModel("userModel"), "userModel");   
-		return oView;
+		sap.ui.core.UIComponent.prototype.init.apply(
+			this, arguments);
+		this.getSessionInfo();
+	},
+
+	destroy: function() {
+		// call the base component's destroy function
+		UIComponent.prototype.destroy.apply(this, arguments);
+	},
+
+	getSessionInfo: function() {
+		var aUrl = "/xsjs/exercisesMaster.xsjs?cmd=getSessionInfo";
+		this.onLoadSession(
+			JSON.parse(jQuery.ajax({
+				url: aUrl,
+				method: "GET",
+				dataType: "json",
+				async: false
+			}).responseText));
+	},
+
+	onLoadSession: function(myJSON) {
+		for (var i = 0; i < myJSON.session.length; i++) {
+			var config = this.getModel("config");
+			config.setProperty("/UserName", myJSON.session[i].UserName);
+		}
 	}
+		
+	});
+
 });

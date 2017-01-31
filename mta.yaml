@@ -127,9 +127,6 @@ modules:
           url: ~{url}
           forwardAuthToken: true  
 
-
- 
-
 resources:
 
  - name: user-container
@@ -213,5 +210,5 @@ resources:
    properties:
      xsc-ui5-service-name: ${service-name}
      url: ${url}
-     
-     
+
+
