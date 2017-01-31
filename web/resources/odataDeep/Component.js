@@ -1,28 +1,27 @@
-jQuery.sap.declare("sap.shineNext.odataDeep.Component");
+/*eslint no-console: 0, no-unused-vars: 0, no-use-before-define: 0, no-redeclare: 0*/
+sap.ui.define([
+	"sap/ui/core/UIComponent"
+], function(UIComponent) {
+	"use strict";
 
+	return UIComponent.extend("sap.shineNext.odataDeep.Component", {
 
-sap.ui.core.UIComponent.extend("sap.shineNext.odataDeep.Component", {
+	metadata: {
+		manifest: "json"
+	},
+
 	init: function(){
 		jQuery.sap.require("sap.m.MessageBox");
 		jQuery.sap.require("sap.m.MessageToast");		
   
-		sap.ui.core.UIComponent.prototype.init.apply(this, arguments);
+		sap.ui.core.UIComponent.prototype.init.apply(
+			this, arguments);	
 	},
 	
-	createContent: function() {
-     
-		var settings = {
-				ID: "odataDeep",
-				title: "OData Deep Insert Exercise",
-				description: "SHINE OData Deep Insert Exercise"
-			};
-		
-		var oView = sap.ui.view({
-			id: "app",
-			viewName: "sap.shineNext.odataDeep.view.App",
-			type: "XML",
-			viewData: settings
-		});
-		return oView;
+	destroy: function() {
+			// call the base component's destroy function
+			UIComponent.prototype.destroy.apply(this, arguments);
 	}
+
+  });
 });
