@@ -1,0 +1,8 @@
+<!-- This message page is shown if a purchase order is not found given the data the user has entered. -->
+<!-- Because there is no interaction on the page, no controller is needed -->
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<MessagePage id="notFoundPage"
+	    showHeader="false" 
+	    description="" 
+    /> 
+</mvc:View>

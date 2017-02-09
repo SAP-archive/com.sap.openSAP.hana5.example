@@ -1,6 +1,6 @@
 _schema-version: '2.0'
 ID: com.sap.openSAP.hana5.example
-version: 2.0.9
+version: 2.1.0
 
 modules:
  - name: openSAP5-ex-user-db
@@ -107,9 +107,6 @@ modules:
     #  - name: EXTERNAL_UI5
     #    properties:
     #      ui5liburl: ~{url}
-    #  - name: XSC_UI5
-    #    properties:
-    #      ui5liburl: ~{url}     
       - name: core_js
         group: destinations
         properties:
@@ -187,14 +184,13 @@ resources:
      service-name: CROSS_SCHEMA_SYS_BI
    properties:
      sys-bi-service-name: ${service-name} 
-     
+
  - name: ui5-lib
-   type: configuration 
+   type: configuration
    parameters:
-      ID: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_SAPUI5_FESV3:sapui5_fesv3 # Specifies the the ID of the provider MTA.
-      name: sapui5_fesv3
-      version: "=1.40.12"     # The version (range) of the provider MTA.     
-      
+      provider-id: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV4:sapui5_fesv4
+      version: ">=1.45.0-SNAPSHOT"
+
  - name: EXTERNAL_UI5
    type: org.cloudfoundry.user-provided-service
    parameters:
@@ -202,15 +198,6 @@ resources:
      url: https://sapui5.hana.ondemand.com
    properties:
      ext-ui5-service-name: ${service-name}
-     url: ${url}
-     
- - name: XSC_UI5
-   type: org.cloudfoundry.user-provided-service
-   parameters:
-     service-name: XSC_UI5
-     url: https://hanapm:4300/sap/ui5/1
-   properties:
-     xsc-ui5-service-name: ${service-name}
      url: ${url}
 
 

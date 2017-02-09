@@ -8,7 +8,7 @@
 			<!-- <script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" -->
 			<script id="sap-ui-bootstrap" src="{{{ui5liburl}}}/resources/sap-ui-core.js"
                       data-sap-ui-libs="sap.ui.ux3,sap.ui.commons,sap.ui.table,sap.m,sap.ui.comp,sap.ui.core,sap.ui.layout"
-                      data-sap-ui-theme="sap_belize"
+                      data-sap-ui-theme="sap_belize_plus"
 				 	  data-sap-ui-xx-bindingSyntax="complex"
 					  data-sap-ui-compatVersion="edge"
 				      data-sap-ui-preload="async"
@@ -17,30 +17,16 @@
               </script>
          
    			  <script>
-   			    sap.ui.getCore().attachInit(function () {
-				var ComponentContainer = new sap.ui.core.ComponentContainer({
-            		height : "100%"
-            	});
-            	
-            	new sap.m.Shell({
-            		app: ComponentContainer,
-            		showLogout: false
-            	}).placeAt("content");
-            	
-            	var oComponent = sap.ui.component({
-            		id: "comp",
-            		name: "shine.democontent.epm.poworklist",
-            		manifestFirst: true,
-            		async: true
-            	}).then(function(oComponent){
-            		ComponentContainer.setComponent(oComponent);
-            	});
-			});
-		
+   			  	sap.ui.getCore().attachInit(function() {
+					var oComponentContainer = new sap.ui.core.ComponentContainer({
+						height : "100%",
+						name : "shine.democontent.epm.poworklist"
+					});
+					oComponentContainer.placeAt("content");
+				});
    			  </script>
 
        </head>
-       <body class="sapUiBody" role="application">
-              <div id="content"></div>
-       </body>
+	<body class="sapUiBody" id="content" role="application">
+	</body>
 </html>

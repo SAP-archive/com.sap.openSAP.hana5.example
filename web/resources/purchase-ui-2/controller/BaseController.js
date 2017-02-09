@@ -1,11 +1,14 @@
 /*global history */
 sap.ui.define([
 		"sap/ui/core/mvc/Controller",
-		"sap/ui/core/routing/History"
-	], function (Controller, History) {
+		"sap/ui/core/routing/History",
+		"shine/democontent/epm/poworklist/model/formatter"
+	], function (Controller, History, formatter) {
 		"use strict";
 
 		return Controller.extend("shine.democontent.epm.poworklist.controller.BaseController", {
+			
+			formatter: formatter,
 			/**
 			 * Convenience method for accessing the router in every controller of the application.
 			 * @public

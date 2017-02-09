@@ -16,6 +16,16 @@ sap.ui.define([
 				}
 
 				return parseFloat(sValue).toFixed(2);
+			},
+			getBundle: function(oControl) {
+				return oControl.getModel("i18n").getResourceBundle();
+			},
+
+			quantity: function(sQuantity, sUnit) {
+				if ( sUnit === "undefined") {
+					return "";
+				}
+				return this.getResourceBundle().getText("xfld.purchaseOrderQuantityAndUnit", [sQuantity, sUnit]);
 			}
 		};
 

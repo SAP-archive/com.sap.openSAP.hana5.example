@@ -1,62 +1,34 @@
-<sap.ui.core.mvc:View controllerName="shine.democontent.epm.poworklist.controller.Shell" xmlns="sap.m" xmlns:u="sap.ui.unified"
-	xmlns:sap.ui.commons.layout="sap.ui.commons.layout" xmlns:sap.ui.core.mvc="sap.ui.core.mvc" xmlns:sap.ui.commons="sap.ui.commons"
-	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:core="sap.ui.core" xmlns:semantic="sap.m.semantic">
-	<u:Shell id="myShell" icon="/images/sap_18.png">
-		<u:user>
-			<u:ShellHeadUserItem image="sap-icon://person-placeholder" username="{config>/UserName}"/>
-		</u:user>
-		<u:content>
-			<semantic:FullscreenPage title="{i18n>appTitle}" showNavButton="false" id="page" floatingFooter="true">
-				<semantic:addAction>
-					<semantic:AddAction press="onAddNew"/>
-				</semantic:addAction>
-				<semantic:messagesIndicator>
-					<semantic:MessagesIndicator press="onMessagesButtonPress"/>
-				</semantic:messagesIndicator>
-				<semantic:content>
-					<!-- use this to make the table occupy the available screen height -->
-					<VBox fitContainer="true">
-						<html:style>
-							.exPageVariantPadding { padding-left: 2rem; }
-						</html:style>
-						<sap.ui.commons.layout:MatrixLayout>
-							<sap.ui.commons.layout:rows>
-								<sap.ui.commons.layout:MatrixLayoutRow>
-									<sap.ui.commons.layout:cells>
-										<sap.ui.commons.layout:MatrixLayoutCell>
-											<sap.ui.commons.layout:content>
-												<sap.ui.core.mvc:XMLView id="po_search_view" viewName="shine.democontent.epm.poworklist.view.Search"></sap.ui.core.mvc:XMLView>
-											</sap.ui.commons.layout:content>
-										</sap.ui.commons.layout:MatrixLayoutCell>
-									</sap.ui.commons.layout:cells>
-								</sap.ui.commons.layout:MatrixLayoutRow>
-								<sap.ui.commons.layout:MatrixLayoutRow>
-									<sap.ui.commons.layout:cells>
-										<sap.ui.commons.layout:MatrixLayoutCell>
-											<sap.ui.commons.layout:content>
-												<sap.ui.core.mvc:XMLView id="po_table_view" viewName="shine.democontent.epm.poworklist.view.Table"></sap.ui.core.mvc:XMLView>
-											</sap.ui.commons.layout:content>
-										</sap.ui.commons.layout:MatrixLayoutCell>
-									</sap.ui.commons.layout:cells>
-								</sap.ui.commons.layout:MatrixLayoutRow>
-								<sap.ui.commons.layout:MatrixLayoutRow>
-									<sap.ui.commons.layout:cells>
-										<sap.ui.commons.layout:MatrixLayoutCell>
-											<sap.ui.commons.layout:content>
-												<sap.ui.core.mvc:XMLView id="po_detail_view" viewName="shine.democontent.epm.poworklist.view.Detail"></sap.ui.core.mvc:XMLView>
-											</sap.ui.commons.layout:content>
-										</sap.ui.commons.layout:MatrixLayoutCell>
-									</sap.ui.commons.layout:cells>
-								</sap.ui.commons.layout:MatrixLayoutRow>
-							</sap.ui.commons.layout:rows>
-						</sap.ui.commons.layout:MatrixLayout>
-					</VBox>
-				</semantic:content>
-				<semantic:customFooterContent>
-					<Button text="{i18n>excel}" icon="sap-icon://excel-attachment" press="onExcelPress"/>
-					<Button text="{i18n>zip}" icon="sap-icon://attachment-zip-file" press="onZipPress"/>
-				</semantic:customFooterContent>
-			</semantic:FullscreenPage>
-		</u:content>
-	</u:Shell>
-</sap.ui.core.mvc:View>
+<mvc:View controllerName="shine.democontent.epm.poworklist.controller.Shell" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:layout="sap.ui.layout" xmlns="sap.m" xmlns:f="sap.f" height="100%">
+	<f:DynamicPage id="dynamicPageId" toggleHeaderOnTitleClick="true" preserveHeaderStateOnScroll="true" showFooter="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>appTitle}"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://add" text="Add" press="onAddNew" type="Transparent"/>
+				</f:actions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+				<f:content></f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content></f:content>
+		<!-- DynamicPage Footer -->
+		<f:footer>
+			<OverflowToolbar>
+				<Button icon="sap-icon://message-popup" text="{/messagesLength}" type="Emphasized" press="onMessagesButtonPress"
+					visible="{= !!${/messagesLength}}"/>
+				<ToolbarSpacer/>
+				<Button text="{i18n>excel}" icon="sap-icon://excel-attachment" press="onExcelPress"/>
+				<Button text="{i18n>zip}" icon="sap-icon://attachment-zip-file" press="onZipPress"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

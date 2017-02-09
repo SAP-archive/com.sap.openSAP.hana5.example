@@ -20,7 +20,22 @@
           "odataVersion": "2.0"
         }
       }
-    }	
+    },	
+    "crossNavigation": {
+      "inbounds": {
+        "posManage": {
+          "semanticObject": "POWorklist",
+          "action": "post",
+          "title": "{{appTitle}}",
+          "subTitle": "{{appDescription}}",
+          "icon": "sap-icon://Fiori2/F0003",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
   },
   "sap.fiori": {
 	"_version": "2.0.0",
@@ -28,11 +43,15 @@
 	"archeType": "transactional"
   },
   "sap.ui": {
-  	"_version": "1.40.0",
+  	"_version": "1.4.0",
 	"technology": "UI5",
   	 "icons":  {
-  	 	"icon": "./images/favicon.ico",
-  	 	"favIcon": "./images/favicon.ico"
+      "icon": "sap-icon://Fiori2/F0003",
+      "favIcon": "icon/F0003_Manage_Tasks.ico",
+      "phone": "icon/launchicon/57_iPhone_Desktop_Launch.png",
+      "phone@2": "icon/launchicon/114_iPhone-Retina_Web_Clip.png",
+      "tablet": "icon/launchicon/72_iPad_Desktop_Launch.png",
+      "tablet@2": "icon/launchicon/144_iPad_Retina_Web_Clip.png"  	 	
   	 },
   	"deviceTypes": {
 		"desktop": true,
@@ -42,7 +61,8 @@
 	"supportedThemes": [
 			"sap_hcb",
 			"sap_bluecrystal",
-			"sap_belize"
+			"sap_belize",
+			"sap_belize_plus"
 	]
   },
   "sap.ui5": {
@@ -53,30 +73,21 @@
     	"css": [{ "uri": "css/style.css" }]
     },
     "rootView": {
-    	"viewName": "shine.democontent.epm.poworklist.view.Shell",
+    	"viewName": "shine.democontent.epm.poworklist.view.Root",
     	"type": "XML",
     	"id": "app"
     },
     "dependencies": {
-			"minUI5Version": "1.40.0",
+			"minUI5Version": "${sap.ui5.dist.version}",
 			"libs": {
 				
-				"sap.ui.ux3": { 	"minVersion": "1.40.0"
-					},
-				"sap.ui.commons": {	"minVersion": "1.40.0" },
-				"sap.ui.table":{ 	"minVersion": "1.40.0" },
-				"sap.ui.core": {
-					"minVersion": "1.40.0"
-				},
-				"sap.ui.comp": {
-					"minVersion": "1.40.0"					
-				},
-				"sap.m": {
-					"minVersion": "1.40.0"
-				},
-				"sap.ui.layout": {
-					"minVersion": "1.40.0"
-				}
+				"sap.ui.ux3": {},
+				"sap.ui.commons": {},
+				"sap.ui.table":{},
+				"sap.ui.core": {},
+				"sap.ui.comp": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
 			}
 		},
 	"contentDensities": {
@@ -120,7 +131,50 @@
     			"bundleName": "shine.democontent.epm.poworklist.i18n.i18n"
     		}
     	}
-    }
-    
+    },
+     "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "shine.democontent.epm.poworklist.view",
+        "controlId": "comp",
+        "controlAggregation": "pages",
+        "bypassed": {
+          "target": [
+            "master",
+            "notFound"
+          ]
+        }
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "start",
+          "target": [
+            "master"
+          ]
+        },
+        {
+          "pattern": "PurchaseOrder/{poId}",
+          "name": "po",
+          "target": [
+            "master"
+          ]
+        }
+      ],
+      "targets": {
+      	"master": {
+          "viewName": "Shell"
+        },
+        "notFound": {
+          "controlId": "MessageContainer",
+          "controlAggregation": "pages",
+          "viewName": "NotFound",
+          "parent": "master"
+        }
+      }
+    },
+    "componentName": "shine.democontent.epm.poworklist"
   }
 }

@@ -1,0 +1,10 @@
+<mvc:View
+	controllerName="shine.democontent.epm.poworklist.controller.Root"
+	displayBlock="true"
+	xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	
+	<App id="comp"
+		busy="{appview>/busy}"
+		busyIndicatorDelay="{appview>/delay}"/>
+
+</mvc:View>
