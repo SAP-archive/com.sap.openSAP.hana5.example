@@ -42,7 +42,9 @@ modules:
       properties:
         key: hdi-user-service
         service: ~{user-container-name}  
-
+    
+    - name: openSAP5-ex-user-db
+    
  - name: openSAP5-ex-core-js
    type: nodejs
    path: core_js

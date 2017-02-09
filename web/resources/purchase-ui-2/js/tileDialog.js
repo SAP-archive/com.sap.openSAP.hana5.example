@@ -55,7 +55,7 @@ sap.account.TileDialog = function(oFrameController,helpID) {
         hAlign: sap.ui.commons.layout.HAlign.Left
     });
     var oTextView = new sap.ui.commons.TextView({
-        text: oBundle.getText("MAJOR_TABLES"),
+        text: sap.global.oBundle.getText("MAJOR_TABLES"),
         design: sap.ui.commons.TextViewDesign.H3,
         width: '100%',
         textAlign: sap.ui.core.TextAlign.Left
@@ -87,7 +87,7 @@ sap.account.TileDialog = function(oFrameController,helpID) {
         hAlign: sap.ui.commons.layout.HAlign.Left
     });
     oTextView = new sap.ui.commons.TextView({
-        text: oBundle.getText("UI_VIEWS"),
+        text: sap.global.oBundle.getText("UI_VIEWS"),
         design: sap.ui.commons.TextViewDesign.H3,
         width: '100%',
         textAlign: sap.ui.core.TextAlign.Left
@@ -129,7 +129,7 @@ sap.account.TileDialog = function(oFrameController,helpID) {
         oTileDialog.close();
     };
     var okButton = new sap.ui.commons.Button({
-        text: oBundle.getText("OK"),
+        text: sap.global.oBundle.getText("OK"),
         press: ok
     });
     oTileDialog.addStyleClass("welcomeDlg");
@@ -140,36 +140,36 @@ sap.account.TileDialog = function(oFrameController,helpID) {
     function getTitle(helpID) {
         switch (helpID) {
             case 1:
-                return oBundle.getText("s_search");
+                return sap.global.oBundle.getText("s_search");
             case 2:
-                return oBundle.getText("ACTIONS_EXPORT");
+                return sap.global.oBundle.getText("ACTIONS_EXPORT");
         }
     }
 
     function getDescription(helpID) {
         switch (helpID) {
             case 1:
-                return oBundle.getText("SEARCH_HELP_DESC");
+                return sap.global.oBundle.getText("SEARCH_HELP_DESC");
             case 2:
-                return oBundle.getText("ACTIONS_EXPORT_DESC");
+                return sap.global.oBundle.getText("ACTIONS_EXPORT_DESC");
         }
     }
 
     function getModel(helpID) {
         switch (helpID) {
             case 1:
-                return oBundle.getText("SEARCH_HELP_MODEL");
+                return sap.global.oBundle.getText("SEARCH_HELP_MODEL");
             case 2:
-                return oBundle.getText("ACTIONS_EXPORT_MODEL");
+                return sap.global.oBundle.getText("ACTIONS_EXPORT_MODEL");
         }
     }
 
     function getUIViews(helpID) {
         switch (helpID) {
             case 1:
-                return oBundle.getText("SEARCH_HELP_UI");
+                return sap.global.oBundle.getText("SEARCH_HELP_UI");
             case 2:
-                return oBundle.getText("ACTIONS_EXPORT_UI");
+                return sap.global.oBundle.getText("ACTIONS_EXPORT_UI");
         }
     }
 

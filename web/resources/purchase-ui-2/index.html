@@ -3,7 +3,6 @@
        <head>
               <meta http-equiv="X-UA-Compatible" content="IE=edge">
               <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
-              <link rel="stylesheet" type="text/css" href="css/style.css">
 			  <title>Purchase Order Worklist</title>
 			  
 			<!-- <script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" -->
@@ -16,7 +15,7 @@
 					  data-sap-ui-language="en"
 				      data-sap-ui-resourceroots='{"shine.democontent.epm.poworklist" : "./"}'>
               </script>
-			  <script type="text/javascript" src="./js/global.js" ></script>               
+         
    			  <script>
    			    sap.ui.getCore().attachInit(function () {
 				var ComponentContainer = new sap.ui.core.ComponentContainer({
@@ -25,7 +24,7 @@
             	
             	new sap.m.Shell({
             		app: ComponentContainer,
-            		showLogout: true
+            		showLogout: false
             	}).placeAt("content");
             	
             	var oComponent = sap.ui.component({

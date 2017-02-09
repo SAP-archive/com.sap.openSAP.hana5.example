@@ -15,11 +15,12 @@ sap.ui.define([
 		init: function() {
 			jQuery.sap.require("sap.m.MessageBox");
 			jQuery.sap.require("sap.m.MessageToast");
-
+			jQuery.sap.require("shine.democontent.epm.poworklist.js.global");
 			this.setModel(models.createDeviceModel(), "device");
 			sap.ui.core.UIComponent.prototype.init.apply(
 				this, arguments);
 			this.getSessionInfo();
+
 		},
 
 		destroy: function() {

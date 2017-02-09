@@ -49,6 +49,9 @@
     "config": {
       "sapFiori2Adaptation": true
     },
+    "resources": {
+    	"css": [{ "uri": "css/style.css" }]
+    },
     "rootView": {
     	"viewName": "shine.democontent.epm.poworklist.view.Shell",
     	"type": "XML",
@@ -88,6 +91,12 @@
     			"defaultBindingMode": "TwoWay"
     		}
     	},
+    	"suggestItems": {
+    		"type": "sap.ui.model.json.JSONModel",
+    		"settings": {
+    			"defaultBindingMode": "TwoWay"
+    		}
+    	},    	
 		"poModel": {
         	"dataSource": "poService",
         	"type": "sap.ui.model.odata.v2.ODataModel",
@@ -102,10 +111,13 @@
     	"config": {
     		"type": "sap.ui.model.json.JSONModel"	
     	},
+		"pieModel": {
+    		"type": "sap.ui.model.json.JSONModel"	
+    	},    	
     	"i18n": {
     		"type": "sap.ui.model.resource.ResourceModel",
     		"settings": {
-    			"bundleUrl": "./i18n/i18n.properties"
+    			"bundleName": "shine.democontent.epm.poworklist.i18n.i18n"
     		}
     	}
     }

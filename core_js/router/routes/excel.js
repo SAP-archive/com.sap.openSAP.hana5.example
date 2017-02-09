@@ -55,6 +55,39 @@ module.exports = function() {
 			});
 	});
 
+	//Simple Database Select - In-line Callbacks
+	app.get("/downloadPO", function(req, res) {
+		var client = req.db;
+		var query = "SELECT TOP 25000 \"PurchaseOrderId\", \"PartnerId\", \"CompanyName\", \"CreatedByLoginName\", \"CreatedAt\", \"GrossAmount\" " + "FROM \"PO.HeaderView\" order by \"PurchaseOrderId\" ";
+		client.prepare(
+			query,
+			function(err, statement) {
+				if (err) {
+					res.type("text/plain").status(500).send("ERROR: " + err.toString());
+					return;
+				}
+				statement.exec([],
+					function(err, rs) {
+						if (err) {
+							res.type("text/plain").status(500).send("ERROR: " + err);
+						} else {
+							var out = [];
+							for (var i = 0; i < rs.length; i++) {
+								out.push([rs[i]["PurchaseOrderId"], rs[i]["PartnerId"], rs[i]["CompanyName"], rs[i]["CreatedByLoginName"],  rs[i]["CreatedAt"], rs[i]["GrossAmount"]  ]);
+							}
+							var result = excel.build([{
+								name: "Purchase Orders",
+								data: out
+							}]);
+							res.header("Content-Disposition", "attachment; filename=poWorklist.xlsx");
+							res.type("application/vnd.ms-excel").status(200).send(result);
+						}
+					});
+			});
+	});
+	
+
+
 	//Upload Workshop from Client Side
 	/*	var cpUpload = upload.fields([
 		{name: "users", maxCount: 1	},

@@ -1,23 +1,25 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-use-before-define: 0, no-redeclare: 0, quotes:0*/
+sap.ui.namespace("sap.global");
+
     // Service Call Logic
     var gFilterTerms = "";
     var gFilterAttribute = "";
     var gLastOrdersChangedTime = "";
-    var gSearchParam;
+    sap.global.gSearchParam = "";
    // jQuery.sap.require("sap.ui.model.json");
    // var oPieModel = new sap.ui.model.json.JSONModel();
 
     /*************** Language Resource Loader *************/
     jQuery.sap.require("jquery.sap.resources");
-    var sLocale = sap.ui.getCore().getConfiguration().getLanguage();
-    var oBundle = jQuery.sap.resources({
-        url: "./i18n/i18n.properties",
-        locale: sLocale
-    });
-    
+    sap.global.sLocale = sap.ui.getCore().getConfiguration().getLanguage();
+    function getResourceBundle() {
+		return sap.ui.getCore().getComponent("comp").getModel("i18n").getResourceBundle();
+	}
+	sap.global.oBundle = sap.ui.getCore().getComponent("comp").getModel("i18n").getResourceBundle();
+
     /** Tooltip formatting for the chart */
     var tooltipFormatString = '';
-    if (sLocale.indexOf("de") > -1) {
+    if (sap.global.sLocale.indexOf("de") > -1) {
         tooltipFormatString = '#.###.###.###,00'; 
     } else {
         tooltipFormatString = '#,###,###,###.00'; 
@@ -60,3 +62,23 @@
 		    return result;
 	    };
     }
+    
+    function	onErrorCall(oError) {
+			if (oError.statusCode === 500 || oError.statusCode === 400 || oError.statusCode === "500" || oError.statusCode === "400") {
+				var errorRes = JSON.parse(oError.responseText);
+				if (!errorRes.error.innererror) {
+					sap.m.MessageBox.alert(errorRes.error.message.value);
+				} else {
+					if (!errorRes.error.innererror.message) {
+						sap.m.MessageBox.alert(errorRes.error.innererror.toString());
+					} else {
+						sap.m.MessageBox.alert(errorRes.error.innererror.message);
+					}
+				}
+				return;
+			} else {
+				sap.m.MessageBox.alert(oError.response.statusText);
+				return;
+			}
+
+		}

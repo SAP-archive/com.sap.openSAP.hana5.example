@@ -1,4 +1,4 @@
-sap.ui.controller("shine.democontent.epm.poworklist.view.Detail", {
+sap.ui.controller("shine.democontent.epm.poworklist.controller.Detail", {
     
     onInit : function(){
       

@@ -1,17 +1,19 @@
-sap.ui.controller("shine.democontent.epm.poworklist.view.Table", {
+sap.ui.controller("shine.democontent.epm.poworklist.controller.Table", {
 
 	onInit: function() {
 
-		var sServiceUrl = "/sap/hana/democontent/epm/services/poWorklist.xsodata/";
-		// Create and set domain model to the component
-		var oModel = new sap.ui.model.odata.ODataModel(sServiceUrl, true);
+		var oModel = this.getOwnerComponent().getModel("poModel");
 		oModel.setDefaultCountMode("Inline");
 		this.getView().setModel(oModel);
-		//oModel.setDefaultBindingMode("TwoWay");
-		var oTable = this.byId("poTable");
+		var oTable = this.getView().byId("poTable");
+		var oTitle = this.getView().byId("title");
+		oTable.setModel(oModel); 
+		oModel.setDefaultBindingMode("TwoWay");
 		oTable.getBinding("rows").attachChange(function() {
-			oTable.setTitle(oBundle.getText("pos", [oTable.getBinding("rows").iLength]));
+			oTitle.setText(sap.global.oBundle.getText("pos", [oTable.getBinding("rows").iLength]));
 		});
+
+		this.getView().addStyleClass("sapUiSizeCompact"); // make everything inside this View appear in Compact mode
 
 		//create and set models for create new purchase orders
 		var sBusinessPartnersServiceUrl = "/sap/hana/democontent/epm/services/businessPartners.xsodata/";
@@ -407,13 +409,13 @@ sap.ui.controller("shine.democontent.epm.poworklist.view.Table", {
 	},
 
 	onAfterRendering: function(oEvent) {
-		var oController = this;
+/*		var oController = this;
 		var oModel = new sap.ui.model.odata.ODataModel("/sap/hana/democontent/epm/services/poWorklist.xsodata/", true);
 		var oSHTable = sap.ui.getCore().byId("idShellView--po_table_view--poTable");
 		oModel.attachRequestCompleted(function() {
 			oController.onBindingChange(oController);
 		});
-		oSHTable.setModel(oModel);
+		oSHTable.setModel(oModel);*/
 
 		// var oCtrl = sap.ui.getCore.byId("quantityTextField");
 		//   oCtrl.$().find('input').context.type = 'number';
