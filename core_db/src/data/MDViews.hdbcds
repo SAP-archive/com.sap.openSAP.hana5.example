@@ -150,9 +150,7 @@ context MDViews {
          ADDRESSES.COUNTRY           as "Country",
          ADDRESSES.REGION            as "Region",
          HISTORY.CREATEDBY.LOGINNAME as "CreatedBy"
-      }
-      where
-         PARTNERROLE = '2';
+      };
 
    define view SupplierViewVH as
       select from SupplierView

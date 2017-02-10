@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+       <head>
+              <meta http-equiv="X-UA-Compatible" content="IE=edge">
+              <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+			  <title>Purchase Order Worklist</title>
+			  
+			<!-- <script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" -->
+			<script id="sap-ui-bootstrap" src="{{{ui5liburl}}}/resources/sap-ui-core.js"
+                      data-sap-ui-libs="sap.ui.ux3,sap.ui.commons,sap.ui.table,sap.m,sap.ui.comp,sap.ui.core,sap.ui.layout"
+                      data-sap-ui-theme="sap_belize_plus"
+				 	  data-sap-ui-xx-bindingSyntax="complex"
+					  data-sap-ui-compatVersion="edge"
+				      data-sap-ui-preload="async"
+					  data-sap-ui-language="en"
+				      data-sap-ui-resourceroots='{"POWorklist" : "./"}'>
+              </script>
+         
+   			  <script>
+   			  	sap.ui.getCore().attachInit(function() {
+					var oComponentContainer = new sap.ui.core.ComponentContainer({
+						height : "100%",
+						name : "POWorklist"
+					});
+					oComponentContainer.placeAt("content");
+				});
+   			  </script>
+
+       </head>
+	<body class="sapUiBody" id="content" role="application">
+	</body>
+</html>

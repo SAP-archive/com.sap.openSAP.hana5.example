@@ -88,7 +88,12 @@ function buildLineItem(xml, cdsAnnotationValues) {
 			if (typeof cdsAnnotationValue.lineItem.importance !== 'undefined') {
 				var importance = subElement(record, 'Annotation');
 				importance.set('Term', 'com.sap.vocabularies.UI.v1.Importance');
-				importance.set('EnumMember', 'com.sap.vocabularies.UI.v1.ImportanceType/' + cdsAnnotationValue.lineItem.importance);
+				if (cdsAnnotationValue.lineItem.importance !== 'space') {
+					importance.set('EnumMember', 'com.sap.vocabularies.UI.v1.ImportanceType/' + cdsAnnotationValue.lineItem.importance);
+				}else{
+					importance.set('EnumMember', ' ');
+				
+				}
 			}
 
 			if (typeof cdsAnnotationValue.lineItem.position !== 'undefined') {
@@ -330,8 +335,15 @@ module.exports = function() {
 		var artifact = req.params.artifact;
 
 		var client = req.db;
-		var insertString = "SELECT * from CDS_ANNOTATION_VALUES " +
-			" WHERE SCHEMA_NAME = CURRENT_SCHEMA AND ARTIFACT_NAME = ? ORDER BY ELEMENT_NAME ";
+/*		var insertString = "SELECT * from CDS_ANNOTATION_VALUES " +
+			" WHERE SCHEMA_NAME = CURRENT_SCHEMA AND ARTIFACT_NAME = ? ORDER BY ELEMENT_NAME ";*/
+			
+		var insertString = "SELECT A.*, B.POSITION from CDS_ANNOTATION_VALUES A " +
+                                  " left outer join view_columns B on A.SCHEMA_NAME = B.SCHEMA_NAME and A.ARTIFACT_NAME = B.VIEW_NAME and A.ELEMENT_NAME = B.COLUMN_NAME" +
+                                             " WHERE A.SCHEMA_NAME = CURRENT_SCHEMA AND A.ARTIFACT_NAME = ? ORDER BY B.POSITION ";
+
+	
+			
 		client.prepare(
 			insertString,
 			function(err, statement) {
