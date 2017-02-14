@@ -24,26 +24,3 @@ extends: com.sap.openSAP.hana5.example
         tags: hana
         schema: SFLIGHT
         
- - name: CrossSchemaSys
-   parameters:
-     service-name: CROSS_SCHEMA_SYS
-     config:
-        host: ${default-domain}
-        port: 3<Instance##>15|13
-        user: <USERNAME>
-        password: <PASSWORD>
-        driver: com.sap.db.jdbc.Driver
-        tags: hana
-        schema: SYS
-        
- - name: CrossSchemaSysBi
-   parameters:
-     service-name: CROSS_SCHEMA_SYS_BI
-     config:
-        host: ${default-domain}
-        port: 3<Instance##>15|13
-        user: <USERNAME>
-        password: <PASSWORD>
-        driver: com.sap.db.jdbc.Driver
-        tags: hana
-        schema: _SYS_BI

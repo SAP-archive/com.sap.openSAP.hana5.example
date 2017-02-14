@@ -24,19 +24,7 @@ modules:
       properties:
         key: hdi-sflight-service
         service: ~{sflight-service-name}  
-        
-    - name: CrossSchemaSys
-      group: SERVICE_REPLACEMENTS
-      properties:
-        key: hdi-sys-service
-        service: ~{sys-service-name}   
-        
-    - name: CrossSchemaSysBi
-      group: SERVICE_REPLACEMENTS
-      properties:
-        key: hdi-sys-bi-service
-        service: ~{sys-bi-service-name}   
-        
+
     - name: user-container
       group: SERVICE_REPLACEMENTS
       properties:
@@ -48,6 +36,8 @@ modules:
  - name: openSAP5-ex-core-js
    type: nodejs
    path: core_js
+   properties:
+     UAA_SERVICE_NAME: openSAP5-ex-uaa
    provides: 
      - name: core_js
        properties:
@@ -62,6 +52,8 @@ modules:
  - name: openSAP5-ex-user-js
    type: nodejs
    path: user_js
+   properties: 
+     SAP_JWT_TRUST_ACL: "[{\"clientid\":\"*\",\"identityzone\":\"*\"}]"
    provides: 
      - name: user_js
        properties:
@@ -104,9 +96,6 @@ modules:
       - name: ui5-lib
         properties:
           ui5liburl: ~{url}      
-    #  - name: EXTERNAL_UI5
-    #    properties:
-    #      ui5liburl: ~{url}
       - name: core_js
         group: destinations
         properties:
@@ -171,33 +160,11 @@ resources:
    parameters:
      service-name: CROSS_SCHEMA_SFLIGHT
 
- - name: CrossSchemaSys
-   type: org.cloudfoundry.existing-service
-   parameters:
-     service-name: CROSS_SCHEMA_SYS
-   properties:
-     sys-service-name: ${service-name}  
-     
- - name: CrossSchemaSysBi
-   type: org.cloudfoundry.existing-service
-   parameters:
-     service-name: CROSS_SCHEMA_SYS_BI
-   properties:
-     sys-bi-service-name: ${service-name} 
-
  - name: ui5-lib
    type: configuration
    parameters:
       provider-id: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV4:sapui5_fesv4
       version: ">=1.45.0-SNAPSHOT"
 
- - name: EXTERNAL_UI5
-   type: org.cloudfoundry.user-provided-service
-   parameters:
-     service-name: EXTERNAL_UI5
-     url: https://sapui5.hana.ondemand.com
-   properties:
-     ext-ui5-service-name: ${service-name}
-     url: ${url}
 
 

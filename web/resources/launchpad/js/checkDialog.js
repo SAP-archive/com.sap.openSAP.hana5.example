@@ -110,8 +110,11 @@ sap.account.CheckDialog.prototype.open = function() {
         design: sap.ui.commons.TextViewDesign.H3,
         textAlign: sap.ui.core.TextAlign.Left,
     });
+    
     oTextView.addStyleClass('dialogTextColor');
+ 
     oCell.addContent(oTextView);
+   
 
     // Synonyms present prerequisite status	
     oCellStatus = new sap.ui.commons.layout.MatrixLayoutCell({
@@ -140,7 +143,9 @@ sap.account.CheckDialog.prototype.open = function() {
         content: sap.app.i18n.getText("ROLE_COLLECTION_INFO"),
         width: '100%'
     });
+  
     oCell.addContent(oTextView);
+   
     oRow.addCell(oCell);
     oContentMatrix.addRow(oRow);
 
@@ -162,14 +167,16 @@ sap.account.CheckDialog.prototype.open = function() {
                          type: 'get', 
                          url: "/sap/rest/authorization/rolecollections/" + "XS_AUTHORIZATION_ADMIN", 
                          headers: { 
-                             "X-CSRF-Token": "Fetch" 
+                             "X-CSRF-Token": "Fetch",
+                             'Accept': "application/json",
+							 'Content-Type': "application/json"
                          }, 
                          async: false, 
                          success: function(res, status, xhr) { 
                              csrftoken = xhr.getResponseHeader('x-csrf-token'); 
                          }, 
                          error: function(error) { 
-                           sap.ui.commons.MessageBox.alert(sap.app.i18n.getTexT("ERROR_CSRFTOKEN"));
+                           sap.ui.commons.MessageBox.alert(sap.app.i18n.getText("ERROR_CSRFTOKEN"));
                          } 
                      }); 
             var jobrole = {roleTemplateAppId: "jobscheduler", roleTemplateName: "jobscheduler_administration_template", name: "jobscheduler_administration_template"};
@@ -204,7 +211,7 @@ sap.account.CheckDialog.prototype.open = function() {
 							if(applications.length!=undefined && applications.length>0){
 								var applicationFound = false;
 								for(var i=0;i<applications.length;i++){
-									if((applications[i].appid).includes("shine-admin")){
+									if((applications[i].appid).indexOf("shine-admin")>-1){
 										applicationFound = true;
 										var role = {roleTemplateAppId: applications[i].appid, roleTemplateName: "Admin", name: "Admin"};
 										if(roleTemplates != undefined){
@@ -235,7 +242,7 @@ sap.account.CheckDialog.prototype.open = function() {
 									}
 								}
 								if(!applicationFound){
-									sap.ui.commons.MessageBox.alert(sap.app.i18n.getTexT("ERROR_CSRFTOKEN"));
+									sap.ui.commons.MessageBox.alert(sap.app.i18n.getText("ERROR_CSRFTOKEN"));
 									ifShineAdminRoleFailed = true;
 									ifSuccess = false;
 								}
@@ -243,30 +250,11 @@ sap.account.CheckDialog.prototype.open = function() {
 						}
             }
             
-            if(!doJobSchedulerRoleExist){
-            	$.ajax({
-					type: 'PUT',
-					url: '/sap/rest/authorization/rolecollections/' + "SHINE_ADMIN" + "/roles",
-					async: false,
-					headers: {
-						'x-csrf-token': csrftoken,
-						'Accept': "application/json",
-						'Content-Type': "application/json"
-					},
-					data: JSON.stringify(jobrole),
-					success: function(result) {
-						ifSuccess=true;
-					},
-					error: function(error) {
-						ifSuccess=false;
-						ifJobSchedulerRoleFailed = true;
-            		}
-            	});
-            }
+     
             
             if(ifSuccess){
 				sap.ui.commons.MessageBox.alert(sap.app.i18n.getText("SUCCESS_ROLECOLLECTION"), logoutMethod);
-				// window.location.replace('/logout');
+				
 			}
 			else{
 				if(ifRoleCollectionFailed){
@@ -275,9 +263,7 @@ sap.account.CheckDialog.prototype.open = function() {
 				if(ifShineAdminRoleFailed){
 					sap.ui.commons.MessageBox.alert(sap.app.i18n.getText("ERROR_ROLECREATION"));
 				}
-				if(ifJobSchedulerRoleFailed){
-					sap.ui.commons.MessageBox.alert(sap.app.i18n.getText("ERROR_ROLECREATION"));
-				}
+				
 			}
 
 			oCheckDialog.roleCollectionBtn.setEnabled(false);
@@ -286,10 +272,123 @@ sap.account.CheckDialog.prototype.open = function() {
             setTimeout(checkPre, 1000);
         }
     });
+    
    
     oCell.addContent(oCheckDialog.roleCollectionBtn);
+    
+    
     oRow.addCell(oCell);
     oContentMatrix.addRow(oRow);
+
+
+ 
+      oRow = new sap.ui.commons.layout.MatrixLayoutRow();
+
+    // role collections present present prerequisite title
+    oCell = new sap.ui.commons.layout.MatrixLayoutCell({
+        hAlign: sap.ui.commons.layout.HAlign.Left,
+    });
+    oTextView = new sap.ui.commons.TextView({
+        text: sap.app.i18n.getText("GENERATE_TIME_DATA"),
+        design: sap.ui.commons.TextViewDesign.H3,
+        textAlign: sap.ui.core.TextAlign.Left,
+    });
+    
+    oTextView.addStyleClass('dialogTextColor');
+ 
+    oCell.addContent(oTextView);
+   
+
+    
+    oCellStatus = new sap.ui.commons.layout.MatrixLayoutCell({
+        hAlign: sap.ui.commons.layout.HAlign.Right,
+    });
+    oCheckDialog.timeDataLayout = new sap.ui.layout.HorizontalLayout({
+        content: [new sap.m.BusyIndicator({
+            size: "1.4em"
+        })]
+    });
+    oCellStatus.addContent(oCheckDialog.timeDataLayout);
+    oRow.addCell(oCell);
+    oRow.addCell(oCellStatus);
+
+    oContentMatrix.addRow(oRow);
+    
+      // add time data info Info
+    oRow = new sap.ui.commons.layout.MatrixLayoutRow();
+
+    oCell = new sap.ui.commons.layout.MatrixLayoutCell({
+        hAlign: sap.ui.commons.layout.HAlign.Left,
+        width: '100%',
+        colSpan: 2
+    });
+    oTextView = new sap.ui.core.HTML({
+        content: sap.app.i18n.getText("TIME_INFO"),
+        width: '100%'
+    });
+  
+    oCell.addContent(oTextView);
+   
+    oRow.addCell(oCell);
+    oContentMatrix.addRow(oRow);
+    //coide
+    
+     oRow = new sap.ui.commons.layout.MatrixLayoutRow();
+
+    oCell = new sap.ui.commons.layout.MatrixLayoutCell({
+        hAlign: sap.ui.commons.layout.HAlign.Right,
+        width: '100%',
+        colSpan: 2
+    });
+
+ var ifTimeDataSuccess = false; 	
+ 
+
+
+    oCheckDialog.generateTimeDataBtn = new sap.ui.commons.Button({
+        text: sap.app.i18n.getText("GENERATE_TIME_DATA"),
+        enabled: false,
+        press: function() {
+        	var csrftoken;
+            $.ajax({ 
+                         type: 'GET', 
+                         url: "/sap/hana/democontent/epm/services/generateTimeData.xsjs", 
+                         headers: { 
+                             	'x-csrf-token': csrftoken
+					
+                         }, 
+                         async: false, 
+                         	success: function(myTxt) {
+                         		ifTimeDataSuccess = true;
+                         			oCheckDialog.timeDataLayout.removeAllContent();
+                         		oCheckDialog.generateTimeDataBtn.setEnabled(false);
+                         		oCheckDialog.timeDataLayout.addContent(new sap.ui.commons.Image({
+                        src: './images/green_tick.png'}));
+					 sap.ui.commons.MessageBox.alert(sap.app.i18n.getText("TIME_DATA_SUCCESS"));
+				},
+                         error: function(error) { 
+                           sap.ui.commons.MessageBox.alert(sap.app.i18n.getText("TIME_DATA_FAILURE"));
+                         } 
+                     }); 
+}
+}); 
+oCheckDialog.generateTimeDataBtn.setEnabled(true);
+
+ if(!ifTimeDataSuccess)
+{
+		oCheckDialog.timeDataLayout.removeAllContent();
+					oCheckDialog.generateTimeDataBtn.setEnabled(true);
+					oCheckDialog.timeDataLayout.addContent(new sap.ui.commons.Image({
+                        src: './images/red_cross.png'}));
+}   
+    oCell.addContent(oCheckDialog.generateTimeDataBtn);
+    
+    
+    oRow.addCell(oCell);
+    oContentMatrix.addRow(oRow);
+    //add time data button
+   
+	
 
     oContentMatrix.addRow(createDividerRow());
 
@@ -373,7 +472,7 @@ sap.account.CheckDialog.prototype.open = function() {
 							var arrayDoShineAdminRoleExist = [];
 								for(var i=0;i<applications.length;i++){
 									var bool = false;
-									if((applications[i].appid).includes("shine-admin")){
+									if((applications[i].appid).indexOf("shine-admin")>-1){
 										if(roleTemplates != undefined){
 											if(roleTemplates.length!=undefined && roleTemplates.length>0)
 												for(var j=0;j<roleTemplates.length;j++){
@@ -383,12 +482,10 @@ sap.account.CheckDialog.prototype.open = function() {
 													}
 												}
 										}
-										// if(!doShineAdminRoleExist){
-										// 	break;
-										// }
+										
 										arrayDoShineAdminRoleExist[i] = bool;
 									}
-									if((applications[i].appid).includes("shine-admin") && !bool){
+									if((applications[i].appid).indexOf("shine-admin")>-1 && !bool){
 											break;
 									}
 								}
@@ -402,35 +499,31 @@ sap.account.CheckDialog.prototype.open = function() {
 							}
 							}
 						}
-						// check for whether job scheduler role exist or not
-						if(roleTemplates != undefined){
-							if(roleTemplates.length!=undefined && roleTemplates.length>0)
-								for(var k=0;k<roleTemplates.length;k++){
-									if(roleTemplates[k].roleTemplateAppId === "jobscheduler"){
-										doJobSchedulerRoleExist = true;
-									}
-									// }else{
-									// 	doJobSchedulerRoleExist = false;
-									// }
-								}
-							}
+						
 					},
 					error: function(error) {
 						doRoleCollectionExist = false;
-						sap.ui.commons.MessageBox.alert(sap.app.i18n.getTexT("ERROR_CSRFTOKEN"));
+						sap.ui.commons.MessageBox.alert(sap.app.i18n.getText("ERROR_CSRFTOKEN"));
 					}
     			});
         		validateAndEnableDisableButton(doRoleCollectionExist,doShineAdminRoleExist,doJobSchedulerRoleExist);
 			},
 			error: function(error) {
-				doRoleCollectionExist = false;
-				sap.ui.commons.MessageBox.alert(sap.app.i18n.getTexT("ERROR_CSRFTOKEN"));
+				if(error.status === '404'){
+					doRoleCollectionExist = false;
+					validateAndEnableDisableButton(doRoleCollectionExist,doShineAdminRoleExist,doJobSchedulerRoleExist);
+				}else{
+					doRoleCollectionExist = false;
+					sap.ui.commons.MessageBox.alert(sap.app.i18n.getText("ERROR_CSRFTOKEN"));
+					validateAndEnableDisableButton(doRoleCollectionExist,doShineAdminRoleExist,doJobSchedulerRoleExist);
+				}
 			}
     	});
     }
     
     function validateAndEnableDisableButton(doRoleCollectionExist,doShineAdminRoleExist,doJobSchedulerRoleExist){
-        if(doRoleCollectionExist & doShineAdminRoleExist & doJobSchedulerRoleExist){
+        
+        if(doRoleCollectionExist & doShineAdminRoleExist){
         	oCheckDialog.roleCollectionLayout.removeAllContent();
 					oCheckDialog.roleCollectionBtn.setEnabled(false);
 					oCheckDialog.roleCollectionLayout.addContent(new sap.ui.commons.Image({

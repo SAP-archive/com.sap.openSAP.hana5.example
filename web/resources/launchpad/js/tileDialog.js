@@ -16,8 +16,14 @@ sap.account.TileDialog.prototype.getHrefLocation = function(tileID) {
          case 3:
             url = "../job-ui/index.html";
             break;
+        case 4:
+            url = "../sales-ui/index.html";
+            break;
         case 5:
             url = "../user-ui/index.html";
+            break;
+        case 8:
+            url = '/spatial-ui/index.html';
             break;
    }
    return url;
@@ -500,7 +506,8 @@ sap.account.TileDialog.prototype.open = function(tileID) {
             case 7:
                 return sap.app.i18n.getText("TILE_PERMS_UIS_GOLD");
             case 8:
-                return sap.app.i18n.getText("TILE_PERMS_SPATIAL");
+                var permission = getInternetConnectivity();
+            	return permission;
             case 9:
                 return sap.app.i18n.getText("TILE_PERMS_INATOOLKIT");
             case 10:
@@ -558,6 +565,17 @@ sap.account.TileDialog.prototype.open = function(tileID) {
                 }
                 return responseBody;
         }
+    }
+    
+     function getInternetConnectivity(){
+    	var status = navigator.onLine;
+    	var responseBody="";
+		if(status){
+			responseBody += " <li><font color='green'> You are connected to the internet. Good to go!!</font> </li>"; 
+		}else{
+			responseBody += "<li><font color='red'> Please connect to the internet to access this tile</font> </li>";
+		}
+    	return responseBody;
     }
 
     function createWelcomeHeaderRow(tileID) {

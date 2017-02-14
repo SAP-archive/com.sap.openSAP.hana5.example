@@ -1,1 +1,0 @@
-xs cups XSC_UI5 -p "{\"protocol\":\"http\",\"host\":\"<hostname>\",\"port\":\"8000\",\"tags\":[\"sapui5\"] }"

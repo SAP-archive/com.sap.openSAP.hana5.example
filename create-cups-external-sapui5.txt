@@ -1,1 +1,0 @@
-xs cups EXTERNAL_UI5 -p "{\"protocol\":\"https\",\"host\":\"sapui5.hana.ondemand.com\",\"port\":\"443\",\"tags\":[\"sapui5\"] }"

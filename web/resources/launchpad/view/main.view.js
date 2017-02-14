@@ -72,9 +72,21 @@ sap.ui.jsview("view.main", {
         });
         jobTile.addStyleClass('templateTileClass');
         jobTile.addStyleClass('jobschedulingClass');
+        
+          var soTile = new sap.m.StandardTile({
+            icon: "sap-icon://sales-order",
+            info: sap.app.i18n.getText("SALES_DASH"),
+            infoState: "None",
+            removable: false,
+            press: function(oEvent) {
+                view.handlePress(oController, 4);
+            }
+        });
+        soTile.addStyleClass('templateTileClass');
+        soTile.addStyleClass('soClass');
 
         var userTile = new sap.m.StandardTile({
-            icon: "sap-icon://database",
+            icon: "sap-icon://account",
             info: sap.app.i18n.getText("USER"),
             infoState: "None",
             removable: false,
@@ -83,17 +95,29 @@ sap.ui.jsview("view.main", {
             }
         });
         userTile.addStyleClass('templateTileClass');
-        userTile.addStyleClass('dgClass');
+        userTile.addStyleClass('ucClass');
+        
+        var spatialTile = new sap.m.StandardTile({
+            icon: "sap-icon://map",
+            info: sap.app.i18n.getText("SPATIAL"),
+            infoState: "None",
+            removable: false,
+            press: function(oEvent) {
+                view.handlePress(oController, 8);
+            }
+        });
+        spatialTile.addStyleClass('templateTileClass');
+        spatialTile.addStyleClass('spatialClass');
         
         var oLink1 = new sap.ui.commons.Link({
 	    text: "Source code",
-	    tooltip: "Click to download Source code",
+	    tooltip: "Click to download Source code"
 	    
 		});
 	    oLink1.setHref("/epm.zip");
        
         var items = [
-            adminTile, poTile, jobTile, userTile
+            adminTile, poTile, jobTile, soTile, userTile, spatialTile
         ];
         // create tile container
         var tileContainer = new sap.m.TileContainer({
@@ -143,4 +167,3 @@ sap.ui.jsview("view.main", {
     }
 
 });
-
