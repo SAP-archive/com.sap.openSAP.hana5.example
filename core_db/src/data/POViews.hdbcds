@@ -1,6 +1,6 @@
 using PO;
 using MDViews;
-using annotations.UI as UI;
+using sap.common::UI as UI;
 using annotations.Importance;
 using annotations.EndUserText;
 using annotations.valueList;
@@ -71,7 +71,7 @@ context POViews {
             CITY,
 
             @UI.lineItem       : [ {
-                                      importance : 'space'
+                                     exclude: true
                                   } ]
             @UI.fieldGroup     : [ {
                                       position : 41
@@ -83,7 +83,7 @@ context POViews {
             HISTORY_CHANGEDAT,
 
             @UI.lineItem       : [ {
-                                      importance : 'space'
+                                     exclude: true
                                   } ]
             @UI.fieldGroup     : [ {
                                       position : 42
@@ -95,7 +95,7 @@ context POViews {
             HISTORY_CHANGEDBY_EMPLOYEEID,
 
             @UI.lineItem       : [ {
-                                      importance : 'space'
+                                     exclude: true
                                   } ]
             @UI.fieldGroup     : [ {
                                       position : 43
@@ -107,7 +107,7 @@ context POViews {
             HISTORY_CREATEDAT,
 
             @UI.lineItem       : [ {
-                                      importance : 'space'
+                                     exclude: true
                                   } ]
             @UI.fieldGroup     : [ {
                                       position : 44
@@ -131,7 +131,7 @@ context POViews {
             GROSSAMOUNT,
 
             @UI.lineItem       : [ {
-                                      importance : 'space'
+                                     exclude: true
                                   } ]
             @UI.fieldGroup     : [ {
                                       position : 51
@@ -143,7 +143,7 @@ context POViews {
             NETAMOUNT,
 
             @UI.lineItem       : [ {
-                                      importance : 'space'
+                                     exclude: true
                                   } ]
             @UI.fieldGroup     : [ {
                                       position : 52
@@ -167,7 +167,7 @@ context POViews {
             CURRENCY,
 
             @UI.lineItem       : [ {
-                                      importance : 'space'
+                                     exclude: true
                                   } ]
             @UI.fieldGroup     : [ {
                                       position : 61
@@ -191,7 +191,7 @@ context POViews {
             APPROVALSTATUSDESC,
 
             @UI.lineItem       : [ {
-                                      importance : 'space'
+                                     exclude: true
                                   } ]
             @UI.fieldGroup     : [ {
                                       position : 71
@@ -203,7 +203,7 @@ context POViews {
             CONFIRMSTATUSDESC,
 
             @UI.lineItem       : [ {
-                                      importance : 'space'
+                                     exclude: true
                                   } ]
             @UI.fieldGroup     : [ {
                                       position : 72
@@ -215,7 +215,7 @@ context POViews {
             LIFECYCLESTATUSDESC,
 
             @UI.lineItem       : [ {
-                                      importance : 'space'
+                                     exclude: true
                                   } ]
             @UI.fieldGroup     : [ {
                                       position : 73
@@ -291,7 +291,7 @@ context POViews {
             GROSSAMOUNT,
 
             @UI.lineItem       : [ {
-                                      importance : 'space'
+                                     exclude: true
                                   } ]
             @UI.fieldGroup     : [ {
                                       position : 51
@@ -303,7 +303,7 @@ context POViews {
             NETAMOUNT,
 
             @UI.lineItem       : [ {
-                                      importance : 'space'
+                                     exclude: true
                                   } ]
             @UI.fieldGroup     : [ {
                                       position : 52

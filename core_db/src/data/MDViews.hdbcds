@@ -3,7 +3,7 @@ using Util;
 using PO;
 using SO;
 using MD;
-using annotations.UI as UI;
+using sap.common::UI as UI;
 using annotations.Importance;
 using annotations.EndUserText;
 using annotations.valueList;
@@ -84,7 +84,7 @@ context MDViews {
    define view partnerRoles as
       select from getPartnerRoles
       {
-         @UI.lineItem       : [ {
+         @UI.lineItem       : [ { 
                                   importance : Importance.High
                                } ]
          @UI.fieldGroup     : [ {

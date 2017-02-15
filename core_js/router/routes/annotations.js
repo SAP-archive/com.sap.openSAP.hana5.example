@@ -85,15 +85,13 @@ function buildLineItem(xml, cdsAnnotationValues) {
 				quick.set('Property', 'QuickInfo');
 				quick.set('String', cdsAnnotationValue.quickInfo);
 			}
+
+			var importance = subElement(record, 'Annotation');
+			importance.set('Term', 'com.sap.vocabularies.UI.v1.Importance');
 			if (typeof cdsAnnotationValue.lineItem.importance !== 'undefined') {
-				var importance = subElement(record, 'Annotation');
-				importance.set('Term', 'com.sap.vocabularies.UI.v1.Importance');
-				if (cdsAnnotationValue.lineItem.importance !== 'space') {
-					importance.set('EnumMember', 'com.sap.vocabularies.UI.v1.ImportanceType/' + cdsAnnotationValue.lineItem.importance);
-				}else{
-					importance.set('EnumMember', ' ');
-				
-				}
+				importance.set('EnumMember', 'com.sap.vocabularies.UI.v1.ImportanceType/' + cdsAnnotationValue.lineItem.importance);
+			} else {
+				importance.set('EnumMember', ' ');
 			}
 
 			if (typeof cdsAnnotationValue.lineItem.position !== 'undefined') {
@@ -294,6 +292,27 @@ function flattenCDSAnnotationVaules(results, locale) {
 
 			}
 
+			if (result.ANNOTATION_NAME === "sap.common::UI") {
+				value = JSON.parse(result.VALUE);
+				if (typeof value.value.fieldGroup !== 'undefined') {
+					getValueByKey('ELEMENT_NAME', result.ELEMENT_NAME, cdsAnnotationValues).fieldGroup = value.value.fieldGroup[0];
+				}
+				if (typeof value.value.lineItem !== 'undefined') {
+					getValueByKey('ELEMENT_NAME', result.ELEMENT_NAME, cdsAnnotationValues).lineItem = value.value.lineItem[0];
+				}
+
+			}
+
+			if (result.ANNOTATION_NAME === "UI.fieldGroup") {
+				value = JSON.parse(result.VALUE);
+				getValueByKey('ELEMENT_NAME', result.ELEMENT_NAME, cdsAnnotationValues).fieldGroup = value.value;
+			}
+
+			if (result.ANNOTATION_NAME === "UI.lineItem") {
+				value = JSON.parse(result.VALUE);
+				getValueByKey('ELEMENT_NAME', result.ELEMENT_NAME, cdsAnnotationValues).lineItem = value.value;
+			}
+
 			if (result.ANNOTATION_NAME === "annotations.valueList") {
 				value = JSON.parse(result.VALUE);
 				getValueByKey('ELEMENT_NAME', result.ELEMENT_NAME, cdsAnnotationValues).valueList = value.value;
@@ -335,15 +354,13 @@ module.exports = function() {
 		var artifact = req.params.artifact;
 
 		var client = req.db;
-/*		var insertString = "SELECT * from CDS_ANNOTATION_VALUES " +
-			" WHERE SCHEMA_NAME = CURRENT_SCHEMA AND ARTIFACT_NAME = ? ORDER BY ELEMENT_NAME ";*/
-			
-		var insertString = "SELECT A.*, B.POSITION from CDS_ANNOTATION_VALUES A " +
-                                  " left outer join view_columns B on A.SCHEMA_NAME = B.SCHEMA_NAME and A.ARTIFACT_NAME = B.VIEW_NAME and A.ELEMENT_NAME = B.COLUMN_NAME" +
-                                             " WHERE A.SCHEMA_NAME = CURRENT_SCHEMA AND A.ARTIFACT_NAME = ? ORDER BY B.POSITION ";
+		/*		var insertString = "SELECT * from CDS_ANNOTATION_VALUES " +
+					" WHERE SCHEMA_NAME = CURRENT_SCHEMA AND ARTIFACT_NAME = ? ORDER BY ELEMENT_NAME ";*/
 
-	
-			
+		var insertString = "SELECT A.*, B.POSITION from CDS_ANNOTATION_VALUES A " +
+			" left outer join view_columns B on A.SCHEMA_NAME = B.SCHEMA_NAME and A.ARTIFACT_NAME = B.VIEW_NAME and A.ELEMENT_NAME = B.COLUMN_NAME" +
+			" WHERE A.SCHEMA_NAME = CURRENT_SCHEMA AND A.ARTIFACT_NAME = ? ORDER BY B.POSITION ";
+
 		client.prepare(
 			insertString,
 			function(err, statement) {
