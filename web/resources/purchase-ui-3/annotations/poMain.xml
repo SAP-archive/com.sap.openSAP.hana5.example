@@ -18,6 +18,28 @@
 						<PropertyPath>HISTORY_CREATEDAT</PropertyPath>
 					</Collection>
 				</Annotation>
+				<Annotation Term="UI.HeaderInfo">
+					<Record Type="UI.HeaderInfoType">
+						<PropertyValue Property="TypeName" String="{@i18n>PO_HEADER}" />
+						<PropertyValue Property="TypeNamePlural" String="{@i18n>PO_HEADERS}" />
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" String="{@i18n>PO_HEADER}" />
+						</Record>
+						<PropertyValue Property="Title">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path ="PURCHASEORDERID"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="Description">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="GROSSAMOUNT" />
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.HeaderFacets">
+					
+				</Annotation>	
 				<Annotation Term="UI.Facets">
 					<Collection>
 						<Record Type="UI.CollectionFacet">
@@ -27,7 +49,7 @@
 								<Collection>
 									<Record Type="UI.ReferenceFacet">
 										<PropertyValue Property="Label" String="{@i18n>@GeneralInfoFacetLabel}"/>
-										<PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+										<PropertyValue Property="Target" AnnotationPath="@UI.LineItem"/>
 									</Record>
 								</Collection>
 							</PropertyValue>

@@ -70,9 +70,9 @@ context POViews {
                                   } ]
             CITY,
 
-            @UI.lineItem       : [ {
+/*            @UI.lineItem       : [ {
                                      exclude: true
-                                  } ]
+                                  } ]*/
             @UI.fieldGroup     : [ {
                                       position : 41
                                   } ]
@@ -82,9 +82,9 @@ context POViews {
                                   } ]
             HISTORY_CHANGEDAT,
 
-            @UI.lineItem       : [ {
+/*            @UI.lineItem       : [ {
                                      exclude: true
-                                  } ]
+                                  } ]*/
             @UI.fieldGroup     : [ {
                                       position : 42
                                   } ]
@@ -94,9 +94,9 @@ context POViews {
                                   } ]
             HISTORY_CHANGEDBY_EMPLOYEEID,
 
-            @UI.lineItem       : [ {
+/*            @UI.lineItem       : [ {
                                      exclude: true
-                                  } ]
+                                  } ]*/
             @UI.fieldGroup     : [ {
                                       position : 43
                                   } ]
@@ -106,9 +106,9 @@ context POViews {
                                   } ]
             HISTORY_CREATEDAT,
 
-            @UI.lineItem       : [ {
+/*            @UI.lineItem       : [ {
                                      exclude: true
-                                  } ]
+                                  } ]*/
             @UI.fieldGroup     : [ {
                                       position : 44
                                   } ]
@@ -130,9 +130,9 @@ context POViews {
                                   } ]
             GROSSAMOUNT,
 
-            @UI.lineItem       : [ {
+/*            @UI.lineItem       : [ {
                                      exclude: true
-                                  } ]
+                                  } ]*/
             @UI.fieldGroup     : [ {
                                       position : 51
                                   } ]
@@ -142,9 +142,9 @@ context POViews {
                                   } ]
             NETAMOUNT,
 
-            @UI.lineItem       : [ {
+/*            @UI.lineItem       : [ {
                                      exclude: true
-                                  } ]
+                                  } ]*/
             @UI.fieldGroup     : [ {
                                       position : 52
                                   } ]
@@ -166,9 +166,9 @@ context POViews {
                                   } ]
             CURRENCY,
 
-            @UI.lineItem       : [ {
+/*            @UI.lineItem       : [ {
                                      exclude: true
-                                  } ]
+                                  } ]*/
             @UI.fieldGroup     : [ {
                                       position : 61
                                   } ]
@@ -190,9 +190,9 @@ context POViews {
                                   } ]
             APPROVALSTATUSDESC,
 
-            @UI.lineItem       : [ {
+/*            @UI.lineItem       : [ {
                                      exclude: true
-                                  } ]
+                                  } ]*/
             @UI.fieldGroup     : [ {
                                       position : 71
                                   } ]
@@ -202,9 +202,9 @@ context POViews {
                                   } ]
             CONFIRMSTATUSDESC,
 
-            @UI.lineItem       : [ {
+/*            @UI.lineItem       : [ {
                                      exclude: true
-                                  } ]
+                                  } ]*/
             @UI.fieldGroup     : [ {
                                       position : 72
                                   } ]
@@ -214,9 +214,9 @@ context POViews {
                                   } ]
             LIFECYCLESTATUSDESC,
 
-            @UI.lineItem       : [ {
+/*            @UI.lineItem       : [ {
                                      exclude: true
-                                  } ]
+                                  } ]*/
             @UI.fieldGroup     : [ {
                                       position : 73
                                   } ]
@@ -290,9 +290,9 @@ context POViews {
                                   } ]
             GROSSAMOUNT,
 
-            @UI.lineItem       : [ {
+/*            @UI.lineItem       : [ {
                                      exclude: true
-                                  } ]
+                                  } ]*/
             @UI.fieldGroup     : [ {
                                       position : 51
                                   } ]
@@ -302,9 +302,9 @@ context POViews {
                                   } ]
             NETAMOUNT,
 
-            @UI.lineItem       : [ {
+/*            @UI.lineItem       : [ {
                                      exclude: true
-                                  } ]
+                                  } ]*/
             @UI.fieldGroup     : [ {
                                       position : 52
                                   } ]
