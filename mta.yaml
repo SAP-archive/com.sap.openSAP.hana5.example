@@ -136,7 +136,7 @@ resources:
  - name: openSAP5-ex-uaa
    type: com.sap.xs.uaa
    parameters:
-    config-path: xs-security.json
+    config-path: ./xs-security.json
  
  - name: openSAP5-ex-scheduler
    type: com.sap.xs.job-scheduler
