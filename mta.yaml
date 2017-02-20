@@ -160,6 +160,12 @@ resources:
    parameters:
      service-name: CROSS_SCHEMA_SFLIGHT
 
+# - name: ui5-lib
+#   type: org.cloudfoundry.managed-service
+#   parameters:
+#     service: sapui5_fesv4
+#     service-plan: default
+     
  - name: ui5-lib
    type: configuration
    parameters:
