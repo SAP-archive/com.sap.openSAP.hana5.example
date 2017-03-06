@@ -1,6 +1,6 @@
 _schema-version: '2.0'
 ID: com.sap.openSAP.hana5.example
-version: 2.1.0
+version: 2.1.1
 
 modules:
  - name: openSAP5-ex-user-db
@@ -170,7 +170,7 @@ resources:
    type: configuration
    parameters:
       provider-id: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV4:sapui5_fesv4
-      version: ">=1.45.0-SNAPSHOT"
+      version: ">=1.47.0-SNAPSHOT"
 
 
 
