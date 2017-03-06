@@ -7,7 +7,7 @@ module.exports = function() {
 
 	var winston = require('winston');
 	var util = require(global.__base + "utils/jobs");
-	var jobsc = require('sap-jobs-client');
+	var jobsc = require('@sap/jobs-client');
 
 	var logger;
 

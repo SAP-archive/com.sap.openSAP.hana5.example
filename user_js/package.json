@@ -3,15 +3,15 @@
     "node": "4.x || 6.x"
   },
   "dependencies": {
-    "sap-xssec": "0.9.1",
-    "sap-xsenv": "1.2.4",
-    "sap-xsjs": "1.11.4",
-    "sap-hdbext": "4.2.2",
-    "sap-logging": "~2.0",
-    "sap-jobs-client": "~1.0.11",
-    "express": "~4.14",
+    "@sap/xssec": "1.0.2",
+    "@sap/xsenv": "1.2.6",
+    "@sap/xsjs": "1.13.1",
+    "@sap/hdbext": "4.3.1",
+    "@sap/logging": "~2.2",
+    "@sap/jobs-client": "~1.0.14",
+    "express": "~4.15",
     "passport": "~0.3.2",
-    "winston": "1.0.0",
+    "winston": "~2.3.1",
     "async": "latest"
   },
   "devDependencies": {},
