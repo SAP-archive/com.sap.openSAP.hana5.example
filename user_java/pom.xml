@@ -3,13 +3,13 @@
 
   <artifactId>hana5.example</artifactId>
   <groupId>com.sap.openSAP</groupId>
-  <version>2.0.1-SNAPSHOT</version>
+  <version>2.0.2-SNAPSHOT</version>
 
   <packaging>war</packaging>
   <name>Gateway Runtime Reference Content: Java Project for DevX</name>
 
   <properties>
-    <sap.gateway.version>1.1.1</sap.gateway.version>
+    <sap.gateway.version>1.2.0</sap.gateway.version>
     <!-- apache.olingo.version>4.3.0-sap-03</apache.olingo.version-->
     <slf4j.version>1.7.7</slf4j.version>
   </properties>

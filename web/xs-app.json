@@ -71,11 +71,6 @@
       }
     },
     {
-      "source": "^/java/odata/(.*)",
-      "destination": "user-java-backend",
-      "authenticationType": "xsuaa"
-    },
-    {
       "source": "/get/(.*)",
       "destination": "core-backend",
       "scope": "$XSAPPNAME.DataGenerator"
