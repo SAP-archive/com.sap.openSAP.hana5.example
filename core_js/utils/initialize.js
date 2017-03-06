@@ -2,14 +2,14 @@
 "use strict";
 module.exports = {
 	initExpress: function() {
-		var xsenv = require("sap-xsenv");
+		var xsenv = require("@sap/xsenv");
 		var passport = require("passport");
-		var xssec = require("sap-xssec");
-		var xsHDBConn = require("sap-hdbext");
+		var xssec = require("@sap/xssec");
+		var xsHDBConn = require("@sap/hdbext");
 		var express = require("express");
 
 		//logging
-		var logging = require("sap-logging");
+		var logging = require("@sap/logging");
 		var appContext = logging.createAppContext();
 
 		//Initialize Express App for XS UAA and HDBEXT Middleware
@@ -38,8 +38,8 @@ module.exports = {
 
 	initXSJS: function(app) {
 	//	process.env.XS_APP_LOG_LEVEL='debug';
-		var xsjs = require("sap-xsjs");
-		var xsenv = require("sap-xsenv");
+		var xsjs = require("@sap/xsjs");
+		var xsenv = require("@sap/xsenv");
 		var options = xsjs.extend({
 			//	anonymous : true, // remove to authenticate calls
 			redirectUrl: "/index.xsjs",

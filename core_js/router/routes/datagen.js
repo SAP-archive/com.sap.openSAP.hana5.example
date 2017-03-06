@@ -4,10 +4,10 @@
 module.exports = function() {
 	var express = require("express");
 	var async = require('async');
-	var cds = require('sap-cds');
+	var cds = require('@sap/cds');
 	var winston = require('winston');
 	var util = require(global.__base + "utils/datagen");
-	var logging = require('sap-logging');
+	var logging = require('@sap/logging');
 	var appContext = logging.createAppContext();
 	var logger;
 	var bodyParser = require('body-parser');

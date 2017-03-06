@@ -79,7 +79,7 @@ module.exports = function() {
 	//Simple Database Call Stored Procedure
 	app.get("/example3", function(req, res) {
 		var client = req.db;
-		var hdbext = require("sap-hdbext");
+		var hdbext = require("@sap/hdbext");
 		//(client, Schema, Procedure, callback)
 		hdbext.loadProcedure(client, null, "get_po_header_data", function(err, sp) {
 			if (err) {
@@ -102,7 +102,7 @@ module.exports = function() {
 	//Database Call Stored Procedure With Inputs
 	app.get("/example4/:partnerRole?", function(req, res) {
 		var client = req.db;
-		var hdbext = require("sap-hdbext");
+		var hdbext = require("@sap/hdbext");
 		var partnerRole = req.params.partnerRole;
 		var inputParams = "";
 		if (typeof partnerRole === "undefined" || partnerRole === null) {
@@ -134,7 +134,7 @@ module.exports = function() {
 	//Call 2 Database Stored Procedures in Parallel
 	app.get("/example5/", function(req, res) {
 		var client = req.db;
-		var hdbext = require("sap-hdbext");
+		var hdbext = require("@sap/hdbext");
 		var inputParams = {
 			IM_PARTNERROLE: "1"
 		};

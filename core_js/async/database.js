@@ -1,7 +1,7 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-undef: 0, no-shadow: 0*/
 "use strict";
-var hdb = require("sap-hdbext");
-var xsenv = require("sap-xsenv");
+var hdb = require("@sap/hdbext");
+var xsenv = require("@sap/xsenv");
 var async = require("async");
 var hanaOptions = xsenv.getServices({
 	hana: {

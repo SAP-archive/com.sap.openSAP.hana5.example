@@ -3,7 +3,7 @@
 var express = require("express");
 var app = express.Router();
 var os = require("os");
-var TextBundle = require("sap-textbundle").TextBundle;
+var TextBundle = require("@sap/textbundle").TextBundle;
 var langparser = require("accept-language-parser");
 
 function getLocale(req) {

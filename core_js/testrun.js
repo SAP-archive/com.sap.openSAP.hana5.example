@@ -1,8 +1,8 @@
 "use strict";
 
-var xsjs = require("sap-xsjs");
-var xsjstest = require("sap-xsjs-test");
-var xsenv = require("sap-xsenv");
+var xsjs = require("@sap/xsjs");
+var xsjstest = require("@sap/xsjs-test");
+var xsenv = require("@sap/xsenv");
 
 var options = xsjs.extend({
     test: {

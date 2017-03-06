@@ -5,7 +5,7 @@ var express = require("express");
 module.exports = function() {
 	var app = express.Router();
 
-	var cds = require("sap-cds");
+	var cds = require("@sap/cds");
 	var client = null;
 	var oEmployee = null;
 	cds.$importEntities([{

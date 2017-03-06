@@ -1,6 +1,6 @@
 // util.js
 // ========
-var xsenv = require('sap-xsenv');
+var xsenv = require('@sap/xsenv');
 module.exports = {
   resetTable: function (req, res, origTable, shadowTable, callback) {
     var client = req.db;

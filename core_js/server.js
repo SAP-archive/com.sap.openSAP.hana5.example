@@ -1,7 +1,7 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-undef:0*/
 "use strict";
 var https = require("https");
-var xsenv = require("sap-xsenv");
+var xsenv = require("@sap/xsenv");
 var port = process.env.PORT || 3000;
 var server = require("http").createServer();
 https.globalAgent.options.ca= xsenv.loadCertificates(); 	
