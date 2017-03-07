@@ -10,6 +10,7 @@
     "@sap/cds": "1.14.0",
     "@sap/textbundle": "latest",
     "@sap/logging": "~2.2",
+    "@sap/audit-logging": "1.0.5",
     "express": "~4.15",
     "passport": "~0.3.2",
     "async": "latest",

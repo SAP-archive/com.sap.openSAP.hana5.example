@@ -1,176 +1,146 @@
 _schema-version: '2.0'
 ID: com.sap.openSAP.hana5.example
 version: 2.1.1
-
 modules:
- - name: openSAP5-ex-user-db
-   type: hdb
-   path: user_db
-   requires:
-    - name: user-container
-      properties:
-        TARGET_CONTAINER: ~{user-container-name}
-        
- - name: openSAP5-ex-core-db
-   type: hdb
-   path: core_db
-   requires:
-    - name: container
-      properties:
-        TARGET_CONTAINER: ~{container-name}
-        
-    - name: CrossSchemaService
-      group: SERVICE_REPLACEMENTS
-      properties:
-        key: hdi-sflight-service
-        service: ~{sflight-service-name}  
-
-    - name: user-container
-      group: SERVICE_REPLACEMENTS
-      properties:
-        key: hdi-user-service
-        service: ~{user-container-name}  
-    
-    - name: openSAP5-ex-user-db
-    
- - name: openSAP5-ex-core-js
-   type: nodejs
-   path: core_js
-   properties:
-     UAA_SERVICE_NAME: openSAP5-ex-uaa
-   provides: 
-     - name: core_js
-       properties:
-         url: "${default-url}"
-   requires:
+  - name: openSAP5-ex-user-db
+    type: hdb
+    path: user_db
+    requires:
+      - name: user-container
+        properties:
+          TARGET_CONTAINER: '~{user-container-name}'
+  - name: openSAP5-ex-core-db
+    type: hdb
+    path: core_db
+    requires:
+      - name: container
+        properties:
+          TARGET_CONTAINER: '~{container-name}'
+      - name: CrossSchemaService
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: hdi-sflight-service
+          service: '~{sflight-service-name}'
+      - name: user-container
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: hdi-user-service
+          service: '~{user-container-name}'
+      - name: openSAP5-ex-user-db
+  - name: openSAP5-ex-core-js
+    type: nodejs
+    path: core_js
+    properties:
+      UAA_SERVICE_NAME: openSAP5-ex-uaa
+    provides:
+      - name: core_js
+        properties:
+          url: '${default-url}'
+    requires:
       - name: openSAP5-ex-uaa
+      - name: openSAP5-ex-log      
       - name: container
       - name: openSAP5-ex-core-db
       - name: sap.hana.democontent.epm.services.images
       - name: CROSS_SCHEMA_SFLIGHT
-      
- - name: openSAP5-ex-user-js
-   type: nodejs
-   path: user_js
-   properties: 
-     SAP_JWT_TRUST_ACL: "[{\"clientid\":\"*\",\"identityzone\":\"*\"}]"
-   provides: 
-     - name: user_js
-       properties:
-         url: "${default-url}"
-   requires:
+
+  - name: openSAP5-ex-user-js
+    type: nodejs
+    path: user_js
+    properties:
+      SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]'
+    provides:
+      - name: user_js
+        properties:
+          url: '${default-url}'
+    requires:
       - name: openSAP5-ex-uaa
       - name: user-container
       - name: openSAP5-ex-user-db
       - name: openSAP5-ex-scheduler
-
- - name: openSAP5-ex-user-java
-   type: java
-   path: user_java
-   provides: 
-     - name: user_java
-       properties:
-         url: "${default-url}"
-   requires:
-     - name: openSAP5-ex-uaa
-     - name: user-container
-       properties:
-          JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml:
-             {"service_name_for_DefaultDB" : "~{user-container-name}"}]'     
-     - name: openSAP5-ex-user-db
-
- - name: openSAP5-ex-web
-   type: html5 
-   path: web
-   provides: 
+  - name: openSAP5-ex-user-java
+    type: java
+    path: user_java
+    provides:
+      - name: user_java
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: openSAP5-ex-uaa
+      - name: user-container
+        properties:
+          JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml: {"service_name_for_DefaultDB" : "~{user-container-name}"}]'
+      - name: openSAP5-ex-user-db
+  - name: openSAP5-ex-web
+    type: html5
+    path: web
+    provides:
       - name: web
         properties:
-          ui-url: "${default-url}"
-   parameters: 
-       host: web 
-       register-service-url: true 
-       service-name: web 
-       service-url: "${default-url}"          
-   requires:
+          ui-url: '${default-url}'
+    parameters:
+      host: web
+      register-service-url: true
+      service-name: web
+      service-url: '${default-url}'
+    requires:
       - name: openSAP5-ex-uaa
       - name: ui5-lib
         properties:
-          ui5liburl: ~{url}      
+          ui5liburl: '~{url}'
       - name: core_js
         group: destinations
         properties:
           name: core-backend
-          url: ~{url}
-          forwardAuthToken: true   
+          url: '~{url}'
+          forwardAuthToken: true
       - name: user_js
         group: destinations
         properties:
           name: user-backend
-          url: ~{url}
-          forwardAuthToken: true  
-#      - name: user_java
-#        group: destinations
-#        properties:
-#          name: user-java-backend
-#          url: ~{url}
-#          forwardAuthToken: true  
-
+          url: '~{url}'
+          forwardAuthToken: true
 resources:
-
- - name: user-container
-   properties:
-     user-container-name: ${service-name}
-   type: com.sap.xs.hdi-container
-   parameters: 
-     config:
-       schema: OPENSAP_HANA5_USER_EXAMPLE
-       
- - name: container
-   properties:
-     container-name: ${service-name}
-   type: com.sap.xs.hdi-container
-   parameters: 
-     config:
-       schema: OPENSAP_HANA5_EXAMPLE
-
- - name: openSAP5-ex-uaa
-   type: com.sap.xs.uaa
-   parameters:
-    config-path: ./xs-security.json
- 
- - name: openSAP5-ex-scheduler
-   type: com.sap.xs.job-scheduler
-
- - name: sap.hana.democontent.epm.services.images
-   type: org.cloudfoundry.existing-service
-   parameters:
-     service-name: sap.hana.democontent.epm.services.images
-   properties:
-     xshttpdest-images-service-name: ${service-name}
-     
- - name: CrossSchemaService
-   type: org.cloudfoundry.existing-service
-   parameters:
-     service-name: CROSS_SCHEMA_SFLIGHT
-   properties:
-     sflight-service-name: ${service-name}
-
- - name: CROSS_SCHEMA_SFLIGHT
-   type: org.cloudfoundry.existing-service
-   parameters:
-     service-name: CROSS_SCHEMA_SFLIGHT
-
-# - name: ui5-lib
-#   type: org.cloudfoundry.managed-service
-#   parameters:
-#     service: sapui5_fesv4
-#     service-plan: default
-     
- - name: ui5-lib
-   type: configuration
-   parameters:
-      provider-id: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV4:sapui5_fesv4
-      version: ">=1.47.0-SNAPSHOT"
-
-
-
+  - name: user-container
+    properties:
+      user-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+    parameters:
+      config:
+        schema: OPENSAP_HANA5_USER_EXAMPLE
+  - name: container
+    properties:
+      container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+    parameters:
+      config:
+        schema: OPENSAP_HANA5_EXAMPLE
+  - name: openSAP5-ex-uaa
+    type: com.sap.xs.uaa
+    parameters:
+      config-path: ./xs-security.json
+  - name: openSAP5-ex-scheduler
+    type: com.sap.xs.job-scheduler
+  - name: sap.hana.democontent.epm.services.images
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: sap.hana.democontent.epm.services.images
+    properties:
+      xshttpdest-images-service-name: '${service-name}'
+  - name: CrossSchemaService
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: CROSS_SCHEMA_SFLIGHT
+    properties:
+      sflight-service-name: '${service-name}'
+  - name: CROSS_SCHEMA_SFLIGHT
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: CROSS_SCHEMA_SFLIGHT
+  - name: ui5-lib
+    type: configuration
+    parameters:
+      provider-id: 'com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV4:sapui5_fesv4'
+      version: '>=1.47.0-SNAPSHOT'
+  - name: openSAP5-ex-log
+    type: com.sap.xs.auditlog
