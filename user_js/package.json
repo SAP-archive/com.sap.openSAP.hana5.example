@@ -6,7 +6,7 @@
     "@sap/xssec": "1.0.2",
     "@sap/xsenv": "1.2.6",
     "@sap/xsjs": "1.13.1",
-    "@sap/hdbext": "4.3.1",
+    "@sap/hdbext": "4.3.2",
     "@sap/logging": "~2.2",
     "@sap/jobs-client": "~1.0.14",
     "express": "~4.15",

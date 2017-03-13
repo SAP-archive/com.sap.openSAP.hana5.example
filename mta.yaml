@@ -1,6 +1,6 @@
 _schema-version: '2.0'
 ID: com.sap.openSAP.hana5.example
-version: 2.1.1
+version: 2.1.2
 modules:
   - name: openSAP5-ex-user-db
     type: hdb
@@ -100,6 +100,12 @@ modules:
           name: user-backend
           url: '~{url}'
           forwardAuthToken: true
+      - name: user_java
+        group: destinations
+        properties:
+          name: user-java-backend
+          url: ~{url}
+          forwardAuthToken: true            
 resources:
   - name: user-container
     properties:
@@ -143,4 +149,7 @@ resources:
       provider-id: 'com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV4:sapui5_fesv4'
       version: '>=1.47.0-SNAPSHOT'
   - name: openSAP5-ex-log
-    type: com.sap.xs.auditlog
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: auditlog
+      service-plan: free
