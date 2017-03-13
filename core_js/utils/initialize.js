@@ -37,10 +37,10 @@ module.exports = {
 	},
 
 	initXSJS: function(app) {
-	//	process.env.XS_APP_LOG_LEVEL='debug';
+		//	process.env.XS_APP_LOG_LEVEL='debug';
 		var xsjs = require("@sap/xsjs");
 		var xsenv = require("@sap/xsenv");
-		var options = xsjs.extend({
+		var options = {
 			//	anonymous : true, // remove to authenticate calls
 			redirectUrl: "/index.xsjs",
 			context: {
@@ -48,21 +48,16 @@ module.exports = {
 				env: process.env,
 				answer: 42
 			}
-		});
+		};
 
 		//configure HANA
 		try {
-			options = xsjs.extend(options, xsenv.getServices({
+			options = Object.assign(options, xsenv.getServices({
 				hana: {
 					tag: "hana"
 				}
 			}));
-		} catch (err) {
-			console.log("[WARN]", err.message);
-		}
-
-		try {
-			options = xsjs.extend(options, xsenv.getServices({
+			options = Object.assign(options, xsenv.getServices({
 				secureStore: {
 					tag: "hana"
 				}
@@ -82,7 +77,7 @@ module.exports = {
 
 		// configure UAA
 		try {
-			options = xsjs.extend(options, xsenv.getServices({
+			options = Object.assign(options, xsenv.getServices({
 				uaa: {
 					tag: "xsuaa"
 				}
