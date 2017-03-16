@@ -27,9 +27,15 @@ module.exports = function(server) {
 		var message = JSON.stringify({
 			text: data
 		});
-		for (var i in this.clients)
-			this.clients[i].send(message);
+		wss.clients.forEach(function each(client) {
+			try {
+				client.send(message);
+			} catch (e) {
+				console.log("Broadcast Error: %s", e.toString());
+			}
+		});
 		console.log("sent: %s", message);
+
 	};
 
 	wss.on("connection", function(ws) {

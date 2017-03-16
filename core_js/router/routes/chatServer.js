@@ -17,9 +17,15 @@ module.exports = function(server) {
 	});
 
 	wss.broadcast = function(data) {
-		for (var i in this.clients)
-			this.clients[i].send(data);
+		wss.clients.forEach(function each(client) {
+			try {
+				client.send(data);
+			} catch (e) {
+				console.log("Broadcast Error: %s", e.toString());
+			}
+		});
 		console.log("sent: %s", data);
+
 	};
 
 	wss.on("connection", function(ws) {
