@@ -43,6 +43,9 @@ module.exports = function(server) {
 			console.log("sent: %s", message);
 
 		};
+		wss.on("error", function(error) {
+			console.log("Web Socket Server Error: " + error.toString());
+		});
 
 		wss.on("connection", function(ws) {
 			console.log("Connected");
@@ -74,16 +77,23 @@ module.exports = function(server) {
 						break;
 				}
 			});
+			ws.on("open", function() {
+				console.log("Opened");
+				ws.send(JSON.stringify({
+					text: "Connected to Exercise 3"
+				}), function ack(error) {
+					if (!typeof error === "undefined") {
+						console.log("Send Error: " + error.toString());
+					}
+				});
+			});
 			ws.on("close", function() {
 				console.log("Closed");
 			});
-			ws.send(JSON.stringify({
-				text: "Connected to Exercise 3"
-			}), function ack(error) {
-				if (!typeof error === "undefined") {
-					console.log("Send Error: " + error.toString());
-				}
+			ws.on("error", function(error) {
+				console.log("Web Socket Errro: " + error.toString());
 			});
+
 		});
 	} catch (e) {
 		console.log("General Error: " + e.toString());
