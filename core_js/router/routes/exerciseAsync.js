@@ -20,7 +20,8 @@ module.exports = function(server) {
 	});
 	var wss = new WebSocketServer({
 		server: server,
-		path: "/node/excAsync"
+		path: "/node/excAsync",
+		perMessageDeflate: false
 	});
 
 	wss.broadcast = function(data) {
@@ -67,6 +68,9 @@ module.exports = function(server) {
 					wss.broadcast("Error: Undefined Action: " + data.action);
 					break;
 			}
+		});
+		ws.on("close", function(){
+			console.log("Closed");	
 		});
 		ws.send(JSON.stringify({
 			text: "Connected to Exercise 3"

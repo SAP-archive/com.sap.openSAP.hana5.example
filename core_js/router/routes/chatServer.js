@@ -29,6 +29,7 @@ module.exports = function(server) {
 	};
 
 	wss.on("connection", function(ws) {
+		console.log("Connected");
 		ws.on("message", function(message) {
 			console.log("received: %s", message);
 			wss.broadcast(message);
