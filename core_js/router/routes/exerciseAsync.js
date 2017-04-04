@@ -18,64 +18,75 @@ module.exports = function(server) {
 			require(global.__base + "utils/exampleTOC").fill();
 		res.type("text/html").status(200).send(output);
 	});
-	var wss = new WebSocketServer({
-		server: server,
-		path: "/node/excAsync",
-		perMessageDeflate: false
-	});
-
-	wss.broadcast = function(data) {
-		var message = JSON.stringify({
-			text: data
+	try {
+		var wss = new WebSocketServer({
+			server: server,
+			path: "/node/excAsync",
+			perMessageDeflate: false
 		});
-		wss.clients.forEach(function each(client) {
-			try {
-				client.send(message);
-			} catch (e) {
-				console.log("Broadcast Error: %s", e.toString());
-			}
+
+		wss.broadcast = function(data) {
+			var message = JSON.stringify({
+				text: data
+			});
+			wss.clients.forEach(function each(client) {
+				try {
+					client.send(message, function ack(error) {
+						if (!typeof error === "undefined") {
+							console.log("Send Error: " + error.toString());
+						}
+					});
+				} catch (e) {
+					console.log("Broadcast Error: %s", e.toString());
+				}
+			});
+			console.log("sent: %s", message);
+
+		};
+
+		wss.on("connection", function(ws) {
+			console.log("Connected");
+
+			ws.on("message", function(message) {
+				console.log("received: %s", message);
+				var data = JSON.parse(message);
+				switch (data.action) {
+					case "async":
+						asyncLib.asyncDemo(wss);
+						break;
+					case "fileSync":
+						fileSync.fileDemo(wss);
+						break;
+					case "fileAsync":
+						fileAsync.fileDemo(wss);
+						break;
+					case "httpClient":
+						httpClient.callService(wss);
+						break;
+					case "dbAsync":
+						dbAsync.dbCall(wss);
+						break;
+					case "dbAsync2":
+						dbAsync2.dbCall(wss);
+						break;
+					default:
+						wss.broadcast("Error: Undefined Action: " + data.action);
+						break;
+				}
+			});
+			ws.on("close", function() {
+				console.log("Closed");
+			});
+			ws.send(JSON.stringify({
+				text: "Connected to Exercise 3"
+			}), function ack(error) {
+				if (!typeof error === "undefined") {
+					console.log("Send Error: " + error.toString());
+				}
+			});
 		});
-		console.log("sent: %s", message);
-
-	};
-
-	wss.on("connection", function(ws) {
-		console.log("Connected");
-
-		ws.on("message", function(message) {
-			console.log("received: %s", message);
-			var data = JSON.parse(message);
-			switch (data.action) {
-				case "async":
-					asyncLib.asyncDemo(wss);
-					break;
-				case "fileSync":
-					fileSync.fileDemo(wss);
-					break;
-				case "fileAsync":
-					fileAsync.fileDemo(wss);
-					break;
-				case "httpClient":
-					httpClient.callService(wss);
-					break;
-				case "dbAsync":
-					dbAsync.dbCall(wss);
-					break;
-				case "dbAsync2":
-					dbAsync2.dbCall(wss);
-					break;
-				default:
-					wss.broadcast("Error: Undefined Action: " + data.action);
-					break;
-			}
-		});
-		ws.on("close", function(){
-			console.log("Closed");	
-		});
-		ws.send(JSON.stringify({
-			text: "Connected to Exercise 3"
-		}));
-	});
-
+	} catch (e) {
+		console.log("General Error: " + e.toString());
+	}
 	return app;
 };
