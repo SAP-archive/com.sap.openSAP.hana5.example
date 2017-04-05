@@ -5,7 +5,8 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel"
 ], function(BaseController, JSONModel) {
 	"use strict";
-    var connection = new sap.ui.core.ws.WebSocket('/node/excAsync');
+	jQuery.sap.require("sap.ui.core.ws.WebSocket"); 
+    var connection = new sap.ui.core.ws.WebSocket("/node/excAsync");
 	return BaseController.extend("sap.xs.exerciseAsync.controller.App", {
 
 		onInit: function() {
