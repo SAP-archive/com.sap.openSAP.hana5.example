@@ -6,7 +6,7 @@
     "@sap/xssec": "1.0.3",
     "@sap/xsenv": "1.2.6",
     "@sap/xsjs": "1.14.1",
-    "@sap/hdbext": "4.3.2",
+    "@sap/hdbext": "4.3.3",
     "@sap/cds": "1.14.0",
     "@sap/textbundle": "latest",
     "@sap/logging": "~2.2",

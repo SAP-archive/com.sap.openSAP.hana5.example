@@ -11,7 +11,7 @@
   <properties>
     <sap.gateway.version>1.2.1</sap.gateway.version>
     <!-- apache.olingo.version>4.3.0-sap-03</apache.olingo.version-->
-    <slf4j.version>1.7.25</slf4j.version>
+    <slf4j.version>1.8.0-alpha0</slf4j.version>
   </properties>
 
   <build>
