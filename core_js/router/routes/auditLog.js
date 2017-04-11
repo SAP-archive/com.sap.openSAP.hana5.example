@@ -5,12 +5,12 @@ var express = require("express");
 module.exports = function() {
 	var app = express.Router();
 
-/*	var xsenv = require("@sap/xsenv");
+	var xsenv = require("@sap/xsenv");
 	xsenv.loadEnv();
 	var credentials = xsenv.getServices({
 		auditlog: 'openSAP5-ex-log'
-	}).auditlog;*/
-	var auditLog = require('@sap/audit-logging'); //(credentials);
+	}).auditlog;
+	var auditLog = require('@sap/audit-logging')(credentials);
 
 	//TOC
 	app.get("/", function(req, res) {
@@ -22,7 +22,15 @@ module.exports = function() {
 
 	//Simple AuditLog Example
 	app.get("/example1", function(req, res) {
-		auditLog.securityMessage('%d unsuccessful login attempts', 3).by('John Doe').externalIP('127.0.0.1').log(function(err, id) {
+		var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+		if (req.headers['x-forwarded-for']) {
+			ip = req.headers['x-forwarded-for'].split(",")[0];
+		} else if (req.connection && req.connection.remoteAddress) {
+			ip = req.connection.remoteAddress;
+		} else {
+			ip = req.ip;
+		}
+		auditLog.securityMessage('%d unsuccessful login attempts', 3).by(req.user.id).externalIP(ip).log(function(err, id) {
 			// Place all of the remaining logic here
 			if (err) {
 				res.type("text/plain").status(500).send("ERROR: " + err.toString());
