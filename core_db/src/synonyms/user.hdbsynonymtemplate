@@ -4,5 +4,11 @@
       "grantor" : "hdi-user-service",
       "object" : "UserData.User"
      }
+  },
+    "USER_DETAILS": {
+    "target": {
+      "grantor" : "hdi-user-service",
+      "object" : "sap.hana.democontent.user.models::USER_DETAILS"
+     }
   }
 }

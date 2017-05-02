@@ -3,6 +3,11 @@
 		"name": "user",
 		"schema_privileges": [{
 		   "privileges": ["SELECT METADATA", "SELECT CDS METADATA", "SELECT", "INSERT", "UPDATE", "EXECUTE", "DELETE", "CREATE TEMPORARY TABLE" ]
-		}]
+		}],
+		"schema_analytic_privileges": [
+            {
+                "privileges":[ "USER_PRIV" ]
+            }
+        ]
 	}
 }

@@ -3,5 +3,10 @@
     "target": {
       "object": "UserData.User"
     }
+  },
+  "USER_DETAILS": {
+    "target": {
+      "object": "sap.hana.democontent.user.models::USER_DETAILS"
+    }
   }
 }
