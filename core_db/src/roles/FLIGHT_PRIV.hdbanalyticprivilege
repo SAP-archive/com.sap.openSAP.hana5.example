@@ -4,5 +4,5 @@
 <securedModels>
   <modelUri>sap.hana.democontent.epm.models::SFLIGHT_MODEL</modelUri>
 </securedModels>
-<whereSql>&quot;CARRID&quot; = 'AA'</whereSql>
+<whereSql>&quot;MANDT&quot; = JSON_VALUE((SELECT SESSION_CONTEXT('XS_CLIENT') FROM DUMMY), '$[0]')</whereSql>
 </Privilege:analyticPrivilege>

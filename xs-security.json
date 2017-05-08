@@ -24,16 +24,23 @@
 	}, {
 		"name": "$XSAPPNAME.ODATASERVICEUSER",
 		"description": "Enter"
-	},
-	{
+	}, {
 		"name": "$XSAPPNAME.ODATASERVICEADMIN",
 		"description": "Enter"
+	}],
+	"attributes": [{
+		"name": "client",
+		"description": "Session Client",
+		"valueType": "int"
 	}],
 	"role-templates": [{
 		"name": "Viewer",
 		"description": "View all records",
 		"scope-references": [
 			"$XSAPPNAME.Display"
+		],
+		"attribute-references": [
+			"client"
 		]
 	}, {
 		"name": "Editor",
@@ -44,8 +51,11 @@
 			"$XSAPPNAME.Delete",
 			"$XSAPPNAME.Display",
 			"$XSAPPNAME.DataGenerator",
-		    "$XSAPPNAME.ODATASERVICEUSER",
-		    "$XSAPPNAME.ODATASERVICEADMIN"
+			"$XSAPPNAME.ODATASERVICEUSER",
+			"$XSAPPNAME.ODATASERVICEADMIN"
+		],
+		"attribute-references": [
+			"client"
 		]
 	}]
 }
