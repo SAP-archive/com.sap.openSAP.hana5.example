@@ -2,6 +2,7 @@ $.response.contentType = "text/html";
 //var sOutput = "Client Filter Tests! <br><br>";
 
 var oConn = $.hdb.getConnection();
+
 var sQuery = "select * from \"M_SESSION_CONTEXT\" ";
 var aRs = oConn.executeQuery(sQuery);
 
