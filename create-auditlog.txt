@@ -1,1 +1,1 @@
-xs create-service auditlog free openSAP5-ex-log
+xs create-service auditlog free openSAP-ex-log

@@ -5,12 +5,12 @@ extends: com.sap.openSAP.hana5.example
  - name: container
    parameters: 
      config:
-       schema: OPENSAP_HANA5_EXAMPLE
+       schema: OPENSAP_EXAMPLE
       
  - name: user-container
    parameters: 
      config:
-       schema: OPENSAP_HANA5_USER_EXAMPLE
+       schema: OPENSAP_USER_EXAMPLE
 
  - name: CrossSchemaService
    parameters:

@@ -1,15 +1,15 @@
 _schema-version: '2.0'
 ID: com.sap.openSAP.hana5.example
-version: 2.1.2
+version: 2.2.0
 modules:
-  - name: openSAP5-ex-user-db
+  - name: openSAP-ex-user-db
     type: hdb
     path: user_db
     requires:
       - name: user-container
         properties:
           TARGET_CONTAINER: '~{user-container-name}'
-  - name: openSAP5-ex-core-db
+  - name: openSAP-ex-core-db
     type: hdb
     path: core_db
     requires:
@@ -26,25 +26,25 @@ modules:
         properties:
           key: hdi-user-service
           service: '~{user-container-name}'
-      - name: openSAP5-ex-user-db
-  - name: openSAP5-ex-core-js
+      - name: openSAP-ex-user-db
+  - name: openSAP-ex-core-js
     type: nodejs
     path: core_js
     properties:
-      UAA_SERVICE_NAME: openSAP5-ex-uaa
+      UAA_SERVICE_NAME: openSAP-ex-uaa
     provides:
       - name: core_js
         properties:
           url: '${default-url}'
     requires:
-      - name: openSAP5-ex-uaa
-      - name: openSAP5-ex-log      
+      - name: openSAP-ex-uaa
+      - name: openSAP-ex-log      
       - name: container
-      - name: openSAP5-ex-core-db
+      - name: openSAP-ex-core-db
       - name: sap.hana.democontent.epm.services.images
       - name: CROSS_SCHEMA_SFLIGHT
 
-  - name: openSAP5-ex-user-js
+  - name: openSAP-ex-user-js
     type: nodejs
     path: user_js
     properties:
@@ -54,11 +54,11 @@ modules:
         properties:
           url: '${default-url}'
     requires:
-      - name: openSAP5-ex-uaa
+      - name: openSAP-ex-uaa
       - name: user-container
-      - name: openSAP5-ex-user-db
-      - name: openSAP5-ex-scheduler
-  - name: openSAP5-ex-user-java
+      - name: openSAP-ex-user-db
+      - name: openSAP-ex-scheduler
+  - name: openSAP-ex-user-java
     type: java
     path: user_java
     provides:
@@ -66,12 +66,12 @@ modules:
         properties:
           url: '${default-url}'
     requires:
-      - name: openSAP5-ex-uaa
+      - name: openSAP-ex-uaa
       - name: user-container
         properties:
           JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml: {"service_name_for_DefaultDB" : "~{user-container-name}"}]'
-      - name: openSAP5-ex-user-db
-  - name: openSAP5-ex-web
+      - name: openSAP-ex-user-db
+  - name: openSAP-ex-web
     type: html5
     path: web
     provides:
@@ -79,12 +79,12 @@ modules:
         properties:
           ui-url: '${default-url}'
     parameters:
-      host: web
+      host: openSAP-web
       register-service-url: true
-      service-name: web
+      service-name: openSAP-web
       service-url: '${default-url}'
     requires:
-      - name: openSAP5-ex-uaa
+      - name: openSAP-ex-uaa
       - name: ui5-lib
         properties:
           ui5liburl: '~{url}'
@@ -113,19 +113,19 @@ resources:
     type: com.sap.xs.hdi-container
     parameters:
       config:
-        schema: OPENSAP_HANA5_USER_EXAMPLE
+        schema: OPENSAP_USER_EXAMPLE
   - name: container
     properties:
       container-name: '${service-name}'
     type: com.sap.xs.hdi-container
     parameters:
       config:
-        schema: OPENSAP_HANA5_EXAMPLE
-  - name: openSAP5-ex-uaa
+        schema: OPENSAP_EXAMPLE
+  - name: openSAP-ex-uaa
     type: com.sap.xs.uaa
     parameters:
       config-path: ./xs-security.json
-  - name: openSAP5-ex-scheduler
+  - name: openSAP-ex-scheduler
     type: com.sap.xs.job-scheduler
   - name: sap.hana.democontent.epm.services.images
     type: org.cloudfoundry.existing-service
@@ -148,7 +148,7 @@ resources:
     parameters:
       provider-id: 'com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV3:sapui5_fesv3'
       version: '>=1.44.0'
-  - name: openSAP5-ex-log
+  - name: openSAP-ex-log
     type: org.cloudfoundry.managed-service
     parameters:
       service: auditlog

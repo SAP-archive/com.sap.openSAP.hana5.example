@@ -1,1 +1,1 @@
-xs create-service jobscheduler default openSAP5-ex-scheduler
+xs create-service jobscheduler default openSAP-ex-scheduler
