@@ -1,4 +1,4 @@
 {
-    "name":    "sap.hana.democontent.user.models",
+    "name":    "user.models",
     "subfolder": "ignore"
 }

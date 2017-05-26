@@ -2,6 +2,6 @@
 <Privilege:analyticPrivilege xmlns:Privilege="http://www.sap.com/ndb/BiModelPrivilege.ecore" id="USER_PRIV" privilegeType="SQL_ANALYTIC_PRIVILEGE" schemaVersion="1.1">
 <descriptions defaultDescription="USER"/>
 <securedModels>
-  <modelUri>sap.hana.democontent.user.models::USER_DETAILS</modelUri>
+  <modelUri>user.models::USER_DETAILS</modelUri>
 </securedModels>
 </Privilege:analyticPrivilege>

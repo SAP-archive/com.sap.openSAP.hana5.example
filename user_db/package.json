@@ -1,7 +1,7 @@
 {
   "name": "deploy",
   "dependencies": {
-    "@sap/ui-annotations": "2.0.3",
+    "@sap/ui-annotations": "2.0.5",
     "@sap/hdi-deploy": "3.1.2"
   },
   "scripts": {

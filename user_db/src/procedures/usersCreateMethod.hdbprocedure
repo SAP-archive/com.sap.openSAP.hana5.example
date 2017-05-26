@@ -26,7 +26,8 @@ select "UserId", "FirstName", "LastName", "Email"
 else
                       
    insert into "UserData.User" 
-             values ("userSeqId".NEXTVAL, lv_firstname, 
+             ("FirstName", "LastName", "Email")
+             values (lv_firstname, 
                      lv_lastname, lv_e_mail);
                      
  end if; 
