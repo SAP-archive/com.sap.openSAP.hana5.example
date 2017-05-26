@@ -1,9 +1,9 @@
 # com.sap.openSAP.hana5.example
-openSAP HANA5 Course: Example Completed Implementation
+openSAP HANA5/HANA6 Course: Example Completed Implementation
 ================
-In this course, we will focus on the new and improved features that were introduced in SAP HANA SPS 11 and 12. Developers taking this course should be able to get up to speed quickly and begin leveraging these new features to enhance their own productivity, as well as tap into powerful new features of SAP HANA itself. Students will learn to use SAP Web IDE for SAP HANA to develop both HDI (SAP HANA Deployment Infrastructure) and XSA (SAP HANA extended application services, advanced model) based applications.
+In this course, we will focus on the new and improved features that were introduced in SAP HANA 1.0 SPS 11 and 12 and then expanded upon in HANA 2.0 SPS 0, SPS 01, and SPS 02. Developers taking this course should be able to get up to speed quickly and begin leveraging these new features to enhance their own productivity, as well as tap into powerful new features of SAP HANA itself. Students will learn to use SAP Web IDE for SAP HANA to develop both HDI (SAP HANA Deployment Infrastructure) and XSA (SAP HANA extended application services, advanced model) based applications.
 
-## Course Summary
+## HANA5 Course Summary
 With the delivery of SAP HANA SPS 11, we see a large number of new features in both the underlying SAP HANA infrastructure and in particular in the custom development aspects of SAP HANA native development.
 
 Requirements change over time, and so too has XS within SAP HANA. SAP HANA extended application services in SPS 11 represents an evolution of the application server architecture, building upon the previous strengths while expanding the technical scope. This course will offer an overview of the new architecture and the various expanded capabilities it makes possible.
