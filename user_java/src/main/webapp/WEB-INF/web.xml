@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 	<servlet>
 		<servlet-name>ODataServlet</servlet-name>
 		<servlet-class>com.sap.gateway.v4.rt.core.web.ODataServlet</servlet-class>
@@ -22,27 +24,39 @@
 		<url-pattern>/java/odata/clearCache</url-pattern>
 	</servlet-mapping>
 	<login-config>
-      <auth-method>XSUAA</auth-method>
-    </login-config>
-	<security-constraint> 
-		<display-name>SecurityConstraint</display-name> 
-		<web-resource-collection> 
-			<web-resource-name>WRCollection</web-resource-name> 
-			<url-pattern>/java/odata/v4/*</url-pattern> 
-		</web-resource-collection> 
-		<auth-constraint> 
-			<role-name>ODATASERVICEUSER</role-name> 
-		</auth-constraint> 
+		<auth-method>XSUAA</auth-method>
+	</login-config>
+	<security-constraint>
+		<display-name>SecurityConstraint</display-name>
+		<web-resource-collection>
+			<web-resource-name>WRCollection</web-resource-name>
+			<url-pattern>/java/odata/v4/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>ODATASERVICEUSER</role-name>
+		</auth-constraint>
 	</security-constraint>
-	<security-constraint> 
-		<display-name>Cache Clearing Dev Admin User</display-name> 
-		<web-resource-collection> 
-			<web-resource-name>CacheClearCollection</web-resource-name> 
-			<url-pattern>/java/odata/clearCache</url-pattern> 
-		</web-resource-collection> 
-		<auth-constraint> 
-			<role-name>ODATASERVICEADMIN</role-name> 
-		</auth-constraint> 
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Enable HTTP Methods</web-resource-name>
+			<url-pattern>/java/odata/v4/*</url-pattern>
+			<http-method-omission>HEAD</http-method-omission>
+			<http-method-omission>GET</http-method-omission>
+			<http-method-omission>PUT</http-method-omission>
+			<http-method-omission>POST</http-method-omission>
+			<http-method-omission>DELETE</http-method-omission>
+		</web-resource-collection>
+		<auth-constraint/>
+	</security-constraint>
+	<security-constraint>
+		<display-name>Cache Clearing Dev Admin User</display-name>
+		<web-resource-collection>
+			<web-resource-name>CacheClearCollection</web-resource-name>
+			<url-pattern>/java/odata/clearCache</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>ODATASERVICEADMIN</role-name>
+		</auth-constraint>
 	</security-constraint>
 	<context-param>
 		<param-name>DPC</param-name>

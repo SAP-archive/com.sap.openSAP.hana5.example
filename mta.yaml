@@ -106,6 +106,9 @@ modules:
           name: user-java-backend
           url: ~{url}
           forwardAuthToken: true            
+
+  
+
 resources:
   - name: user-container
     properties:

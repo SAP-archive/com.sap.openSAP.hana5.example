@@ -51,26 +51,26 @@ public class ExtensionSample {
 			DeserializerResult payload = dpCtx.getDeserializerResult();
 			Entity requestEntity = payload.getEntity();
 			//Generate the object Id via the Sequence.
-			String sequenceSQL = "select " + "\"userSeqId"+ "\".NEXTVAL  FROM " + "\"DUMMY\"";
+//			String sequenceSQL = "select " + "\"userSeqId"+ "\".NEXTVAL  FROM " + "\"DUMMY\"";
 			
-			ResultSet sequenceRs = idStmt.executeQuery(sequenceSQL);
-			while(sequenceRs.next()){
-				Long keyVal = sequenceRs.getLong(1);
-				LOGGER.debug("The Sequence Id for the User > " + keyVal);
-				String SQL = "INSERT INTO \"UserData.User\"(\"UserId\",\"FirstName\",\"LastName\",\"Email\") VALUES" + '('
-						+ keyVal + ',' + "'"
+//			ResultSet sequenceRs = idStmt.executeQuery(sequenceSQL);
+//			while(sequenceRs.next()){
+//				Long keyVal = sequenceRs.getLong(1);
+//				LOGGER.debug("The Sequence Id for the User > " + keyVal);
+				String SQL = "INSERT INTO \"UserData.User\"(\"FirstName\",\"LastName\",\"Email\") VALUES" + '('
+//						+ keyVal + ',' + "'"
 						+ requestEntity.getProperty("FirstName").getValue() + "'" + "," + "'"
 						+ requestEntity.getProperty("LastName").getValue() + "'" + "," + "'"
 						+ requestEntity.getProperty("Email").getValue() + "'" + ')';
 				//String keyVal = requestEntity.getProperty("UserId").getValue().toString();
-				String selectSQL = "SELECT * FROM \"UserData.User\" WHERE " + '"' + "UserId" + '"' + '=' + keyVal;
+				String selectSQL = "SELECT * FROM \"UserData.User\" WHERE " + '"' + "UserId" + '"' + '= CURRENT_IDENTITY_VALUE() ';
 				stmt.execute(SQL);
-				LOGGER.debug("Inserted record for Id > " + keyVal);
+//				LOGGER.debug("Inserted record for Id > " + keyVal);
 				ResultSet rs = stmt.executeQuery(selectSQL);
 				Entity result = rs.next() ? createEntityFromResultSet(rs) : null;
 				dpCtx.setResultEntity(result);
 				LOGGER.debug("Data Successfully inserted");
-			}
+//			}
 			
 			
 		} catch (SQLException sqlException) {
