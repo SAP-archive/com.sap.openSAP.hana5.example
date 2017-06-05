@@ -11,35 +11,35 @@ function my_create_after_exit(param) {
     pStmt = persNo = perFName = perLName = perEmail = null;
     try {
 
-        pStmt = param.connection
-            .prepareStatement('select "userSeqId".NEXTVAL from dummy');
-        var rs = pStmt.executeQuery();
-        var PersNo = '';
-        while (rs.next()) {
-            PersNo = rs.getString(1);
-        }
-        pStmt.close();
-        pStmt = param.connection.prepareStatement("update\"" + after + "\"set \"UserId\" = ?");
-        pStmt.setString(1, PersNo);
-        pStmt.execute();
-        pStmt.close();
+        // pStmt = param.connection
+        //     .prepareStatement('select "userSeqId".NEXTVAL from dummy');
+        // var rs = pStmt.executeQuery();
+        // var PersNo = '';
+        // while (rs.next()) {
+        //     PersNo = rs.getString(1);
+        // }
+        // pStmt.close();
+        // pStmt = param.connection.prepareStatement("update\"" + after + "\"set \"UserId\" = ?");
+        // pStmt.setString(1, PersNo);
+        // pStmt.execute();
+        // pStmt.close();
 
-        pStmt = param.connection.prepareStatement('select * from "' + after + '"');
-        rs = pStmt.executeQuery();
-        while (rs.next()) {
-            persNo = rs.getString(1);
-            perFName = rs.getString(2);
-            perLName = rs.getString(3);
-            perEmail = rs.getString(4);
-        }
+        // pStmt = param.connection.prepareStatement('select * from "' + after + '"');
+        // rs = pStmt.executeQuery();
+        // while (rs.next()) {
+        //     persNo = rs.getString(1);
+        //     perFName = rs.getString(2);
+        //     perLName = rs.getString(3);
+        //     perEmail = rs.getString(4);
+        // }
 
         pStmt = param.connection
-            .prepareStatement('insert into "UserData.User" values(?,?,?,?,?)');
-        pStmt.setString(1, persNo);
-        pStmt.setString(2, perFName);
-        pStmt.setString(3, perLName);
-        pStmt.setString(4, perEmail);
-        pStmt.setString(5, "");        
+            .prepareStatement("insert into \"UserData.User\"  (\"FirstName\", \"LastName\", \"Email\") values(?,?,?)");
+        //pStmt.setString(1, persNo);
+        pStmt.setString(1, perFName);
+        pStmt.setString(2, perLName);
+        pStmt.setString(3, perEmail);
+//      pStmt.setString(4, "");        
         pStmt.executeUpdate();
         pStmt.close();
 

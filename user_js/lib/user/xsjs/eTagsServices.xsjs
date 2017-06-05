@@ -1,5 +1,5 @@
 function readUserIdSequence(){
-	var rs, overAllId, responseBody;
+/*	var rs, overAllId, responseBody;
 	var conn = $.hdb.getConnection();
 	rs = conn.executeQuery("SELECT \"userSeqId\".NEXTVAL as OverallId from DUMMY");
 	overAllId = "";
@@ -8,7 +8,7 @@ function readUserIdSequence(){
 	    responseBody = overAllId.toString();
 	    $.response.status = $.net.http.OK;
 	    $.response.setBody(responseBody);      
-	}
+	}*/
 
 }
 

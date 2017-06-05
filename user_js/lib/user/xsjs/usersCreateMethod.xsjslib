@@ -22,6 +22,7 @@ function usersCreate(param) {
 
 		//Get Input New Record Values
 		var pStmt = param.connection.prepareStatement("select * from \"" + after + "\"");
+		var rs = null;
 		var User = SESSIONINFO.recordSetToJSON(pStmt.executeQuery(), "Details");
 		pStmt.close();
         console.log(JSON.stringify(User));  
@@ -31,29 +32,29 @@ function usersCreate(param) {
 				" No Way! E-Mail must be valid and " + User.Details[0].Email + " has problems";
 		}
 
-		//Get Next Personnel Number
-		pStmt = param.connection.prepareStatement("select \"userSeqId\".NEXTVAL from dummy");
-		var rs = pStmt.executeQuery();
-		var PersNo = "";
-		while (rs.next()) {
-			PersNo = rs.getString(1);
-		}
-		pStmt.close();
+		//Get Next Personnel Number - No longer needed as we now use an identity column
+		// pStmt = param.connection.prepareStatement("select \"userSeqId\".NEXTVAL from dummy");
+		// var rs = pStmt.executeQuery();
+		// var PersNo = "";
+		// while (rs.next()) {
+		// 	PersNo = rs.getString(1);
+		// }
+		// pStmt.close();
 		//Insert Record into DB Table and Temp Output Table
 		for (var i = 0; i < 2; i++) {
 			var pStmt;
 			if (i < 1) {
-				pStmt = param.connection.prepareStatement("insert into \"UserData.User\" (\"UserId\",\"FirstName\",\"LastName\",\"Email\") values(?,?,?,?)");
+				pStmt = param.connection.prepareStatement("insert into \"UserData.User\" (\"FirstName\", \"LastName\", \"Email\") values(?,?,?)");
 			} else {
 				pStmt = param.connection.prepareStatement("TRUNCATE TABLE \"" + after + "\"");
 				pStmt.executeUpdate();
 				pStmt.close();
-				pStmt = param.connection.prepareStatement("insert into \"" + after + "\" (\"UserId\",\"FirstName\",\"LastName\",\"Email\") values(?,?,?,?)");
+				pStmt = param.connection.prepareStatement("insert into \"" + after + "\" (\"FirstName\",\"LastName\",\"Email\") values(?,?,?)");
 			}
-			pStmt.setString(1, PersNo.toString());
-			pStmt.setString(2, User.Details[0].FirstName.toString());
-			pStmt.setString(3, User.Details[0].LastName.toString());
-			pStmt.setString(4, User.Details[0].Email.toString());
+		//	pStmt.setString(1, PersNo.toString());
+			pStmt.setString(1, User.Details[0].FirstName.toString());
+			pStmt.setString(2, User.Details[0].LastName.toString());
+			pStmt.setString(3, User.Details[0].Email.toString());
 			//pStmt.setString(5, "");
 
 			pStmt.executeUpdate();

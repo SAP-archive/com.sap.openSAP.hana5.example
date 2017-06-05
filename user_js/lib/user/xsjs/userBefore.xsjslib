@@ -10,12 +10,13 @@ function create_before_exit(param) {
     var pStmt = null;
     //Get Input New Record Values
 
+//Before Exit no longer viable due to Identity Column. You need an Insert Override exit for Indentity Columns
     try {
 
-        pStmt = param.connection
+ /*       pStmt = param.connection
             .prepareStatement("select \"userSeqId\".NEXTVAL from dummy");
         var rs = pStmt.executeQuery();
-        var PersNo = "";
+      var PersNo = "";
         while (rs.next()) {
             PersNo = rs.getString(1);
         }
@@ -23,7 +24,7 @@ function create_before_exit(param) {
         pStmt = param.connection.prepareStatement("update\"" + after + "\"set \"UserId\" = ?");
         pStmt.setString(1, PersNo);
         pStmt.execute();
-        pStmt.close();
+        pStmt.close();*/
 
     } catch (e) {
         pStmt.close();
