@@ -165,7 +165,7 @@ module.exports = function() {
 		logger = req.loggingContext.getLogger("/schedules/getjobschedulesbyname");
 		var client = req.db;
 		var name = req.params.name;
-		var sql = 'SELECT "JOBID","NAME" FROM "Jobs.ScheduleDetails" WHERE NAME= ?';
+		var sql = 'SELECT "JOBID", "NAME" FROM "Jobs.ScheduleDetails" WHERE NAME= ?';
 		var jobArray = [];
 		var jobObj = {};
 		client.prepare(sql, function(error, stmt) {

@@ -14,18 +14,21 @@ module.exports = function() {
 	app.post('/create', function(req, res) {
 		logger = req.loggingContext.getLogger("/jobactivity/create");
 		var client = req.db;
-		var query = 'select "jobId".NEXTVAL as nJobId from "DUMMY"';
+//		var query = 'select "jobId".NEXTVAL as nJobId from "DUMMY"';
+		var query = '';
 		var jname = req.body.jobname;
-		var jobid;
+//		var jobid;
 		var timestamp;
-		client.exec(query, function(error, rows) {
-			if (error) {
-				util.callback(error, res, "");
-				logger.error('Error occured' + error);
-			} else {
-				jobid = rows[0].NJOBID;
+//		client.exec(query, function(error, rows) {
+//			if (error) {
+//				util.callback(error, res, "");
+//				logger.error('Error occured' + error);
+//			} else {
+//				jobid = rows[0].NJOBID;
 				timestamp = new Date().toISOString();
-				query = "INSERT INTO \"Jobs.Data\" VALUES('" + jobid.toString() + "','" + jname + "','" + timestamp +
+				query = "INSERT INTO \"Jobs.Data\" " +
+				        " (\"NAME\", \"TIMESTAMP\")" +
+				        " VALUES('" + jname + "','" + timestamp +
 					"')";
 				client.exec(query, function(error, status) {
 					if (error) {
@@ -43,8 +46,8 @@ module.exports = function() {
 					}
 				});
 
-			}
-		});
+		// 	}
+		// });
 
 	});
 	return app;

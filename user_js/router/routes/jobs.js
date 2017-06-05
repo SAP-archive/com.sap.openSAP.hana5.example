@@ -36,7 +36,7 @@ module.exports = function() {
 	app.get('/getalljobs', function(req, res) {
 		logger = req.loggingContext.getLogger("/jobs/getalljobs");
 		var client = req.db;
-		var query = 'SELECT "ID","NAME", "TIMESTAMP" FROM "Jobs.Data"';
+		var query = 'SELECT "ID", "NAME", "TIMESTAMP" FROM "Jobs.Data"';
 		var jobArray = [];
 		var jobObj = {};
 		client.exec(query, function(error, rows) {
@@ -64,7 +64,7 @@ module.exports = function() {
 		logger = req.loggingContext.getLogger("/jobs/getjobsbyname");
 		var client = req.db;
 		var name = req.params.name;
-		var sql = 'SELECT "ID","NAME", "TIMESTAMP" FROM "Jobs.Data" WHERE NAME =?';
+		var sql = 'SELECT "ID", "NAME", "TIMESTAMP" FROM "Jobs.Data" WHERE NAME =?';
 		var jobArray = [];
 		var jobObj = {};
 		client.prepare(sql, function(error, stmt) {
