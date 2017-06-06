@@ -7,9 +7,9 @@ using sap.common::UI as UI;
 using annotations.Importance;
 using annotations.EndUserText;
 using annotations.valueList;
-using "sap.hana.democontent.epm.models::GET_PARTNER_ROLES" as getPartnerRoles;
-using "sap.hana.democontent.epm.models::GET_COUNTRIES" as getCountries;
-using "sap.hana.democontent.epm.models::PRODUCTS" as PRODUCTS;
+using "core.models::GET_PARTNER_ROLES" as getPartnerRoles;
+using "core.models::GET_COUNTRIES" as getCountries;
+using "core.models::PRODUCTS" as PRODUCTS;
 
 context MDViews {
    define view BPView as

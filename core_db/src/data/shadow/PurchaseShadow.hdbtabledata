@@ -39,7 +39,6 @@
             "import_settings": {
                 "import_columns": [
                     "PURCHASEORDERID",
-					"PURCHASEORDERITEM",
 					"PRODUCT.PRODUCTID",
 					"NOTEID",
 					"CURRENCY",

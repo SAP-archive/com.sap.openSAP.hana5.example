@@ -4,8 +4,8 @@ using sap.common::UI as UI;
 using annotations.Importance;
 using annotations.EndUserText;
 using annotations.valueList;
-using "sap.hana.democontent.epm.models::PO_ITEM" as PO_ITEM;
-using "sap.hana.democontent.epm.models::PO_HEADER_ONLY" as PO_HEADER;
+using "core.models::PO_ITEM" as PO_ITEM;
+using "core.models::PO_HEADER_ONLY" as PO_HEADER;
 
 context POViews {
     define view POHeaderConsumption as
