@@ -1,67 +1,68 @@
 context PurchaseOrder {
     type BusinessKey : String(10);
-	type SDate : LocalDate;
-	type CurrencyT : String(5);
-	type AmountT : Decimal(15,2);
-	type QuantityT : Decimal(13,3);
-	type UnitT: String(3);
-	type StatusT: String(1);
-	
- 	Type HistoryT {
-          CREATEDBY : BusinessKey;
-          CREATEDAT : SDate;
-          CHANGEDBY : BusinessKey;
-          CHANGEDAT : SDate; 
-        };
+    type SDate : LocalDate;
+    type CurrencyT : String(5);
+    type AmountT : Decimal(15, 2);
+    type QuantityT : Decimal(13, 3);
+    type UnitT : String(3);
+    type StatusT : String(1);
+    type HistoryT {
+        CREATEDBY : BusinessKey;
+        CREATEDAT : SDate;
+        CHANGEDBY : BusinessKey;
+        CHANGEDAT : SDate;
+    };
 
-    Entity Header {
-        key  PURCHASEORDERID: BusinessKey;
-        ITEMS: Association[*] to Item on ITEMS.PURCHASEORDERID = PURCHASEORDERID;        
-        HISTORY: HistoryT;
-        NOTEID: BusinessKey null;
-        PARTNER: BusinessKey;
-        CURRENCY: CurrencyT;
-        GROSSAMOUNT: AmountT;
-        NETAMOUNT: AmountT;
-        TAXAMOUNT: AmountT;
-        LIFECYCLESTATUS: StatusT;
-        APPROVALSTATUS: StatusT;
-        CONFIRMSTATUS: StatusT;
-        ORDERINGSTATUS: StatusT;
-        INVOICINGSTATUS: StatusT;
-      } technical configuration {
-          column store;
-      };
+    entity Header {
+        key PURCHASEORDERID : Integer generated always as identity(start with 200000000 increment by 1 no minvalue maxvalue 2999999999 no cache no cycle);
+            ITEMS           : association[1, 0..*] to Item on Header.PURCHASEORDERID = PURCHASEORDERID;
+            HISTORY         : HistoryT;
+            NOTEID          : BusinessKey null;
+            PARTNER         : BusinessKey;
+            CURRENCY        : CurrencyT;
+            GROSSAMOUNT     : AmountT;
+            NETAMOUNT       : AmountT;
+            TAXAMOUNT       : AmountT;
+            LIFECYCLESTATUS : StatusT;
+            APPROVALSTATUS  : StatusT;
+            CONFIRMSTATUS   : StatusT;
+            ORDERINGSTATUS  : StatusT;
+            INVOICINGSTATUS : StatusT;
+    }
+    technical configuration {
+        column store;
+    };
 
-    Entity Item {
-        key  PURCHASEORDERID: BusinessKey;
-        key  PURCHASEORDERITEM: BusinessKey;
-      	HEADER: Association[1] to Header on HEADER.PURCHASEORDERID = PURCHASEORDERID; 
-        PRODUCT:  BusinessKey;
-        NOTEID: BusinessKey null;
-        CURRENCY: CurrencyT;
-        GROSSAMOUNT: AmountT;
-        NETAMOUNT: AmountT;
-        TAXAMOUNT: AmountT;
-	    QUANTITY: QuantityT;
-		QUANTITYUNIT: UnitT;
-		DELIVERYDATE: SDate;
-      } technical configuration {
-          column store;
-      };
+    entity Item {
+        POHeader     : association[*, 1..1] to Header { PURCHASEORDERID };
+        PRODUCT      : BusinessKey;
+        NOTEID       : BusinessKey null;
+        CURRENCY     : CurrencyT;
+        GROSSAMOUNT  : AmountT;
+        NETAMOUNT    : AmountT;
+        TAXAMOUNT    : AmountT;
+        QUANTITY     : QuantityT;
+        QUANTITYUNIT : UnitT;
+        DELIVERYDATE : SDate;
+    }
+    technical configuration {
+        column store;
+        index PURCHASEORDER_ITEM_ID on (POHeader.PURCHASEORDERID) asc;
+    };
 
-   define view ItemView as SELECT from Item {
-      PURCHASEORDERID as "PurchaseOrderItemId", 
-      PURCHASEORDERITEM as "ItemPos",
-      HEADER.PARTNER as "PartnerId",
-  	  PRODUCT as "ProductID",
-  	  CURRENCY as "CurrencyCode",
-      GROSSAMOUNT as "Amount",
-      NETAMOUNT as "NetAmount",
-      TAXAMOUNT as "TaxAmount",
-  	  QUANTITY as "Quantity",
-  	  QUANTITYUNIT as "QuantityUnit",
-  	  DELIVERYDATE as "DeliveryDate1"
-   } with structured privilege check;
-   
+    define view ItemView as
+        select from Item
+        {
+            POHeader.PURCHASEORDERID as "PurchaseOrderItemId",
+            POHeader.PARTNER         as "PartnerId",
+            PRODUCT                  as "ProductID",
+            CURRENCY                 as "CurrencyCode",
+            GROSSAMOUNT              as "Amount",
+            NETAMOUNT                as "NetAmount",
+            TAXAMOUNT                as "TaxAmount",
+            QUANTITY                 as "Quantity",
+            QUANTITYUNIT             as "QuantityUnit",
+            DELIVERYDATE             as "DeliveryDate1"
+        }
+        with structured privilege check;
 };

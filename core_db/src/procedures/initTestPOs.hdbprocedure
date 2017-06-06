@@ -1,0 +1,36 @@
+PROCEDURE "initTestPOs" ( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY DEFINER
+   --DEFAULT SCHEMA <default_schema_name>
+   AS
+   	lv_counter integer := 0; 
+BEGIN
+   /*************************************
+       Write your procedure logic 
+   *************************************/
+   
+   INSERT INTO "PurchaseOrder.Header" 
+   ("PARTNER", "CURRENCY", "GROSSAMOUNT")
+   VALUES(
+	'0100000000' /*PARTNER <NVARCHAR(10)>*/,
+	'EUR' /*CURRENCY <NVARCHAR(5)>*/,
+	(SELECT ROUND(TO_DECIMAL(1 + (999999-1)*RAND()),2) FROM DUMMY) /*GROSSAMOUNT <DECIMAL>*/
+	);
+	
+	WHILE :lv_counter < 6 DO 
+
+		lv_counter := :lv_counter + 1;
+		INSERT INTO "PurchaseOrder.Item" 
+		("POHeader.PURCHASEORDERID", "PRODUCT", "QUANTITY", "QUANTITYUNIT", "DELIVERYDATE")
+		VALUES(
+			CURRENT_IDENTITY_VALUE(),
+			'HT-6100' /*PRODUCT <NVARCHAR(10)>*/,
+			(SELECT ROUND(TO_DECIMAL(1 + (999-1)*RAND()),0) FROM DUMMY) /*QUANTITY <DECIMAL>*/,
+			'EA' /*QUANTITYUNIT <NVARCHAR(3)>*/,
+			add_days(now(),30) /*DELIVERYDATE <DATE>*/
+		);
+	END WHILE;
+
+	commit;
+
+END
