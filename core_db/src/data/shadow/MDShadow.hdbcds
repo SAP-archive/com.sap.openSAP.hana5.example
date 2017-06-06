@@ -5,7 +5,7 @@ using Util;
 using MD;
 
 context MDShadow {
-    entity Addresses {
+   entity Addresses {
         key ADDRESSID   : Integer;
             CITY        : EPM.SString;
             POSTALCODE  : EPM.BusinessKey;

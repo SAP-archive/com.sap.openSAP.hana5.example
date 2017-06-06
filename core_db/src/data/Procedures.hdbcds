@@ -3,7 +3,7 @@ using MD;
 
 
 context Procedures {
-   
+ 
     table type tt_bp_addresses {
       PARTNERID: String(10);
       PARTNERROLE: String(3);
@@ -104,5 +104,5 @@ context Procedures {
         APPLICATION: String(128);
         EXPIRY: UTCTimestamp;    
     };
-    
+
 };
