@@ -3,41 +3,46 @@ using MD;
 using annotations;
 
 context SO {
-   entity Header {
-      key SALESORDERID    : EPM.BusinessKey;
-          ITEMS           : association [ * ] to Item on
-         ITEMS.SALESORDERID = SALESORDERID;
-          HISTORY         : MD.HistT;
-          NOTEID          : EPM.BusinessKey null;
-          PARTNER         : association to MD.BusinessPartner;
-          CURRENCY        : EPM.CurrencyT;
-          GROSSAMOUNT     : EPM.AmountT;
-          NETAMOUNT       : EPM.AmountT;
-          TAXAMOUNT       : EPM.AmountT;
-          LIFECYCLESTATUS : EPM.StatusT;
-          BILLINGSTATUS   : EPM.StatusT;
-          DELIVERYSTATUS  : EPM.StatusT;
-   };
-   entity Item {
-      key SALESORDERID   : EPM.BusinessKey;
-      key SALESORDERITEM : EPM.BusinessKey;
-          HEADER         : association [ 1 ] to Header on
-         HEADER.SALESORDERID = SALESORDERID;
-          PRODUCT        : association to MD.Products;
-          NOTEID         : EPM.BusinessKey null;
-          CURRENCY       : EPM.CurrencyT;
-          GROSSAMOUNT    : EPM.AmountT;
-          NETAMOUNT      : EPM.AmountT;
-          TAXAMOUNT      : EPM.AmountT;
-          ITEMATPSTATUS  : String(1);
-          OPITEMPOS      : EPM.BusinessKey null;
-          QUANTITY       : EPM.QuantityT;
-          QUANTITYUNIT   : EPM.UnitT;
-          DELIVERYDATE   : EPM.SDate;
-   };
-   entity Filter {
-      key MODEL    : String(30);
-      key COLNAME  : String(8);
-          COLVALUE : String(8);
-   };
+    entity Header {
+        key SALESORDERID    : Integer generated always as identity(start with 500001029 increment by 1 no minvalue maxvalue 599999999 no cache no cycle);
+            ITEMS           : association[1, 0..*] to Item                on Header.SALESORDERID = SALESORDERID;
+            HISTORY         : MD.HistT;
+            NOTEID          : EPM.BusinessKey null;
+            PARTNER         : association          to MD.BusinessPartner;
+            CURRENCY        : EPM.CurrencyT;
+            GROSSAMOUNT     : EPM.AmountT;
+            NETAMOUNT       : EPM.AmountT;
+            TAXAMOUNT       : EPM.AmountT;
+            LIFECYCLESTATUS : EPM.StatusT;
+            BILLINGSTATUS   : EPM.StatusT;
+            DELIVERYSTATUS  : EPM.StatusT;
+    }
+    technical configuration {
+        column store;
+    };
+
+    entity Item {
+        HEADER        : association[*, 1..1] to Header { SALESORDERID };
+        PRODUCT       : association          to MD.Products;
+        NOTEID        : EPM.BusinessKey null;
+        CURRENCY      : EPM.CurrencyT;
+        GROSSAMOUNT   : EPM.AmountT;
+        NETAMOUNT     : EPM.AmountT;
+        TAXAMOUNT     : EPM.AmountT;
+        ITEMATPSTATUS : String(1);
+        OPITEMPOS     : EPM.BusinessKey null;
+        QUANTITY      : EPM.QuantityT;
+        QUANTITYUNIT  : EPM.UnitT;
+        DELIVERYDATE  : EPM.SDate;
+    }
+    technical configuration {
+        column store;
+        index ITEM_ID on (HEADER.SALESORDERID) asc;
+    };
+
+    entity Filter {
+        key MODEL    : String(30);
+        key COLNAME  : String(8);
+            COLVALUE : String(8);
+    };
 };
