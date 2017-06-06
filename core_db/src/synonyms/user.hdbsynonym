@@ -6,7 +6,7 @@
   },
   "USER_DETAILS": {
     "target": {
-      "object": "sap.hana.democontent.user.models::USER_DETAILS"
+      "object": "user.models::USER_DETAILS"
     }
   }
 }

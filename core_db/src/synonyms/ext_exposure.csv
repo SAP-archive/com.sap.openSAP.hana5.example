@@ -1,26 +1,26 @@
 {   
-	"sap.hana.democontent.epm.models::BUYER":
+	"core.models::BUYER":
 	{
 		"target": {
-			"object"   : "sap.hana.democontent.epm.models::BUYER"
+			"object"   : "core.models::BUYER"
 		}
 	},
-	"sap.hana.democontent.epm.models::PURCHASE_ORDERS":
+	"core.models::PURCHASE_ORDERS":
 	{
 		"target": {
-			"object"   : "sap.hana.democontent.epm.models::PURCHASE_ORDERS"
+			"object"   : "core.models::PURCHASE_ORDERS"
 		}
 	},
-	"sap.hana.democontent.epm.models/BUYER":
+	"core.models/BUYER":
 	{
 		"target": {
-			"object"   : "sap.hana.democontent.epm.models::BUYER"
+			"object"   : "core.models::BUYER"
 		}
 	},
-	"sap.hana.democontent.epm.models/PURCHASE_ORDERS":
+	"core.models/PURCHASE_ORDERS":
 	{
 		"target": {
-			"object"   : "sap.hana.democontent.epm.models::PURCHASE_ORDERS"
+			"object"   : "core.models::PURCHASE_ORDERS"
 		}
 	}	
 } 

@@ -8,7 +8,7 @@
     "USER_DETAILS": {
     "target": {
       "grantor" : "hdi-user-service",
-      "object" : "sap.hana.democontent.user.models::USER_DETAILS"
+      "object" : "user.models::USER_DETAILS"
      }
   }
 }
