@@ -1,0 +1,8 @@
+context users {
+Table Type RolesT {
+        ROLE_NAME : String(255);
+      };
+Table Type LogT {
+        MESSAGE: String(255);
+      };      
+};
