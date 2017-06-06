@@ -1,0 +1,30 @@
+{
+	"role":{
+		"name": "poAccess",
+		"schema_privileges": [{
+		   "privileges": ["SELECT METADATA", 
+		    			  "SELECT" ] }],
+		"object_privileges":[
+			{
+				"name": "PurchaseOrderSQL.Header",
+				"type": "TABLE",
+				"privileges": [ "SELECT" ]
+			},
+			{
+				"name": "PurchaseOrderSQL.Item",
+				"type": "TABLE",
+				"privileges": [ "SELECT" ]
+			},
+			{
+				"name": "getPOItemsSQL",
+				"type": "PROCEDURE",
+				"privileges": [ "EXECUTE" ]
+			},
+			{
+				"name": "PurchaseOrdersSQL",
+				"type": "VIEW",
+				"privileges": [ "SELECT" ]
+			}			
+		]
+	}
+}
