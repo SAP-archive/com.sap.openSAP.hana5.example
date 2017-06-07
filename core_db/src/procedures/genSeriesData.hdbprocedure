@@ -24,7 +24,8 @@ FROM SERIES_GENERATE_TIMESTAMP('INTERVAL 1 HOUR',now() , ADD_YEARS(now(), 1)  ) 
 		
                     
    			insert into "Util.SeriesData" 
-             values ( "seriesData".NEXTVAL , (select series_round(cur_row.TS ,'INTERVAL 1 HOUR') from dummy), cur_row.FACTOR );
+   			 ("t", FACTOR) 
+             values ((select series_round(cur_row.TS ,'INTERVAL 1 HOUR') from dummy), cur_row.FACTOR );
   
  
   	End For;   

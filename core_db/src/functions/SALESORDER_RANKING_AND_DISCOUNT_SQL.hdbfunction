@@ -25,7 +25,7 @@ SELECT   company_name, region, sales, orders, sales_rank, order_rank from(
 	 dense_rank() over ( order by count(T0."SALESORDERID") desc ) as order_rank
 	 --T1."DELIVERYDATE" 
 	 from "SO.Header" T0 
-     inner join "SO.Item" T1 on T0."SALESORDERID" = T1."SALESORDERID" 
+     inner join "SO.Item" T1 on T0."SALESORDERID" = T1."HEADER.SALESORDERID" 
      inner join "MD.BusinessPartner" T2 on T0."PARTNER.PARTNERID" = T2."PARTNERID" 
      inner join "MD.Addresses" T3 on T2."ADDRESSES.ADDRESSID" = T3."ADDRESSID"  
      where TO_DATE(T1."DELIVERYDATE") between :IP_FR_DATE and :IP_TO_DATE

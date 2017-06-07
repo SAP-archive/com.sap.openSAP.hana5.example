@@ -12,6 +12,7 @@ BEGIN
 	Write your procedure logic 
  *****************************/
  UPSERT "Util.SSCOOKIE"
+	  (SESSIONID, NAME, APPLICATION, EXPIRY, DATA)
 	  VALUES(:im_sessionid, :IM_NAME, :im_application, :im_expiry, :im_data)
 	   WHERE SESSIONID   = :im_sessionid
 	     AND NAME        = :im_name

@@ -19,7 +19,7 @@ declare lv_date string;
 declare lv_price DECIMAL(15,2);
 declare lv_val string;
 
-select "PRODUCT.PRODUCTID",CURRENCY,QUANTITY,DELIVERYDATE
+select "PRODUCT.PRODUCTID", CURRENCY, QUANTITY, DELIVERYDATE
      into lv_productid,  
           lv_currency,lv_quantity,lv_date
                       from :im_so_details;
@@ -38,15 +38,19 @@ lv_grossamount := :lv_netamount + :lv_taxamount;
                'Invalid Product ' || lv_productid as error_message, 
                      'No Way! Product field can not be empty' as detail from dummy;
 else
-                      
 
-    insert into "SO.Header" 
-             values('0' || "salesOrderId".NEXTVAL,'0000000033',CURRENT_DATE,'0000000033',CURRENT_DATE,'','0100000000',lv_currency,lv_grossamount,lv_netamount,
-             		lv_taxamount,'N','I','I');
-         			
+    insert into "SO.Header"
+             ("HISTORY.CREATEDBY.EMPLOYEEID", "HISTORY.CREATEDAT", "HISTORY.CHANGEDBY.EMPLOYEEID", "HISTORY.CHANGEDAT",
+              "PARTNER.PARTNERID", CURRENCY, GROSSAMOUNT, NETAMOUNT, TAXAMOUNT,
+              LIFECYCLESTATUS, BILLINGSTATUS, DELIVERYSTATUS)
+             values(33, CURRENT_DATE, 33, CURRENT_DATE, 100000000, lv_currency, lv_grossamount, lv_netamount,
+             		lv_taxamount, 'N', 'I', 'I');
+ 
 	insert into "SO.Item" 
-             values ('0' || "salesOrderId".CURRVAL,'0000000010',lv_productid,'',lv_currency,lv_grossamount,lv_netamount, lv_taxamount,
-        			'I','',lv_quantity,'EA',lv_date);   			
+	         ("HEADER.SALESORDERID", "PRODUCT.PRODUCTID", CURRENCY, GROSSAMOUNT, NETAMOUNT, TAXAMOUNT,
+	          ITEMATPSTATUS, QUANTITY, QUANTITYUNIT, DELIVERYDATE)
+             values (CURRENT_IDENTITY_VALUE(), lv_productid, lv_currency, lv_grossamount, lv_netamount, lv_taxamount,
+        			'I', lv_quantity, 'EA', lv_date);   			
         			
  end if;
  END;

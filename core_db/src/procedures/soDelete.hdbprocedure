@@ -26,7 +26,7 @@ if :lv_salesorderid = '' then
                      'Sales Order does not exists' as detail from dummy;
 else
             
-delete from "SO.Item"  where "SALESORDERID" = :lv_soid;     
+delete from "SO.Item"  where "HEADER.SALESORDERID" = :lv_soid;     
 
 delete from  "SO.Header" where SALESORDERID = :lv_soid;
             

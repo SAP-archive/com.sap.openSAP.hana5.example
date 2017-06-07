@@ -24,7 +24,7 @@ select "PRODUCT.PRODUCTID",CURRENCY,QUANTITY,DELIVERYDATE
           lv_currency,lv_quantity,lv_date
                       from :im_po_details;
                       
-select "purchaseOrderSeqId".NEXTVAL into lv_purchaseorderid FROM "DUMMY";                    
+--select "purchaseOrderSeqId".NEXTVAL into lv_purchaseorderid FROM "DUMMY";                    
 select price into lv_price from "MD.Products" where PRODUCTID = :lv_productid;
 
 
@@ -40,8 +40,10 @@ lv_grossamount := :lv_netamount + :lv_taxamount;
 else
                       
 	insert into "PO.Item" 
-             values ('0' || lv_purchaseorderid,'0000000010',lv_productid,'',lv_currency,lv_grossamount,lv_netamount, lv_taxamount,
-        			lv_quantity,'EA',lv_date);  
+			("PRODUCT.PRODUCTID", CURRENCY, GROSSAMOUNT, NETAMOUNT, TAXAMOUNT, 
+	          QUANTITY, QUANTITYUNIT, DELIVERYDATE)
+             values (lv_productid, lv_currency, lv_grossamount, lv_netamount, lv_taxamount,
+        			lv_quantity,'EA', lv_date);  
         			
  end if;
  END;

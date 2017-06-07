@@ -19,9 +19,9 @@ declare lv_date string;
 declare lv_price DECIMAL(15,2);
 declare lv_val string;
 
-select PURCHASEORDERID,PRODUCTID,PARTNERID,CURRENCY,QUANTITY,DELIVERYDATE
-     into lv_purchaseorderid,lv_productid,lv_partnerid,  
-          lv_currency,lv_quantity,lv_date
+select PURCHASEORDERID, PRODUCTID, PARTNERID, CURRENCY, QUANTITY, DELIVERYDATE
+     into lv_purchaseorderid, lv_productid, lv_partnerid,  
+          lv_currency, lv_quantity, lv_date
                       from :im_po_details;
                       
 /*select "purchaseOrderSeqId".NEXTVAL into lv_purchaseorderid FROM ":DUMMY";  */                  
@@ -38,15 +38,19 @@ lv_grossamount := :lv_netamount + :lv_taxamount;
                'Invalid Product ' || lv_productid as error_message, 
                      'No Way! Product field can not be empty' as detail from "DUMMY";
 else
-                      
 
     insert into "PO.Header" 
-             values(lv_purchaseorderid,'33',CURRENT_DATE,'33',CURRENT_DATE,'',lv_partnerid,lv_currency,lv_grossamount,lv_netamount,
-             		lv_taxamount,'N','I','I','I','I');
-         			
-	insert into "PO.Item" 
-             values (lv_purchaseorderid,'10',lv_productid,'',lv_currency,lv_grossamount,lv_netamount, lv_taxamount,
-        			lv_quantity,'EA',lv_date);  
+             ("HISTORY.CREATEDBY.EMPLOYEEID", "HISTORY.CREATEDAT", "HISTORY.CHANGEDBY.EMPLOYEEID", "HISTORY.CHANGEDAT",
+              "PARTNER.PARTNERID", CURRENCY, GROSSAMOUNT, NETAMOUNT, TAXAMOUNT, 
+              LIFECYCLESTATUS, APPROVALSTATUS, CONFIRMSTATUS, ORDERINGSTATUS, INVOICINGSTATUS)
+             values(33, CURRENT_DATE, 33, CURRENT_DATE, lv_partnerid, lv_currency, lv_grossamount, lv_netamount,
+             		lv_taxamount, 'N', 'I', 'I', 'I', 'I');
+
+	insert into "PO.Item"
+	         ("HEADER.PURCHASEORDERID", "PRODUCT.PRODUCTID", CURRENCY, GROSSAMOUNT, NETAMOUNT, TAXAMOUNT, 
+	          QUANTITY, QUANTITYUNIT, DELIVERYDATE)
+             values (CURRENT_IDENTITY_VALUE(), lv_productid, lv_currency, lv_grossamount, lv_netamount, lv_taxamount,
+        			lv_quantity,'EA', lv_date);  
         			
  end if;
  END;
