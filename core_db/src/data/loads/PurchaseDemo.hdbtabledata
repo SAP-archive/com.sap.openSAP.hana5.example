@@ -52,8 +52,7 @@
 			}
 		},
 		"import_settings": {
-			"import_columns": ["PURCHASEORDERID",
-			"PURCHASEORDERITEM",
+			"import_columns": ["POHeader.PURCHASEORDERID",
 			"PRODUCT",
 			"NOTEID",
 			"CURRENCY",
@@ -64,8 +63,7 @@
 			"QUANTITYUNIT" ]
 		},
 		"column_mappings": {
-			"PURCHASEORDERID": 1,
-			"PURCHASEORDERITEM": 2,
+			"POHeader.PURCHASEORDERID": 1,
 			"PRODUCT": 3,
 			"NOTEID": 4,
 			"CURRENCY": 5,

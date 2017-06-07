@@ -48,7 +48,7 @@ context MD {
             CURRENCY     : EPM.CurrencyT;
     }
     technical configuration {
-       partition by HASH  (PARTNERID) Partitions GET_NUM_SERVERS();
+    //   partition by HASH  (PARTNERID) Partitions GET_NUM_SERVERS();
     };
 
     entity Employees {
