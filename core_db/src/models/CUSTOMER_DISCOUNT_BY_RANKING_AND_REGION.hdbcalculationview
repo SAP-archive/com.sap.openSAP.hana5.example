@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="sap.hana.democontent.epm.models::CUSTOMER_DISCOUNT_BY_RANKING_AND_REGION" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="core.models::CUSTOMER_DISCOUNT_BY_RANKING_AND_REGION" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="CUSTOMER_DISCOUNT_BY_"/>
 <localVariables>
   <variable id="IP_FR_DTE" parameter="true">
@@ -87,67 +87,67 @@
   </variable>
 </localVariables>
 <variableMappings>
-  <mapping xsi:type="Variable:VariableMapping" dataSource="sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL">
-    <targetVariable name="IP_FR_DTE" resourceUri="/undefined/calculationviews/sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL">
+    <targetVariable name="IP_FR_DTE" resourceUri="/undefined/calculationviews/core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
     <localVariable>IP_FR_DTE</localVariable>
   </mapping>
-  <mapping xsi:type="Variable:VariableMapping" dataSource="sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL">
-    <targetVariable name="IP_TO_DTE" resourceUri="/undefined/calculationviews/sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL">
+    <targetVariable name="IP_TO_DTE" resourceUri="/undefined/calculationviews/core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
     <localVariable>IP_TO_DTE</localVariable>
   </mapping>
-  <mapping xsi:type="Variable:VariableMapping" dataSource="sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL">
-    <targetVariable name="IP_REGION" resourceUri="/undefined/calculationviews/sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL">
+    <targetVariable name="IP_REGION" resourceUri="/undefined/calculationviews/core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
     <localVariable>IP_AMER</localVariable>
   </mapping>
-  <mapping xsi:type="Variable:VariableMapping" dataSource="APJ$$$$sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
-    <targetVariable name="IP_FR_DTE" resourceUri="/undefined/calculationviews/sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="APJ$$$$core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
+    <targetVariable name="IP_FR_DTE" resourceUri="/undefined/calculationviews/core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
     <localVariable>IP_FR_DTE</localVariable>
   </mapping>
-  <mapping xsi:type="Variable:VariableMapping" dataSource="APJ$$$$sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
-    <targetVariable name="IP_TO_DTE" resourceUri="/undefined/calculationviews/sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="APJ$$$$core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
+    <targetVariable name="IP_TO_DTE" resourceUri="/undefined/calculationviews/core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
     <localVariable>IP_TO_DTE</localVariable>
   </mapping>
-  <mapping xsi:type="Variable:VariableMapping" dataSource="APJ$$$$sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
-    <targetVariable name="IP_REGION" resourceUri="/undefined/calculationviews/sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="APJ$$$$core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
+    <targetVariable name="IP_REGION" resourceUri="/undefined/calculationviews/core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
     <localVariable>IP_EMEA</localVariable>
   </mapping>
-  <mapping xsi:type="Variable:VariableMapping" dataSource="AMER$$$$sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
-    <targetVariable name="IP_FR_DTE" resourceUri="/undefined/calculationviews/sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="AMER$$$$core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
+    <targetVariable name="IP_FR_DTE" resourceUri="/undefined/calculationviews/core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
     <localVariable>IP_FR_DTE</localVariable>
   </mapping>
-  <mapping xsi:type="Variable:VariableMapping" dataSource="AMER$$$$sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
-    <targetVariable name="IP_TO_DTE" resourceUri="/undefined/calculationviews/sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="AMER$$$$core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
+    <targetVariable name="IP_TO_DTE" resourceUri="/undefined/calculationviews/core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
     <localVariable>IP_TO_DTE</localVariable>
   </mapping>
-  <mapping xsi:type="Variable:VariableMapping" dataSource="AMER$$$$sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
-    <targetVariable name="IP_REGION" resourceUri="/undefined/calculationviews/sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="AMER$$$$core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
+    <targetVariable name="IP_REGION" resourceUri="/undefined/calculationviews/core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
     <localVariable>IP_AFR</localVariable>
   </mapping>
-  <mapping xsi:type="Variable:VariableMapping" dataSource="EMEA$$$$sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
-    <targetVariable name="IP_FR_DTE" resourceUri="/undefined/calculationviews/sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="EMEA$$$$core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
+    <targetVariable name="IP_FR_DTE" resourceUri="/undefined/calculationviews/core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
     <localVariable>IP_FR_DTE</localVariable>
   </mapping>
-  <mapping xsi:type="Variable:VariableMapping" dataSource="EMEA$$$$sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
-    <targetVariable name="IP_TO_DTE" resourceUri="/undefined/calculationviews/sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="EMEA$$$$core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
+    <targetVariable name="IP_TO_DTE" resourceUri="/undefined/calculationviews/core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
     <localVariable>IP_TO_DTE</localVariable>
   </mapping>
-  <mapping xsi:type="Variable:VariableMapping" dataSource="EMEA$$$$sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
-    <targetVariable name="IP_REGION" resourceUri="/undefined/calculationviews/sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="EMEA$$$$core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
+    <targetVariable name="IP_REGION" resourceUri="/undefined/calculationviews/core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
     <localVariable>IP_APJ</localVariable>
   </mapping>
 </variableMappings>
 <dataSources>
-  <DataSource id="sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL">
-    <resourceUri>sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL</resourceUri>
+  <DataSource id="core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL">
+    <resourceUri>core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL</resourceUri>
   </DataSource>
-  <DataSource id="APJ$$$$sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
-    <resourceUri>sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL</resourceUri>
+  <DataSource id="APJ$$$$core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
+    <resourceUri>core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL</resourceUri>
   </DataSource>
-  <DataSource id="AMER$$$$sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
-    <resourceUri>sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL</resourceUri>
+  <DataSource id="AMER$$$$core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
+    <resourceUri>core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL</resourceUri>
   </DataSource>
-  <DataSource id="EMEA$$$$sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
-    <resourceUri>sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL</resourceUri>
+  <DataSource id="EMEA$$$$core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
+    <resourceUri>core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews>
@@ -167,7 +167,7 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL">
+    <input node="core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL">
       <mapping xsi:type="Calculation:AttributeMapping" target="REGION" source="REGION"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="SALES_AFR" source="SALES"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="COMPANY_NAME" source="COMPANY_NAME"/>
@@ -190,7 +190,7 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="APJ$$$$sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
+    <input node="APJ$$$$core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
       <mapping xsi:type="Calculation:AttributeMapping" target="REGION" source="REGION"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="SALES_APJ" source="SALES"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="COMPANY_NAME" source="COMPANY_NAME"/>
@@ -213,7 +213,7 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="AMER$$$$sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
+    <input node="AMER$$$$core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
       <mapping xsi:type="Calculation:AttributeMapping" target="REGION" source="REGION"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="SALES_AMER" source="SALES"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="COMPANY_NAME" source="COMPANY_NAME"/>
@@ -236,7 +236,7 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="EMEA$$$$sap.hana.democontent.epm.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
+    <input node="EMEA$$$$core.models::SALES_ORDER_RANKING_AND_DISCOUNT_SQL$$">
       <mapping xsi:type="Calculation:AttributeMapping" target="REGION" source="REGION"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="SALES_EMEA" source="SALES"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="COMPANY_NAME" source="COMPANY_NAME"/>

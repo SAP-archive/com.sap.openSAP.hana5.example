@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALES_ORDER_RANKING" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="core.models::SALES_ORDER_RANKING" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALES_ORDER_RANKING"/>
 <localVariables/>
 <variableMappings/>
@@ -23,9 +23,6 @@
       <viewAttribute id="PARTNERID"><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PARTNER_PARTNERID"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERITEM"><descriptions/><descriptions/><descriptions/>
-        <descriptions defaultDescription="SALESORDERITEM"/>
-      </viewAttribute>
       <viewAttribute id="NETAMOUNT"><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="NETAMOUNT"/>
       </viewAttribute>
@@ -38,16 +35,16 @@
         <formula>&quot;NETAMOUNT&quot; &gt;= 0</formula>
       </calculatedViewAttribute>
     </calculatedViewAttributes>
+    <restrictedViewAttributes/>
     <input node="SO.Header">
       <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="HISTORY_CREATEDAT" source="HISTORY.CREATEDAT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERID" source="PARTNER.PARTNERID"/>
     </input>
     <input node="SO.Item">
-      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERITEM" source="SALESORDERITEM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT" source="NETAMOUNT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCT.PRODUCTID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="HEADER.SALESORDERID"/>
     </input>
     <joinAttribute name="SALESORDERID"/>
   </calculationView>
@@ -58,23 +55,22 @@
       <descriptions defaultDescription="SALESORDERID"/>
       <keyMapping columnObjectName="Join_1" columnName="SALESORDERID"/>
     </attribute>
-    <attribute id="SALESORDERITEM" key="true" order="2" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="SALESORDERITEM"/>
-      <keyMapping columnObjectName="Join_1" columnName="SALESORDERITEM"/>
-    </attribute>
     <attribute id="PARTNERID$local">
+      <descriptions/>
       <keyMapping columnObjectName="Join_1" columnName="PARTNERID"/>
     </attribute>
     <attribute id="PRODUCTID$local">
+      <descriptions/>
       <keyMapping columnObjectName="Join_1" columnName="PRODUCTID"/>
     </attribute>
     <attribute id="HISTORY_CREATEDAT$local">
+      <descriptions/>
       <keyMapping columnObjectName="Join_1" columnName="HISTORY_CREATEDAT"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
   <baseMeasures>
-    <measure id="NETAMOUNT" order="3" aggregationType="sum" measureType="simple">
+    <measure id="NETAMOUNT" order="2" aggregationType="sum" measureType="simple">
       <descriptions defaultDescription="NETAMOUNT"/>
       <measureMapping columnObjectName="Join_1" columnName="NETAMOUNT"/>
     </measure>
@@ -83,7 +79,7 @@
   <restrictedMeasures/>
   <localDimensions/>
   <sharedDimensions>
-    <logicalJoin associatedObjectUri="sap.hana.democontent.epm.models::BUYER">
+    <logicalJoin associatedObjectUri="core.models::BUYER">
       <attributes>
         <attributeRef>PARTNERID$local</attributeRef>
       </attributes>
@@ -93,7 +89,7 @@
       <properties joinType="referential" joinOperator="Equal"/>
       <associatedAttributeFeatures/>
     </logicalJoin>
-    <logicalJoin associatedObjectUri="sap.hana.democontent.epm.models::PROD">
+    <logicalJoin associatedObjectUri="core.models::PROD">
       <attributes>
         <attributeRef>PRODUCTID$local</attributeRef>
       </attributes>
@@ -105,7 +101,7 @@
         <attributeReference alias="COMPANYNAME_1" attributeName="COMPANYNAME"/>
       </associatedAttributeFeatures>
     </logicalJoin>
-    <logicalJoin associatedObjectUri="sap.hana.democontent.epm.models::TIME_DIM">
+    <logicalJoin associatedObjectUri="core.models::TIME_DIM">
       <attributes>
         <attributeRef>HISTORY_CREATEDAT$local</attributeRef>
       </attributes>
@@ -131,7 +127,7 @@
     </shape>
     <shape modelObjectName="SO.Header" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="20" y="38"/>
-      <rectangleSize width="266"/>
+      <rectangleSize width="278.97265625"/>
     </shape>
     <shape modelObjectName="SO.Item" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="30"/>
@@ -141,15 +137,15 @@
       <upperLeftCorner x="330" y="224"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="sap.hana.democontent.epm.models::BUYER" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+    <shape modelObjectName="core.models::BUYER" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
       <upperLeftCorner x="-11" y="-98"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="sap.hana.democontent.epm.models::PROD" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+    <shape modelObjectName="core.models::PROD" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
       <upperLeftCorner x="-16" y="178"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="sap.hana.democontent.epm.models::TIME_DIM" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+    <shape modelObjectName="core.models::TIME_DIM" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
       <upperLeftCorner x="644" y="16"/>
       <rectangleSize width="250"/>
     </shape>

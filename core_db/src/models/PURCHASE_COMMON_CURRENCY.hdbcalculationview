@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::PURCHASE_COMMON_CURRENCY" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="core.models::PURCHASE_COMMON_CURRENCY" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="PURCHASE_COMMON_CURRENCY"/>
 <localVariables>
   <variable id="IP_O_TARGET_CURRENCY" parameter="true">
@@ -22,8 +22,8 @@
   <DataSource id="MD.Products">
     <resourceUri>MD.Products</resourceUri>
   </DataSource>
-  <DataSource id="sap.hana.democontent.epm.models::BUYER">
-    <resourceUri>sap.hana.democontent.epm.models::BUYER</resourceUri>
+  <DataSource id="core.models::BUYER">
+    <resourceUri>core.models::BUYER</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews>
@@ -44,9 +44,6 @@
       <viewAttribute id="PRODUCTID"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_PRODUCTID"/>
       </viewAttribute>
-      <viewAttribute id="PURCHASEORDERITEM"><descriptions/><descriptions/><descriptions/><descriptions/>
-        <descriptions defaultDescription="PURCHASEORDERITEM"/>
-      </viewAttribute>
       <viewAttribute id="GROSSAMOUNT"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="GROSSAMOUNT"/>
       </viewAttribute>
@@ -55,6 +52,7 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="PO.Header">
       <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERID" source="PURCHASEORDERID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERID" source="PARTNER.PARTNERID"/>
@@ -62,10 +60,9 @@
     </input>
     <input node="PO.Item">
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCT.PRODUCTID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERITEM" source="PURCHASEORDERITEM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="GROSSAMOUNT" source="GROSSAMOUNT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERID" source="PURCHASEORDERID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERID" source="HEADER.PURCHASEORDERID"/>
     </input>
     <joinAttribute name="PURCHASEORDERID"/>
   </calculationView>
@@ -83,9 +80,6 @@
       <viewAttribute id="HISTORY_CREATEDAT"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="HISTORY_CREATEDAT"/>
       </viewAttribute>
-      <viewAttribute id="PURCHASEORDERITEM"><descriptions/><descriptions/><descriptions/><descriptions/>
-        <descriptions defaultDescription="PURCHASEORDERITEM"/>
-      </viewAttribute>
       <viewAttribute id="GROSSAMOUNT"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="GROSSAMOUNT"/>
       </viewAttribute>
@@ -101,11 +95,11 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="PO">
       <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERID" source="PURCHASEORDERID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERID" source="PARTNERID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="HISTORY_CREATEDAT" source="HISTORY_CREATEDAT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERITEM" source="PURCHASEORDERITEM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="GROSSAMOUNT" source="GROSSAMOUNT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
     
@@ -127,9 +121,6 @@
       </viewAttribute>
       <viewAttribute id="HISTORY_CREATEDAT"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="HISTORY_CREATEDAT"/>
-      </viewAttribute>
-      <viewAttribute id="PURCHASEORDERITEM"><descriptions/><descriptions/><descriptions/><descriptions/>
-        <descriptions defaultDescription="PURCHASEORDERITEM"/>
       </viewAttribute>
       <viewAttribute id="GROSSAMOUNT"><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="GROSSAMOUNT"/>
@@ -158,10 +149,10 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="Products">
       <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERID" source="PURCHASEORDERID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="HISTORY_CREATEDAT" source="HISTORY_CREATEDAT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERITEM" source="PURCHASEORDERITEM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="GROSSAMOUNT" source="GROSSAMOUNT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CATEGORY" source="CATEGORY"/>
@@ -169,7 +160,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCTID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERID" source="PARTNERID"/>
     </input>
-    <input node="sap.hana.democontent.epm.models::BUYER">
+    <input node="core.models::BUYER">
       <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYNAME" source="COMPANYNAME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="POSTALCODE" source="POSTALCODE"/>
@@ -184,36 +175,34 @@
       <descriptions defaultDescription="PURCHASEORDERID"/>
       <keyMapping columnObjectName="Partners" columnName="PURCHASEORDERID"/>
     </attribute>
-    <attribute id="PURCHASEORDERITEM" key="true" order="3" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="PURCHASEORDERITEM"/>
-      <keyMapping columnObjectName="Partners" columnName="PURCHASEORDERITEM"/>
-    </attribute>
-    <attribute id="CURRENCY" order="5" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CURRENCY" order="4" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CURRENCY"/>
       <keyMapping columnObjectName="Partners" columnName="CURRENCY"/>
     </attribute>
-    <attribute id="CATEGORY" order="6" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CATEGORY" order="5" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CATEGORY"/>
       <keyMapping columnObjectName="Partners" columnName="CATEGORY"/>
     </attribute>
-    <attribute id="CITY" order="7" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CITY" order="6" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CITY"/>
       <keyMapping columnObjectName="Partners" columnName="CITY"/>
     </attribute>
-    <attribute id="COMPANYNAME" order="8" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="COMPANYNAME" order="7" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="COMPANYNAME"/>
       <keyMapping columnObjectName="Partners" columnName="COMPANYNAME"/>
     </attribute>
-    <attribute id="POSTALCODE" order="9" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="POSTALCODE" order="8" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="POSTALCODE"/>
       <keyMapping columnObjectName="Partners" columnName="POSTALCODE"/>
     </attribute>
   
-    <attribute id="PARTNERID" order="11" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="PARTNERID" order="10" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="PARTNERID"/>
+  
       <keyMapping columnObjectName="Partners" columnName="PARTNERID"/>
+  
     </attribute>
-    <attribute id="PRODUCTID" order="12" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="PRODUCTID" order="11" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="PRODUCTID"/>
       <keyMapping columnObjectName="Partners" columnName="PRODUCTID"/>
     </attribute>
@@ -224,13 +213,13 @@
       <descriptions defaultDescription="HISTORY_CREATEDAT"/>
       <measureMapping columnObjectName="Partners" columnName="HISTORY_CREATEDAT"/>
     </measure>
-    <measure id="GROSSAMOUNT" order="4" aggregationType="sum" measureType="simple">
+    <measure id="GROSSAMOUNT" order="3" aggregationType="sum" measureType="simple">
       <descriptions defaultDescription="GROSSAMOUNT"/>
       <measureMapping columnObjectName="Partners" columnName="GROSSAMOUNT"/>
     </measure>
   </baseMeasures>
   <calculatedMeasures>
-    <measure id="CONVGROSSAMOUNT" hidden="false" order="10" aggregationType="sum" measureType="simple" aggregatable="true" datatype="DECIMAL" length="13" scale="2">
+    <measure id="CONVGROSSAMOUNT" hidden="false" order="9" aggregationType="sum" measureType="simple" aggregatable="true" datatype="DECIMAL" length="13" scale="2">
       <descriptions defaultDescription="CONVGROSSAMOUNT"/>
       <formula>&quot;GROSSAMOUNT&quot;</formula>
       
@@ -242,20 +231,47 @@
 <layout>
   <shapes>
     <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
-      <upperLeftCorner x="40" y="85"/>
+      <upperLeftCorner x="92" y="112"/>
+    
+      <rectangleSize width="140"/>
     </shape>
   
     <shape expanded="true" modelObjectName="PO" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="82" y="213"/>
+      <upperLeftCorner x="92" y="457"/>
       <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape modelObjectName="PO.Header" modelObjectNameSpace="PO" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="278.97265625"/>
+    </shape>
+    <shape modelObjectName="PO.Item" modelObjectNameSpace="PO" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
     </shape>
     <shape expanded="true" modelObjectName="Products" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="72" y="298"/>
+      <upperLeftCorner x="92" y="337"/>
       <rectangleSize height="30" width="140"/>
     </shape>
+    <shape modelObjectName="PO" modelObjectNameSpace="Products" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="MD.Products" modelObjectNameSpace="Products" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
     <shape expanded="true" modelObjectName="Partners" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="72" y="195"/>
+      <upperLeftCorner x="92" y="217"/>
       <rectangleSize height="30" width="140"/>
+    </shape>
+  
+    <shape modelObjectName="Products" modelObjectNameSpace="Partners" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="core.models::BUYER" modelObjectNameSpace="Partners" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
     </shape>
   </shapes>
 </layout>

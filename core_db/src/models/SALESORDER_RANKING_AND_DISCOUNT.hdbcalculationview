@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="sap.hana.democontent.epm.models::SALESORDER_RANKING_AND_DISCOUNT" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="core.models::SALESORDER_RANKING_AND_DISCOUNT" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALESORDER_RANKING_AND_DISCOUNT"/>
 <localVariables>
   <variable id="IP_FR_DATE" parameter="true">
@@ -48,27 +48,27 @@
   <attributes>
     <attribute id="ORDER_RANK" order="1" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="ORDER_RANK"/>
-      <keyMapping schemaName="B9AEKIXA83AWIW8R_DEV602_HDI_CONTAINER" columnObjectName="SALESORDER_RANKING_AND_DISCOUNT_SQL" columnName="ORDER_RANK"/>
+      <keyMapping  columnObjectName="SALESORDER_RANKING_AND_DISCOUNT_SQL" columnName="ORDER_RANK"/>
     </attribute>
     <attribute id="COMPANY_NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="COMPANY_NAME"/>
-      <keyMapping schemaName="B9AEKIXA83AWIW8R_DEV602_HDI_CONTAINER" columnObjectName="SALESORDER_RANKING_AND_DISCOUNT_SQL" columnName="COMPANY_NAME"/>
+      <keyMapping  columnObjectName="SALESORDER_RANKING_AND_DISCOUNT_SQL" columnName="COMPANY_NAME"/>
     </attribute>
     <attribute id="REGION" order="3" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="REGION"/>
-      <keyMapping schemaName="B9AEKIXA83AWIW8R_DEV602_HDI_CONTAINER" columnObjectName="SALESORDER_RANKING_AND_DISCOUNT_SQL" columnName="REGION"/>
+      <keyMapping  columnObjectName="SALESORDER_RANKING_AND_DISCOUNT_SQL" columnName="REGION"/>
     </attribute>
     <attribute id="SALES" order="4" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="SALES"/>
-      <keyMapping schemaName="B9AEKIXA83AWIW8R_DEV602_HDI_CONTAINER" columnObjectName="SALESORDER_RANKING_AND_DISCOUNT_SQL" columnName="SALES"/>
+      <keyMapping  columnObjectName="SALESORDER_RANKING_AND_DISCOUNT_SQL" columnName="SALES"/>
     </attribute>
     <attribute id="ORDERS" order="5" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="ORDERS"/>
-      <keyMapping schemaName="B9AEKIXA83AWIW8R_DEV602_HDI_CONTAINER" columnObjectName="SALESORDER_RANKING_AND_DISCOUNT_SQL" columnName="ORDERS"/>
+      <keyMapping  columnObjectName="SALESORDER_RANKING_AND_DISCOUNT_SQL" columnName="ORDERS"/>
     </attribute>
     <attribute id="SALES_RANK" order="6" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="SALES_RANK"/>
-      <keyMapping schemaName="B9AEKIXA83AWIW8R_DEV602_HDI_CONTAINER" columnObjectName="SALESORDER_RANKING_AND_DISCOUNT_SQL" columnName="SALES_RANK"/>
+      <keyMapping  columnObjectName="SALESORDER_RANKING_AND_DISCOUNT_SQL" columnName="SALES_RANK"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>

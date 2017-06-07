@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="sap.hana.democontent.epm.models::BUYER" defaultClient="crossClient" defaultLanguage="$$language$$" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Projection" applyPrivilegeType="NONE">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="core.models::BUYER" defaultClient="crossClient" defaultLanguage="$$language$$" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Projection" applyPrivilegeType="NONE">
   <descriptions defaultDescription="Buyer Join"/>
   <localVariables/>
   <variableMappings/>
@@ -57,7 +57,7 @@
       </attribute>
       <attribute id="PARTNERROLE" order="2" attributeHierarchyActive="false" displayAttribute="false" semanticType="empty">
         <descriptions defaultDescription="Partner Role"/>
-        <externalLikeStructureName>sap.hana.democontent.epm.models::GET_PARTNER_ROLES</externalLikeStructureName>
+        <externalLikeStructureName>core.models::GET_PARTNER_ROLES</externalLikeStructureName>
         <externalLikeElementName>PARTNERROLE</externalLikeElementName>
         <keyMapping columnObjectName="Join_1" columnName="PARTNERROLE"/>
       </attribute>

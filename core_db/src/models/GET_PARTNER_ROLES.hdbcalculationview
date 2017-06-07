@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::GET_PARTNER_ROLES" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="core.models::GET_PARTNER_ROLES" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
 <descriptions defaultDescription="GET_PARTNER_ROLES"/>
 <localVariables/>
 <variableMappings/>
@@ -13,11 +13,11 @@
   <attributes>
     <attribute id="PARTNERROLE" order="1" displayAttribute="false" attributeHierarchyActive="false" descriptionColumnName="PARTNERDESC">
       <descriptions defaultDescription="Partner Role"/>
-      <keyMapping schemaName="XC6BDDGY8KK5WVSD_OPENSAP_HANA5_EXAMPLE" columnObjectName="get_partner_roles" columnName="PARTNERROLE"/>
+      <keyMapping  columnObjectName="get_partner_roles" columnName="PARTNERROLE"/>
     </attribute>
     <attribute id="PARTNERDESC" order="2" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Partner Description"/>
-      <keyMapping schemaName="XC6BDDGY8KK5WVSD_OPENSAP_HANA5_EXAMPLE" columnObjectName="get_partner_roles" columnName="PARTNERDESC"/>
+      <keyMapping  columnObjectName="get_partner_roles" columnName="PARTNERDESC"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>

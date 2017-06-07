@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALES_ORDER_LITE" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="crossClient" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="core.models::SALES_ORDER_LITE" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="crossClient" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALES_ORDER_LITE"/>
 <localVariables/>
 <variableMappings/>
@@ -58,6 +58,7 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="SO.Header_1">
       <mapping xsi:type="Calculation:AttributeMapping" target="BILLINGSTATUS" source="BILLINGSTATUS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
@@ -107,17 +108,15 @@
       <viewAttribute id="QUANTITYUNIT"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="QUANTITYUNIT"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERID"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
-        <descriptions defaultDescription="SALESORDERID"/>
-      </viewAttribute>
-      <viewAttribute id="SALESORDERITEM"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
-        <descriptions defaultDescription="SALESORDERITEM"/>
-      </viewAttribute>
       <viewAttribute id="TAXAMOUNT"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="TAXAMOUNT"/>
       </viewAttribute>
+      <viewAttribute id="SALESORDERID">
+        <descriptions defaultDescription="HEADER_SALESORDERID"/>
+      </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="SO.Item_1">
       <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="DELIVERYDATE" source="DELIVERYDATE"/>
@@ -129,9 +128,8 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_PRODUCTID" source="PRODUCT.PRODUCTID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITY" source="QUANTITY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITYUNIT" source="QUANTITYUNIT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERITEM" source="SALESORDERITEM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="TAXAMOUNT" source="TAXAMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="HEADER.SALESORDERID"/>
     </input>
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
@@ -145,9 +143,6 @@
       <viewAttribute id="PARTNERID"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PARTNER_PARTNERID"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERITEM"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
-        <descriptions defaultDescription="SALESORDERITEM"/>
-      </viewAttribute>
       <viewAttribute id="PRODUCTID"><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_PRODUCTID"/>
       </viewAttribute>
@@ -156,13 +151,13 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="Projection_1">
       <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="HISTORY_CREATEDAT" source="HISTORY_CREATEDAT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERID" source="PARTNER_PARTNERID"/>
     </input>
     <input node="Projection_2">
-      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERITEM" source="SALESORDERITEM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCT_PRODUCTID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT" source="NETAMOUNT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
@@ -176,23 +171,22 @@
       <descriptions defaultDescription="SALESORDERID"/>
       <keyMapping columnObjectName="Join_1" columnName="SALESORDERID"/>
     </attribute>
-    <attribute id="SALESORDERITEM" key="true" order="2" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="SALESORDERITEM"/>
-      <keyMapping columnObjectName="Join_1" columnName="SALESORDERITEM"/>
-    </attribute>
     <attribute id="HISTORY_CREATEDAT$local">
+      <descriptions/>
       <keyMapping columnObjectName="Join_1" columnName="HISTORY_CREATEDAT"/>
     </attribute>
     <attribute id="PARTNERID$local">
+      <descriptions/>
       <keyMapping columnObjectName="Join_1" columnName="PARTNERID"/>
     </attribute>
     <attribute id="PRODUCTID$local">
+      <descriptions/>
       <keyMapping columnObjectName="Join_1" columnName="PRODUCTID"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
   <baseMeasures>
-    <measure id="NETAMOUNT" order="3" aggregationType="sum" measureType="simple">
+    <measure id="NETAMOUNT" order="2" aggregationType="sum" measureType="simple">
       <descriptions defaultDescription="NETAMOUNT"/>
       <measureMapping columnObjectName="Join_1" columnName="NETAMOUNT"/>
     </measure>
@@ -201,7 +195,7 @@
   <restrictedMeasures/>
   <localDimensions/>
   <sharedDimensions>
-    <logicalJoin associatedObjectUri="sap.hana.democontent.epm.models::TIME_DIM">
+    <logicalJoin associatedObjectUri="core.models::TIME_DIM">
       <attributes>
         <attributeRef>HISTORY_CREATEDAT$local</attributeRef>
       </attributes>
@@ -211,7 +205,7 @@
       <properties joinType="referential" joinOperator="Equal"/>
       <associatedAttributeFeatures/>
     </logicalJoin>
-    <logicalJoin associatedObjectUri="sap.hana.democontent.epm.models::BUYER">
+    <logicalJoin associatedObjectUri="core.models::BUYER">
       <attributes>
         <attributeRef>PARTNERID$local</attributeRef>
       </attributes>
@@ -221,7 +215,7 @@
       <properties joinType="referential" joinOperator="Equal"/>
       <associatedAttributeFeatures/>
     </logicalJoin>
-    <logicalJoin associatedObjectUri="sap.hana.democontent.epm.models::PROD">
+    <logicalJoin associatedObjectUri="core.models::PROD">
       <attributes>
         <attributeRef>PRODUCTID$local</attributeRef>
       </attributes>
@@ -257,25 +251,25 @@
     </shape>
     <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="35" y="31"/>
-      <rectangleSize width="275.6025390625"/>
+      <rectangleSize width="287.931640625"/>
     </shape>
     <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
-      <upperLeftCorner x="357" y="-4"/>
+      <upperLeftCorner x="457" y="99"/>
       <rectangleSize width="250"/>
     </shape>
     <shape modelObjectName="Join_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
       <upperLeftCorner x="330" y="240"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="sap.hana.democontent.epm.models::TIME_DIM" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+    <shape modelObjectName="core.models::TIME_DIM" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
       <upperLeftCorner x="644" y="32"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="sap.hana.democontent.epm.models::BUYER" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+    <shape modelObjectName="core.models::BUYER" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
       <upperLeftCorner x="16" y="16"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="sap.hana.democontent.epm.models::PROD" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+    <shape modelObjectName="core.models::PROD" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
       <upperLeftCorner x="316" y="30"/>
       <rectangleSize width="250"/>
     </shape>

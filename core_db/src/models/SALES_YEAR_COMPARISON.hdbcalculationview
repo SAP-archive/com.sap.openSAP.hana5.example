@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALES_YEAR_COMPARISON" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="core.models::SALES_YEAR_COMPARISON" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALES_ORDER_COMPARISON"/>
 <localVariables>
   <variable id="IP_YEAR_1" parameter="true">
@@ -21,11 +21,11 @@
 </localVariables>
 <variableMappings/>
 <dataSources>
-  <DataSource id="sap.hana.democontent.epm.models::SALES_ORDER_LITE">
-    <resourceUri>sap.hana.democontent.epm.models::SALES_ORDER_LITE</resourceUri>
+  <DataSource id="core.models::SALES_ORDER_LITE">
+    <resourceUri>core.models::SALES_ORDER_LITE</resourceUri>
   </DataSource>
-  <DataSource id="YEAR_1$$$$sap.hana.democontent.epm.models::SALES_ORDER_LITE$$">
-    <resourceUri>sap.hana.democontent.epm.models::SALES_ORDER_LITE</resourceUri>
+  <DataSource id="YEAR_1$$$$core.models::SALES_ORDER_LITE$$">
+    <resourceUri>core.models::SALES_ORDER_LITE</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews>
@@ -42,7 +42,7 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="sap.hana.democontent.epm.models::SALES_ORDER_LITE">
+    <input node="core.models::SALES_ORDER_LITE">
       <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT" source="NETAMOUNT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_CATEGORY" source="PRODUCT_CATEGORY"/>
@@ -62,7 +62,7 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="YEAR_1$$$$sap.hana.democontent.epm.models::SALES_ORDER_LITE$$">
+    <input node="YEAR_1$$$$core.models::SALES_ORDER_LITE$$">
       <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT" source="NETAMOUNT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_CATEGORY" source="PRODUCT_CATEGORY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>

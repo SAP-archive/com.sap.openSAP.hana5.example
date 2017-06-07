@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::PO_HEADER_EN" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" defaultClient="$$client$$" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false" applyPrivilegeType="NONE">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="core.models::PO_HEADER_EN" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" defaultClient="$$client$$" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false" applyPrivilegeType="NONE">
 <descriptions defaultDescription="PO_HEADER_EN"/>
 <localVariables/>
 <variableMappings/>
@@ -20,10 +20,10 @@
     <resourceUri>PO.Header</resourceUri>
   </DataSource>
   <DataSource id="BUYER">
-    <resourceUri>sap.hana.democontent.epm.models::BUYER</resourceUri>
+    <resourceUri>core.models::BUYER</resourceUri>
   </DataSource>
   <DataSource id="PO_ITEM">
-    <resourceUri>sap.hana.democontent.epm.models::PO_ITEM</resourceUri>
+    <resourceUri>core.models::PO_ITEM</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews>
@@ -35,6 +35,7 @@
       <viewAttribute id="LANGUAGE"/>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="Util.Constants">
       <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPTION" source="DESCRIPTION"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="DOMAIN" source="DOMAIN"/>
@@ -51,6 +52,7 @@
       <viewAttribute id="LANGUAGE"/>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="LC$$$$Util.Constants$$">
       <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPTION" source="DESCRIPTION"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="DOMAIN" source="DOMAIN"/>
@@ -67,6 +69,7 @@
       <viewAttribute id="LANGUAGE"/>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="CF$$$$Util.Constants$$">
       <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPTION" source="DESCRIPTION"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="DOMAIN" source="DOMAIN"/>
@@ -83,6 +86,7 @@
       <viewAttribute id="LANGUAGE"/>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="OR$$$$Util.Constants$$">
       <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPTION" source="DESCRIPTION"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="DOMAIN" source="DOMAIN"/>
@@ -112,6 +116,7 @@
       <viewAttribute id="APPROVALSTATUSDESC"/>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="PO.Header">
       <mapping xsi:type="Calculation:AttributeMapping" target="APPROVALSTATUS" source="APPROVALSTATUS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CONFIRMSTATUS" source="CONFIRMSTATUS"/>
@@ -158,6 +163,7 @@
       <viewAttribute id="CONFIRMSTATUSDESC"/>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="Join_1">
       <mapping xsi:type="Calculation:AttributeMapping" target="APPROVALSTATUS" source="APPROVALSTATUS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CONFIRMSTATUS" source="CONFIRMSTATUS"/>
@@ -206,6 +212,7 @@
       <viewAttribute id="LIFECYCLESTATUSDESC"/>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="Join_2">
       <mapping xsi:type="Calculation:AttributeMapping" target="APPROVALSTATUS" source="APPROVALSTATUS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CONFIRMSTATUS" source="CONFIRMSTATUS"/>
@@ -256,6 +263,7 @@
       <viewAttribute id="ORDERINGSTATUSDESC"/>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="Join_3">
       <mapping xsi:type="Calculation:AttributeMapping" target="APPROVALSTATUS" source="APPROVALSTATUS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CONFIRMSTATUS" source="CONFIRMSTATUS"/>
@@ -310,6 +318,7 @@
       <viewAttribute id="LEGALFORM"/>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="Join_4">
       <mapping xsi:type="Calculation:AttributeMapping" target="APPROVALSTATUS" source="APPROVALSTATUS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CONFIRMSTATUS" source="CONFIRMSTATUS"/>
@@ -363,7 +372,6 @@
       <viewAttribute id="LIFECYCLESTATUSDESC"/>
       <viewAttribute id="ORDERINGSTATUSDESC"/>
       <viewAttribute id="PRODUCT_PRODUCTID"/>
-      <viewAttribute id="PURCHASEORDERITEM"/>
       <viewAttribute id="ProductName"/>
     
       <viewAttribute id="CATEGORY"/>
@@ -373,6 +381,7 @@
       <viewAttribute id="LEGALFORM"/>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="Join_5">
       <mapping xsi:type="Calculation:AttributeMapping" target="APPROVALSTATUS" source="APPROVALSTATUS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CONFIRMSTATUS" source="CONFIRMSTATUS"/>
@@ -400,7 +409,6 @@
     </input>
     <input node="PO_ITEM">
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_PRODUCTID" source="PRODUCT_PRODUCTID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERITEM" source="PURCHASEORDERITEM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ProductName" source="ProductName"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CATEGORY" source="CATEGORY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERID" source="PURCHASEORDERID"/>
@@ -499,33 +507,29 @@
       <attributeRelationship parentAttribute="ProductName" type="manual"/>
       <keyMapping columnObjectName="Join_6" columnName="PRODUCT_PRODUCTID"/>
     </attribute>
-    <attribute id="PURCHASEORDERITEM" order="22" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="Purchase Order Item ID"/>
-      <keyMapping columnObjectName="Join_6" columnName="PURCHASEORDERITEM"/>
-    </attribute>
-    <attribute id="ProductName" order="23" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="ProductName" order="22" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="ProductName"/>
       <keyMapping columnObjectName="Join_6" columnName="ProductName"/>
     </attribute>
   
-    <attribute id="CATEGORY" order="24" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CATEGORY" order="23" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Product Category"/>
   
       <keyMapping columnObjectName="Join_6" columnName="CATEGORY"/>
   
     </attribute>
   
-    <attribute id="CITY" order="25" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CITY" order="24" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="City"/>
   
       <keyMapping columnObjectName="Join_6" columnName="CITY"/>
   
     </attribute>
-    <attribute id="COMPANYNAME" order="26" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="COMPANYNAME" order="25" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Company"/>
       <keyMapping columnObjectName="Join_6" columnName="COMPANYNAME"/>
     </attribute>
-    <attribute id="LEGALFORM" order="27" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="LEGALFORM" order="26" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Legal Form"/>
       <keyMapping columnObjectName="Join_6" columnName="LEGALFORM"/>
     </attribute>
@@ -616,7 +620,7 @@
       <upperLeftCorner x="20" y="30"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="sap.hana.democontent.epm.models::BUYER" modelObjectNameSpace="Join_5" modelObjectType="JoinNodeInput">
+    <shape modelObjectName="core.models::BUYER" modelObjectNameSpace="Join_5" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="30"/>
       <rectangleSize width="250"/>
     </shape>
@@ -625,12 +629,11 @@
       <upperLeftCorner x="283" y="217"/>
       <rectangleSize height="30" width="140"/>
     </shape>
-  
     <shape modelObjectName="Join_5" modelObjectNameSpace="Join_6" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="20" y="30"/>
-      <rectangleSize width="250"/>
+      <rectangleSize width="287.931640625"/>
     </shape>
-    <shape modelObjectName="sap.hana.democontent.epm.models::PO_ITEM" modelObjectNameSpace="Join_6" modelObjectType="JoinNodeInput">
+    <shape modelObjectName="core.models::PO_ITEM" modelObjectNameSpace="Join_6" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="30"/>
       <rectangleSize width="250"/>
     </shape>

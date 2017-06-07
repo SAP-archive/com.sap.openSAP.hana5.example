@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::GET_COUNTRIES" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="core.models::GET_COUNTRIES" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
 <descriptions defaultDescription="GET_COUNTRIES"/>
 <localVariables/>
 <variableMappings/>
@@ -13,11 +13,11 @@
   <attributes>
     <attribute id="CODE" order="1" descriptionColumnName="NAME" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CODE"/>
-      <keyMapping schemaName="P0AGP1QEVK4SZTIQ_OPENSAP_HANA5_EXAMPLE" columnObjectName="get_countries" columnName="CODE"/>
+      <keyMapping columnObjectName="get_countries" columnName="CODE"/>
     </attribute>
     <attribute id="NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="NAME"/>
-      <keyMapping schemaName="P0AGP1QEVK4SZTIQ_OPENSAP_HANA5_EXAMPLE" columnObjectName="get_countries" columnName="NAME"/>
+      <keyMapping columnObjectName="get_countries" columnName="NAME"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>

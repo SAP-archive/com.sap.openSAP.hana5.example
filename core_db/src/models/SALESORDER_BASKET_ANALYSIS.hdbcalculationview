@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALESORDER_BASKET_ANALYSIS" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="core.models::SALESORDER_BASKET_ANALYSIS" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALESORDER_BASKET_ANALYSIS"/>
 <localVariables/>
 <variableMappings/>
@@ -26,23 +26,20 @@
       <viewAttribute id="NETAMOUNT"><descriptions/>
         <descriptions defaultDescription="NETAMOUNT"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERITEM"><descriptions/>
-        <descriptions defaultDescription="SALESORDERITEM"/>
-      </viewAttribute>
       <viewAttribute id="PRODUCTID"><descriptions/>
         <descriptions defaultDescription="PRODUCT_PRODUCTID"/>
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="SO.Header">
       <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="History_CREATEDAT" source="HISTORY.CREATEDAT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT" source="NETAMOUNT"/>
     </input>
     <input node="SO.Item">
-      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERITEM" source="SALESORDERITEM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCT.PRODUCTID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="HEADER.SALESORDERID"/>
     </input>
     <joinAttribute name="SALESORDERID"/>
   </calculationView>
@@ -53,9 +50,6 @@
       </viewAttribute>
       <viewAttribute id="PRODUCTID"><descriptions/>
         <descriptions defaultDescription="PRODUCTID"/>
-      </viewAttribute>
-      <viewAttribute id="SALESORDERITEM"><descriptions/>
-        <descriptions defaultDescription="SALESORDERITEM"/>
       </viewAttribute>
       <viewAttribute id="NETAMOUNT"><descriptions/>
         <descriptions defaultDescription="NETAMOUNT"/>
@@ -68,9 +62,9 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="Join_1">
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCTID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERITEM" source="SALESORDERITEM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT" source="NETAMOUNT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="History_CREATEDAT" source="History_CREATEDAT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
@@ -86,9 +80,6 @@
       <viewAttribute id="CATEGORY"><descriptions/>
         <descriptions defaultDescription="CATEGORY"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERITEM"><descriptions/>
-        <descriptions defaultDescription="SALESORDERITEM"/>
-      </viewAttribute>
       <viewAttribute id="NETAMOUNT"><descriptions/>
         <descriptions defaultDescription="NETAMOUNT"/>
       </viewAttribute>
@@ -100,9 +91,9 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="Join_2">
       <mapping xsi:type="Calculation:AttributeMapping" target="CATEGORY" source="CATEGORY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERITEM" source="SALESORDERITEM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT" source="NETAMOUNT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="History_CREATEDAT" source="History_CREATEDAT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
@@ -119,32 +110,27 @@
       <descriptions defaultDescription="HISTORY_CREATEDAT"/>
       <keyMapping columnObjectName="Aggregation_1" columnName="History_CREATEDAT"/>
     </attribute>
-    <attribute id="SALESORDERITEM" order="3" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="SALESORDERITEM"/>
-      <keyMapping columnObjectName="Aggregation_1" columnName="SALESORDERITEM"/>
-    </attribute>
-    <attribute id="CATEGORY" order="4" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CATEGORY" order="3" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CATEGORY"/>
       <keyMapping columnObjectName="Aggregation_1" columnName="CATEGORY"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
   <baseMeasures>
-    <measure id="NETAMOUNT" order="5" aggregationType="sum" measureType="simple">
+    <measure id="NETAMOUNT" order="4" aggregationType="sum" measureType="simple">
       <descriptions defaultDescription="NETAMOUNT"/>
       <measureMapping columnObjectName="Aggregation_1" columnName="NETAMOUNT"/>
     </measure>
   </baseMeasures>
   <calculatedMeasures>
-    <measure id="Counter" hidden="true" order="6" aggregationType="sum" measureType="simple" calculatedMeasureType="counter" aggregatable="true" datatype="INTEGER">
+    <measure id="Counter" hidden="true" order="5" aggregationType="sum" measureType="simple" calculatedMeasureType="counter" aggregatable="true" datatype="INTEGER">
       <descriptions defaultDescription="COUNTER"/>
       <exceptionAggregation>
-        <attribute attributeName="SALESORDERITEM"/>
         <attribute attributeName="CATEGORY"/>
       </exceptionAggregation>
       <formula>1</formula>
       </measure>
-    <measure id="SALES" hidden="false" order="7" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="12" scale="2">
+    <measure id="SALES" hidden="false" order="6" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="12" scale="2">
       <descriptions defaultDescription="SALES"/>
       <formula>&quot;NETAMOUNT&quot;/&quot;Counter&quot;</formula>
       </measure>
@@ -164,7 +150,7 @@
     </shape>
     <shape modelObjectName="SO.Header" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="20" y="34"/>
-      <rectangleSize width="266"/>
+      <rectangleSize width="278.97265625"/>
     </shape>
     <shape modelObjectName="SO.Item" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="30"/>

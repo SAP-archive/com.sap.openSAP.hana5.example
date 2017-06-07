@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALES_OVERVIEW_WO_CURR_CONV_OPT" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="core.models::SALES_OVERVIEW_WO_CURR_CONV_OPT" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALES_OVERVIEW_WO_CURR_CONV_OPT"/>
 <localVariables/>
 <variableMappings/>
@@ -38,9 +38,6 @@
       <viewAttribute id="CURRENCY"><descriptions/>
         <descriptions defaultDescription="CURRENCY"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERITEM"><descriptions/>
-        <descriptions defaultDescription="SALESORDERITEM"/>
-      </viewAttribute>
       <viewAttribute id="PRODUCTID"><descriptions/>
         <descriptions defaultDescription="PRODUCT_PRODUCTID"/>
       </viewAttribute>
@@ -58,6 +55,7 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="SO.Header">
       <mapping xsi:type="Calculation:AttributeMapping" target="LIFECYCLESTATUS" source="LIFECYCLESTATUS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="BILLINGSTATUS" source="BILLINGSTATUS"/>
@@ -69,13 +67,12 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
     </input>
     <input node="SO.Item">
-      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERITEM" source="SALESORDERITEM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCT.PRODUCTID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT" source="NETAMOUNT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="TAXAMOUNT" source="TAXAMOUNT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITY" source="QUANTITY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITYUNIT" source="QUANTITYUNIT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="HEADER.SALESORDERID"/>
     </input>
     <joinAttribute name="SALESORDERID"/>
   </calculationView>
@@ -110,19 +107,16 @@
       <descriptions defaultDescription="CURRENCY"/>
       <keyMapping columnObjectName="Join_1" columnName="CURRENCY"/>
     </attribute>
-    <attribute id="SALESORDERITEM" order="9" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="SALESORDERITEM"/>
-      <keyMapping columnObjectName="Join_1" columnName="SALESORDERITEM"/>
-    </attribute>
-    <attribute id="PRODUCTID_1" order="10" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="PRODUCTID_1" order="9" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="PRODUCTID_1"/>
       <keyMapping columnObjectName="Join_1" columnName="PRODUCTID"/>
     </attribute>
-    <attribute id="QUANTITYUNIT" order="14" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="QUANTITYUNIT" order="13" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="QUANTITYUNIT"/>
       <keyMapping columnObjectName="Join_1" columnName="QUANTITYUNIT"/>
     </attribute>
     <attribute id="PRODUCTID$local">
+      <descriptions/>
       <keyMapping columnObjectName="Join_1" columnName="PRODUCTID"/>
     </attribute>
   </attributes>
@@ -132,46 +126,46 @@
       <descriptions defaultDescription="POSTING_DATE"/>
       <measureMapping columnObjectName="Join_1" columnName="POSTING_DATE"/>
     </measure>
-    <measure id="NETAMOUNT" order="11" aggregationType="sum" measureType="simple">
+    <measure id="NETAMOUNT" order="10" aggregationType="sum" measureType="simple">
       <descriptions defaultDescription="NETAMOUNT"/>
       <measureMapping columnObjectName="Join_1" columnName="NETAMOUNT"/>
     </measure>
-    <measure id="TAXAMOUNT" order="12" aggregationType="sum" measureType="simple">
+    <measure id="TAXAMOUNT" order="11" aggregationType="sum" measureType="simple">
       <descriptions defaultDescription="TAXAMOUNT"/>
       <measureMapping columnObjectName="Join_1" columnName="TAXAMOUNT"/>
     </measure>
-    <measure id="QUANTITY" order="13" aggregationType="sum" measureType="simple">
+    <measure id="QUANTITY" order="12" aggregationType="sum" measureType="simple">
       <descriptions defaultDescription="QUANTITY"/>
       <measureMapping columnObjectName="Join_1" columnName="QUANTITY"/>
     </measure>
   </baseMeasures>
   <calculatedMeasures>
-    <measure id="RM_AMOUNT_NEW" hidden="false" order="15" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="15" scale="2">
+    <measure id="RM_AMOUNT_NEW" hidden="false" order="14" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="15" scale="2">
       <descriptions defaultDescription="RM_AMOUNT_NEW"/>
       <formula>if(&quot;LIFECYCLESTATUS&quot; = 'N', &quot;NETAMOUNT&quot;, 0)
 </formula>
       </measure>
-    <measure id="RM_AMOUNT_COMPLETED" hidden="false" order="16" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="15" scale="2">
+    <measure id="RM_AMOUNT_COMPLETED" hidden="false" order="15" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="15" scale="2">
       <descriptions defaultDescription="RM_AMOUNT_COMPLETED"/>
       <formula>if(&quot;LIFECYCLESTATUS&quot; = 'C', &quot;NETAMOUNT&quot;, 0)</formula>
       </measure>
-    <measure id="RM_AMOUNT_INPROCESS" hidden="false" order="17" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="15" scale="2">
+    <measure id="RM_AMOUNT_INPROCESS" hidden="false" order="16" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="15" scale="2">
       <descriptions defaultDescription="RM_AMOUNT_INPROCESS"/>
       <formula>if(&quot;LIFECYCLESTATUS&quot; = 'P', &quot;NETAMOUNT&quot;, 0)</formula>
       </measure>
-    <measure id="RM_AMOUNT_PAID" hidden="false" order="18" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="15" scale="2">
+    <measure id="RM_AMOUNT_PAID" hidden="false" order="17" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="15" scale="2">
       <descriptions defaultDescription="RM_AMOUNT_PAID"/>
       <formula>if(&quot;BILLINGSTATUS&quot; = 'P', &quot;NETAMOUNT&quot;, 0)</formula>
       </measure>
-    <measure id="RM_AMOUNT_UNPAID" hidden="false" order="19" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="15" scale="2">
+    <measure id="RM_AMOUNT_UNPAID" hidden="false" order="18" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="15" scale="2">
       <descriptions defaultDescription="RM_AMOUNT_UNPAID"/>
       <formula>if(&quot;BILLINGSTATUS&quot; = 'N' OR isnull(&quot;BILLINGSTATUS&quot;), &quot;NETAMOUNT&quot;, 0)</formula>
       </measure>
-    <measure id="RM_AMOUNT_DELIVERED" hidden="false" order="20" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="15" scale="2">
+    <measure id="RM_AMOUNT_DELIVERED" hidden="false" order="19" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="15" scale="2">
       <descriptions defaultDescription="RM_AMOUNT_DELIVERED"/>
       <formula>if(&quot;DELIVERYSTATUS&quot; = 'D', &quot;NETAMOUNT&quot;, 0)</formula>
       </measure>
-    <measure id="RM_AMOUNT_UNDELIVERED" hidden="false" order="21" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="15" scale="2">
+    <measure id="RM_AMOUNT_UNDELIVERED" hidden="false" order="20" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="15" scale="2">
       <descriptions defaultDescription="RM_AMOUNT_UNDELIVERED"/>
       <formula>if(&quot;DELIVERYSTATUS&quot; = 'I' OR isnull(&quot;DELIVERYSTATUS&quot;), &quot;NETAMOUNT&quot;, 0)</formula>
       </measure>
@@ -179,7 +173,7 @@
   <restrictedMeasures/>
   <localDimensions/>
   <sharedDimensions>
-    <logicalJoin associatedObjectUri="sap.hana.democontent.epm.models::PROD">
+    <logicalJoin associatedObjectUri="core.models::PROD">
       <attributes>
         <attributeRef>PRODUCTID$local</attributeRef>
       </attributes>
@@ -203,7 +197,7 @@
     </shape>
     <shape modelObjectName="SO.Header" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="20" y="30"/>
-      <rectangleSize width="250"/>
+      <rectangleSize width="278.97265625"/>
     </shape>
     <shape modelObjectName="SO.Item" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="30"/>
@@ -213,7 +207,7 @@
       <upperLeftCorner x="20" y="30"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="sap.hana.democontent.epm.models::PROD" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+    <shape modelObjectName="core.models::PROD" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
       <upperLeftCorner x="320" y="30"/>
       <rectangleSize width="250"/>
     </shape>

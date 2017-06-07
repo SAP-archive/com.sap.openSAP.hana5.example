@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.models::SALES_ORDER_WORKLIST" applyPrivilegeType="NONE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="core.models::SALES_ORDER_WORKLIST" applyPrivilegeType="NONE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="SALES_ORDER_WORKLIST"/>
 <localVariables/>
 <variableMappings/>
@@ -10,11 +10,11 @@
   <DataSource id="SO.Item">
     <resourceUri>SO.Item</resourceUri>
   </DataSource>
-  <DataSource id="sap.hana.democontent.epm.models::PROD">
-    <resourceUri>sap.hana.democontent.epm.models::PROD</resourceUri>
+  <DataSource id="core.models::PROD">
+    <resourceUri>core.models::PROD</resourceUri>
   </DataSource>
-  <DataSource id="sap.hana.democontent.epm.models::BUYER">
-    <resourceUri>sap.hana.democontent.epm.models::BUYER</resourceUri>
+  <DataSource id="core.models::BUYER">
+    <resourceUri>core.models::BUYER</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews>
@@ -35,9 +35,6 @@
       <viewAttribute id="GROSSAMOUNT"><descriptions/><descriptions/>
         <descriptions defaultDescription="GROSSAMOUNT"/>
       </viewAttribute>
-      <viewAttribute id="SALESORDERITEM"><descriptions/><descriptions/>
-        <descriptions defaultDescription="SALESORDERITEM"/>
-      </viewAttribute>
       <viewAttribute id="PRODUCTID"><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCT_PRODUCTID"/>
       </viewAttribute>
@@ -49,6 +46,7 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="SO.Header">
       <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERID" source="PARTNER.PARTNERID"/>
@@ -57,11 +55,10 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="GROSSAMOUNT" source="GROSSAMOUNT"/>
     </input>
     <input node="SO.Item">
-      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERITEM" source="SALESORDERITEM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCT.PRODUCTID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITY" source="QUANTITY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITYUNIT" source="QUANTITYUNIT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="HEADER.SALESORDERID"/>
     </input>
     <joinAttribute name="SALESORDERID"/>
   </calculationView>
@@ -81,9 +78,6 @@
       </viewAttribute>
       <viewAttribute id="GROSSAMOUNT"><descriptions/><descriptions/>
         <descriptions defaultDescription="GROSSAMOUNT"/>
-      </viewAttribute>
-      <viewAttribute id="SALESORDERITEM"><descriptions/><descriptions/>
-        <descriptions defaultDescription="SALESORDERITEM"/>
       </viewAttribute>
       <viewAttribute id="PRODUCTID"><descriptions/><descriptions/>
         <descriptions defaultDescription="PRODUCTID"/>
@@ -108,18 +102,18 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="Sales">
       <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERID" source="PARTNERID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="LIFECYCLESTATUS" source="LIFECYCLESTATUS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="GROSSAMOUNT" source="GROSSAMOUNT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERITEM" source="SALESORDERITEM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCTID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITY" source="QUANTITY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITYUNIT" source="QUANTITYUNIT"/>
     </input>
-    <input node="sap.hana.democontent.epm.models::PROD">
+    <input node="core.models::PROD">
       <mapping xsi:type="Calculation:AttributeMapping" target="TYPECODE" source="PRODUCT_TYPECODE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CATEGORY" source="PRODUCT_CATEGORY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTNAME" source="PRODUCT_NAME"/>
@@ -144,9 +138,6 @@
       </viewAttribute>
       <viewAttribute id="GROSSAMOUNT"><descriptions/>
         <descriptions defaultDescription="GROSSAMOUNT"/>
-      </viewAttribute>
-      <viewAttribute id="SALESORDERITEM"><descriptions/>
-        <descriptions defaultDescription="SALESORDERITEM"/>
       </viewAttribute>
       <viewAttribute id="PRODUCTID"><descriptions/>
         <descriptions defaultDescription="PRODUCTID"/>
@@ -180,13 +171,13 @@
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
     <input node="Product">
       <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERID" source="SALESORDERID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PARTNERID" source="PARTNERID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="LIFECYCLESTATUS" source="LIFECYCLESTATUS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="GROSSAMOUNT" source="GROSSAMOUNT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="SALESORDERITEM" source="SALESORDERITEM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCTID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITY" source="QUANTITY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITYUNIT" source="QUANTITYUNIT"/>
@@ -195,7 +186,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTNAME" source="PRODUCTNAME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTDESC" source="PRODUCTDESC"/>
     </input>
-    <input node="sap.hana.democontent.epm.models::BUYER">
+    <input node="core.models::BUYER">
       <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYNAME" source="COMPANYNAME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="POSTALCODE" source="POSTALCODE"/>
@@ -226,47 +217,43 @@
       <descriptions defaultDescription="GROSSAMOUNT"/>
       <keyMapping columnObjectName="Partner" columnName="GROSSAMOUNT"/>
     </attribute>
-    <attribute id="SALESORDERITEM" key="true" order="6" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="SALESORDERITEM"/>
-      <keyMapping columnObjectName="Partner" columnName="SALESORDERITEM"/>
-    </attribute>
-    <attribute id="PRODUCTID" order="7" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="PRODUCTID" order="6" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="PRODUCTID"/>
       <keyMapping columnObjectName="Partner" columnName="PRODUCTID"/>
     </attribute>
-    <attribute id="QUANTITY" order="8" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="QUANTITY" order="7" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="QUANTITY"/>
       <keyMapping columnObjectName="Partner" columnName="QUANTITY"/>
     </attribute>
-    <attribute id="QUANTITYUNIT" order="9" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="QUANTITYUNIT" order="8" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="QUANTITYUNIT"/>
       <keyMapping columnObjectName="Partner" columnName="QUANTITYUNIT"/>
     </attribute>
-    <attribute id="TYPECODE" order="10" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="TYPECODE" order="9" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="TYPECODE"/>
       <keyMapping columnObjectName="Partner" columnName="TYPECODE"/>
     </attribute>
-    <attribute id="CATEGORY" order="11" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CATEGORY" order="10" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CATEGORY"/>
       <keyMapping columnObjectName="Partner" columnName="CATEGORY"/>
     </attribute>
-    <attribute id="PRODUCTNAME" order="12" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="PRODUCTNAME" order="11" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="PRODUCTNAME"/>
       <keyMapping columnObjectName="Partner" columnName="PRODUCTNAME"/>
     </attribute>
-    <attribute id="PRODUCTDESC" order="13" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="PRODUCTDESC" order="12" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="PRODUCTDESC"/>
       <keyMapping columnObjectName="Partner" columnName="PRODUCTDESC"/>
     </attribute>
-    <attribute id="COMPANYNAME" order="14" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="COMPANYNAME" order="13" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="COMPANYNAME"/>
       <keyMapping columnObjectName="Partner" columnName="COMPANYNAME"/>
     </attribute>
-    <attribute id="CITY" order="15" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CITY" order="14" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CITY"/>
       <keyMapping columnObjectName="Partner" columnName="CITY"/>
     </attribute>
-    <attribute id="POSTALCODE" order="16" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="POSTALCODE" order="15" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="POSTALCODE"/>
       <keyMapping columnObjectName="Partner" columnName="POSTALCODE"/>
     </attribute>
@@ -288,7 +275,7 @@
     </shape>
     <shape modelObjectName="SO.Header" modelObjectNameSpace="Sales" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="20" y="38"/>
-      <rectangleSize width="266"/>
+      <rectangleSize width="278.97265625"/>
     </shape>
     <shape modelObjectName="SO.Item" modelObjectNameSpace="Sales" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="30"/>
@@ -302,7 +289,7 @@
       <upperLeftCorner x="20" y="30"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="sap.hana.democontent.epm.models::PROD" modelObjectNameSpace="Product" modelObjectType="JoinNodeInput">
+    <shape modelObjectName="core.models::PROD" modelObjectNameSpace="Product" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="620" y="30"/>
       <rectangleSize width="250"/>
     </shape>
@@ -314,7 +301,7 @@
       <upperLeftCorner x="20" y="30"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="sap.hana.democontent.epm.models::BUYER" modelObjectNameSpace="Partner" modelObjectType="JoinNodeInput">
+    <shape modelObjectName="core.models::BUYER" modelObjectNameSpace="Partner" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="30"/>
       <rectangleSize width="250"/>
     </shape>
