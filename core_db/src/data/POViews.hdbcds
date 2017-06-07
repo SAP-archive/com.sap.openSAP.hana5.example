@@ -246,18 +246,6 @@ context POViews {
                                       importance : Importance.High
                                   } ]
             @UI.fieldGroup     : [ {
-                                      position : 20
-                                  } ]
-            @EndUserText.label : [ {
-                                      language : 'EN',
-                                      text : 'Purchase Order Item ID'
-                                  } ]
-            PURCHASEORDERITEM,
-
-            @UI.lineItem       : [ {
-                                      importance : Importance.High
-                                  } ]
-            @UI.fieldGroup     : [ {
                                       position : 30
                                   } ]
             @EndUserText.label : [ {
