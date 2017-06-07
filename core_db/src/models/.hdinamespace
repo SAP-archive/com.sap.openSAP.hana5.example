@@ -1,4 +1,4 @@
 {
-    "name":    "sap.hana.democontent.epm.models",
+    "name":    "core.models",
     "subfolder": "ignore"
 }

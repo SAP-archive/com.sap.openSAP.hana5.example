@@ -1,4 +1,4 @@
 {
-    "name":    "sap.hana.democontent.epm.spatial.models",
+    "name":    "spatial.models",
     "subfolder": "ignore"
 }
