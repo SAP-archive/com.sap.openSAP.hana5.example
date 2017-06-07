@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="sap.hana.democontent.epm.spatial.models::PRODUCT_SALES" applyPrivilegeType="SQL_ANALYTIC_PRIVILEGE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="spatial.models::PRODUCT_SALES" applyPrivilegeType="SQL_ANALYTIC_PRIVILEGE" dataCategory="CUBE" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
 <descriptions defaultDescription="PRODUCT_SALES"/>
 <localVariables/>
 <variableMappings/>
@@ -49,7 +49,7 @@
   <restrictedMeasures/>
   <localDimensions/>
   <sharedDimensions>
-    <logicalJoin associatedObjectUri="sap.hana.democontent.epm.spatial.models::REGION_PRODUCT">
+    <logicalJoin associatedObjectUri="spatial.models::REGION_PRODUCT">
       <attributes>
         <attributeRef>PRODUCT_PRODUCTID$local</attributeRef>
       </attributes>
@@ -75,7 +75,7 @@
       <upperLeftCorner x="20" y="30"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="sap.hana.democontent.epm.spatial.models::REGION_PRODUCT" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+    <shape modelObjectName="spatial.models::REGION_PRODUCT" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
       <upperLeftCorner x="320" y="30"/>
       <rectangleSize width="250"/>
     </shape>
