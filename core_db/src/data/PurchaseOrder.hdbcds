@@ -34,20 +34,20 @@ context PurchaseOrder {
     };
 
     entity Item {
-        POHeader     : association[*, 1..1] to Header { PURCHASEORDERID };
-        PRODUCT      : BusinessKey;
-        NOTEID       : BusinessKey null;
-        CURRENCY     : CurrencyT;
-        GROSSAMOUNT  : AmountT;
-        NETAMOUNT    : AmountT;
-        TAXAMOUNT    : AmountT;
-        QUANTITY     : QuantityT;
-        QUANTITYUNIT : UnitT;
-        DELIVERYDATE : SDate;
+        key POHeader     : association[*, 1..1] to Header { PURCHASEORDERID };
+        key PRODUCT      : BusinessKey;
+            NOTEID       : BusinessKey null;
+            CURRENCY     : CurrencyT;
+            GROSSAMOUNT  : AmountT;
+            NETAMOUNT    : AmountT;
+            TAXAMOUNT    : AmountT;
+            QUANTITY     : QuantityT;
+            QUANTITYUNIT : UnitT;
+            DELIVERYDATE : SDate;
     }
     technical configuration {
         column store;
-        index PURCHASEORDER_ITEM_ID on (POHeader.PURCHASEORDERID) asc;
+        //    index PURCHASEORDER_ITEM_ID on (POHeader.PURCHASEORDERID) asc;
     };
 
     define view ItemView as

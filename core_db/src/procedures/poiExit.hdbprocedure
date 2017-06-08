@@ -38,11 +38,19 @@ lv_grossamount := :lv_netamount + :lv_taxamount;
                'Invalid Product ' || lv_productid as error_message, 
                      'No Way! Product field can not be empty' as detail from "DUMMY";
 else
-                      
+    
+     INSERT INTO "PO.Header" 
+   ("PARTNER.PARTNERID", "CURRENCY", "GROSSAMOUNT")
+   VALUES(
+	100000000 /*PARTNER <NVARCHAR(10)>*/,
+	'EUR' /*CURRENCY <NVARCHAR(5)>*/,
+	(SELECT ROUND(TO_DECIMAL(1 + (999999-1)*RAND()),2) FROM DUMMY) /*GROSSAMOUNT <DECIMAL>*/
+	);
+	
 	insert into "PO.Item" 
-			("PRODUCT.PRODUCTID", CURRENCY, GROSSAMOUNT, NETAMOUNT, TAXAMOUNT, 
+			("HEADER.PURCHASEORDERID", "PRODUCT.PRODUCTID", CURRENCY, GROSSAMOUNT, NETAMOUNT, TAXAMOUNT, 
 	          QUANTITY, QUANTITYUNIT, DELIVERYDATE)
-             values (lv_productid, lv_currency, lv_grossamount, lv_netamount, lv_taxamount,
+             values (CURRENT_IDENTITY_VALUE(), lv_productid, lv_currency, lv_grossamount, lv_netamount, lv_taxamount,
         			lv_quantity,'EA', lv_date);  
         			
  end if;

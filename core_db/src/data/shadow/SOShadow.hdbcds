@@ -20,18 +20,18 @@ context SOShadow {
     };
 
     entity Item {
-        HEADER        : association[*, 1..1] to Header { SALESORDERID };
-        PRODUCT       : association          to MD.Products;
-        NOTEID        : EPM.BusinessKey null;
-        CURRENCY      : EPM.CurrencyT;
-        GROSSAMOUNT   : EPM.AmountT;
-        NETAMOUNT     : EPM.AmountT;
-        TAXAMOUNT     : EPM.AmountT;
-        ITEMATPSTATUS : String(1);
-        OPITEMPOS     : EPM.BusinessKey null;
-        QUANTITY      : EPM.QuantityT;
-        QUANTITYUNIT  : EPM.UnitT;
-        DELIVERYDATE  : EPM.SDate;
+        key HEADER        : association[*, 1..1] to Header { SALESORDERID };
+        key PRODUCT       : association          to MD.Products;
+            NOTEID        : EPM.BusinessKey null;
+            CURRENCY      : EPM.CurrencyT;
+            GROSSAMOUNT   : EPM.AmountT;
+            NETAMOUNT     : EPM.AmountT;
+            TAXAMOUNT     : EPM.AmountT;
+            ITEMATPSTATUS : String(1);
+            OPITEMPOS     : EPM.BusinessKey null;
+            QUANTITY      : EPM.QuantityT;
+            QUANTITYUNIT  : EPM.UnitT;
+            DELIVERYDATE  : EPM.SDate;
     };
 
     entity Filter {

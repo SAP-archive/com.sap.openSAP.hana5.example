@@ -121,7 +121,7 @@ module.exports = {
 							wss.broadcast("Database Call  #2");
 							wss.broadcast("--PO Items");
 							for (var i = 0; i < res.length; i++) {
-								wss.broadcast(res[i].PURCHASEORDERID + ": " + res[i].PURCHASEORDERITEM);
+								wss.broadcast(res[i]["HEADER.PURCHASEORDERID"] + ": " + res[i]["PRODUCT.PRODUCTID"]);
 							}
 							wss.broadcast("\n");
 							client.disconnect(callback);
