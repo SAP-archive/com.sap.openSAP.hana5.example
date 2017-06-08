@@ -1,8 +1,8 @@
-service namespace "com.sap.openSAP.hana5.example.service"  { 
-  "sap.hana.democontent.epm.models::PO_HEADER_EN" as "PO_WORKLIST" 
-   keys ("PURCHASEORDERID","PURCHASEORDERITEM");
+service namespace "com.sap.openSAP.hana.example.service"  { 
+  "core.models::PO_HEADER_EN" as "PO_WORKLIST" 
+   keys ("PURCHASEORDERID","PRODUCT_PRODUCTID");
    
-   "sap.hana.democontent.epm.models::PO_ITEM" as "PurchaseOrderItem" keys ("PURCHASEORDERID","PURCHASEORDERITEM");
+   "core.models::PO_ITEM" as "PurchaseOrderItem" keys ("PURCHASEORDERID","PRODUCT_PRODUCTID");
    
    "PO.HeaderView" as "PurchaseOrderHeader" keys("PurchaseOrderId")
    navigates (     

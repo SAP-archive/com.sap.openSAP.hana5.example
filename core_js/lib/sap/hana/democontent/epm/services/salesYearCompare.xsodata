@@ -1,5 +1,5 @@
-service namespace "com.sap.openSAP.hana5.example.service"  { 
-   "sap.hana.democontent.epm.models::SALES_YEAR_COMPARISON" 
+service namespace "com.sap.openSAP.hana.example.service"  { 
+   "core.models::SALES_YEAR_COMPARISON" 
     as "salesYear"  
 	keys generate local "ID"
     aggregates always

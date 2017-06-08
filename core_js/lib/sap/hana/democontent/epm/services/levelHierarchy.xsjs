@@ -22,8 +22,8 @@ function getHierarchyData()
 try
 {
 
-  var query = 'SELECT  "COUNTRY",SUM("TOTAL_SALES") AS "TOTAL_SALES" FROM "sap.hana.democontent.epm.models::SALESORDER_DYNAMIC_JOIN"'+' WHERE "COUNTRY" IN (SELECT "QUERY_NODE_NAME"'+
-           ' FROM "sap.hana.democontent.epm.models::SALESORDER_DYNAMIC_JOIN/REGION_COUNTRY_LEVEL/hier/REGION_COUNTRY_LEVEL"' +' WHERE PRED_NODE = ?)'+
+  var query = 'SELECT  "COUNTRY",SUM("TOTAL_SALES") AS "TOTAL_SALES" FROM "core.models::SALESORDER_DYNAMIC_JOIN"'+' WHERE "COUNTRY" IN (SELECT "QUERY_NODE_NAME"'+
+           ' FROM "core.models::SALESORDER_DYNAMIC_JOIN/REGION_COUNTRY_LEVEL/hier/REGION_COUNTRY_LEVEL"' +' WHERE PRED_NODE = ?)'+
             'GROUP BY "COUNTRY"';                
 
  rs = conn.executeQuery(query, "[REGION].[" + region + "]");

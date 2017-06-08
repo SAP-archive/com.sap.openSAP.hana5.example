@@ -1,9 +1,9 @@
-service namespace "com.sap.openSAP.hana5.example.services"  { 
+service namespace "com.sap.openSAP.hana.example.services"  { 
    "SO.Header" 
    as "SalesOrderHeader" 
    navigates ("SO_Partner" as "Buyer", "SO_Item" as "SalesOrderItem");
    
-   "sap.hana.democontent.epm.models::BUYER" 
+   "core.models::BUYER" 
    as "Buyer" 
    keys ("PARTNERID");
  
@@ -19,7 +19,7 @@ service namespace "com.sap.openSAP.hana5.example.services"  {
    association "SO_Item" principal "SalesOrderHeader"("SALESORDERID") 
      multiplicity "1" dependent "SalesOrderItem"("SALESORDERID") multiplicity "*"; 
      
-    "sap.hana.democontent.epm.models::PROD" as "ProductDetails" 
+    "core.models::PROD" as "ProductDetails" 
     keys ("PRODUCTID");
      
   }

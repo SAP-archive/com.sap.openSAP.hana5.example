@@ -1,5 +1,5 @@
-service namespace "com.sap.openSAP.hana5.example.services"  { 
-   "sap.hana.democontent.epm.models::SALESORDER_BASKET_ANALYSIS" 
+service namespace "com.sap.openSAP.hana.example.services"  { 
+   "core.models::SALESORDER_BASKET_ANALYSIS" 
     as "SalesBasket" with ("CATEGORY", "SALES")   
 	keys generate local "ID"
     aggregates always;	  

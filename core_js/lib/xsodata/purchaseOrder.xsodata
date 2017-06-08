@@ -1,4 +1,4 @@
-service namespace "com.sap.openSAP.hana5.example.services" {
+service namespace "com.sap.openSAP.hana.example.services" {
     "PO.Header" 
 	  as "POHeader" navigates ("Items" as "POItem");
 	  
@@ -6,5 +6,5 @@ service namespace "com.sap.openSAP.hana5.example.services" {
 	  as "POItem";
 	  
 	association "Items" principal  "POHeader"("PURCHASEORDERID")
-	multiplicity "1" dependent "POItem"("PURCHASEORDERID") multiplicity "*";
+	multiplicity "1" dependent "POItem"("HEADER.PURCHASEORDERID") multiplicity "*";
 }

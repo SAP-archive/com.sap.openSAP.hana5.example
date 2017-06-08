@@ -1,11 +1,11 @@
-service namespace "com.sap.openSAP.hana5.example.services" {
+service namespace "com.sap.openSAP.hana.example.services" {
 
-    "sap.hana.democontent.epm.models::PROD" as "ProductDetails" 
+    "core.models::PROD" as "ProductDetails" 
     keys ("PRODUCTID");
 
-	"sap.hana.democontent.epm.spatial.models::REGION_PRODUCT" as "ProductRegionQuantity" 
-	with ("SALESORDERID", "SALESORDERITEM", "LATITUDE", "LONGITUDE", "QUANTITY", "PRODUCT_PRODUCTID")
-	keys ("SALESORDERID", "SALESORDERITEM"); 
+	"spatial.models::REGION_PRODUCT" as "ProductRegionQuantity" 
+	with ("SALESORDERID", "LATITUDE", "LONGITUDE", "QUANTITY", "PRODUCT_PRODUCTID")
+	keys ("SALESORDERID", "PRODUCT_PRODUCTID"); 
 	
 //	"sap.hana.democontent.epm.spatial.models::PRODUCT_SALES" as "ProductSales"
 //	with ("PRODUCT_PRODUCTID", "YEAR_OF_SALE", "GROSSAMOUNT_1")

@@ -164,7 +164,7 @@ function getTotalOrders() {
     if (CheckUpperCase.test(ivCurrency) === true) {
         try {
             // not able to add Currency as prepared statement using setString so adding it in query directly
-           var query = 'SELECT TOP 5 ' + ivGroupBy + ' AS GROUP1, SUM("CONVGROSSAMOUNT") AS AMOUNT1 FROM "sap.hana.democontent.epm.models::PURCHASE_COMMON_CURRENCY"' + ' (\'PLACEHOLDER\' = (\'$$IP_O_TARGET_CURRENCY$$\', \'' + ivCurrency + '\')) group by ' + ivGroupBy + ' order by sum("CONVGROSSAMOUNT") desc';
+           var query = 'SELECT TOP 5 ' + ivGroupBy + ' AS GROUP1, SUM("CONVGROSSAMOUNT") AS AMOUNT1 FROM "core.models::PURCHASE_COMMON_CURRENCY"' + ' (\'PLACEHOLDER\' = (\'$$IP_O_TARGET_CURRENCY$$\', \'' + ivCurrency + '\')) group by ' + ivGroupBy + ' order by sum("CONVGROSSAMOUNT") desc';
             $.trace.debug(query);
             var conn = $.hdb.getConnection();
             var rs = conn.executeQuery(query);

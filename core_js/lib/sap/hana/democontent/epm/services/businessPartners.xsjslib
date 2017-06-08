@@ -24,24 +24,32 @@ function bpCreateBusinessPartner(param, partnerRole) {
 	//insert addresss
 	try {
 
-		pStmt = param.connection.prepareStatement("select \"addressSeqId\".NEXTVAL from dummy");
+/*		pStmt = param.connection.prepareStatement("select \"addressSeqId\".NEXTVAL from dummy");
 		var rs = pStmt.executeQuery();
 		var AddressId = "";
 		while (rs.next()) {
 			AddressId = rs.getString(1);
 		}
-		pStmt.close();
+		pStmt.close();*/
 		pStmt = param.connection.prepareStatement("INSERT INTO \"MD.Addresses\" " +
-		                   " (ADDRESSID, ADDRESSTYPE, CITY, COUNTRY, REGION, \"VALIDITY.STARTDATE\", \"VALIDITY.ENDDATE\") "+
-		                   " VALUES( ?,?,?,?,?, TO_DATE('2000-01-01', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD') )");
-		pStmt.setString(1, AddressId.toString());
-		pStmt.setString(2, "02");
-		pStmt.setString(3, input.Details[0].City);
-		pStmt.setString(4, input.Details[0].Country);	
-		pStmt.setString(5, input.Details[0].Region);		
+		                   " (ADDRESSTYPE, CITY, COUNTRY, REGION, \"VALIDITY.STARTDATE\", \"VALIDITY.ENDDATE\") "+
+		                   " VALUES(?,?,?,?, TO_DATE('2000-01-01', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD') )");
+		//pStmt.setString(1, AddressId.toString());
+		pStmt.setString(1, "02");
+		pStmt.setString(2, input.Details[0].City);
+		pStmt.setString(3, input.Details[0].Country);	
+		pStmt.setString(4, input.Details[0].Region);		
 
 		 
 		pStmt.execute();
+		
+		pStmt = param.connection.prepareStatement("select CURRENT_IDENTITY_VALUE() from dummy");
+		var rs = pStmt.executeQuery();
+		var AddressId = null;
+		while (rs.next()) {
+			AddressId = rs.getInteger(1);
+		}
+		
 		pStmt.close();
 
 	} catch (e) {
@@ -52,22 +60,22 @@ function bpCreateBusinessPartner(param, partnerRole) {
 //Business Partner
 	try {
 
-		pStmt = param.connection.prepareStatement("select \"partnerSeqId\".NEXTVAL from DUMMY");
+	/*	pStmt = param.connection.prepareStatement("select \"partnerSeqId\".NEXTVAL from DUMMY");
 		
 		rs = pStmt.executeQuery();
 		var PartnerId = "";
 		while (rs.next()) {
 			PartnerId = rs.getString(1);
 		}
-		pStmt.close();
+		pStmt.close();*/
 		pStmt = param.connection.prepareStatement("INSERT INTO  \"MD.BusinessPartner\" " +
-		             " (PARTNERID, PARTNERROLE, \"HISTORY.CREATEDAT\", \"HISTORY.CHANGEDAT\", \"ADDRESSES.ADDRESSID\", EMAILADDRESS, COMPANYNAME  ) " +
-		             " values(?, ?, now(), now(), ?, ?, ?)");
-		pStmt.setString(1, PartnerId.toString());	
-		pStmt.setString(2, partnerRole);	
-		pStmt.setString(3, AddressId.toString());		
-		pStmt.setString(4, input.Details[0].EmailAddress);
-		pStmt.setString(5, input.Details[0].CompanyName);
+		             " (PARTNERROLE, \"HISTORY.CREATEDAT\", \"HISTORY.CHANGEDAT\", \"ADDRESSES.ADDRESSID\", EMAILADDRESS, COMPANYNAME  ) " +
+		             " values(?, now(), now(), ?, ?, ?)");
+	//	pStmt.setString(1, PartnerId.toString());	
+		pStmt.setString(1, partnerRole);	
+		pStmt.setInteger(2, AddressId);		
+		pStmt.setString(3, input.Details[0].EmailAddress);
+		pStmt.setString(4, input.Details[0].CompanyName);
 		pStmt.execute();
 		pStmt.close();
 

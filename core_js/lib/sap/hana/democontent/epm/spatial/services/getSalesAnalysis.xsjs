@@ -23,7 +23,7 @@ try {
 
     // get the total sales amount for the region
     // make sure the polygon is complete i.e. first and last point are same
-    query = 'select SUM(GROSSAMOUNT) AS AMOUNT,' + polygonString + ' AS COND from "sap.hana.democontent.epm.spatial.models::REGION_SALES_BP" group by ' + polygonString;
+    query = 'select SUM(GROSSAMOUNT) AS AMOUNT,' + polygonString + ' AS COND from "spatial.models::REGION_SALES_BP" group by ' + polygonString;
     rs = conn.executeQuery(query);
 
     var totalSalesAmount = '';
@@ -41,7 +41,7 @@ try {
 
     // get the top 5 buyers 
     // make sure the polygon is complete i.e. first and last point are same
-    query = 'select PARTNERID,COMPANYNAME,LEGALFORM,LATITUDE,LONGITUDE,SUM(GROSSAMOUNT) AS AMOUNT,' + polygonString + ' AS COND from "sap.hana.democontent.epm.spatial.models::REGION_SALES_BP" group by PARTNERID,COMPANYNAME,LEGALFORM,LATITUDE,LONGITUDE,' + polygonString + ' order by SUM(GROSSAMOUNT) desc';
+    query = 'select PARTNERID,COMPANYNAME,LEGALFORM,LATITUDE,LONGITUDE,SUM(GROSSAMOUNT) AS AMOUNT,' + polygonString + ' AS COND from "spatial.models::REGION_SALES_BP" group by PARTNERID,COMPANYNAME,LEGALFORM,LATITUDE,LONGITUDE,' + polygonString + ' order by SUM(GROSSAMOUNT) desc';
     rs = conn.executeQuery(query);
 
     var count = 0;
@@ -65,7 +65,7 @@ try {
 
     // get the sales amount year over year
     // make sure the polygon is complete i.e. first and last point are same
-    query = 'select YEAR_OF_SALE,SUM(GROSSAMOUNT) AS AMOUNT,' + polygonString + ' AS COND from "sap.hana.democontent.epm.spatial.models::REGION_SALES_BP" group by YEAR_OF_SALE,' + polygonString + ' order by YEAR_OF_SALE';
+    query = 'select YEAR_OF_SALE,SUM(GROSSAMOUNT) AS AMOUNT,' + polygonString + ' AS COND from "spatial.models::REGION_SALES_BP" group by YEAR_OF_SALE,' + polygonString + ' order by YEAR_OF_SALE';
     rs = conn.executeQuery(query);
 
     body.salesYoY = [];

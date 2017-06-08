@@ -27,7 +27,7 @@ function getFilter() {
 
         // Business Partner Company Name	
 
-        query = 'SELECT TO_INT(SCORE()*100)/100 AS SCORE, TO_NVARCHAR(COMPANYNAME) AS COMPANYNAME FROM "sap.hana.democontent.epm.models::BUYER" ' + ' WHERE CONTAINS("COMPANYNAME",?,FUZZY( 0.7 , \'similarCalculationMode=symmetricsearch\')) ORDER BY score DESC';
+        query = 'SELECT TO_INT(SCORE()*100)/100 AS SCORE, TO_NVARCHAR(COMPANYNAME) AS COMPANYNAME FROM "core.models::BUYER" ' + ' WHERE CONTAINS("COMPANYNAME",?,FUZZY( 0.7 , \'similarCalculationMode=symmetricsearch\')) ORDER BY score DESC';
         rs = conn.executeQuery(query, terms);
 
         for (i = 0; i < rs.length; i++) {
@@ -36,7 +36,7 @@ function getFilter() {
         }
 
         // Business Partner City
-        query = 'SELECT TO_INT(SCORE()*100)/100 AS score, TO_NVARCHAR(CITY) AS COMPANYNAME FROM "sap.hana.democontent.epm.models::BUYER" ' + ' WHERE CONTAINS("CITY",?,FUZZY( 0.7 , \'similarCalculationMode=symmetricsearch\')) ORDER BY score DESC';
+        query = 'SELECT TO_INT(SCORE()*100)/100 AS score, TO_NVARCHAR(CITY) AS COMPANYNAME FROM "core.models::BUYER" ' + ' WHERE CONTAINS("CITY",?,FUZZY( 0.7 , \'similarCalculationMode=symmetricsearch\')) ORDER BY score DESC';
         rs = conn.executeQuery(query, terms);
 
         for (i = 0; i < rs.length; i++) {

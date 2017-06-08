@@ -9,7 +9,7 @@ var conn = $.hdb.getConnection();
 var query = 
     'select PARTNERID,EMAILADDRESS,PHONENUMBER,WEBADDRESS,COMPANYNAME,LEGALFORM,' 
     + 'BUILDING,STREET,CITY,POSTALCODE,COUNTRY,REGION,LATITUDE,LONGITUDE FROM ' 
-    + '"sap.hana.democontent.epm.spatial.models::BP_ADDRESS_DETAILS"';
+    + '"spatial.models::BP_ADDRESS_DETAILS"';
 var rs = conn.executeQuery(query);
 var bpEntry = {};
 

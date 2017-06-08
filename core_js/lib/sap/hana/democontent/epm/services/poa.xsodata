@@ -1,6 +1,6 @@
-service namespace "com.sap.openSAP.hana5.example.services" { 
+service namespace "com.sap.openSAP.hana.example.services" { 
 
-	"sap.hana.democontent.epm.models::PO_HEADER_EN" 
+	"core.models::PO_HEADER_EN" 
 	as "PurchaseOrderCollection"
 	keys ("PURCHASEORDERID")
 	navigates ("PO_Supplier" as "Supplier", "PO_Notes" as "Notes", 
@@ -20,7 +20,7 @@ service namespace "com.sap.openSAP.hana5.example.services" {
 	
 	"sap.hana.democontent.epm.models::PO_ITEM"
 	as "PurchaseOrder_Items"
-	keys ("PURCHASEORDERID","PURCHASEORDERITEM")
+	keys ("PURCHASEORDERID","PRODUCT_PRODUCTID")
 	navigates ("PO_Item" as "PurchaseOrder_Items");
 	
 	association "PO_Supplier" principal "PurchaseOrderCollection"("PARTNER_PARTNERID") 

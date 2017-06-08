@@ -30,16 +30,16 @@ responseBody += 'BP_ID:' + encodeURI(overallsoData.PARTNERID) + "\n";
 
 var conn = $.hdb.getConnection();
 
-query = 'SELECT \"salesOrderId\".NEXTVAL as OverallId from Dummy';
+//query = 'SELECT \"salesOrderId\".NEXTVAL as OverallId from Dummy';
 
 
-rs = conn.executeQuery(query);
-var overAllId = '';
+//rs = conn.executeQuery(query);
+//var overAllId = '';
 
-if (rs.length > 0) {
+/*if (rs.length > 0) {
     overAllId = rs[0].OVERALLID;
     responseBody += 'so id ' + overAllId + '\n';
-}
+}*/
 
 //Get the company name for the BP id and store it in a local variable
 lv_bp_id = encodeURI(overallsoData.PARTNERID);
@@ -53,6 +53,16 @@ if (rs.length > 0) {
 }
 
 so_items = overallsoData.SalesOrderItems;
+
+
+//Insert Sales Order Header
+query = 'insert into \"SO.Header\"' 
+        + '("HISTORY.CREATEDBY.EMPLOYEEID", "HISTORY.CREATEDAT", "HISTORY.CHANGEDBY.EMPLOYEEID", "HISTORY.CHANGEDAT",  "PARTNER", "CURRENCY", "GROSSAMOUNT", "NETAMOUNT", "TAXAMOUNT", "LIFECYCLESTATUS", "BILLINGSTATUS", "DELIVERYSTATUS") ' 
+        + " values('0000000033',CURRENT_DATE,'0000000033',CURRENT_DATE, " 
+        + "?,'EUR',?,?,?,'N','I','I')";
+
+rs = conn.executeUpdate(query, overallsoData.PARTNERID,
+                        lv_so_grossamount, lv_so_netamount, lv_so_taxamount);
 
 
 //Insert all Sales Order Items
@@ -102,18 +112,18 @@ if (so_items) {
         lv_taxamount = lv_netamount * lv_tax;
         lv_grossamount = lv_netamount + lv_taxamount;
         //Insert Item into table
-        query = 'insert into "SO.Item"' + " values(?,?,?,'','EUR',?,?,?,'I','',?,'EA','')";
-        finalItemId = '';
+        query = 'insert into "SO.Item"' + " values(CURRENT_IDENTITY_VALUE(),?,'','EUR',?,?,?,'I','',?,'EA','')";
+       /* finalItemId = '';
         if (item_id >= 100) {
             finalItemId = '0000000' + item_id;
         } else {
             finalItemId = '00000000' + item_id;
-        }
+        }*/
 
-        rs = conn.executeUpdate(query, '0' + overAllId, finalItemId, lv_productid, lv_grossamount,
+        rs = conn.executeUpdate(query, lv_productid, lv_grossamount,
                                 lv_netamount, lv_taxamount, lv_quantity);
 
-        item_id = item_id + 10;
+       // item_id = item_id + 10;
 
         //Calculate the total of net amount, gross amount and tax amount for all line items
         lv_so_netamount = lv_so_netamount + lv_netamount;
@@ -128,13 +138,17 @@ if (so_items) {
 
 }
 
-//Insert Sales Order Header
-query = 'insert into \"SO.Header\"' 
-        + " values(?,'0000000033',CURRENT_DATE,'0000000033',CURRENT_DATE,''," 
-        + "?,'EUR',?,?,?,'N','I','I')";
 
-rs = conn.executeUpdate(query, '0' + overAllId, overallsoData.PARTNERID,
-                        lv_so_grossamount, lv_so_netamount, lv_so_taxamount);
+query = 'SELECT CURRENT_IDENTITY_VALUE() as OverallId from Dummy';
+
+
+rs = conn.executeQuery(query);
+var overAllId = '';
+
+if (rs.length > 0) {
+    overAllId = rs[0].OVERALLID;
+    responseBody += 'so id ' + overAllId + '\n';
+}
 
 conn.commit();
 conn.close();

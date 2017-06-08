@@ -54,7 +54,7 @@ function getData() {
     {
         //for distance calculation
       query = 'select NEW ST_Point(\'POINT(' + userLongitude + " " + userLatitude + ')\',4326 ).ST_Distance( NEW ST_Point(\'POINT(' + longitude + " " + latitude + ')\',4326 ),\'meter\')'+
-             'AS DISTANCE  from "sap.hana.democontent.epm.spatial.models::BP_ADDRESS_DETAILS"';
+             'AS DISTANCE  from "spatial.models::BP_ADDRESS_DETAILS"';
     rs = conn.executeQuery(query);
     }
     if(rs.length < 1){

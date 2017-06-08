@@ -1,10 +1,10 @@
-service namespace "com.sap.openSAP.hana5.example.services" {
+service namespace "com.sap.openSAP.hana.example.services" {
     "POViews.POHeaderConsumption" 
 	  as "POHeader" keys("PURCHASEORDERID") navigates ("Items" as "POItem", "PO_Supplier" as "Supplier", "PO_Notes" as "Notes", 
 	           "PO_Attachments" as "Attachments") ;
 	  
 	"POViews.POItemConsumption"
-	  as "POItem" keys("PURCHASEORDERID","PURCHASEORDERITEM") navigates ("ToProducts" as "ToProducts") ;
+	  as "POItem" keys("PURCHASEORDERID","PRODUCT_PRODUCTID") navigates ("ToProducts" as "ToProducts") ;
 	  
 	"MDViews.BuyerView"
 	as "BusinessPartners"

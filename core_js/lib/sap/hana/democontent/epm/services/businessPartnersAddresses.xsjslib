@@ -17,7 +17,7 @@ function bp_create_before_exit(param) {
 		var rs = pStmt.executeQuery();
 		var PartnerId = '';
 		while (rs.next()) {
-			PartnerId = rs.getString(1);
+			PartnerId = rs.getInteger(1);
 		}
 		pStmt.close();
 
@@ -29,10 +29,10 @@ function bp_create_before_exit(param) {
 				  '  "HISTORY.CREATEDAT" = now(),' + 
 				  '  "HISTORY.CHANGEDAT" = now(),' + 
 				  '  "CURRENCY" = ?');
-		pStmt.setString(1, PartnerId);	
+		pStmt.setInteger(1, PartnerId);	
 		pStmt.setString(2, '01');	
-		pStmt.setString(3, '0000000033');
-		pStmt.setString(4, '0000000033');
+		pStmt.setInteger(3, 33);
+		pStmt.setInteger(4, 33);
 		pStmt.setString(5, 'EUR');		
 		
 		pStmt.execute();
@@ -57,7 +57,7 @@ function address_create_before_exit(param) {
 	var rs = pStmt.executeQuery();
 	var AddressId = '';
 	while (rs.next()) {
-		AddressId = rs.getString(1);
+		AddressId = rs.getInterger(1);
 	}
 	pStmt.close();
 
@@ -66,7 +66,7 @@ function address_create_before_exit(param) {
 			  'ADDRESSTYPE = ?,' +
 			  '"VALIDITY.STARTDATE" = TO_DATE(' + "'2000-01-01', 'YYYY-MM-DD'),"  +
 			  '"VALIDITY.ENDDATE" = TO_DATE(' + "'9999-12-31', 'YYYY-MM-DD')" );
-	pStmt.setString(1, AddressId);		
+	pStmt.setInteger(1, AddressId);		
 	pStmt.setString(2, '02');			
 	pStmt.execute();
 	pStmt.close();
@@ -102,8 +102,8 @@ function assocation_create_exit(param){
 	$.trace.debug(JSON.stringify(Dependent));
 	var pStmt = param.connection.prepareStatement('update "MD.BusinessPartner" ' +
 			    ' SET "ADDRESSES.ADDRESSID" = ? WHERE "PARTNERID" = ? ');
-	pStmt.setString(1, Dependent.Details[0].ADDRESSID);
-	pStmt.setString(2, Principal.Details[0].PARTNERID);		
+	pStmt.setInteger(1, Dependent.Details[0].ADDRESSID);
+	pStmt.setInteger(2, Principal.Details[0].PARTNERID);		
 	pStmt.execute();
 	pStmt.close();	
 			

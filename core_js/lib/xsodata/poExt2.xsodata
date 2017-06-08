@@ -1,9 +1,9 @@
-service namespace "com.sap.openSAP.hana5.example.services" {
+service namespace "com.sap.openSAP.hana.example.services" {
     "POViews.POHeaderConsumption" 
 	  as "POHeader" keys("PURCHASEORDERID") navigates ("Items" as "POItem") ;
 	  
 	"POViews.POItemConsumption" 
-	  as "POItem" keys("PURCHASEORDERID","PURCHASEORDERITEMID") ;
+	  as "POItem" keys("PURCHASEORDERID","PRODUCT_PRODUCTID") ;
 	  
 
 	association "Items" principal  "POHeader"("PURCHASEORDERID")

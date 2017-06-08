@@ -1,9 +1,9 @@
-service namespace "com.sap.openSAP.hana5.example.services" { 
-	"sap.hana.democontent.epm.models::BUYER"
+service namespace "com.sap.openSAP.hana.example.services" { 
+	"core.models::BUYER"
 	as "BusinessPartners"
 	keys("PARTNERID");	
 	
-	"sap.hana.democontent.epm.models::GET_PARTNER_ROLES"
+	"core.models::GET_PARTNER_ROLES"
 	as "PartnerRoles"
 	keys("PARTNERROLE");	
 }
