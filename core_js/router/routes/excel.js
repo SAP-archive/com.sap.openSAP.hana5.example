@@ -24,7 +24,7 @@ module.exports = function() {
 		var client = req.db;
 		var query = "SELECT TOP 10 " +
 			" PURCHASEORDERID as \"PurchaseOrderItemId\", " +
-			" PURCHASEORDERITEM as \"ItemPos\", " +
+	//		" PURCHASEORDERITEM as \"ItemPos\", " +
 			" \"PRODUCT.PRODUCTID\" as \"ProductID\", " +
 			" GROSSAMOUNT as \"Amount\" " +
 			" FROM \"PO.Item\"  ";
@@ -42,7 +42,7 @@ module.exports = function() {
 						} else {
 							var out = [];
 							for (var i = 0; i < rs.length; i++) {
-								out.push([rs[i]["PurchaseOrderItemId"], rs[i]["ItemPos"], rs[i]["ProductID"], rs[i]["Amount"]]);
+								out.push([rs[i]["PurchaseOrderItemId"], rs[i]["ProductID"], rs[i]["Amount"]]);
 							}
 							var result = excel.build([{
 								name: "Purchase Orders",

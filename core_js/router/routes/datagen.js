@@ -1,4 +1,7 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, quotes: 0, no-use-before-define: 0, new-cap:0 */
+
+// TODO: Completely Rewrite Data Geneator - This current version no longer works!
+
 "use strict";
 
 module.exports = function() {
