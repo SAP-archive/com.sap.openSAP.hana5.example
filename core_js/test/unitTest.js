@@ -46,7 +46,7 @@ describe('Unit tests for Admin backend', function() {
             queryStr = query;
         }; 
         util.resetTable(req, res, "SO.Header", "SOShadow.Header", function(){});
-        expect(queryStr).to.be('truncate table "sap.hana.democontent.epm.data::' + 'SO.Header"');
+        expect(queryStr).to.be('truncate table "' + 'SO.Header"');
     });
     it('util resetTable check insert query', function(){
         // mock client
@@ -58,7 +58,7 @@ describe('Unit tests for Admin backend', function() {
             callbackFn(null, {});
         }; 
         util.resetTable(req, res, "SO.Header", "SOShadow.Header", function(){});
-        expect(queryStrNext).to.be('insert into "sap.hana.democontent.epm.data::SO.Header" select * from "sap.hana.democontent.epm.data.shadow::SOShadow.Header"');        
+        expect(queryStrNext).to.be('insert into "SO.Header" select * from "shadow::SOShadow.Header"');        
     });
     it('util getTableInfo check query', function(){
         // mock client
@@ -70,7 +70,7 @@ describe('Unit tests for Admin backend', function() {
             }]);
         };
         util.getTableInfo(req.db, "SO.Header", "Sales Header", function(){});
-        expect(queryStr).to.be('SELECT "RECORD_COUNT","TABLE_SIZE" FROM "SYS"."M_TABLES" where "TABLE_NAME"=\'sap.hana.democontent.epm.data::SO.Header\'');
+        expect(queryStr).to.be('SELECT "RECORD_COUNT","TABLE_SIZE" FROM "SYS"."M_TABLES" where "TABLE_NAME"=\'SO.Header\'');
     });
     it('util getTableInfo check TABLE_SYNONYM in callback', function(){
         // mock client
