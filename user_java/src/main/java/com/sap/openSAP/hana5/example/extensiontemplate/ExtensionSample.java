@@ -63,12 +63,12 @@ public class ExtensionSample {
 						+ requestEntity.getProperty("LastName").getValue() + "'" + "," + "'"
 						+ requestEntity.getProperty("Email").getValue() + "'" + ')';
 				//String keyVal = requestEntity.getProperty("UserId").getValue().toString();
-				String selectSQL = "SELECT * FROM \"UserData.User\" WHERE " + '"' + "UserId" + '"' + '= CURRENT_IDENTITY_VALUE() ';
-				stmt.execute(SQL);
+			//	String selectSQL = "SELECT * FROM \"UserData.User\" WHERE " + '"' + "UserId" + '"' + ' = CURRENT_IDENTITY_VALUE() ';
+			//	stmt.execute(SQL);
 //				LOGGER.debug("Inserted record for Id > " + keyVal);
-				ResultSet rs = stmt.executeQuery(selectSQL);
-				Entity result = rs.next() ? createEntityFromResultSet(rs) : null;
-				dpCtx.setResultEntity(result);
+		//		ResultSet rs = stmt.executeQuery(selectSQL);
+			//	Entity result = rs.next() ? createEntityFromResultSet(rs) : null;
+			//	dpCtx.setResultEntity(result);
 				LOGGER.debug("Data Successfully inserted");
 //			}
 			
