@@ -9,9 +9,9 @@
   <name>Gateway Runtime Reference Content: Java Project for DevX</name>
 
   <properties>
-    <sap.gateway.version>1.2.1</sap.gateway.version>
+    <sap.gateway.version>1.2.2</sap.gateway.version>
     <!-- apache.olingo.version>4.3.0-sap-03</apache.olingo.version-->
-    <slf4j.version>1.8.0-alpha0</slf4j.version>
+    <slf4j.version>1.8.0-alpha2</slf4j.version>
   </properties>
 
   <build>
@@ -40,7 +40,7 @@
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.0-b05</version>
+      <version>4.0.0-b07</version>
       <scope>provided</scope>
     </dependency>
 
