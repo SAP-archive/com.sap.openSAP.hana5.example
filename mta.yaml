@@ -150,7 +150,7 @@ resources:
     type: configuration
     parameters:
       provider-id: 'com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV4:sapui5_fesv4'
-      version: '>=1.49.0'
+      version: '>=1.49.0-SNAPSHOT'
   - name: openSAP-ex-log
     type: org.cloudfoundry.managed-service
     parameters:
