@@ -3,12 +3,12 @@
     "node": "4.x || 6.x"
   },
   "dependencies": {
-    "@sap/xssec": "1.0.3",
-    "@sap/xsenv": "1.2.6",
-    "@sap/xsjs": "1.14.1",
-    "@sap/hdbext": "4.3.3",
-    "@sap/logging": "~2.2",
-    "@sap/jobs-client": "~1.1.0",
+    "@sap/xssec": "1.1.1",
+    "@sap/xsenv": "1.2.7",
+    "@sap/xsjs": "1.16.1",
+    "@sap/hdbext": "4.3.4",
+    "@sap/logging": "~3.0",
+    "@sap/jobs-client": "~1.1.1",
     "express": "~4.15",
     "passport": "~0.3.2",
     "winston": "~2.3.1",
