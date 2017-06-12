@@ -3,13 +3,13 @@
     "node": "4.x || 6.x"
   },
   "dependencies": {
-    "@sap/xssec": "1.0.3",
-    "@sap/xsenv": "1.2.6",
-    "@sap/xsjs": "1.14.1",
-    "@sap/hdbext": "4.3.3",
+    "@sap/xssec": "1.1.1",
+    "@sap/xsenv": "1.2.7",
+    "@sap/xsjs": "1.16.1",
+    "@sap/hdbext": "4.3.4",
     "@sap/textbundle": "latest",
-    "@sap/logging": "~2.2",
-    "@sap/audit-logging": "2.0.0",
+    "@sap/logging": "~3.0",
+    "@sap/audit-logging": "2.0.1",
     "@sap/cds": "1.14.0",
     "express": "~4.15",
     "express-ws": "3.0",
@@ -19,7 +19,7 @@
     "accept-language-parser": "latest",
     "node-xlsx": "~0.7.4",
     "node-zip": "~1.1.1",
-    "xmldoc": "~1.0.0",
+    "xmldoc": "~1.1.0",
     "winston": "~2.3",
     "body-parser": "~1.17",
     "elementtree": "latest"
