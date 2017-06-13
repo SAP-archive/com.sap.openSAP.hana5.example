@@ -105,7 +105,8 @@
     },
     {
       "source": "/user/(.*)",
-      "destination": "user-backend"
+      "destination": "user-backend",
+      "authenticationType": "xsuaa"
     },
     {
       "source": "^/admin-ui/(.*)",

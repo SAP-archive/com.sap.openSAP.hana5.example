@@ -2,25 +2,25 @@
 "use strict";
 
 var conn = $.hdb.getConnection();
-var query = "SELECT FROM PO.Item { " +
-	        " PURCHASEORDERID as \"PurchaseOrderItemId\", " +
-            " PURCHASEORDERITEM as \"ItemPos\", " +
+/*var query = "SELECT FROM PO.Item { " +
+	        " HEADER.PURCHASEORDERID as \"PurchaseOrderItemId\", " +
+//            " PURCHASEORDERITEM as \"ItemPos\", " +
             " PRODUCT.PRODUCTID as \"ProductID\", " +
             " GROSSAMOUNT as \"Amount\" " +
-            " } ";
-/*var query = "SELECT "  +
-	" PURCHASEORDERID as \"PurchaseOrderItemId\", " +
-	" PURCHASEORDERITEM as \"ItemPos\", " +
+            " } ";*/
+var query = "SELECT "  +
+	" \"HEADER.PURCHASEORDERID\" as \"PurchaseOrderItemId\", " +
+//	" PURCHASEORDERITEM as \"ItemPos\", " +
 	" \"PRODUCT.PRODUCTID\" as \"ProductID\", " +
 	" GROSSAMOUNT as \"Amount\" " +
-	"FROM \"PO.Item\" ";            */
+	"FROM \"PO.Item\" ";           
 var rs = conn.executeQuery(query);
 
 var body = "";
 
 for(var i = 0; i < rs.length; i++){
    if(rs[i]["Amount"] >= 500){
-	body += rs[i]["PurchaseOrderItemId"] + "\t" + rs[i]["ItemPos"] + "\t" + 
+	body += rs[i]["PurchaseOrderItemId"] + "\t" + 
 			rs[i]["ProductID"] + "\t" + rs[i]["Amount"] + "\n";
    }
 }

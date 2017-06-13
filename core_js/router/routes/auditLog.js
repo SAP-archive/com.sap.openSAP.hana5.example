@@ -8,7 +8,7 @@ module.exports = function() {
 	var xsenv = require("@sap/xsenv");
 	xsenv.loadEnv();
 	var credentials = xsenv.getServices({
-		auditlog: 'openSAP5-ex-log'
+		auditlog: 'openSAP-ex-log'
 	}).auditlog;
 	var auditLog = require('@sap/audit-logging')(credentials);
 

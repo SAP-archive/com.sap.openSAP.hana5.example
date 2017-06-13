@@ -23,7 +23,7 @@ module.exports = function() {
 	app.get("/download", function(req, res) {
 		var client = req.db;
 		var query = "SELECT TOP 10 " +
-			" PURCHASEORDERID as \"PurchaseOrderItemId\", " +
+			" \"HEADER.PURCHASEORDERID\" as \"PurchaseOrderItemId\", " +
 	//		" PURCHASEORDERITEM as \"ItemPos\", " +
 			" \"PRODUCT.PRODUCTID\" as \"ProductID\", " +
 			" GROSSAMOUNT as \"Amount\" " +

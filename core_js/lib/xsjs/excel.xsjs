@@ -4,8 +4,8 @@
 var excel = $.require("node-xlsx");
 var conn = $.hdb.getConnection();
 var query = "SELECT FROM PO.Item { " +
-	" PURCHASEORDERID as \"PurchaseOrderItemId\", " +
-	" PURCHASEORDERITEM as \"ItemPos\", " +
+	" HEADER.PURCHASEORDERID as \"PurchaseOrderItemId\", " +
+//	" PURCHASEORDERITEM as \"ItemPos\", " +
 	" PRODUCT.PRODUCTID as \"ProductID\", " +
 	" GROSSAMOUNT as \"Amount\" " +
 	" } ";
@@ -20,7 +20,7 @@ var rs = conn.executeQuery(query);
 var body = "";
 var out = [];
 for (var i = 0; i < rs.length; i++) {
-	out.push([rs[i]["PurchaseOrderItemId"], rs[i]["ItemPos"], rs[i]["ProductID"], rs[i]["Amount"]]);
+	out.push([rs[i]["PurchaseOrderItemId"], rs[i]["ProductID"], rs[i]["Amount"]]);
 }
 var result = excel.build([{
 	name: "Purchase Orders",
