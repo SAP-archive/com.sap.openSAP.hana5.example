@@ -29,7 +29,7 @@ sap.ui.define([
 			bpModel.attachMetadataLoaded(bpModel, function() {
 				fnLoadMetadata();
 			});
-			
+			fnLoadMetadata();
 			
 		},
 

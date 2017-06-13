@@ -852,7 +852,7 @@ sap.ui.define([
 			oEntry.City = result.city;
 			oEntry.Country = this.getView().byId("ddlbCountry").getSelectedKey();
 			oEntry.Region = this.getView().byId("ddlbRegion").getSelectedKey();
-			oEntry.CompanyName = result.compnay;
+			oEntry.CompanyName = result.company;
 			oEntry.EmailAddress = result.email;
 
 			oModel.setHeaders({
