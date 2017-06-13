@@ -26,6 +26,7 @@ function usersCreate(param) {
 		var User = SESSIONINFO.recordSetToJSON(pStmt.executeQuery(), "Details");
 		pStmt.close();
         console.log(JSON.stringify(User));  
+        console.log(User.Details[0].FirstName);
 		//Validate Email
 		if (!validateEmail(User.Details[0].Email)) {
 			throw "Invalid email for " + User.Details[0].FirstName +
@@ -38,19 +39,19 @@ function usersCreate(param) {
 		// var PersNo = "";
 		// while (rs.next()) {
 		// 	PersNo = rs.getString(1);
-		// }
+		// }  {"Details":[{"UserId":0,"FirstName":"test","LastName":"test","Email":"test@sap.com"}]}
 		// pStmt.close();
 		//Insert Record into DB Table and Temp Output Table
-		for (var i = 0; i < 2; i++) {
-			var pStmt;
-			if (i < 1) {
+//		for (var i = 0; i < 2; i++) {
+//			var pStmt;
+//			if (i < 1) {
 				pStmt = param.connection.prepareStatement("insert into \"UserData.User\" (\"FirstName\", \"LastName\", \"Email\") values(?,?,?)");
-			} else {
-				pStmt = param.connection.prepareStatement("TRUNCATE TABLE \"" + after + "\"");
+//			} else {
+	/*			pStmt = param.connection.prepareStatement("TRUNCATE TABLE \"" + after + "\"");
 				pStmt.executeUpdate();
 				pStmt.close();
-				pStmt = param.connection.prepareStatement("insert into \"" + after + "\" (\"FirstName\",\"LastName\",\"Email\") values(?,?,?)");
-			}
+				pStmt = param.connection.prepareStatement("insert into \"" + after + "\" (\"FirstName\",\"LastName\",\"Email\") values(?,?,?)");*/
+//			}
 		//	pStmt.setString(1, PersNo.toString());
 			pStmt.setString(1, User.Details[0].FirstName.toString());
 			pStmt.setString(2, User.Details[0].LastName.toString());
@@ -59,7 +60,7 @@ function usersCreate(param) {
 
 			pStmt.executeUpdate();
 			pStmt.close();
-		}
+//		}
 	} catch (e) {
 		console.error(e);
 		throw e;

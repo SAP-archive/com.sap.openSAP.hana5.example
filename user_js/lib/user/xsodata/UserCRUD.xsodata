@@ -1,6 +1,7 @@
 service namespace "com.sap.openSAP.hana5.example.servicesa" {
     "UserData.User"
-	as "UserDetails" concurrencytoken;
+	as "UserDetails" concurrencytoken create using 
+	"user.xsjs:usersCreateMethod.xsjslib::usersCreate";
 }
 settings {  
  support null;
