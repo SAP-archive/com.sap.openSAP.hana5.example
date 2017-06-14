@@ -32,14 +32,6 @@
                     <sap.ui.commons:TextView text="{PURCHASEORDERID}"/>
                 </sap.ui.table:template>
             </sap.ui.table:Column>
-            <sap.ui.table:Column width="125px" sortProperty="PURCHASEORDERITEM" filterProperty="PURCHASEORDERITEM">
-                <sap.ui.table:label>
-                    <sap.ui.commons:Label text="{i18n&gt;item}" requiredAtBegin="false"/>
-                </sap.ui.table:label>
-                <sap.ui.table:template>
-                    <sap.ui.commons:TextView text="{PURCHASEORDERITEM}"/>
-                </sap.ui.table:template>
-            </sap.ui.table:Column>
             <sap.ui.table:Column sortProperty="PARTNER_PARTNERID" filterProperty="PARTNER_PARTNERID">
                 <sap.ui.table:label>
                     <sap.ui.commons:Label text="{i18n&gt;bpart}" requiredAtBegin="false"/>

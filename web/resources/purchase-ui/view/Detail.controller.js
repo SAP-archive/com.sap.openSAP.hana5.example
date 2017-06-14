@@ -50,12 +50,12 @@ sap.ui.controller("shine.democontent.epm.poworklist.view.Detail", {
 
         var oTableItems = this.byId("poItemTable");
         var ContextItem = "/PurchaseOrderItem";
-        var sort1 = new sap.ui.model.Sorter("PURCHASEORDERITEM");
+        var sort1 = new sap.ui.model.Sorter("PRODUCT_PRODUCTID");
         oTableItems.bindRows({
             path: ContextItem,
             parameters: {
               //  expand: "Buyer",
-                select: "PURCHASEORDERITEM,PRODUCT_PRODUCTID,ProductName,CATEGORY,QUANTITY,QUANTITYUNIT,GROSSAMOUNT,CURRENCY"
+                select: "PRODUCT_PRODUCTID,ProductName,CATEGORY,QUANTITY,QUANTITYUNIT,GROSSAMOUNT,CURRENCY"
             },
             sorter: sort1,
             filters:[

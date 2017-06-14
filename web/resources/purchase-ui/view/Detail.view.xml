@@ -106,15 +106,7 @@
                 <sap.ui.commons:content>
                     <sap.ui.table:Table id="poItemTable" visibleRowCount="6" selectionMode="None" title="{i18n&gt;po_item}">
                         <sap.ui.table:columns>
-                            <sap.ui.table:Column sortProperty="PURCHASEORDERITEM" filterProperty="PURCHASEORDERITEM">
-                                <sap.ui.table:label>
-                                    <sap.ui.commons:Label text="{i18n&gt;item}" requiredAtBegin="false"/>
-                                </sap.ui.table:label>
-                                <sap.ui.table:template>
-                                    <sap.ui.commons:TextView text="{PURCHASEORDERITEM}"/>
-                                </sap.ui.table:template>
-                            </sap.ui.table:Column>
-                            <sap.ui.table:Column sortProperty="PRODUCT_PRODUCTID" filterProperty="PRODUCT_PRODUCTID">
+                             <sap.ui.table:Column sortProperty="PRODUCT_PRODUCTID" filterProperty="PRODUCT_PRODUCTID">
                                 <sap.ui.table:label>
                                     <sap.ui.commons:Label text="{i18n&gt;product}" requiredAtBegin="false"/>
                                 </sap.ui.table:label>

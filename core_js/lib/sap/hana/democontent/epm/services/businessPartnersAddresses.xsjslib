@@ -41,6 +41,7 @@ function bp_create_before_exit(param) {
 		
 	}
 	catch (e) {
+		console.log(e.toString());
 		return;
 	}
 
@@ -73,6 +74,7 @@ function address_create_before_exit(param) {
 		
 	}
 	catch (e) {
+		console.log(e.toString());
 		return;
 	}
 

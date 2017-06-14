@@ -18,7 +18,7 @@ service namespace "com.sap.openSAP.hana.example.services" {
 	as "Attachments"
 	keys ("NOTEID");
 	
-	"sap.hana.democontent.epm.models::PO_ITEM"
+	"core.models::PO_ITEM"
 	as "PurchaseOrder_Items"
 	keys ("PURCHASEORDERID","PRODUCT_PRODUCTID")
 	navigates ("PO_Item" as "PurchaseOrder_Items");

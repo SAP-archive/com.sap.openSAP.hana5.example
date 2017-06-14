@@ -71,8 +71,9 @@
       }
     },
     {
-      "source": "^/java/odata/(.*)",
+      "source": "/java/odata(.*)",
       "destination": "user-java-backend",
+      "csrfProtection": true,
       "authenticationType": "xsuaa"
     },
     {
