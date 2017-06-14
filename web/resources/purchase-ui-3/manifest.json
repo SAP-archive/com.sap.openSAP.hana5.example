@@ -39,35 +39,35 @@
 				}
 			},
 			"localAnnotations_1": {
-				"uri": "/node/annotations/com.sap.openSAP.hana5.example.services.POHeaderType/POViews.POHeaderConsumption/",
+				"uri": "/node/annotations/com.sap.openSAP.hana.example.services.POHeaderType/POViews.POHeaderConsumption/",
 				"type": "ODataAnnotation"
 			},
 			"localAnnotations_2": {
-				"uri": "/node/annotations/com.sap.openSAP.hana5.example.services.POItemType/POViews.POItemConsumption/",
+				"uri": "/node/annotations/com.sap.openSAP.hana.example.services.POItemType/POViews.POItemConsumption/",
 				"type": "ODataAnnotation"
 			},
 			"localAnnotations_3": {
-				"uri": "/node/annotations/com.sap.openSAP.hana5.example.services.ProductsType/MDViews.ProductsConsumption/",
+				"uri": "/node/annotations/com.sap.openSAP.hana.example.services.ProductsType/MDViews.ProductsConsumption/",
 				"type": "ODataAnnotation"
 			},
 			"localAnnotations_4": {
-				"uri": "/node/annotations/com.sap.openSAP.hana5.example.services.CountriesType/MDViews.counties/",
+				"uri": "/node/annotations/com.sap.openSAP.hana.example.services.CountriesType/MDViews.counties/",
 				"type": "ODataAnnotation"
 			},
 			"localAnnotations_5": {
-				"uri": "/node/annotations/com.sap.openSAP.hana5.example.services.ProductsVHType/MDViews.ProductsValueHelp/",
+				"uri": "/node/annotations/com.sap.openSAP.hana.example.services.ProductsVHType/MDViews.ProductsValueHelp/",
 				"type": "ODataAnnotation"
 			},
 			"localAnnotations_6": {
-				"uri": "/node/annotations/com.sap.openSAP.hana5.example.services.ProductCatVhType/MDViews.productCategoryVH/",
+				"uri": "/node/annotations/com.sap.openSAP.hana.example.services.ProductCatVhType/MDViews.productCategoryVH/",
 				"type": "ODataAnnotation"
 			},
 			"localAnnotations_7": {
-				"uri": "/node/annotations/com.sap.openSAP.hana5.example.services.SupplierVhType/MDViews.SupplierViewVH/",
+				"uri": "/node/annotations/com.sap.openSAP.hana.example.services.SupplierVhType/MDViews.SupplierViewVH/",
 				"type": "ODataAnnotation"
 			},
 			"localAnnotations_8": {
-				"uri": "/node/annotations/com.sap.openSAP.hana5.example.services.BusinessPartnersType/PARTNERROLE",
+				"uri": "/node/annotations/com.sap.openSAP.hana.example.services.BusinessPartnersType/PARTNERROLE",
 				"type": "ODataAnnotation"
 			}
 		},

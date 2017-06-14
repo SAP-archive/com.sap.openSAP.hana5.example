@@ -73,7 +73,7 @@
     {
       "source": "/java/odata(.*)",
       "destination": "user-java-backend",
-      "csrfProtection": true,
+      "csrfProtection": true, 
       "authenticationType": "xsuaa"
     },
     {

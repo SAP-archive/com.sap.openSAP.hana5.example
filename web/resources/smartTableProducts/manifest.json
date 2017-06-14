@@ -4,23 +4,23 @@
   "sap.app": {
     "dataSources": {
       "mainServiceAnnotation": {
-        "uri": "/node/annotations/com.sap.openSAP.hana5.example.services.ProductsType/MDViews.ProductsConsumption/",
+        "uri": "/node/annotations/com.sap.openSAP.hana.example.services.ProductsType/MDViews.ProductsConsumption/",
         "type": "ODataAnnotation"
       },
       "countriesAnnotation": {
-        "uri": "/node/annotations/com.sap.openSAP.hana5.example.services.CountriesType/MDViews.counties/",
+        "uri": "/node/annotations/com.sap.openSAP.hana.example.services.CountriesType/MDViews.counties/",
         "type": "ODataAnnotation"
       },
       "productsVHAnnotation": {
-        "uri": "/node/annotations/com.sap.openSAP.hana5.example.services.ProductsVHType/MDViews.ProductsValueHelp/",
+        "uri": "/node/annotations/com.sap.openSAP.hana.example.services.ProductsVHType/MDViews.ProductsValueHelp/",
         "type": "ODataAnnotation"
       }, 
       "productCatVHAnnotation": {
-        "uri": "/node/annotations/com.sap.openSAP.hana5.example.services.ProductCatVhType/MDViews.productCategoryVH/",
+        "uri": "/node/annotations/com.sap.openSAP.hana.example.services.ProductCatVhType/MDViews.productCategoryVH/",
         "type": "ODataAnnotation"
       }, 
       "supplierVHAnnotation": {
-        "uri": "/node/annotations/com.sap.openSAP.hana5.example.services.SupplierVhType/MDViews.SupplierViewVH/",
+        "uri": "/node/annotations/com.sap.openSAP.hana.example.services.SupplierVhType/MDViews.SupplierViewVH/",
         "type": "ODataAnnotation"
       },       
       "mainService": {

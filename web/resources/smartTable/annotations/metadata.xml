@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
 	<edmx:DataServices m:DataServiceVersion="2.0">
-		<Schema xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="com.sap.openSAP.hana5.example.services">
-			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.sap.openSAP.hana5.example.services.BusinessPartnersType/PARTNERROLE">
+		<Schema xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="com.sap.openSAP.hana.example.services">
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.sap.openSAP.hana.example.services.BusinessPartnersType/PARTNERROLE">
 				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
 					<Record>
 						<PropertyValue Property="CollectionPath" String="PartnerRoles"/>
@@ -20,12 +20,12 @@
 					</Record>
 				</Annotation>
 			</Annotations>
-			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.sap.openSAP.hana5.example.services.BusinessPartnersType">
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.sap.openSAP.hana.example.services.BusinessPartnersType">
 				<Annotation Term="com.sap.vocabularies.UI.v1.LineItem">
 					<Collection>
 						<Record Type="com.sap.vocabularies.UI.v1.DataField">
 							<PropertyValue Property="Value" Path="PARTNERID"/>
-							<PropertyValue Property="Label" String="Partner ID upd ann" />
+							<PropertyValue Property="Label" String="Partner ID" />
 							<PropertyValue Property="QuickInfo" String="Quick" />
 							<Annotation Term="com.sap.vocabularies.UI.v1.Importance" EnumMember="com.sap.vocabularies.UI.v1.ImportanceType/High"/>
 						</Record>

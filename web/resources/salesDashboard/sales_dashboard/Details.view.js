@@ -148,9 +148,9 @@ sap.ui.jsview("sales_dashboard.Details", {
     oTable = this.oSITable;
     oTable.setTitle(oBundle.getText("SALES_ORDER_ITEMS"));
     
-    oControl = new sap.ui.commons.TextField().bindProperty("value","SALESORDERITEM");
+ /*   oControl = new sap.ui.commons.TextField().bindProperty("value","SALESORDERITEM");
     oTable.addColumn(new sap.ui.table.Column({label:new sap.ui.commons.Label({text: oBundle.getText("SALES_ORDER_ITEM_ID")}), template: oControl, sortProperty: "SALESORDERITEM", filterProperty: "SALESORDERITEM", width: "100px" }));
-    
+ */   
     //Product Id
     oControl = new sap.ui.commons.TextField().bindProperty("value","PRODUCTID");
     oTable.addColumn(new sap.ui.table.Column({label:new sap.ui.commons.Label({text: oBundle.getText("PRODUCT")}), template: oControl, sortProperty: "PRODUCTID", filterProperty: "PRODUCTID", width: "100px" }));

@@ -46,7 +46,7 @@ function buildXMLHeader() {
 	Schema.set('xmlns:d', 'http://schemas.microsoft.com/ado/2007/08/dataservice');
 	Schema.set('xmlns:m', 'http://schemas.microsoft.com/ado/2007/08/dataservices/metadata');
 	Schema.set('xmlns', 'http://schemas.microsoft.com/ado/2008/09/edm');
-	Schema.set('Namespace', 'com.sap.openSAP.hana5.example.services');
+	Schema.set('Namespace', 'com.sap.openSAP.hana.example.services');
 
 	return {
 		root: Edmx,

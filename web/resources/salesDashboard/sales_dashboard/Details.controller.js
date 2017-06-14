@@ -7,7 +7,7 @@ sap.ui.controller("sales_dashboard.Details", {
 		
 		var oTableItems = sap.ui.getCore().byId("soItemTable");
 		var ContextItem = "/SalesOrderHeader(SALESORDERID='"+soId+"')/SalesOrderItem";
-		var sort1 = new sap.ui.model.Sorter("SALESORDERID,SALESORDERITEM");
+		var sort1 = new sap.ui.model.Sorter("SALESORDERID");
 		oTableItems.bindRows(ContextItem,sort1);
 	},
 	

@@ -3,15 +3,15 @@
 	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/UI.xml">
 		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
 	</edmx:Reference>
-	<edmx:Reference Uri="$metadata">
-		<edmx:Include Alias="com.sap.openSAP.hana5.example.services" Namespace="com.sap.openSAP.hana5.example.services"/>
+	<edmx:Reference Uri="$metadata"> 
+		<edmx:Include Alias="com.sap.openSAP.hana.example.services" Namespace="com.sap.openSAP.hana.example.services"/>
 	</edmx:Reference>
 	<edmx:DataServices>
-		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="POWorklist.com.sap.openSAP.hana5.example.services">
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="POWorklist.com.sap.openSAP.hana.example.services">
 			<!--===============================================================================
                 Entity Type from chosen collection 
                 ================================================================================-->
-			<Annotations Target="com.sap.openSAP.hana5.example.services.POHeaderType">
+			<Annotations Target="com.sap.openSAP.hana.example.services.POHeaderType">
 				<Annotation Term="UI.SelectionFields">
 					<Collection>
 						<PropertyPath>PARTNER_PARTNERID</PropertyPath>
@@ -64,7 +64,7 @@
 			<!--===============================================================================
                 Entity Type from chosen navigation property
                 ================================================================================-->
-			<Annotations Target="com.sap.openSAP.hana5.example.services.POItemType">
+			<Annotations Target="com.sap.openSAP.hana.example.services.POItemType">
 				<Annotation Term="UI.Facets">
 					<Collection>
 						<Record Type="UI.CollectionFacet">

@@ -98,14 +98,6 @@
                             <sap.ui.commons.layout:content>
                                 <sap.ui.table:Table id="soItemTable" visibleRowCount="8" selectionMode="None"  title="{i18n&gt;SALES_ORDER_ITEMS}">
                                     <sap.ui.table:columns>
-                                        <sap.ui.table:Column sortProperty="SALESORDERITEM" filterProperty="SALESORDERITEM" filterOperator="EQ">
-                                            <sap.ui.table:label>
-                                                <sap.ui.commons:Label text="{i18n&gt;SALES_ORDER_ITEM_ID}" requiredAtBegin="false"/>
-                                            </sap.ui.table:label>
-                                            <sap.ui.table:template>
-                                                <sap.ui.commons:TextView text="{SALESORDERITEM}"/>
-                                            </sap.ui.table:template>
-                                        </sap.ui.table:Column>
                                         <sap.ui.table:Column sortProperty="PRODUCTID" filterProperty="PRODUCTID">
                                             <sap.ui.table:label>
                                                 <sap.ui.commons:Label text="{i18n&gt;PRODUCT}" requiredAtBegin="false"/>
