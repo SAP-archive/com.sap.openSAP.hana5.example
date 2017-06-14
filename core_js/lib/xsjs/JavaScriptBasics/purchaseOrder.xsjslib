@@ -69,7 +69,7 @@ function header(purchaseOrderId, schema) {
 	query = 'SELECT * FROM "PO.HeaderView" '
 			+ ' WHERE "PurchaseOrderId" = ?';
 	pstmt = conn.prepareStatement(query);
-	pstmt.setString(1, purchaseOrderId);
+	pstmt.setInteger(1, purchaseOrderId);
 	rs = pstmt.executeQuery();
 
 	var meta = rs.getMetaData();
@@ -91,10 +91,10 @@ function header(purchaseOrderId, schema) {
 
 	//Get Items
 	this.Items = [];
-	query = 'SELECT "ItemPos" FROM "PO.ItemView" '
+	query = 'SELECT "ProductID" FROM "PO.ItemView" '
 		+ ' WHERE "PurchaseOrderItemId" = ?';
 	pstmt = conn.prepareStatement(query);
-	pstmt.setString(1, purchaseOrderId);
+	pstmt.setInteger(1, purchaseOrderId);
 	var rsItems = pstmt.executeQuery();
 	while (rsItems.next()) {
 	   this.Items.push(new item(this.PurchaseOrderId,rsItems.getNString(1)));
@@ -109,7 +109,7 @@ function buyer(partnerId) {
 	query = 'SELECT * FROM "MDViews.BuyerView" '
 			+ ' WHERE "Id" = ?';
 	pstmt = conn.prepareStatement(query);
-	pstmt.setString(1, partnerId);
+	pstmt.setInteger(1, partnerId);
 	rs = pstmt.executeQuery();
 
 	var meta = rs.getMetaData();
@@ -125,13 +125,13 @@ function buyer(partnerId) {
 }
 buyer.prototype = new base();
 
-function item(purchaseOrderId, itemPos){
+function item(purchaseOrderId, ProductID){
 
 	query = 'SELECT * FROM "PO.ItemView" '
-			+ ' WHERE "PurchaseOrderItemId" = ? and "ItemPos" = ?';
+			+ ' WHERE "PurchaseOrderItemId" = ? and "ProductID" = ?';
 	pstmt = conn.prepareStatement(query);
-	pstmt.setString(1, purchaseOrderId);
-	pstmt.setString(2, itemPos);	
+	pstmt.setInteger(1, purchaseOrderId);
+	pstmt.setString(2, ProductID);	
 	var rs = pstmt.executeQuery();
 
 	var meta = rs.getMetaData();

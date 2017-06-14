@@ -109,7 +109,7 @@ function getHeader(purchaseOrderId, schema, connection) {
 	query = 'SELECT * FROM "PO.Header" '
 			+ ' WHERE PURCHASEORDERID = ?';
 	pstmt = connection.prepareStatement(query);
-	pstmt.setString(1, purchaseOrderId.toString());
+	pstmt.setInteger(1, purchaseOrderId.toString());
 	rs = pstmt.executeQuery();
 
 	var meta = rs.getMetaData();
@@ -149,10 +149,10 @@ function putHeader(purchaseOrderId, header, schema, connection ) {
 	+ 'VALUES (?,?, now(), ?, now(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 	
 	pstmt = connection.prepareStatement(query);
-	pstmt.setString(1, purchaseOrderId.toString());
-	pstmt.setString(2,'0000000033');  //Created By
-	pstmt.setString(3,'0000000033');  //Changed By	
-	pstmt.setString(4,header.partnerId);  
+	pstmt.setInteger(1, purchaseOrderId.toString());
+	pstmt.setInteger(2, 33);  //Created By
+	pstmt.setInteger(3, 33);  //Changed By	
+	pstmt.setInteger(4,header.partnerId);  
 	pstmt.setString(5,header.currency);  
 	
 	var tax = header.netAmount * '.10';

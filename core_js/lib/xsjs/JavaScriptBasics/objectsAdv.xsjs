@@ -12,7 +12,7 @@ function objectsAdv(){
 	      + ' <b>Created At: </b>' + po.CreatedAt.toLocaleDateString()	      
 	      + '</br>';
 	for(var i = 0; i < po.Items.length; i++){
-    	body += '&nbsp&nbsp&nbsp<b>Item: </b>' + po.Items[i].ItemPos 
+    	body += '&nbsp&nbsp&nbsp'
     	       +' <b>Product ID: </b>'+ po.Items[i].ProductID 
     	       +' <b>Product Category: </b>'+ po.Items[i].Product.Product_Category 
     	       +' </p>';
@@ -31,7 +31,7 @@ function objectsAdv(){
 	      + ' <b>Created At: </b>' + po.CreatedAt.toLocaleDateString()	      
 	      + '</br>';
 	for(var i = 0; i < po.Items.length; i++){
-    	body += '&nbsp&nbsp&nbsp<b>Item: </b>' + po.Items[i].ItemPos 
+    	body += '&nbsp&nbsp&nbsp'
     	       +' <b>Product ID: </b>'+ po.Items[i].ProductID 
     	       +' <b>Product Category: </b>'+ po.Items[i].Product.Product_Category 
     	       +' </p>';
