@@ -69,7 +69,11 @@ module.exports = {
 							wss.broadcast(res[i].PURCHASEORDERID + ": " + res[i].GROSSAMOUNT);
 						}
 						wss.broadcast("\n");
-						client.disconnect(callback);
+						client.disconnect();
+						wss.broadcast("Database Disconnected #1");
+						wss.broadcast("End Waterfall #1");
+						pool.release(client);
+						cb();
 					},
 
 					function disconnectDone(callback) {
@@ -124,7 +128,11 @@ module.exports = {
 								wss.broadcast(res[i]["HEADER.PURCHASEORDERID"] + ": " + res[i]["PRODUCT.PRODUCTID"]);
 							}
 							wss.broadcast("\n");
-							client.disconnect(callback);
+							client.disconnect();
+							wss.broadcast("Database Disconnected #2");
+							wss.broadcast("End Waterfall #2");
+							pool.release(client);
+							cb();
 						},
 
 						function disconnectDone(callback) {
