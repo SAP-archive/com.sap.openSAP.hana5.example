@@ -2,12 +2,11 @@
 "use strict";
 
 var conn = $.hdb.getConnection();
-var query = "SELECT FROM PurchaseOrder.Item { " +
-	        " POHeader.PURCHASEORDERID as \"PurchaseOrderId\", " +
-            " PRODUCT as \"ProductID\", " +
-            " GROSSAMOUNT as \"Amount\" " +
-            " } ";
-      
+var query = "SELECT "  +
+	" \"HEADER.PURCHASEORDERID\" as \"PurchaseOrderItemId\", " +
+	" \"PRODUCT.PRODUCTID\" as \"ProductID\", " +
+	" GROSSAMOUNT as \"Amount\" " +
+	"FROM \"PO.Item\" ";           
 var rs = conn.executeQuery(query);
 
 $.response.setBody(JSON.stringify(rs));

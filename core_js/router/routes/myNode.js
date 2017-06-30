@@ -15,6 +15,9 @@ module.exports = function() {
 			"<a href=\"" + req.baseUrl + "/example4/1\">/example4</a> - Call Stored Procedure with Input = Partner Role 1 </br>" +
 			"<a href=\"" + req.baseUrl + "/example4/2\">/example4</a> - Call Stored Procedure with Input = Partner Role 2 </br>" +
 			"<a href=\"" + req.baseUrl + "/example5\">/example5</a> - Call Two Stored Procedures in Parallel Because We Can!</br>" +
+			"<a href=\"" + req.baseUrl + "/whoAmI\">/whoAmI</a> - Look at the session information</br>" +
+			"<a href=\"" + req.baseUrl + "/hdb\">/hdb</a> - Small DB example - port of hdb.xsjs</br>" +
+			"<a href=\"" + req.baseUrl + "/os\">/os</a> - Operating System Information - port of os.xsjs</br>" +
 			require(global.__base + "utils/exampleTOC").fill();
 		res.type("text/html").status(200).send(output);
 	});
@@ -143,7 +146,10 @@ module.exports = function() {
 
 			function(cb) {
 				hdbext.loadProcedure(client, null, "get_po_header_data", function(err, sp) {
-					if(err){ cb(err); return; }
+					if (err) {
+						cb(err);
+						return;
+					}
 					//(Input Parameters, callback(errors, Output Scalar Parameters, [Output Table Parameters])
 					sp(inputParams, function(err, parameters, results) {
 						result.EX_TOP_3_EMP_PO_COMBINED_CNT = results;
@@ -155,7 +161,10 @@ module.exports = function() {
 			function(cb) {
 				//(client, Schema, Procedure, callback)            		
 				hdbext.loadProcedure(client, null, "get_bp_addresses_by_role", function(err, sp) {
-					if(err){ cb(err); return; }
+					if (err) {
+						cb(err);
+						return;
+					}
 					//(Input Parameters, callback(errors, Output Scalar Parameters, [Output Table Parameters])
 					sp(inputParams, function(err, parameters, results) {
 						result.EX_BP_ADDRESSES = results;
@@ -174,13 +183,71 @@ module.exports = function() {
 
 	});
 
-	app.get("/user1", function(req, res) {
+	app.get("/whoAmI", function(req, res) {
 		var userContext = req.authInfo;
-			var result = JSON.stringify({
-								userContext: userContext
+		var result = JSON.stringify({
+			userContext: userContext
+		});
+		res.type("application/json").status(200).send(result);
+	});
+
+	app.get("/hdb", function(req, res) {
+		var client = req.db;
+		client.prepare(
+			"SELECT FROM PurchaseOrder.Item { " +
+			" POHeader.PURCHASEORDERID as \"PurchaseOrderId\", " +
+			" PRODUCT as \"ProductID\", " +
+			" GROSSAMOUNT as \"Amount\" " +
+			" } ",
+			function(err, statement) {
+				if (err) {
+					res.type("text/plain").status(500).send("ERROR: " + err.toString());
+					return;
+				}
+				statement.exec([],
+					function(err, results) {
+						if (err) {
+							res.type("text/plain").status(500).send("ERROR: " + err.toString());
+							return;
+						} else {
+							var result = JSON.stringify({
+								PurchaseOrders: results
 							});
 							res.type("application/json").status(200).send(result);
+						}
+					});
+			});
 	});
-	
+
+	app.get("/os", function(req, res) {
+		var os = require("os");
+		var output = {};
+
+		output.tmpdir = os.tmpdir();
+		output.endianness = os.endianness();
+		output.hostname = os.hostname();
+		output.type = os.type();
+		output.platform = os.platform();
+		output.arch = os.arch();
+		output.release = os.release();
+		output.uptime = os.uptime();
+		output.loadavg = os.loadavg();
+		output.totalmem = os.totalmem();
+		output.freemem = os.freemem();
+		output.cpus = os.cpus();
+		output.networkInfraces = os.networkInterfaces();
+
+		var result = JSON.stringify(output);
+		res.type("application/json").status(200).send(result);
+	});
+
+	app.get("/user1", function(req, res) {
+		var userContext = req.authInfo;
+		var result = JSON.stringify({
+			userContext: userContext
+		});
+		res.type("application/json").status(200).send(result);
+	});
+
 	return app;
 };
