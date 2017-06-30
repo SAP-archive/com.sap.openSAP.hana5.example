@@ -27,7 +27,7 @@ context MDViews {
             PARTNERDESC
         };
 
-    define view BPView as
+    define view BPView as 
         select from MD.BusinessPartner
         mixin
         {

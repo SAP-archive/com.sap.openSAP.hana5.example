@@ -19,7 +19,10 @@ context Core {
     type Source : String(30);
     
     type ValidityT {
+        @Comment : 'Start Date'
         STARTDATE : SDate;
+
+        @Comment : 'End Date'
         ENDDATE   : SDate;
     };
 
