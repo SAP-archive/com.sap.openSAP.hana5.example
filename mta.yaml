@@ -1,6 +1,6 @@
 _schema-version: '2.0'
 ID: com.sap.openSAP.hana5.example
-version: 2.2.0
+version: 2.2.1
 modules:
   - name: openSAP-ex-user-db
     type: hdb
