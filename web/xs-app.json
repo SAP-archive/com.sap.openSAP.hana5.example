@@ -105,7 +105,7 @@
       "authenticationType": "basic"
     },
     {
-      "source": "/user/(.*)",
+      "source": "/user/(.*)", 
       "destination": "user-backend",
       "authenticationType": "xsuaa"
     },

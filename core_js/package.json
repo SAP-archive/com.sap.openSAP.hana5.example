@@ -3,10 +3,10 @@
     "node": "4.x || 6.x"
   },
   "dependencies": {
-    "@sap/xssec": "2.0.0",
+    "@sap/xssec": "2.1.0",
     "@sap/xsenv": "1.2.7",
     "@sap/xsjs": "1.14.1",
-    "@sap/hdbext": "4.3.4",
+    "@sap/hdbext": "4.4.1",
     "@sap/textbundle": "latest",
     "@sap/logging": "~3.0",
     "@sap/audit-logging": "2.0.1",
