@@ -1,0 +1,4 @@
+alter system alter configuration ('indexserver.ini','SYSTEM') set
+    ('sqlscript', 'enable_code_scanner') = 'true' with reconfigure;
+
+set '__SQLSCRIPT_ENABLE_CODE_SCANNER' = 'true';
