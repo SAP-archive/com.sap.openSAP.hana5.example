@@ -14,7 +14,7 @@ using "getPartnerRoles" as getPartnerRoles2;
 
 context MDViews {
 
-//Direct Access to Table Functions without Calc View Wrapper - HANA 2.0 SPS 02 New Feature
+    //Direct Access to Table Functions without Calc View Wrapper - HANA 2.0 SPS 02 New Feature
     define view PartnerRoles2
         with parameters
             IM_VAR : String(1)
@@ -27,7 +27,7 @@ context MDViews {
             PARTNERDESC
         };
 
-    define view BPView as 
+    define view BPView as
         select from MD.BusinessPartner
         mixin
         {
@@ -87,6 +87,25 @@ context MDViews {
         }
         where
             PARTNERROLE = '1';
+
+    define view BusinessPartnersView
+        with parameters
+            IM_PR : String(1)
+    as
+        select from MD.BusinessPartner as BP
+        inner join  getPartnerRoles (
+            IM_PR : :IM_PR
+        ) as PR                              on
+            BP.PARTNERROLE = PR.PARTNERROLE
+        {
+            BP.PARTNERID,
+            BP.PARTNERROLE,
+            PR.PARTNERDESC,
+            BP.EMAILADDRESS,
+            BP.COMPANYNAME
+        }
+        where
+            BP.PARTNERROLE = :IM_PR;
 
     define view partnerRoles as
         select from getPartnerRoles
