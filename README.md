@@ -1,5 +1,16 @@
 # com.sap.openSAP.hana5.example
 openSAP HANA5/HANA6 Course: Example Completed Implementation 
+
+Dependencies:
+#1: In this exercise, we will create a synonym in order to access a table within another container. This exercise requires that you have the SFLIGHT catalog schema installed in your system and a database user who has access to this schema. You can find more information on loading SFLIGHT into your system, if it doesn’t exist already, here:
+http://scn.sap.com/docs/DOC-41576
+Afterwards please create a User Provided Service named CROSS_SCHEMA_SFLIGHT to access this schema.
+
+#2: We also will show the usage of an HDI container installed outside of this project.  Please download the MTAR from this URL:
+https://github.com/SAP/com.sap.openSAP.hana5.templates/raw/hana2_sps02/ex2/openSAP.CentralDB_1.0.2017.mtar
+Then install this MTA into your development space with the command: 
+xs deploy openSAP.CentralDB_1.0.2017.mtar --use-namespaces
+
 ================
 In this course, we will focus on the new and improved features that were introduced in SAP HANA 1.0 SPS 11 and 12 and then expanded upon in HANA 2.0 SPS 0, SPS 01, and SPS 02. Developers taking this course should be able to get up to speed quickly and begin leveraging these new features to enhance their own productivity, as well as tap into powerful new features of SAP HANA itself. Students will learn to use SAP Web IDE for SAP HANA to develop both HDI (SAP HANA Deployment Infrastructure) and XSA (SAP HANA extended application services, advanced model) based applications.
 
