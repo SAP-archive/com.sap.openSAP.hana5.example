@@ -1,6 +1,6 @@
 _schema-version: '2.0'
 ID: com.sap.openSAP.hana5.example
-version: 2.2.1
+version: 2.2.2
 modules:
   - name: openSAP-ex-user-db
     type: hdb
@@ -27,6 +27,11 @@ modules:
           key: hdi-user-service
           service: '~{user-container-name}'
       - name: openSAP-ex-user-db
+      - name: CentralDB
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: central-db-service
+          service: '~{central-db-name}'          
   - name: openSAP-ex-core-js
     type: nodejs
     path: core_js
@@ -149,10 +154,16 @@ resources:
   - name: ui5-lib
     type: configuration
     parameters:
-      provider-id: 'com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV4:sapui5_fesv4'
-      version: '>=1.49.0-SNAPSHOT'
+      provider-id: 'com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV3:sapui5_fesv3'
+      version: '>=1.44'
   - name: openSAP-ex-log
     type: org.cloudfoundry.managed-service
     parameters:
       service: auditlog
       service-plan: free
+  - name: CentralDB
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: openSAP.CentralDB.opensap-central-container
+    properties:
+      central-db-name: '${service-name}'      
