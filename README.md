@@ -2,6 +2,7 @@
 openSAP HANA5/HANA6 Course: Example Completed Implementation 
 
 Dependencies:
+
 #1: In this exercise, we will create a synonym in order to access a table within another container. This exercise requires that you have the SFLIGHT catalog schema installed in your system and a database user who has access to this schema. You can find more information on loading SFLIGHT into your system, if it doesn’t exist already, here:
 http://scn.sap.com/docs/DOC-41576
 Afterwards please create a User Provided Service named CROSS_SCHEMA_SFLIGHT to access this schema.
