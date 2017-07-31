@@ -34,7 +34,7 @@ EMP_PO_COMBINED_CNT = SELECT EMPLOYEEID,
                     ON emp.EMPLOYEEID = chcnt.EID
                       ORDER BY COMBINED_CNT DESC ;
 
-RETURN select * from :emp_po_combined_cnt;
+RETURN :emp_po_combined_cnt;
 
 
 END;

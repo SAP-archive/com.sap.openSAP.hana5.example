@@ -15,6 +15,7 @@ BEGIN
     DECLARE tmp_cumulated BIGINT       = 0;
     DECLARE i             INTEGER      = 1;
 
+IF NOT IS_EMPTY(:im_products) THEN
     ex_products = select products.*, NULL AS CUMULATIVE_SUM FROM :im_products as products;
 
 --  FOR i IN 1..CARDINALITY(ARRAY_AGG(:IM_PRODUCTS.PRODUCTID))DO 
@@ -30,4 +31,5 @@ BEGIN
 
     END FOR;
 
+end if;
 END
