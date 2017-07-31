@@ -1,4 +1,5 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, new-cap: 0*/
+/*eslint-env node, es6 */
 "use strict";
 var express = require("express");
 var async = require("async");
@@ -7,35 +8,35 @@ module.exports = function() {
 	var app = express.Router();
 
 	//Hello Router
-	app.get("/", function(req, res) {
-		var output = "<H1>HDBEXT Examples</H1></br>" +
-			"<a href=\"" + req.baseUrl + "/example1\">/example1</a> - Simple Database Select - In-Line Callbacks</br>" +
-			"<a href=\"" + req.baseUrl + "/example2\">/example2</a> - Simple Database Select - Async Waterfall</br>" +
-			"<a href=\"" + req.baseUrl + "/example3\">/example3</a> - Call Stored Procedure</br>" +
-			"<a href=\"" + req.baseUrl + "/example4/1\">/example4</a> - Call Stored Procedure with Input = Partner Role 1 </br>" +
-			"<a href=\"" + req.baseUrl + "/example4/2\">/example4</a> - Call Stored Procedure with Input = Partner Role 2 </br>" +
-			"<a href=\"" + req.baseUrl + "/example5\">/example5</a> - Call Two Stored Procedures in Parallel Because We Can!</br>" +
-			"<a href=\"" + req.baseUrl + "/whoAmI\">/whoAmI</a> - Look at the session information</br>" +
-			"<a href=\"" + req.baseUrl + "/hdb\">/hdb</a> - Small DB example - port of hdb.xsjs</br>" +
-			"<a href=\"" + req.baseUrl + "/os\">/os</a> - Operating System Information - port of os.xsjs</br>" +
+	app.get("/", (req, res) => {
+		var output = `<H1>HDBEXT Examples</H1></br> 
+			<a href="${req.baseUrl}/example1">/example1</a> - Simple Database Select - In-Line Callbacks</br> 
+			<a href="${req.baseUrl}/example2">/example2</a> - Simple Database Select - Async Waterfall</br> 
+			<a href="${req.baseUrl}/example3">/example3</a> - Call Stored Procedure</br> 
+			<a href="${req.baseUrl}/example4/1">/example4</a> - Call Stored Procedure with Input = Partner Role 1 </br> 
+			<a href="${req.baseUrl}/example4/2">/example4</a> - Call Stored Procedure with Input = Partner Role 2 </br> 
+			<a href="${req.baseUrl}/example5">/example5</a> - Call Two Stored Procedures in Parallel Because We Can!</br> 
+			<a href="${req.baseUrl}/whoAmI">/whoAmI</a> - Look at the session information</br> 
+			<a href="${req.baseUrl}/hdb">/hdb</a> - Small DB example - port of hdb.xsjs</br> 
+			<a href="${req.baseUrl}/os">/os</a> - Operating System Information - port of os.xsjs</br>` +
 			require(global.__base + "utils/exampleTOC").fill();
 		res.type("text/html").status(200).send(output);
 	});
 
 	//Simple Database Select - In-line Callbacks
-	app.get("/example1", function(req, res) {
+	app.get("/example1", (req, res) => {
 		var client = req.db;
 		client.prepare(
 			"select SESSION_USER from \"DUMMY\" ",
-			function(err, statement) {
+			(err, statement) => {
 				if (err) {
-					res.type("text/plain").status(500).send("ERROR: " + err.toString());
+					res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 					return;
 				}
 				statement.exec([],
-					function(err, results) {
+					(err, results) => {
 						if (err) {
-							res.type("text/plain").status(500).send("ERROR: " + err.toString());
+							res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 							return;
 						} else {
 							var result = JSON.stringify({
@@ -48,13 +49,13 @@ module.exports = function() {
 	});
 
 	//Simple Database Select - Async Waterfall
-	app.get("/example2", function(req, res) {
+	app.get("/example2", (req, res) => {
 		var client = req.db;
 		async.waterfall([
 
 			function prepare(callback) {
 				client.prepare("select SESSION_USER from \"DUMMY\" ",
-					function(err, statement) {
+					(err, statement) => {
 						callback(null, err, statement);
 					});
 			},
@@ -66,7 +67,7 @@ module.exports = function() {
 			},
 			function response(err, results, callback) {
 				if (err) {
-					res.type("text/plain").status(500).send("ERROR: " + err.toString());
+					res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 					return;
 				} else {
 					var result = JSON.stringify({
@@ -80,19 +81,19 @@ module.exports = function() {
 	});
 
 	//Simple Database Call Stored Procedure
-	app.get("/example3", function(req, res) {
+	app.get("/example3", (req, res) => {
 		var client = req.db;
 		var hdbext = require("@sap/hdbext");
 		//(client, Schema, Procedure, callback)
-		hdbext.loadProcedure(client, null, "get_po_header_data", function(err, sp) {
+		hdbext.loadProcedure(client, null, "get_po_header_data", (err, sp) => {
 			if (err) {
-				res.type("text/plain").status(500).send("ERROR: " + err.toString());
+				res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 				return;
 			}
 			//(Input Parameters, callback(errors, Output Scalar Parameters, [Output Table Parameters])
-			sp({}, function(err, parameters, results) {
+			sp({}, (err, parameters, results) => {
 				if (err) {
-					res.type("text/plain").status(500).send("ERROR: " + err.toString());
+					res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 				}
 				var result = JSON.stringify({
 					EX_TOP_3_EMP_PO_COMBINED_CNT: results
@@ -103,7 +104,7 @@ module.exports = function() {
 	});
 
 	//Database Call Stored Procedure With Inputs
-	app.get("/example4/:partnerRole?", function(req, res) {
+	app.get("/example4/:partnerRole?", (req, res) => {
 		var client = req.db;
 		var hdbext = require("@sap/hdbext");
 		var partnerRole = req.params.partnerRole;
@@ -116,15 +117,15 @@ module.exports = function() {
 			};
 		}
 		//(cleint, Schema, Procedure, callback)
-		hdbext.loadProcedure(client, null, "get_bp_addresses_by_role", function(err, sp) {
+		hdbext.loadProcedure(client, null, "get_bp_addresses_by_role", (err, sp) => {
 			if (err) {
-				res.type("text/plain").status(500).send("ERROR: " + err.toString());
+				res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 				return;
 			}
 			//(Input Parameters, callback(errors, Output Scalar Parameters, [Output Table Parameters])
-			sp(inputParams, function(err, parameters, results) {
+			sp(inputParams, (err, parameters, results) => {
 				if (err) {
-					res.type("text/plain").status(500).send("ERROR: " + err.toString());
+					res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 				}
 				var result = JSON.stringify({
 					EX_BP_ADDRESSES: results
@@ -135,7 +136,7 @@ module.exports = function() {
 	});
 
 	//Call 2 Database Stored Procedures in Parallel
-	app.get("/example5/", function(req, res) {
+	app.get("/example5/", (req, res) => {
 		var client = req.db;
 		var hdbext = require("@sap/hdbext");
 		var inputParams = {
@@ -145,13 +146,13 @@ module.exports = function() {
 		async.parallel([
 
 			function(cb) {
-				hdbext.loadProcedure(client, null, "get_po_header_data", function(err, sp) {
+				hdbext.loadProcedure(client, null, "get_po_header_data", (err, sp) => {
 					if (err) {
 						cb(err);
 						return;
 					}
 					//(Input Parameters, callback(errors, Output Scalar Parameters, [Output Table Parameters])
-					sp(inputParams, function(err, parameters, results) {
+					sp(inputParams, (err, parameters, results) => {
 						result.EX_TOP_3_EMP_PO_COMBINED_CNT = results;
 						cb();
 					});
@@ -160,21 +161,21 @@ module.exports = function() {
 			},
 			function(cb) {
 				//(client, Schema, Procedure, callback)            		
-				hdbext.loadProcedure(client, null, "get_bp_addresses_by_role", function(err, sp) {
+				hdbext.loadProcedure(client, null, "get_bp_addresses_by_role", (err, sp) => {
 					if (err) {
 						cb(err);
 						return;
 					}
 					//(Input Parameters, callback(errors, Output Scalar Parameters, [Output Table Parameters])
-					sp(inputParams, function(err, parameters, results) {
+					sp(inputParams, (err, parameters, results) => {
 						result.EX_BP_ADDRESSES = results;
 						cb();
 					});
 				});
 			}
-		], function(err) {
+		], (err) => {
 			if (err) {
-				res.type("text/plain").status(500).send("ERROR: " + err);
+				res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 			} else {
 				res.type("application/json").status(200).send(JSON.stringify(result));
 			}
@@ -183,7 +184,7 @@ module.exports = function() {
 
 	});
 
-	app.get("/whoAmI", function(req, res) {
+	app.get("/whoAmI", (req, res) => {
 		var userContext = req.authInfo;
 		var result = JSON.stringify({
 			userContext: userContext
@@ -191,7 +192,7 @@ module.exports = function() {
 		res.type("application/json").status(200).send(result);
 	});
 
-	app.get("/hdb", function(req, res) {
+	app.get("/hdb", (req, res) => {
 		var client = req.db;
 		client.prepare(
 			"SELECT FROM PurchaseOrder.Item { " +
@@ -199,15 +200,15 @@ module.exports = function() {
 			" PRODUCT as \"ProductID\", " +
 			" GROSSAMOUNT as \"Amount\" " +
 			" } ",
-			function(err, statement) {
+			(err, statement) => {
 				if (err) {
-					res.type("text/plain").status(500).send("ERROR: " + err.toString());
+					res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 					return;
 				}
 				statement.exec([],
-					function(err, results) {
+					(err, results) => {
 						if (err) {
-							res.type("text/plain").status(500).send("ERROR: " + err.toString());
+							res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 							return;
 						} else {
 							var result = JSON.stringify({
@@ -219,7 +220,7 @@ module.exports = function() {
 			});
 	});
 
-	app.get("/os", function(req, res) {
+	app.get("/os", (req, res) => {
 		var os = require("os");
 		var output = {};
 
@@ -241,7 +242,7 @@ module.exports = function() {
 		res.type("application/json").status(200).send(result);
 	});
 
-	app.get("/user1", function(req, res) {
+	app.get("/user1", (req, res) => {
 		var userContext = req.authInfo;
 		var result = JSON.stringify({
 			userContext: userContext

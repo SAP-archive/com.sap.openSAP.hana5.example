@@ -1,6 +1,5 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, new-cap: 0, dot-notation:0, no-use-before-define:0 */
 /*eslint-env node, es6 */
-
 "use strict";
 var express = require("express");
 
@@ -8,20 +7,20 @@ module.exports = function() {
 	var app = express.Router();
 
 	//Hello Router
-	app.get("/", function(req, res) {
-		var output = "<H1>JavaScript Basics</H1></br>" +
-			"<a href=\"" + req.baseUrl + "/dates\">/dates</a> - Date processing</br>" +
-			"<a href=\"" + req.baseUrl + "/array\">/array</a> - Array processing</br>" +
-			"<a href=\"" + req.baseUrl + "/json\">/json</a> - JSON JavaScript Object Notation processing</br>" +
-			"<a href=\"" + req.baseUrl + "/objects\">/objects</a> - JavaScript Objects</br>" +
-			"<a href=\"" + req.baseUrl + "/strings\">/strings</a> - String processing</br>" +
-			"<a href=\"" + req.baseUrl + "/promises\">/promises</a> - Promises</br>" +
+	app.get("/", (req, res) => {
+		var output = `<H1>JavaScript Basics</H1></br>
+			<a href="${req.baseUrl}/dates">/dates</a> - Date processing</br>
+			<a href="${req.baseUrl}/array">/array</a> - Array processing</br>
+			<a href="${req.baseUrl}/json">/json</a> - JSON JavaScript Object Notation processing</br>
+			<a href="${req.baseUrl}/objects">/objects</a> - JavaScript Objects</br>
+			<a href="${req.baseUrl}/strings">/strings</a> - String processing</br>
+			<a href="${req.baseUrl}/promises">/promises</a> - Promises</br>` +
 			require(global.__base + "utils/exampleTOC").fill();
 		res.type("text/html").status(200).send(output);
 	});
 
 	//Dates
-	app.get("/dates", function(req, res) {
+	app.get("/dates", (req, res) => {
 		var body = "";
 		var now = new Date();
 		var nextMonth = new Date();
@@ -49,7 +48,7 @@ module.exports = function() {
 	});
 
 	//array
-	app.get("/array", function(req, res) {
+	app.get("/array", (req, res) => {
 		var colors = ["Red", "Green", "Blue"];
 		var extColors = ["Black", "White", "Orange", "Purple"];
 
@@ -70,8 +69,8 @@ module.exports = function() {
 
 		//Common technique to loop through all elements in an array
 		body += "Loop of Elements: ";
-		for (var i = 0; i < colors.length; i++) {
-			body += colors[i] + " ";
+	    for (let color of colors){
+			body += color + " ";
 		}
 		body += "</p>";
 
@@ -111,23 +110,23 @@ module.exports = function() {
 	});
 
 	//json
-	app.get("/json", function(req, res) {
+	app.get("/json", (req, res) => {
 		var client = req.db;
 		client.prepare(
 			"SELECT * FROM \"PO.Header\" " + " LIMIT 10",
-			function(err, statement) {
+			(err, statement) => {
 				if (err) {
 					res.type("text/plain").status(500).send("ERROR: " + err.toString());
 					return;
 				}
 				statement.exec([],
-					function(err, results) {
+					(err, results) => {
 						if (err) {
 							res.type("text/plain").status(500).send("ERROR: " + err.toString());
 							return;
 						} else {
-							for (var i = 0; i < results.length; i++) {
-								results[i].DISCOUNTAMOUNT = (results[i].GROSSAMOUNT - results[i].GROSSAMOUNT * .10);
+							for (let result of results){
+								result.DISCOUNTAMOUNT = (result.GROSSAMOUNT - result.GROSSAMOUNT * .10);
 							}
 							res.type("application/json").status(200).send(JSON.stringify(results));
 						}
@@ -136,7 +135,7 @@ module.exports = function() {
 	});
 
 	//objects
-	app.get("/objects", function(req, res) {
+	app.get("/objects", (req, res) => {
 		var body = "";
 
 		body += "<b>Object Literals</b></p>";
@@ -145,7 +144,7 @@ module.exports = function() {
 			red: "#FF0000",
 			green: "#00FF00",
 			blue: "#0000FF",
-			favoriteColor: function() {
+			favoriteColor: () => {
 				var now = new Date();
 				if (now.getDay() === 1) { //If Monday
 					return this.blue;
@@ -185,20 +184,20 @@ module.exports = function() {
 			var client = req.db;
 			client.prepare(
 				"SELECT * FROM \"PO.Header\" " + " WHERE PURCHASEORDERID = ?",
-				function(err, statement) {
+				(err, statement) => {
 					if (err) {
 						res.type("text/plain").status(500).send("ERROR: " + err.toString());
 						callback(err);
 					}
 					statement.exec([purchaseOrderID],
-						function(err, results) {
+						(err, results) => {
 							if (err) {
 								res.type("text/plain").status(500).send("ERROR: " + err.toString());
 								callback(err);
 							} else {
-								for (var i = 0; i < results.length; i++) {
-									me.purchaseOrderID = results[i].PURCHASEORDERID;
-									me.grossAmount = results[i].GROSSAMOUNT;
+								for (let result in results) {
+									me.purchaseOrderID = result.PURCHASEORDERID;
+									me.grossAmount = result.GROSSAMOUNT;
 									callback(null);
 								}
 							}
@@ -213,7 +212,7 @@ module.exports = function() {
 		var async = require("async");
 		async.parallel([
 			function(cb) {
-				var po = new purchaseOrder(300000001, function(err, results) {
+				var po = new purchaseOrder(300000001, (err, results) => {
 					body += "Purchase Order: " + po.purchaseOrderID + " Gross Amount: " + po.grossAmount + " Discount Amount: " + po.discount() +
 						"</p>";
 					cb();
@@ -221,7 +220,7 @@ module.exports = function() {
 
 			},
 			function(cb) {
-				var po = new purchaseOrder(300000002, function(err, results) {
+				var po = new purchaseOrder(300000002, (err, results) => {
 					body += "Purchase Order: " + po.purchaseOrderID + " Gross Amount: " + po.grossAmount + " Discount Amount: " + po.discount() +
 						"</p>";
 					cb();
@@ -234,7 +233,7 @@ module.exports = function() {
 	});
 
 	//strings
-	app.get("/strings", function(req, res) {
+	app.get("/strings", (req, res) => {
 		var body = "";
 		var demo1 = "SAP HANA Extended Application Services";
 
@@ -267,12 +266,12 @@ module.exports = function() {
 	});
 
 	//promises
-	app.get("/promises", function(req, res) {
+	app.get("/promises", (req, res) => {
 		var body = "";
 
 		function readFilePromisified(filename) {
 			return new Promise(
-				function(resolve, reject) {
+				(resolve, reject) => {
 					require("fs").readFile(filename, "utf8", (error, data) => {
 						if (error) {
 							reject(error);

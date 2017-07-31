@@ -1,6 +1,6 @@
 {
   "engines": {
-    "node": "4.x || 6.x"
+    "node": "6.x"
   },
   "dependencies": {
     "@sap/xssec": "2.1.0",

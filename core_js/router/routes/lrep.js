@@ -1,4 +1,5 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, new-cap: 0*/
+/*eslint-env node, es6 */
 "use strict";
 var express = require("express");
 
@@ -15,9 +16,9 @@ function upsertVariant(req, res) {
 		" AND \"variantName\" = ? ";
 	client.prepare(
 		insertString,
-		function(err, statement) {
+		(err, statement) => {
 			if (err) {
-				res.type("text/plain").status(500).send("ERROR: " + err.toString());
+				res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 				return;
 			}
 			var generator = "";
@@ -39,9 +40,9 @@ function upsertVariant(req, res) {
 					generator, service, body.layer, JSON.stringify(body.selector), JSON.stringify(body.texts),
 					variantName, body.changeType, body.fileType, body.layer, variantName
 				],
-				function(err, results) {
+				(err, results) => {
 					if (err) {
-						res.type("text/plain").status(500).send("ERROR: " + err.toString());
+						res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 						return;
 					} else {
 						res.type("application/json").status(200).send(body);
@@ -56,19 +57,19 @@ module.exports = function() {
 	var bodyParser = require("body-parser");
 	app.use(bodyParser.json());
 
-	app.get("/", function(req, res) {
+	app.get("/", (req, res) => {
 		res.type("text/html").status(200).send("");
 	});
 
-	app.get("/actions/getcsrftoken/", function(req, res) {
+	app.get("/actions/getcsrftoken/", (req, res) => {
 		res.type("text/html").status(200).send("");
 	});
 
-	app.post("/variants/", function(req, res) {
+	app.post("/variants/", (req, res) => {
 		upsertVariant(req, res);
 	});
 
-	app.put("/variants/:fileName", function(req, res) {
+	app.put("/variants/:fileName", (req, res) => {
 		var body = req.body;
 		var client = req.db;
 		var fileNameInput = req.params.fileName;
@@ -82,9 +83,9 @@ module.exports = function() {
 			" WHERE \"fileName\" = ? ";
 		client.prepare(
 			insertString,
-			function(err, statement) {
+			(err, statement) => {
 				if (err) {
-					res.type("text/plain").status(500).send("ERROR: " + err.toString());
+					res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 					return;
 				}
 				var generator = "";
@@ -106,9 +107,9 @@ module.exports = function() {
 						generator, service, body.layer, JSON.stringify(body.selector), JSON.stringify(body.texts),
 						variantName, fileNameInput
 					],
-					function(err, results) {
+					(err, results) => {
 						if (err) {
-							res.type("text/plain").status(500).send("ERROR: " + err.toString());
+							res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 							return;
 						} else {
 							res.type("application/json").status(200).send(body);
@@ -118,7 +119,7 @@ module.exports = function() {
 
 	});
 
-	app.delete("/variants/:fileName", function(req, res) {
+	app.delete("/variants/:fileName", (req, res) => {
 		var body = req.body;
 		var client = req.db;
 		var fileNameInput = req.params.fileName;
@@ -127,16 +128,16 @@ module.exports = function() {
 			" WHERE \"fileName\" = ? ";
 		client.prepare(
 			deleteString,
-			function(err, statement) {
+			(err, statement) => {
 				if (err) {
-					res.type("text/plain").status(500).send("ERROR: " + err.toString());
+					res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 					return;
 				}
 				statement.exec([ fileNameInput
 					],
-					function(err, results) {
+					(err, results) => {
 						if (err) {
-							res.type("text/plain").status(500).send("ERROR: " + err.toString());
+							res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 							return;
 						} else {
 							res.type("application/json").status(200).send(body);
@@ -146,11 +147,11 @@ module.exports = function() {
 
 	});
 
-	app.post("/changes/", function(req, res) {
+	app.post("/changes/", (req, res) => {
 		upsertVariant(req, res);
 	});
 
-	app.get("/flex/data/:app?", function(req, res) {
+	app.get("/flex/data/:app?", (req, res) => {
 		var outer = {
 			"changes": [],
 			"settings": {
@@ -165,15 +166,15 @@ module.exports = function() {
 			" WHERE \"reference\" = ? ";
 		client.prepare(
 			insertString,
-			function(err, statement) {
+			(err, statement) => {
 				if (err) {
-					res.type("text/plain").status(500).send("ERROR: " + err.toString());
+					res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 					return;
 				}
 				statement.exec([appInput],
-					function(err, results) {
+					(err, results) => {
 						if (err) {
-							res.type("text/plain").status(500).send("ERROR: " + err.toString());
+							res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 							return;
 						} else {
 							var body = {};

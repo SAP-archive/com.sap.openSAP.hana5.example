@@ -1,13 +1,14 @@
 /*eslint no-console: 0, no-unused-vars: 0, new-cap: 0*/
+/*eslint-env node, es6 */
 "use strict";
 var WebSocketServer = require("ws").Server;
 var express = require("express");
 
 module.exports = function(server) {
 	var app = express.Router();
-	app.use(function(req, res) {
-		var output = "<H1>Node.js Web Socket Examples</H1></br>" +
-			"<a href=\"/exerciseChat\">/exerciseChat</a> - Chat Application for Web Socket Example</br>" +
+	app.use((req, res) => {
+		var output = `<H1>Node.js Web Socket Examples</H1></br>
+			<a href="/exerciseChat">/exerciseChat</a> - Chat Application for Web Socket Example</br>` +
 			require(global.__base + "utils/exampleTOC").fill();
 		res.type("text/html").status(200).send(output);
 	});
@@ -16,7 +17,7 @@ module.exports = function(server) {
 		path: "/node/chatServer"
 	});
 
-	wss.broadcast = function(data) {
+	wss.broadcast = (data) => {
 		wss.clients.forEach(function each(client) {
 			try {
 				client.send(data);
@@ -28,9 +29,9 @@ module.exports = function(server) {
 
 	};
 
-	wss.on("connection", function(ws) {
+	wss.on("connection", (ws) => {
 		console.log("Connected");
-		ws.on("message", function(message) {
+		ws.on("message", (message) => {
 			console.log("received: %s", message);
 			wss.broadcast(message);
 		});

@@ -1,4 +1,5 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, quotes: 0, no-use-before-define: 0, new-cap:0 */
+/*eslint-env node, es6 */
 "use strict";
 var express = require("express");
 
@@ -13,15 +14,15 @@ module.exports = function() {
 	var auditLog = require('@sap/audit-logging')(credentials);
 
 	//TOC
-	app.get("/", function(req, res) {
-		var output = "<H1>Audit Log Examples</H1></br>" +
-			"<a href=\"" + req.baseUrl + "/example1\">/example1</a> - Simple Audit Log Example</br>" +
+	app.get("/", (req, res) => {
+		var output = `<H1>Audit Log Examples</H1></br>
+			<a href="${req.baseUrl}/example1">/example1</a> - Simple Audit Log Example</br>` +
 			require(global.__base + "utils/exampleTOC").fill();
 		res.type("text/html").status(200).send(output);
 	});
 
 	//Simple AuditLog Example
-	app.get("/example1", function(req, res) {
+	app.get("/example1", (req, res) => {
 		var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 		if (req.headers['x-forwarded-for']) {
 			ip = req.headers['x-forwarded-for'].split(",")[0];
@@ -36,7 +37,7 @@ module.exports = function() {
 				res.type("text/plain").status(500).send("ERROR: " + err.toString());
 				return;
 			}
-			res.type("application/json").status(200).send(JSON.stringify('Log Entry Saved as: ' + id));
+			res.type("application/json").status(200).send(JSON.stringify(`Log Entry Saved as: ${id}`));
 		});
 	});
 

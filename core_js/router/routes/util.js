@@ -1,3 +1,6 @@
+/*eslint-env node, es6 */
+"use strict";
+
 // util.js
 // ========
 var xsenv = require('@sap/xsenv');

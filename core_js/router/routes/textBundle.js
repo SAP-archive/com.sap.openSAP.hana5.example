@@ -1,4 +1,5 @@
 /*eslint no-console: 0, no-unused-vars: 0, consistent-return: 0, new-cap: 0*/
+/*eslint-env node, es6 */
 "use strict";
 var express = require("express");
 var app = express.Router();
@@ -24,7 +25,7 @@ function getLocale(req) {
 
 module.exports = function() {
 
-	app.get("/", function(req, res) {
+	app.get("/", (req, res) => {
 		var bundle = new TextBundle(global.__base + "i18n/messages", getLocale(req));
 		res.writeHead(200, {
 			"Content-Type": "text/plain; charset=utf-8"

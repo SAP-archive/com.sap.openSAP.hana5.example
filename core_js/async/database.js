@@ -1,4 +1,5 @@
-/*eslint no-console: 0, no-unused-vars: 0, no-undef: 0, no-shadow: 0*/
+/*eslint no-console: 0, no-unused-vars: 0, no-undef: 0, no-shadow: 0, consistent-return: 0*/
+/*eslint-env node, es6 */
 "use strict";
 var hdb = require("@sap/hdbext");
 var xsenv = require("@sap/xsenv");
@@ -11,23 +12,23 @@ var hanaOptions = xsenv.getServices({
 var pool = hdb.getPool(hanaOptions.hana);
 
 module.exports = {
-	callHANA: function(wss) {
-		pool.acquire(null, function(error, client) {
+	callHANA: (wss) => {
+		pool.acquire(null, (error, client) => {
 			if (error) {
 				console.error(error);
 			}
 			if (client) {
 				wss.broadcast("Database Connected");
 				client.exec("select TOP 25 * from \"PO.Header\"",
-					function(err, res, cb) {
+					(err, res, cb) => {
 						if (err) {
-							return ("ERROR: " + err);
+							return (`ERROR: ${err.toString()}`);
 						}
 						wss.broadcast("Database Call Complete");
-						for (var i = 0; i < res.length; i++) {
-							wss.broadcast(res[i].PURCHASEORDERID + ": " + res[i].GROSSAMOUNT + "\n");
+						for (let item of res) {
+							wss.broadcast(`${item.PURCHASEORDERID}: ${item.GROSSAMOUNT}\n`);
 						}
-						client.disconnect(function(cb) {
+						client.disconnect((cb) => {
 							wss.broadcast("Database Disconnected");
 							pool.release(client);
 						});
@@ -37,22 +38,20 @@ module.exports = {
 		cb();
 	}, //end callHANA
 
-	callHANA1: function(cb, wss) {
+	callHANA1: (cb, wss) => {
 		//hdb.createConnection(hanaService, function(error, client) {
-		pool.acquire(null, function(error, client) {
+		pool.acquire(null, (error, client) => {
 			if (error) {
 				console.error(error);
 			}
 			if (client) {
-
 				async.waterfall([
-
 					function execute(callback) {
 						wss.broadcast("Database Connected #1");
 						client.exec("select TOP 25 * from \"PO.Header\"",
-							function(err, res) {
+							(err, res) => {
 								if (err) {
-									return ("ERROR: " + err);
+									return (`ERROR: ${err.toString()}`);
 								}
 								callback(null, err, res);
 							});
@@ -61,12 +60,12 @@ module.exports = {
 
 					function processResults(err, res, callback) {
 						if (err) {
-							return ("ERROR: " + err);
+							return (`ERROR: ${err.toString()}`);
 						}
 						wss.broadcast("Database Call  #1");
 						wss.broadcast("--PO Header");
-						for (var i = 0; i < res.length; i++) {
-							wss.broadcast(res[i].PURCHASEORDERID + ": " + res[i].GROSSAMOUNT);
+						for (let item of res) {
+							wss.broadcast(`${item.PURCHASEORDERID}: ${item.GROSSAMOUNT}`);
 						}
 						wss.broadcast("\n");
 						client.disconnect();
@@ -83,7 +82,7 @@ module.exports = {
 						cb();
 					}
 
-				], function(err, result) {
+				], (err, result) => {
 					wss.broadcast(err || "done");
 					wss.broadcast("Error Occured disrupting flow of Waterfall for #1");
 					pool.release(client);
@@ -95,23 +94,21 @@ module.exports = {
 
 	}, //end callHANA1
 
-	callHANA2: function(cb, wss) {
+	callHANA2: (cb, wss) => {
 
 			//hdb.createConnection(hanaService, function(error, client) {
-			pool.acquire(null, function(error, client) {
+			pool.acquire(null, (error, client) => {
 				if (error) {
-					console.error(error);
+					console.error(error.toString());
 				}
 				if (client) {
-
 					async.waterfall([
-
 						function execute(callback) {
 							wss.broadcast("Database Connected #2");
 							client.exec("select TOP 25 * from \"PO.Item\"",
-								function(err, res) {
+								(err, res) => {
 									if (err) {
-										return ("ERROR: " + err);
+										return (`ERROR: ${err.toString()}`);
 									}
 									callback(null, err, res);
 								});
@@ -120,12 +117,12 @@ module.exports = {
 
 						function processResults(err, res, callback) {
 							if (err) {
-								return ("ERROR: " + err);
+								return (`ERROR: ${err.toString()}`);
 							}
 							wss.broadcast("Database Call  #2");
 							wss.broadcast("--PO Items");
-							for (var i = 0; i < res.length; i++) {
-								wss.broadcast(res[i]["HEADER.PURCHASEORDERID"] + ": " + res[i]["PRODUCT.PRODUCTID"]);
+							for (let item of res) {
+								wss.broadcast(`${item["HEADER.PURCHASEORDERID"]}: ${item["PRODUCT.PRODUCTID"]}`);
 							}
 							wss.broadcast("\n");
 							client.disconnect();
@@ -142,7 +139,7 @@ module.exports = {
 							cb();
 						}
 
-					], function(err, result) {
+					], (err, result) => {
 						wss.broadcast(err || "done");
 						wss.broadcast("Error Occured disrupting flow of Waterfall for #2");
 						pool.release(client);
