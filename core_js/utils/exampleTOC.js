@@ -14,6 +14,8 @@ module.exports = {
 	"<a href=\"/node/zip\">/node/zip</a> - Node.js ZIP archive Examples</br>" +	
 	"<a href=\"/node/cds\">/node/cds</a> - Node.js CDS/XSDS Examples</br>"+
 	"<a href=\"/node/auditLog\">/node/auditLog</a> - Node.js AuditLog Examples</br>"+	
+	"<a href=\"/node/JavaScriptBasics\">/node/JavaScriptBasics</a> - Node.js JavaScript Basics</br>"+	
+	"<a href=\"/node/promises\">/node/promises</a> - Node.js Promises Examples</br>"+	
 	
 	"</p>" +
 	"<H1>XSJS Compatibility Mode Table of Contents</H1></br>" +

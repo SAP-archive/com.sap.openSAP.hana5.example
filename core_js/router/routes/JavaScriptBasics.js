@@ -1,4 +1,6 @@
-/*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, new-cap: 0*/
+/*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, new-cap: 0, dot-notation:0, no-use-before-define:0 */
+/*eslint-env node, es6 */
+
 "use strict";
 var express = require("express");
 
@@ -13,6 +15,7 @@ module.exports = function() {
 			"<a href=\"" + req.baseUrl + "/json\">/json</a> - JSON JavaScript Object Notation processing</br>" +
 			"<a href=\"" + req.baseUrl + "/objects\">/objects</a> - JavaScript Objects</br>" +
 			"<a href=\"" + req.baseUrl + "/strings\">/strings</a> - String processing</br>" +
+			"<a href=\"" + req.baseUrl + "/promises\">/promises</a> - Promises</br>" +
 			require(global.__base + "utils/exampleTOC").fill();
 		res.type("text/html").status(200).send(output);
 	});
@@ -255,6 +258,33 @@ module.exports = function() {
 		body += "Replace with XS: " + demo1.replace("Extended Application Services", "XS") + "</p>";
 
 		res.type("text/html").status(200).send(body);
+	});
+
+	//promises
+	app.get("/promises", function(req, res) {
+		var body = "";
+
+		function readFilePromisified(filename) {
+			return new Promise(
+				function(resolve, reject) {
+					require("fs").readFile(filename, "utf8", (error, data) => {
+						if (error) {
+							reject(error);
+						} else {
+							resolve(data);
+						}
+					});
+				}
+			);
+		}
+
+		readFilePromisified(global.__base + "async/file.txt")
+			.then(text => {
+				return res.type("text/html").status(200).send(text);
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	});
 
 	return app;
