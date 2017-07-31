@@ -84,6 +84,12 @@ sap.ui.define([
 			oModel.create("/"+mEntity1, oEntry, mParams);
 		},
 
+		callExcel: function(oEvent){
+			//Excel Download
+			window.open("/node/products");
+			return;
+		},
+		
 		onErrorCall: function(oError) {
 			if (oError.statusCode === 500 || oError.statusCode === 400 || oError.statusCode === "500" || oError.statusCode === "400") {
 				var errorRes = JSON.parse(oError.responseText);

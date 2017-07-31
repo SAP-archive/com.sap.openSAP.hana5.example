@@ -192,6 +192,37 @@ module.exports = function() {
 		res.type("application/json").status(200).send(result);
 	});
 
+	//Call Stored Procedure and return as Excel
+	app.get("/products", (req, res) => {
+		var client = req.db;
+		var hdbext = require("@sap/hdbext");
+		//(client, Schema, Procedure, callback)
+		hdbext.loadProcedure(client, null, "build_products", (err, sp) => {
+			if (err) {
+				res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
+				return;
+			}
+			//(Input Parameters, callback(errors, Output Scalar Parameters, [Output Table Parameters])
+			sp({}, (err, parameters, results) => {
+				if (err) {
+					res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
+				}
+				var out = [];
+				for (let result of results){
+					out.push([result.PRODUCTID, result.CATEGORY, result.PRICE]);
+				}
+				var excel = require("node-xlsx");
+				var excelOut = excel.build([{
+					name: "Products",
+					data: out
+				}]);
+				res.header("Content-Disposition", "attachment; filename=Excel.xlsx");
+				res.type("application/vnd.ms-excel").status(200).send(excelOut);
+			});
+		});
+
+	});
+	
 	app.get("/hdb", (req, res) => {
 		var client = req.db;
 		client.prepare(

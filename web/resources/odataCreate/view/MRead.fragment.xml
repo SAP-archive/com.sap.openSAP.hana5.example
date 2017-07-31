@@ -10,6 +10,7 @@
 		</List>
 		<Button press="callService" text="{i18n>B1}"/>
 		<Button press="callCreate" text="{i18n>B2}"/>
+		<Button press="callExcel" text="Download Products" />
 	</Panel>
 	<core:Fragment fragmentName="opensap.odataTest.view.MTableHead" type="XML"/>
 </core:FragmentDefinition>

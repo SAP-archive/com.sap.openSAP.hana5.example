@@ -1,6 +1,7 @@
 service namespace "com.sap.openSAP.hana.example.services" {
     "PO.Header" 
-	  as "POHeader" navigates ("Items" as "POItem");
+	  as "POHeader" navigates ("Items" as "POItem")
+	  create using "xsjs:poExits.xsjslib::po_create";
 	  
 	"PO.Item" 
 	  as "POItem";
