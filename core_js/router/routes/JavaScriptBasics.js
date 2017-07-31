@@ -257,6 +257,12 @@ module.exports = function() {
 
 		body += "Replace with XS: " + demo1.replace("Extended Application Services", "XS") + "</p>";
 
+		var es6 = "ES6!";
+		body += `Template Literals in ${es6}` + "</p>";
+		
+		body += `Multi-line string </br>
+		         second line </p>`;
+		
 		res.type("text/html").status(200).send(body);
 	});
 

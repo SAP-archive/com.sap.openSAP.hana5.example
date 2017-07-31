@@ -2,11 +2,14 @@
 /*eslint-env node, es6 */
 "use strict";
 
-module.exports = {
+module.exports = class promisedDB {
+	constructor(client) {
+		this.client = client;
+	}
 
-	preparePromisified: function(client, query) {
+	preparePromisified(query) {
 		return new Promise((resolve, reject) => {
-			client.prepare(query, (error, statement) => {
+			this.client.prepare(query, (error, statement) => {
 				if (error) {
 					reject(error);
 				} else {
@@ -14,9 +17,9 @@ module.exports = {
 				}
 			});
 		});
-	},
+	}
 
-	statementExecPromisified: function(statement, parameters) {
+	statementExecPromisified(statement, parameters) {
 		return new Promise((resolve, reject) => {
 			statement.exec(parameters, (error, results) => {
 				if (error) {
@@ -26,11 +29,11 @@ module.exports = {
 				}
 			});
 		});
-	},
+	}
 
-	loadProcedurePromisified: function(hdbext, client, schema, procedure) {
+	loadProcedurePromisified(hdbext, schema, procedure) {
 		return new Promise((resolve, reject) => {
-			hdbext.loadProcedure(client, schema, procedure, (error, storedProc) => {
+			hdbext.loadProcedure(this.client, schema, procedure, (error, storedProc) => {
 				if (error) {
 					reject(error);
 				} else {
@@ -38,9 +41,9 @@ module.exports = {
 				}
 			});
 		});
-	},
+	}
 
-	callProcedurePromisified: function(storedProc, inputParams) {
+	callProcedurePromisified(storedProc, inputParams) {
 		return new Promise((resolve, reject) => {
 			storedProc(inputParams, (error, outputScalar, results) => {
 				if (error) {
@@ -54,5 +57,4 @@ module.exports = {
 			});
 		});
 	}
-
 };
