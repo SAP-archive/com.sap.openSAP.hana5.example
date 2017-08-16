@@ -30,7 +30,10 @@ module.exports = function() {
 			<a href="${req.baseUrl}/classes3a">/classes3a</a> - Classes with Instance Methods #1</br>
 			<a href="${req.baseUrl}/classes3b">/classes3b</a> - Classes with Instance Methods #2</br>	
 			<a href="${req.baseUrl}/classes4a">/classes4a</a> - Classes with Inherited Methods #1</br>
-			<a href="${req.baseUrl}/classes4b">/classes4b</a> - Classes with Inherited Methods #2</br>` +			
+			<a href="${req.baseUrl}/classes4b">/classes4b</a> - Classes with Inherited Methods #2</br>
+			<a href="${req.baseUrl}/numFormat">/numFormat</a> - International Number Formatting</br>	
+			<a href="${req.baseUrl}/currFormat">/currFormat</a> - International Currency Formatting</br>
+			<a href="${req.baseUrl}/dateFormat">/dateFormat</a> - International Date/Time Formatting</br>` +			
 			require(global.__base + "utils/exampleTOC").fill();
 		res.type("text/html").status(200).send(output);
 	});
@@ -147,7 +150,7 @@ module.exports = function() {
 				res.type("application/json").status(200).send(`Call and catch errors: ${JSON.stringify(e)}`);
 			});
 	});
-	
+
 	app.get("/classes4a", function(req, res) {
 		let class4 = new ooTutorial4(req.db);
 		class4.getFlightDetails("AA", "0017", "20100421").then(results => {
@@ -169,6 +172,28 @@ module.exports = function() {
 			.catch(e => {
 				res.type("application/json").status(200).send(`Call and catch errors: ${JSON.stringify(e)}`);
 			});
+	});
+
+	//Number Formatting
+	app.get("/numFormat", function(req, res) {
+		let numEN = new Intl.NumberFormat("en-US");
+		let numDE = new Intl.NumberFormat("de-DE");
+		res.type("text/html").status(200).send(`US: ${numEN.format(123456789.10)}, DE: ${numDE.format(123456789.10)}`);
+	});
+	
+	//Currency Formatting
+	app.get("/currFormat", function(req, res) {
+		let curUS = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD"});
+		let curDE = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR"});
+		res.type("text/html").status(200).send(`US: ${curUS.format(123456789.10)}, DE: ${curDE.format(123456789.10)}`);
 	});	
+
+	//Date/Time Formatting
+	app.get("/dateFormat", function(req, res) {
+		let dateUS = new Intl.DateTimeFormat("en-US");
+		let dateDE = new Intl.DateTimeFormat("de-DE");
+		res.type("text/html").status(200).send(`US: ${dateUS.format(new Date())}, DE: ${dateDE.format(new Date())}`);
+	});	
+	
 	return app;
 };
