@@ -2,7 +2,7 @@
 /*eslint-env node, es6 */
 "use strict";
 
-module.exports = class promisedDB {
+module.exports = class {
 	constructor(client) {
 		this.client = client;
 	}

@@ -17,5 +17,6 @@ module.exports = (app, server) => {
 	app.use("/sap/bc/lrep", require("./routes/lrep")());
 	app.use("/node/annotations", require("./routes/annotations")());
 	app.use("/node/JavaScriptBasics", require("./routes/JavaScriptBasics")());
-	app.use("/node/promises", require("./routes/promises")());	
+	app.use("/node/promises", require("./routes/promises")());
+	app.use("/node/es6", require("./routes/es6")());
 };
