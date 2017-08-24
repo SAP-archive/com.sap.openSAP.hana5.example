@@ -1,5 +1,5 @@
 # com.sap.openSAP.hana5.example
-openSAP HANA5/HANA6 Course: Example Completed Implementation 
+openSAP HANA5/HANA6 Course: Example Completed Implementation  
 
 Dependencies:
 
