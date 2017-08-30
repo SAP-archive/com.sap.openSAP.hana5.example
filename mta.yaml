@@ -1,6 +1,6 @@
 _schema-version: '2.0'
 ID: com.sap.openSAP.hana5.example
-version: 2.2.2
+version: 2.2.3
 modules:
   - name: openSAP-ex-user-db
     type: hdb
@@ -31,7 +31,7 @@ modules:
         group: SERVICE_REPLACEMENTS
         properties:
           key: central-db-service
-          service: '~{central-db-name}'          
+          service: '~{central-db-name}'
   - name: openSAP-ex-core-js
     type: nodejs
     path: core_js
@@ -43,12 +43,11 @@ modules:
           url: '${default-url}'
     requires:
       - name: openSAP-ex-uaa
-      - name: openSAP-ex-log      
+      - name: openSAP-ex-log
       - name: container
       - name: openSAP-ex-core-db
       - name: sap.hana.democontent.epm.services.images
       - name: CROSS_SCHEMA_SFLIGHT
-
   - name: openSAP-ex-user-js
     type: nodejs
     path: user_js
@@ -109,11 +108,8 @@ modules:
         group: destinations
         properties:
           name: user-java-backend
-          url: ~{url}
-          forwardAuthToken: true            
-
-  
-
+          url: '~{url}'
+          forwardAuthToken: true
 resources:
   - name: user-container
     properties:
@@ -166,4 +162,4 @@ resources:
     parameters:
       service-name: openSAP.CentralDB.opensap-central-container
     properties:
-      central-db-name: '${service-name}'      
+      central-db-name: '${service-name}'

@@ -3,7 +3,7 @@ using Util;
 using PO;
 using SO;
 using MD;
-using sap.common :: UI as UI;
+using sap.common::UI as UI;
 using annotations.Importance;
 using annotations.EndUserText;
 using annotations.valueList;
