@@ -1,16 +1,16 @@
 {
   "engines": {
-    "node": "4.x || 6.x"
+    "node": "6.x"
   },
   "dependencies": {
     "@sap/xssec": "2.1.0",
     "@sap/xsenv": "1.2.7",
     "@sap/xsjs": "1.14.1",
-    "@sap/hdbext": "4.4.1",
-    "@sap/logging": "~3.0",
+    "@sap/hdbext": "4.4.2",
+    "@sap/logging": "~3.1",
     "@sap/jobs-client": "~1.1.1",
     "express": "~4.15",
-    "passport": "~0.3.2",
+    "passport": "~0.4.0",
     "winston": "~2.3.1",
     "async": "latest"
   },
