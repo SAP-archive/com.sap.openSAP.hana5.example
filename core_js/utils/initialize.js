@@ -29,6 +29,7 @@ module.exports = {
 				tag: "hana"
 			}
 		});
+		hanaOptions.hana.rowsWithMetadata = true;
 		app.use(
 			passport.authenticate("JWT", {
 				session: false

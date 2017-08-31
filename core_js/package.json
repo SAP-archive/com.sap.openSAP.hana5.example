@@ -5,7 +5,7 @@
   "dependencies": {
     "@sap/xssec": "2.1.0",
     "@sap/xsenv": "1.2.7",
-    "@sap/xsjs": "1.14.1",
+    "@sap/xsjs": "2.0.0",
     "@sap/hdbext": "4.4.2",
     "@sap/textbundle": "latest",
     "@sap/logging": "~3.1",
