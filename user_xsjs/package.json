@@ -1,0 +1,18 @@
+{
+	"engines": {
+		"node": " ^6 "
+	},
+	"dependencies": {
+		"@sap/xssec": "2.1.4",
+		"@sap/xsenv": "1.2.8",
+		"@sap/xsjs": "2.1.1"
+	},
+	"devDependencies": {},
+	"files": [],
+	"main": "server.js",
+	"name": "user-xsjs",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"version": "1.0.0"
+}

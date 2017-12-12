@@ -48,13 +48,13 @@ modules:
       - name: openSAP-ex-core-db
       - name: sap.hana.democontent.epm.services.images
       - name: CROSS_SCHEMA_SFLIGHT
-  - name: openSAP-ex-user-js
+  - name: openSAP-ex-user-xsjs
     type: nodejs
-    path: user_js
+    path: user_xsjs
     properties:
       SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]'
     provides:
-      - name: user_js
+      - name: user_xsjs_api
         properties:
           url: '${default-url}'
     requires:
@@ -98,7 +98,7 @@ modules:
           name: core-backend
           url: '~{url}'
           forwardAuthToken: true
-      - name: user_js
+      - name: user_xsjs_api
         group: destinations
         properties:
           name: user-backend
