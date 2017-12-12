@@ -98,6 +98,12 @@ modules:
           name: core-backend
           url: '~{url}'
           forwardAuthToken: true
+      - name: core_xsjs_api
+        group: destinations
+        properties:
+          name: core-xsjs-backend
+          url: '~{url}'
+          forwardAuthToken: true          
       - name: user_xsjs_api
         group: destinations
         properties:
@@ -129,6 +135,21 @@ modules:
       - name: container
       - name: openSAP-ex-core-db
 
+
+  - name: openSAP-ex-core-xsjs
+    type: nodejs
+    path: core_xsjs
+    provides:
+     - name: core_xsjs_api
+       properties:
+          url: ${default-url}
+    requires:
+      - name: openSAP-ex-uaa
+      - name: container
+      - name: openSAP-ex-core-db
+      - name: sap.hana.democontent.epm.services.images
+      - name: CROSS_SCHEMA_SFLIGHT
+      
 resources:
   - name: user-container
     properties:

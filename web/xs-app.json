@@ -52,7 +52,7 @@
     },
     {
       "source": "/sap/hana/democontent/epm/(.*)",
-      "destination": "core-backend",
+      "destination": "core-xsjs-backend",
       "scope": {
         "GET": "$XSAPPNAME.Display",
         "POST": [
@@ -124,7 +124,7 @@
     },
     {
       "source": "(.*)(.xsjs)",
-      "destination": "core-backend",
+      "destination": "core-xsjs-backend",
       "csrfProtection": true,
       "authenticationType": "xsuaa",
       "scope": {
@@ -146,7 +146,7 @@
     },
     {
       "source": "(.*)(.xsodata)",
-      "destination": "core-backend",
+      "destination": "core-xsjs-backend",
       "authenticationType": "xsuaa",
       "scope": {
         "GET": "$XSAPPNAME.Display",
