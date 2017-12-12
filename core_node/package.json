@@ -1,15 +1,27 @@
 {
+	"engines": {
+		"node": " ^6 "
+	},
 	"dependencies": {
 		"@sap/xssec": "2.1.4",
 		"@sap/xsenv": "1.2.8",
 		"@sap/hdbext": "4.5.0",
+		"@sap/textbundle": "latest",
 		"@sap/logging": "~3.2",
-		"@sap/jobs-client": "~1.2",
-		"@sap/cds": "1.14.1",		
+		"@sap/audit-logging": "2.1.1",
+		"@sap/cds": "1.14.1",
 		"express": "~4.16",
+		"express-ws": "3.0",
 		"passport": "~0.4.0",
-		"winston": "~2.3.1",
-		"async": "latest"
+		"async": "latest",
+		"ws": "1.1.1",
+		"accept-language-parser": "latest",
+		"node-xlsx": "~0.11",
+		"node-zip": "~1.1.1",
+		"xmldoc": "~1.1.0",
+		"winston": "~2.3",
+		"body-parser": "~1.17",
+		"elementtree": "latest"
 	},
 	"devDependencies": {
 		"gulp": "3.9.1",
@@ -18,16 +30,14 @@
 		"gulp-jasmine": "2.4.1",
 		"gulp-istanbul": "1.1.1"
 	},
+	"description": "",
 	"files": [],
 	"main": "server.js",
-	"name": "admin_node",
+	"name": "core_node",
 	"scripts": {
 		"start": "node server.js",
 		"test": "node ./node_modules/gulp/bin/gulp test",
 		"test-coverage": "node ./node_modules/gulp/bin/gulp test-coverage"
-	},
-	"engines": {
-		"node": " ^6 || ^8.7"
 	},
 	"version": "1.0.0"
 }

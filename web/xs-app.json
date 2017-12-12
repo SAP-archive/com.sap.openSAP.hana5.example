@@ -11,7 +11,7 @@
   "routes": [
     {
       "source": "/node(.*)",
-      "destination": "core-backend",
+      "destination": "core-node-backend",
       "csrfProtection": true,
       "authenticationType": "xsuaa",
       "scope": {
@@ -33,7 +33,7 @@
     },
     {
       "source": "/sap/bc/lrep(.*)",
-      "destination": "core-backend",
+      "destination": "core-node-backend",
       "csrfProtection": true,
       "authenticationType": "xsuaa",
       "scope": {

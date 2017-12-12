@@ -1,4 +1,3 @@
-core_js
 admin_node
 web
 core_db
@@ -7,3 +6,4 @@ javaTest
 user_db
 core_xsjs
 user_java
+core_node

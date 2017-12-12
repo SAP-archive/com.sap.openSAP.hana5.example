@@ -1,5 +1,5 @@
 _schema-version: '2.0'
-ID: com.sap.openSAP.hana5.example
+ID: hana6.example
 version: 2.3.0
 modules:
   - name: openSAP-ex-user-db
@@ -9,6 +9,7 @@ modules:
       - name: user-container
         properties:
           TARGET_CONTAINER: '~{user-container-name}'
+          
   - name: openSAP-ex-core-db
     type: hdb
     path: core_db
@@ -32,13 +33,19 @@ modules:
         properties:
           key: central-db-service
           service: '~{central-db-name}'
-  - name: openSAP-ex-core-js
+          
+  - name: openSAP-ex-core-node
     type: nodejs
-    path: core_js
+    path: core_node
+    parameters:
+      host: openSAP-core-node
+      register-service-url: true
+      service-name: openSAP-core-node
+      service-url: '${default-url}'      
     properties:
       UAA_SERVICE_NAME: openSAP-ex-uaa
     provides:
-      - name: core_js
+      - name: core_node_api
         properties:
           url: '${default-url}'
     requires:
@@ -48,9 +55,15 @@ modules:
       - name: openSAP-ex-core-db
       - name: sap.hana.democontent.epm.services.images
       - name: CROSS_SCHEMA_SFLIGHT
+      
   - name: openSAP-ex-user-xsjs
     type: nodejs
     path: user_xsjs
+    parameters:
+      host: openSAP-user-xsjs
+      register-service-url: true
+      service-name: openSAP-user-xsjs
+      service-url: '${default-url}'      
     properties:
       SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]'
     provides:
@@ -69,12 +82,18 @@ modules:
       - name: user_java_api
         properties:
           url: '${default-url}'
+    parameters:
+      host: openSAP-user-java
+      register-service-url: true
+      service-name: openSAP-user-java
+      service-url: '${default-url}'            
     requires:
       - name: openSAP-ex-uaa
       - name: user-container
         properties:
           JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml: {"service_name_for_DefaultDB" : "~{user-container-name}"}]'
       - name: openSAP-ex-user-db
+      
   - name: openSAP-ex-web
     type: html5
     path: web
@@ -92,10 +111,10 @@ modules:
       - name: ui5-lib
         properties:
           ui5liburl: '~{url}'
-      - name: core_js
+      - name: core_node_api
         group: destinations
         properties:
-          name: core-backend
+          name: core-node-backend
           url: '~{url}'
           forwardAuthToken: true
       - name: core_xsjs_api
@@ -126,6 +145,11 @@ modules:
   - name: openSAP-ex-admin-node
     type: nodejs
     path: admin_node
+    parameters:
+      host: openSAP-admin-node
+      register-service-url: true
+      service-name: openSAP-admin-node
+      service-url: '${default-url}'    
     provides:
      - name: admin_node_api
        properties:
@@ -143,6 +167,11 @@ modules:
      - name: core_xsjs_api
        properties:
           url: ${default-url}
+    parameters:
+      host: openSAP-core-xsjs
+      register-service-url: true
+      service-name: openSAP-core-xsjs
+      service-url: '${default-url}'            
     requires:
       - name: openSAP-ex-uaa
       - name: container
