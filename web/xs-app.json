@@ -78,30 +78,30 @@
     },
     {
       "source": "/get/(.*)",
-      "destination": "core-backend",
+      "destination": "admin-backend",
       "scope": "$XSAPPNAME.DataGenerator"
     },
     {
       "source": "/reset/(.*)",
-      "destination": "core-backend",
+      "destination": "admin-backend",
       "scope": "$XSAPPNAME.DataGenerator"
     },
     {
       "source": "/replicate/(.*)",
-      "destination": "core-backend",
+      "destination": "admin-backend",
       "scope": "$XSAPPNAME.DataGenerator"
     },
     {
       "source": "/jobs/(.*)",
-      "destination": "user-backend"
+      "destination": "admin-backend"
     },
     {
       "source": "/schedules/(.*)",
-      "destination": "user-backend"
+      "destination": "admin-backend"
     },
     {
       "source": "/jobactivity/(.*)",
-      "destination": "user-backend",
+      "destination": "admin-backend",
       "authenticationType": "basic"
     },
     {

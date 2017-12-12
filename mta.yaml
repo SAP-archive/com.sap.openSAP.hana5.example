@@ -61,12 +61,12 @@ modules:
       - name: openSAP-ex-uaa
       - name: user-container
       - name: openSAP-ex-user-db
-      - name: openSAP-ex-scheduler
+
   - name: openSAP-ex-user-java
     type: java
     path: user_java
     provides:
-      - name: user_java
+      - name: user_java_api
         properties:
           url: '${default-url}'
     requires:
@@ -104,12 +104,31 @@ modules:
           name: user-backend
           url: '~{url}'
           forwardAuthToken: true
-      - name: user_java
+      - name: admin_node_api
+        group: destinations
+        properties:
+          name: admin-backend
+          url: '~{url}'
+          forwardAuthToken: true          
+      - name: user_java_api
         group: destinations
         properties:
           name: user-java-backend
           url: '~{url}'
           forwardAuthToken: true
+
+  - name: openSAP-ex-admin-node
+    type: nodejs
+    path: admin_node
+    provides:
+     - name: admin_node_api
+       properties:
+          url: ${default-url}
+    requires:
+      - name: openSAP-ex-uaa
+      - name: container
+      - name: openSAP-ex-core-db
+
 resources:
   - name: user-container
     properties:
