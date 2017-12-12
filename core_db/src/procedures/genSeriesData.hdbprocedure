@@ -14,7 +14,7 @@ SELECT 'EUR' AS FCURR, 'USD' AS TCURR, G.GENERATED_PERIOD_START AS TS
         , (1.+   0.05 * COS( (G.ELEMENT_NUMBER-1)/(24.0*60.0/5) * ACOS(-1)) -- daily variation
             + 0.075 * COS( (G.ELEMENT_NUMBER-1)/(7*24.0*60.0/5) * ACOS(-1)) -- weekly variation 
             + 0.1 * COS( (G.ELEMENT_NUMBER-1)/(14*24.0*60.0/5) * ACOS(-1)) -- biweekly variation 
-            + 0.5 * (RAND() - 0.5)
+ --           + 0.5 * (RAND() - 0.5)
         ) AS FACTOR
 FROM SERIES_GENERATE_TIMESTAMP('INTERVAL 1 HOUR',now() , ADD_YEARS(now(), 1)  ) G
     );    
