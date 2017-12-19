@@ -23,6 +23,12 @@
       "schema": "SYS"
     }
   },
+ "SERIES_GENERATE_INTEGER": {
+    "target": {
+      "object": "SERIES_GENERATE_INTEGER",
+      "schema": "SYS"
+    }
+  },  
   "SERIES_GENERATE_TIMESTAMP": {
     "target": {
       "object": "SERIES_GENERATE_TIMESTAMP",

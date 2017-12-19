@@ -1,187 +1,183 @@
 {
-  "welcomeFile": "index.html",
-  "authenticationMethod": "route",
-  "websockets": {
-    "enabled": true
-  },
-  "logout": {
-    "logoutEndpoint": "/logout",
-    "logoutPage": "/"
-  },
-  "routes": [
-    {
-      "source": "/node(.*)",
-      "destination": "core-node-backend",
-      "csrfProtection": true,
-      "authenticationType": "xsuaa",
-      "scope": {
-        "GET": "$XSAPPNAME.Display",
-        "POST": [
-          "$XSAPPNAME.Display",
-          "$XSAPPNAME.Create"
-        ],
-        "PUT": [
-          "$XSAPPNAME.Display",
-          "$XSAPPNAME.Create"
-        ],
-        "DELETE": [
-          "$XSAPPNAME.Display",
-          "$XSAPPNAME.Delete"
-        ],
-        "default": "$XSAPPNAME.Display"
-      }
-    },
-    {
-      "source": "/sap/bc/lrep(.*)",
-      "destination": "core-node-backend",
-      "csrfProtection": true,
-      "authenticationType": "xsuaa",
-      "scope": {
-        "GET": "$XSAPPNAME.Display",
-        "POST": [
-          "$XSAPPNAME.Display"
-        ],
-        "PUT": [
-          "$XSAPPNAME.Display"
-        ],
-        "DELETE": [
-          "$XSAPPNAME.Display"
-        ],
-        "default": "$XSAPPNAME.Display"
-      }
-    },
-    {
-      "source": "/sap/hana/democontent/epm/(.*)",
-      "destination": "core-xsjs-backend",
-      "scope": {
-        "GET": "$XSAPPNAME.Display",
-        "POST": [
-          "$XSAPPNAME.Display",
-          "$XSAPPNAME.Create"
-        ],
-        "PUT": [
-          "$XSAPPNAME.Display",
-          "$XSAPPNAME.Create"
-        ],
-        "DELETE": [
-          "$XSAPPNAME.Display",
-          "$XSAPPNAME.Delete"
-        ],
-        "default": "$XSAPPNAME.Display"
-      }
-    },
-    {
-      "source": "/java/odata(.*)",
-      "destination": "user-java-backend",
-      "csrfProtection": true, 
-      "authenticationType": "xsuaa"
-    },
-    {
-      "source": "/get/(.*)",
-      "destination": "admin-backend",
-      "scope": "$XSAPPNAME.DataGenerator"
-    },
-    {
-      "source": "/reset/(.*)",
-      "destination": "admin-backend",
-      "scope": "$XSAPPNAME.DataGenerator"
-    },
-    {
-      "source": "/replicate/(.*)",
-      "destination": "admin-backend",
-      "scope": "$XSAPPNAME.DataGenerator"
-    },
-    {
-      "source": "/jobs/(.*)",
-      "destination": "admin-backend"
-    },
-    {
-      "source": "/schedules/(.*)",
-      "destination": "admin-backend"
-    },
-    {
-      "source": "/jobactivity/(.*)",
-      "destination": "admin-backend",
-      "authenticationType": "basic"
-    },
-    {
-      "source": "/user/(.*)", 
-      "destination": "user-backend",
-      "authenticationType": "xsuaa"
-    },
-    {
-      "source": "^/admin-ui/(.*)",
-      "localDir": "resources",
-      "scope": "$XSAPPNAME.DataGenerator",
-      "replace": {
-        "pathSuffixes": [
-          "index.html"
-        ],
-        "vars": [
-          "ui5liburl"
-        ]
-      }
-    },
-    {
-      "source": "(.*)(.xsjs)",
-      "destination": "core-xsjs-backend",
-      "csrfProtection": true,
-      "authenticationType": "xsuaa",
-      "scope": {
-        "GET": "$XSAPPNAME.Display",
-        "POST": [
-          "$XSAPPNAME.Display",
-          "$XSAPPNAME.Create"
-        ],
-        "PUT": [
-          "$XSAPPNAME.Display",
-          "$XSAPPNAME.Create"
-        ],
-        "DELETE": [
-          "$XSAPPNAME.Display",
-          "$XSAPPNAME.Delete"
-        ],
-        "default": "$XSAPPNAME.Display"
-      }
-    },
-    {
-      "source": "(.*)(.xsodata)",
-      "destination": "core-xsjs-backend",
-      "authenticationType": "xsuaa",
-      "scope": {
-        "GET": "$XSAPPNAME.Display",
-        "POST": [
-          "$XSAPPNAME.Display",
-          "$XSAPPNAME.Create"
-        ],
-        "PUT": [
-          "$XSAPPNAME.Display",
-          "$XSAPPNAME.Create"
-        ],
-        "DELETE": [
-          "$XSAPPNAME.Display",
-          "$XSAPPNAME.Delete"
-        ],
-        "default": "$XSAPPNAME.Display"
-      }
-    },
-    {
-      "source": "/(.*)",
-      "localDir": "resources",
-      "authenticationType": "xsuaa",
-      "scope": {
-        "GET": "$XSAPPNAME.Display",
-        "default": "$XSAPPNAME.Display"
-      },
-      "replace": {
-        "pathSuffixes": [
-          "index.html",
-          "odataTest.html"
-        ],
-        "vars": [
-          "ui5liburl"
-        ]
-      }
-    }
-  ]
+	"welcomeFile": "index.html",
+	"authenticationMethod": "route",
+	"websockets": {
+		"enabled": true
+	},
+	"logout": {
+		"logoutEndpoint": "/logout",
+		"logoutPage": "/"
+	},
+	"routes": [{
+		"source": "/node(.*)",
+		"destination": "core-node-backend",
+		"csrfProtection": true,
+		"authenticationType": "xsuaa",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"POST": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"PUT": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"DELETE": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Delete"
+			],
+			"default": "$XSAPPNAME.Display"
+		}
+	}, {
+		"source": "/sap/bc/lrep(.*)",
+		"destination": "core-node-backend",
+		"csrfProtection": true,
+		"authenticationType": "xsuaa",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"POST": [
+				"$XSAPPNAME.Display"
+			],
+			"PUT": [
+				"$XSAPPNAME.Display"
+			],
+			"DELETE": [
+				"$XSAPPNAME.Display"
+			],
+			"default": "$XSAPPNAME.Display"
+		}
+	}, {
+		"source": "/sap/hana/democontent/epm/(.*)",
+		"destination": "core-xsjs-backend",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"POST": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"PUT": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"DELETE": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Delete"
+			],
+			"default": "$XSAPPNAME.Display"
+		}
+	}, {
+		"source": "/java/odata(.*)",
+		"destination": "user-java-backend",
+		"csrfProtection": true,
+		"authenticationType": "xsuaa"
+	}, {
+		"source": "/get/(.*)",
+		"destination": "core-node-backend",
+		"scope": "$XSAPPNAME.DataGenerator"
+	}, {
+		"source": "/reset/(.*)",
+		"destination": "core-node-backend",
+		"scope": "$XSAPPNAME.DataGenerator"
+	}, {
+		"source": "/replicate/(.*)",
+		"destination": "core-node-backend",
+		"scope": "$XSAPPNAME.DataGenerator"
+	}, {
+		"source": "/jobs/(.*)",
+		"destination": "core-node-backend"
+	}, {
+		"source": "/schedules/(.*)",
+		"destination": "core-node-backend"
+	}, {
+		"source": "/jobactivity/(.*)",
+		"destination": "core-node-backend",
+		"authenticationType": "basic"
+	}, {
+		"source": "/user/(.*)",
+		"destination": "user-backend",
+		"authenticationType": "xsuaa"
+	}, {
+		"source": "^/admin-ui/(.*)",
+		"localDir": "resources",
+		"scope": "$XSAPPNAME.DataGenerator",
+		"replace": {
+			"pathSuffixes": [
+				"index.html"
+			],
+			"vars": [
+				"ui5liburl"
+			]
+		}
+	}, {
+		"source": "^/job-ui/(.*)",
+		"localDir": "resources",
+		"scope": "$XSAPPNAME.JOBSCHEDULER",
+		"replace": {
+			"pathSuffixes": [
+				"index.html"
+			],
+			"vars": [
+				"sapui5url"
+			]
+		}
+	}, {
+		"source": "(.*)(.xsjs)",
+		"destination": "core-xsjs-backend",
+		"csrfProtection": true,
+		"authenticationType": "xsuaa",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"POST": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"PUT": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"DELETE": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Delete"
+			],
+			"default": "$XSAPPNAME.Display"
+		}
+	}, {
+		"source": "(.*)(.xsodata)",
+		"destination": "core-xsjs-backend",
+		"authenticationType": "xsuaa",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"POST": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"PUT": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"DELETE": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Delete"
+			],
+			"default": "$XSAPPNAME.Display"
+		}
+	}, {
+		"source": "/(.*)",
+		"localDir": "resources",
+		"authenticationType": "xsuaa",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"default": "$XSAPPNAME.Display"
+		},
+		"replace": {
+			"pathSuffixes": [
+				"index.html",
+				"odataTest.html"
+			],
+			"vars": [
+				"ui5liburl"
+			]
+		}
+	}]
 }

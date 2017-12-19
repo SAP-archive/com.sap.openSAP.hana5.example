@@ -17,4 +17,11 @@ module.exports = (app, server) => {
 	app.use("/node/JavaScriptBasics", require("./routes/JavaScriptBasics")());
 	app.use("/node/promises", require("./routes/promises")());
 	app.use("/node/es6", require("./routes/es6")());
+
+	app.use("/jobactivity", require("./routes/jobactivity")());
+	app.use("/jobs", require("./routes/jobs")());
+	app.use("/schedules", require("./routes/schedules")());
+	app.use("/replicate", require("./routes/datagen")());
+	app.use("/reset", require("./routes/reset")());
+	app.use("/get", require("./routes/get")());
 };

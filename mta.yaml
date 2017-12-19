@@ -142,22 +142,7 @@ modules:
           url: '~{url}'
           forwardAuthToken: true
 
-  - name: openSAP-ex-admin-node
-    type: nodejs
-    path: admin_node
-    parameters:
-      host: openSAP-admin-node
-      register-service-url: true
-      service-name: openSAP-admin-node
-      service-url: '${default-url}'    
-    provides:
-     - name: admin_node_api
-       properties:
-          url: ${default-url}
-    requires:
-      - name: openSAP-ex-uaa
-      - name: container
-      - name: openSAP-ex-core-db
+  
 
 
   - name: openSAP-ex-core-xsjs

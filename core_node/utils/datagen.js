@@ -1,6 +1,7 @@
 /*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, quotes: 0, no-use-before-define: 0, new-cap:0 */
 var xsenv = require("@sap/xsenv");
 
+
 module.exports = {
 	resetTable: function(req, res, origTable, shadowTable, callback) {
 		var client = req.db;
@@ -76,7 +77,6 @@ module.exports = {
 		// }
 		return true;
 	},
-
 	getBuinessPartners: function(client, callback1) {
 		console.log("inside bpDict");
 		var query = "SELECT \"PARTNERID\" FROM \"MD.BusinessPartner\"";
@@ -85,7 +85,6 @@ module.exports = {
 			callback1(error, response);
 		});
 	},
-
 	getProducts: function(client, callback2) {
 		//console.log("inside prodDict");
 		// Select ProductId and the corresponding Price
