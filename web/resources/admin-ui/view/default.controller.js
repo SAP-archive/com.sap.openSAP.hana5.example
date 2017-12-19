@@ -1,10 +1,11 @@
+var displayRecords = 0;
+jQuery.sap.require("sap.ui.commons.MessageBox");
 sap.ui.controller("sap.hana.democontent.epm.admin.view.default", {
-
-    /**
-     * Called when a controller is instantiated and its View controls (if available) are already created.
-     * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
-     */
- 	onInit: function() {
+	/**
+	 * Called when a controller is instantiated and its View controls (if available) are already created.
+	 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
+	 */
+	onInit: function() {
 		// attach handlers for validation errors
 		sap.ui.getCore().attachValidationError(function(evt) {
 			var control = evt.getParameter("element");
@@ -122,11 +123,21 @@ sap.ui.controller("sap.hana.democontent.epm.admin.view.default", {
 				return false;
 			}
 		});
-
-		// output result
-		if (canContinue) {
-			this.executeCall(this);
-		} else {
+        var oModel = sap.ui.getCore().getModel();
+		var totalPO = parseInt(oModel.getProperty('/POVal'), 10);
+		var totalSO = parseInt(oModel.getProperty('/SOVal'), 10);
+		
+		if(totalPO > 20 || totalSO > 20)
+		{   canContinue = false;
+			sap.ui.commons.MessageBox.show("Please enter a number between 1 and 20",sap.ui.commons.MessageBox.Icon.ERROR,"Error");
+			
+		}
+		else  if (canContinue) {
+			this.
+			executeCall(this);
+		} 
+		 
+		else {
 			sap.m.MessageBox.alert(oBundle.getText("ValidNumber"));
 		}
 	},
@@ -219,14 +230,38 @@ sap.ui.controller("sap.hana.democontent.epm.admin.view.default", {
 				oModel.setProperty('/percentValue', 0);
 				oModel.setProperty('/displayValue', "");
 				oModel.setProperty('/txtLog', "");
+				var xsrf_token;
 				soLoops = 0;
 				poLoops = 0;
 				soRequired = parseInt(oModel.getProperty('/SOVal'), 10);;
 				poRequired = parseInt(oModel.getProperty('/POVal'), 10);;
+				$.ajax({
+						type: "GET",
+						async: false,
+						url: "/sap/hana/democontent/epm/services/poCreate.xsodata",
+						contentType: "application/json",
+						headers: {
+							'x-csrf-token': 'Fetch',
+							'Accept': "application/json"
+						},
+						success: function(data, textStatus, request) {
+							xsrf_token = request.getResponseHeader('x-csrf-token');
+						},
+						error: function(jqXHR, textStatus, errorThrown) {
+							sap.ui.commons.MessageBox.show("Error in fetching XSRF token",
+								"ERROR",
+								"Error");
+							return;
+						}
+					});
 				for (var i = 0; i < soRequired; i++) {
 					jQuery.ajax({
 						url: '/replicate/sales',
-						method: 'GET',
+						headers: {
+								'x-csrf-token': xsrf_token
+								 },
+						method: 'POST',
+						contentType: "application/json",
 						dataType: 'json',
 						success: function(myTxt) {
 							oModel.setProperty('/txtLog', myTxt.message + "\n" + oModel.getProperty('/txtLog'));
@@ -252,7 +287,10 @@ sap.ui.controller("sap.hana.democontent.epm.admin.view.default", {
 				for (var j = 0; j < poRequired; j++) {
 					jQuery.ajax({
 						url: '/replicate/purchase',
-						method: 'GET',
+						headers: {
+									'x-csrf-token': xsrf_token
+								 },
+						method: 'POST',
 						dataType: 'json',
 						success: function(myTxt) {
 							oModel.setProperty('/txtLog', myTxt.message + "\n" + oModel.getProperty('/txtLog'));
@@ -288,7 +326,10 @@ sap.ui.controller("sap.hana.democontent.epm.admin.view.default", {
 				var soLoops = parseInt(oModel.getProperty('/SOVal'), 10);
 				var poLoops = parseInt(oModel.getProperty('/POVal'), 10);
 				oModel.setProperty('/percentValue', (soLoops + poLoops) * 1000);
-				if (parseInt(oModel.getProperty('/POVal')) !== 0) {
+				
+				
+			
+					if (parseInt(oModel.getProperty('/POVal')) !== 0) {
 					var noRec = oModel.getProperty('/POVal');
 					var url = "/replicate/timebasedPO";
 					oController.triggerReplicateTimeBasedPO(oController, noRec, url, "PurchaseOrderId");
@@ -298,6 +339,8 @@ sap.ui.controller("sap.hana.democontent.epm.admin.view.default", {
 					url = "/replicate/timebasedPO";
 					oController.triggerReplicateTimeBasedPO(oController, noRec, url, "SalesOrderId");
 				}
+				
+			
 			}
 		}
 	},
@@ -308,11 +351,36 @@ sap.ui.controller("sap.hana.democontent.epm.admin.view.default", {
 		oModel.setProperty('/displayValue', "");
 		oModel.setProperty('/txtLog', "");
 		resetCount = 0;
+		var xsrf_token;
 		resetMax = urls.length;
+		//get xsrf token
+			$.ajax({
+			type: "GET",
+			async: false,
+			url: "/sap/hana/democontent/epm/services/poCreate.xsodata",
+			contentType: "application/json",
+			headers: {
+				'x-csrf-token': 'Fetch',
+				'Accept': "application/json"
+			},
+			success: function(data, textStatus, request) {
+				xsrf_token = request.getResponseHeader('x-csrf-token');
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				sap.ui.commons.MessageBox.show("Error in fetching XSRF token",
+					"ERROR",
+					"Error");
+				return;
+			}
+		});
 		for (var i = 0; i < urls.length; i++) {
+			
 			jQuery.ajax({
 				url: urls[i],
-				method: 'GET',
+				headers: {
+						'x-csrf-token': xsrf_token
+			             },
+				method: 'POST',
 				dataType: 'json',
 				success: function(myTxt) {
 					oModel.setProperty('/txtLog', myTxt.message + "\n" + oModel.getProperty('/txtLog'));
@@ -416,7 +484,15 @@ sap.ui.controller("sap.hana.democontent.epm.admin.view.default", {
 				//oController.onTimeBasedRequestComplete(myTxt, oController);
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				alert("error");
+			if (id=="PurchaseOrderId")
+			{
+			var errorString = "Unexpected error occured during Purchase order data generation.Please check the logs for more details";
+			}
+			else
+			{
+			var errorString = "Unexpected error occured during sales order data generation.Please check the logs for more details";
+			}
+			sap.ui.commons.MessageBox.show(errorString,sap.ui.commons.MessageBox.Icon.ERROR,"Error");
 				// onError(jqXHR.status, oBundle.getText("purchase_order"));
 			}
 

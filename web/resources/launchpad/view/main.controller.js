@@ -1,32 +1,31 @@
-sap.ui.controller("view.main", {
+sap.ui.controller("shine.democontent.epm.launchpad.view.main", {
 
 	onInit: function() {
+		this.getView().addStyleClass("sapUiSizeCompact");
+		
+		// var data = [{
+  //	       name:"userSession"
+  //	    }];
+		// var userModel = new sap.ui.model.json.JSONModel({modelData: data});
+		// sap.ui.getCore().setModel(userModel, "user"); 
+		// sap.ui.core.UIComponent.prototype.init.apply(this,arguments);
+		// var mConfig = this.getMetadata().getConfig();
+  // 	    var sServiceUrl = mConfig.serviceConfig.serviceUrl;
+		
+		
+		// var oConfig = new sap.ui.model.json.JSONModel(sServiceUrl);
+		// oConfig.attachRequestCompleted(jQuery.proxy(function(){
+	 //       this.getSessionInfo();
+	 //   }),this);
+  //  	sap.ui.getCore().setModel(oConfig, "config");
+  //  	this.setModel(oConfig, "config");
+
+	},
 	
+	logout: function() {
+		window.location.replace('/logout');
 	},
 
-	/**
-	 * Called when a controller is instantiated and its View controls (if available) are already created.
-	 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
-	 * @memberOf shine_so.main
-	 */
-	//	onInit: function() {
-	//
-	//	},
-
-	/**
-	 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-	 * (NOT before the first rendering! onInit() is used for that one!).
-	 * @memberOf shine_so.main
-	 */
-	//	onBeforeRendering: function() {
-	//
-	//	},
-
-	/**
-	 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
-	 * This hook is the same one that SAPUI5 controls get after being rendered.
-	 * @memberOf launchpad.main
-	 */
 	onAfterRendering: function() {
 
 		var value = sap.app.localStorage.getPreference(sap.app.localStorage.PREF_SHOW_WELCOME);
@@ -34,14 +33,44 @@ sap.ui.controller("view.main", {
 			var welcomeDialog = new sap.account.WelcomeDialog(this);
 			welcomeDialog.open();
 		}
-	}
+	},
+	handlePress: function(oEvent) {
+		var tileID;
+		var tileId = oEvent.getSource().getId();
+		if (tileId === "__xmlview0--dg") {
+			tileID = 1;
+		}
+		if (tileId === "__xmlview0--po") {
+			tileID = 2;
+		}
+		if (tileId === "__xmlview0--jobscheduling") {
+			tileID = 3;
+		}
+		if (tileId === "__xmlview0--so") {
+			tileID = 4;
+		}
+		if (tileId === "__xmlview0--uc") {
+			tileID = 5;
+		}
+		if (tileId === "__xmlview0--spatial") {
+			tileID = 8;
+		}
+		// if (tileId === "__xmlview0--fulltextsearch") {
+		// 	tileID = 1;
+		// }
 
-	/**
-	 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-	 * @memberOf shine_so.main
-	 */
-	//	onExit: function() {
-	//
-	//	}
+		var value = sap.app.localStorage.getPreference(sap.app.localStorage.PREF_TILE_HELP_SHOW_PREFIX + tileID);
+		if (value !== 'false') {
+			var tileDialog = new sap.account.TileDialog(this);
+			tileDialog.open(tileID);
+		} else {
+			var tileDialog = new sap.account.TileDialog(this);
+			window.location = tileDialog.getHrefLocation(tileID);
+		}
+	},
+
+	sourceCodeDownload: function() {
+		sap.m.URLHelper.redirect("../source/sap-xsac-shine-src-code.zip", true);
+	}
 
 });
