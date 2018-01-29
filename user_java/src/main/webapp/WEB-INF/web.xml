@@ -1,45 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
-	<servlet>
-		<servlet-name>ODataServlet</servlet-name>
-		<servlet-class>com.sap.gateway.v4.rt.core.web.ODataServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet>
-		<servlet-name>MaintainenceServlet</servlet-name>
-		<servlet-class>com.sap.gateway.v4.rt.core.web.MaintainanceServlet</servlet-class>
-		<load-on-startup>2</load-on-startup>
-	</servlet>
 	<resource-ref>
 		<res-ref-name>jdbc/java-hdi-container</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 	</resource-ref>
 	<servlet-mapping>
-		<servlet-name>ODataServlet</servlet-name>
-		<url-pattern>/java/odata/v4/*</url-pattern>
+		<servlet-name>GatewayCoreServlet</servlet-name>
+		<url-pattern>/java/odata/v2/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>MaintainenceServlet</servlet-name>
-		<url-pattern>/java/odata/clearCache</url-pattern>
+		<servlet-name>EndPoints</servlet-name>
+		<url-pattern>/java/odata/v2/</url-pattern>
 	</servlet-mapping>
-	<login-config>
-		<auth-method>XSUAA</auth-method>
-	</login-config>
-	<security-constraint>
-		<display-name>SecurityConstraint</display-name>
-		<web-resource-collection>
-			<web-resource-name>WRCollection</web-resource-name>
-			<url-pattern>/java/odata/v4/*</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>ODATASERVICEUSER</role-name>
-		</auth-constraint>
-	</security-constraint>
+	<servlet>
+		<servlet-name>EndPoints</servlet-name>
+		<servlet-class>com.sap.cloud.sdk.service.prov.v2.rt.core.web.EndPointsList</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>GatewayCoreServlet</servlet-name>
+		<servlet-class>org.apache.olingo.odata2.core.servlet.ODataServlet</servlet-class>
+		<init-param>
+			<param-name>org.apache.olingo.odata2.service.factory</param-name>
+			<param-value>com.sap.cloud.sdk.service.prov.v2.rt.core.CloudSDKODataServiceFactory</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.apache.olingo.odata2.path.split</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Enable HTTP Methods</web-resource-name>
-			<url-pattern>/java/odata/v4/*</url-pattern>
+			<url-pattern>/java/odata/v2/*</url-pattern>
 			<http-method-omission>HEAD</http-method-omission>
 			<http-method-omission>GET</http-method-omission>
 			<http-method-omission>PUT</http-method-omission>
@@ -48,31 +42,39 @@
 		</web-resource-collection>
 		<auth-constraint/>
 	</security-constraint>
-	<security-constraint>
-		<display-name>Cache Clearing Dev Admin User</display-name>
-		<web-resource-collection>
-			<web-resource-name>CacheClearCollection</web-resource-name>
-			<url-pattern>/java/odata/clearCache</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>ODATASERVICEADMIN</role-name>
-		</auth-constraint>
-	</security-constraint>
 	<context-param>
 		<param-name>DPC</param-name>
-		<param-value>com.sap.gateway.v4.rt.cds.CDSDataProvider</param-value>
+		<param-value>com.sap.cloud.sdk.service.prov.v2.rt.cds.CDSDataProvider</param-value>
 	</context-param>
 	<context-param>
 		<param-name>MPC</param-name>
-		<param-value>com.sap.gateway.v4.rt.xsa.cds.XSACDSEdmProvider</param-value>
+		<param-value>com.sap.cloud.sdk.service.prov.v2.rt.cdx.CDXEdmProvider</param-value>
 	</context-param>
 	<context-param>
-		<param-name>RPF</param-name>
-		<param-value>com.sap.gateway.v4.rt.cds.util.CDSRuntimeProviderFactory</param-value>
+		<param-name>delegate</param-name>
+		<param-value>com.sap.cloud.sdk.service.prov.v2.rt.cdx.CDXRuntimeDelegate</param-value>
+	</context-param>
+	<context-param>
+		<param-name>ServiceRepositoryProviderPackage</param-name>
+		<param-value>com.sap.cloud.sdk.service.prov.v2.rt.cds.repository</param-value>
+	</context-param>
+	<context-param>
+		<param-name>ServiceRepositoryProvider</param-name>
+		<param-value>com.sap.cloud.sdk.service.prov.v2.rt.repository.ServiceRepositoryProvider</param-value>
 	</context-param>
 	<listener>
-		<listener-class>com.sap.gateway.v4.rt.core.web.ODataApplicationInitializer</listener-class>
+		<listener-class>com.sap.cloud.sdk.service.prov.v2.rt.core.web.ServletListener</listener-class>
 	</listener>
+	<!--Option to give custom JDBC connection. Uncomment for multinenacy support-->
+	<!--context-param>
+		<param-name>DBConnection</param-name>
+		<param-value>com.sap.cloud.sdk.service.prov.rt.multitenant.TenantAwareDataSource</param-value>
+	</context-param-->
+	<!--Option to give custom handler for tenant onboarding and runtime-->
+	<!--context-param>
+		<param-name>TenantHandler</param-name>
+		<param-value>com.sap.cloud.sdk.service.prov.rt.multitenant.DefaultTenantHandler</param-value>
+	</context-param-->
 	<!--listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>

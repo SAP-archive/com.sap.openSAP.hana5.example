@@ -82,6 +82,7 @@ modules:
         properties:
           url: '${default-url}'
     parameters:
+      memory: 512M    
       host: openSAP-user-java
       register-service-url: true
       service-name: openSAP-user-java

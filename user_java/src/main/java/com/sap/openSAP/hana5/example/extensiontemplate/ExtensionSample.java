@@ -1,4 +1,4 @@
-package com.sap.openSAP.hana5.example.extensiontemplate;
+/*package com.sap.openSAP.hana5.example.extensiontemplate;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -157,7 +157,7 @@ public class ExtensionSample {
 			 * ResultSet rs = pstmt.executeQuery(); Entity result = rs.next() ?
 			 * createEntityFromResultSet(rs) : null;
 			 * dpCtx.setResultEntity(result); }
-			 */
+			 
 		}
 
 		catch (SQLException sqlException) {
@@ -185,4 +185,4 @@ public class ExtensionSample {
 
 	}
 
-}
+}*/
