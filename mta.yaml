@@ -9,7 +9,6 @@ modules:
       - name: user-container
         properties:
           TARGET_CONTAINER: '~{user-container-name}'
-          
   - name: openSAP-ex-core-db
     type: hdb
     path: core_db
@@ -33,7 +32,6 @@ modules:
         properties:
           key: central-db-service
           service: '~{central-db-name}'
-          
   - name: openSAP-ex-core-node
     type: nodejs
     path: core_node
@@ -41,7 +39,7 @@ modules:
       host: openSAP-core-node
       register-service-url: true
       service-name: openSAP-core-node
-      service-url: '${default-url}'      
+      service-url: '${default-url}'
     properties:
       UAA_SERVICE_NAME: openSAP-ex-uaa
     provides:
@@ -55,7 +53,6 @@ modules:
       - name: openSAP-ex-core-db
       - name: sap.hana.democontent.epm.services.images
       - name: CROSS_SCHEMA_SFLIGHT
-      
   - name: openSAP-ex-user-xsjs
     type: nodejs
     path: user_xsjs
@@ -63,7 +60,7 @@ modules:
       host: openSAP-user-xsjs
       register-service-url: true
       service-name: openSAP-user-xsjs
-      service-url: '${default-url}'      
+      service-url: '${default-url}'
     properties:
       SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]'
     provides:
@@ -74,7 +71,6 @@ modules:
       - name: openSAP-ex-uaa
       - name: user-container
       - name: openSAP-ex-user-db
-
   - name: openSAP-ex-user-java
     type: java
     path: user_java
@@ -86,14 +82,13 @@ modules:
       host: openSAP-user-java
       register-service-url: true
       service-name: openSAP-user-java
-      service-url: '${default-url}'            
+      service-url: '${default-url}'
     requires:
       - name: openSAP-ex-uaa
       - name: user-container
         properties:
           JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml: {"service_name_for_DefaultDB" : "~{user-container-name}"}]'
       - name: openSAP-ex-user-db
-      
   - name: openSAP-ex-web
     type: html5
     path: web
@@ -122,7 +117,7 @@ modules:
         properties:
           name: core-xsjs-backend
           url: '~{url}'
-          forwardAuthToken: true          
+          forwardAuthToken: true
       - name: user_xsjs_api
         group: destinations
         properties:
@@ -134,36 +129,31 @@ modules:
         properties:
           name: admin-backend
           url: '~{url}'
-          forwardAuthToken: true          
+          forwardAuthToken: true
       - name: user_java_api
         group: destinations
         properties:
           name: user-java-backend
           url: '~{url}'
           forwardAuthToken: true
-
-  
-
-
   - name: openSAP-ex-core-xsjs
     type: nodejs
     path: core_xsjs
     provides:
-     - name: core_xsjs_api
-       properties:
-          url: ${default-url}
+      - name: core_xsjs_api
+        properties:
+          url: '${default-url}'
     parameters:
       host: openSAP-core-xsjs
       register-service-url: true
       service-name: openSAP-core-xsjs
-      service-url: '${default-url}'            
+      service-url: '${default-url}'
     requires:
       - name: openSAP-ex-uaa
       - name: container
       - name: openSAP-ex-core-db
       - name: sap.hana.democontent.epm.services.images
       - name: CROSS_SCHEMA_SFLIGHT
-      
 resources:
   - name: user-container
     properties:
@@ -204,8 +194,8 @@ resources:
   - name: ui5-lib
     type: configuration
     parameters:
-      provider-id: 'com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV3:sapui5_fesv3'
-      version: '>=1.44.18'
+      provider-id: 'com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV4:sapui5_fesv4'
+      version: '>=1.52.02'
   - name: openSAP-ex-log
     type: org.cloudfoundry.managed-service
     parameters:
