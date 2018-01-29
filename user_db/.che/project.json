@@ -8,9 +8,8 @@
 		"configs": {}
 	},
 	"attributes": {
-		"mta_module_parent": ["/com.sap.openSAP.hana5.example"],
 		"sap.watt.common.setting": [
-			"{\"generation\":[{\"templateId\":\"hanatemplates.hanadbproject\",\"templateVersion\":\"1.0.0\",\"dateTimeStamp\":\"Thu, 28 Jul 2016 15:58:46 GMT\"}]}"
+			"{\"analyticsService\":{\"dataWarehouse\":false},\"generation\":[{\"templateId\":\"hanatemplates.hanadbproject\",\"templateVersion\":\"1.0.0\",\"dateTimeStamp\":\"Mon, 29 Jan 2018 14:58:28 GMT\"}],\"basevalidator\":{\"services\":{\"js\":\"jsValidator\",\"xml\":\"xmlValidator\"}}}"
 		]
 	},
 	"mixinTypes": ["mtamodule"]

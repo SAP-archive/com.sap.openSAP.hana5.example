@@ -1,1 +1,16 @@
-{"type":"mta","builders":{"default":"mtabuilder","configs":{}},"runners":{"configs":{}},"attributes":{"sap.watt.common.setting":["{\"cdsBeautifier\":{\"tab_size\":\"3\",\"max_keep_empty_lines\":\"2\",\"capitalization_mode\":\"lower\",\"auto_beautify_blocks\":false,\"nGrammarVersion\":{\"id\":7,\"description\":\"HANA 2.0 SP0\"}},\"basevalidator\":{\"services\":{\"js\":\"jsValidator\",\"xml\":\"xmlValidator\"}}}"]},"mixinTypes":[]}
+{
+	"type": "mta",
+	"builders": {
+		"default": "mtabuilder",
+		"configs": {}
+	},
+	"runners": {
+		"configs": {}
+	},
+	"attributes": {
+		"sap.watt.common.setting": [
+			"{\"cdsBeautifier\":{\"tab_size\":\"3\",\"max_keep_empty_lines\":\"2\",\"capitalization_mode\":\"lower\",\"auto_beautify_blocks\":false,\"nGrammarVersion\":{\"id\":7,\"description\":\"HANA 2.0 SP0\"}},\"basevalidator\":{\"services\":{\"js\":\"jsValidator\",\"xml\":\"xmlValidator\"}}}"
+		]
+	},
+	"mixinTypes": []
+}

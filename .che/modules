@@ -2,7 +2,6 @@ web
 core_node
 core_db
 user_xsjs
-javaTest
 user_db
 core_xsjs
 user_java

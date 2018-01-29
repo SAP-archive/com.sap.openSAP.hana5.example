@@ -1,6 +1,6 @@
 _schema-version: '2.0'
 ID: hana6.example
-version: 2.3.0
+version: 2.3.1
 modules:
   - name: openSAP-ex-user-db
     type: hdb
@@ -32,6 +32,7 @@ modules:
         properties:
           key: central-db-service
           service: '~{central-db-name}'
+
   - name: openSAP-ex-core-node
     type: nodejs
     path: core_node
@@ -53,6 +54,7 @@ modules:
       - name: openSAP-ex-core-db
       - name: sap.hana.democontent.epm.services.images
       - name: CROSS_SCHEMA_SFLIGHT
+
   - name: openSAP-ex-user-xsjs
     type: nodejs
     path: user_xsjs
@@ -71,6 +73,7 @@ modules:
       - name: openSAP-ex-uaa
       - name: user-container
       - name: openSAP-ex-user-db
+
   - name: openSAP-ex-user-java
     type: java
     path: user_java
@@ -89,6 +92,26 @@ modules:
         properties:
           JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml: {"service_name_for_DefaultDB" : "~{user-container-name}"}]'
       - name: openSAP-ex-user-db
+
+  - name: openSAP-ex-core-xsjs
+    type: nodejs
+    path: core_xsjs
+    provides:
+      - name: core_xsjs_api
+        properties:
+          url: '${default-url}'
+    parameters:
+      host: openSAP-core-xsjs
+      register-service-url: true
+      service-name: openSAP-core-xsjs
+      service-url: '${default-url}'
+    requires:
+      - name: openSAP-ex-uaa
+      - name: container
+      - name: openSAP-ex-core-db
+      - name: sap.hana.democontent.epm.services.images
+      - name: CROSS_SCHEMA_SFLIGHT
+
   - name: openSAP-ex-web
     type: html5
     path: web
@@ -124,36 +147,13 @@ modules:
           name: user-backend
           url: '~{url}'
           forwardAuthToken: true
-      - name: admin_node_api
-        group: destinations
-        properties:
-          name: admin-backend
-          url: '~{url}'
-          forwardAuthToken: true
       - name: user_java_api
         group: destinations
         properties:
           name: user-java-backend
           url: '~{url}'
           forwardAuthToken: true
-  - name: openSAP-ex-core-xsjs
-    type: nodejs
-    path: core_xsjs
-    provides:
-      - name: core_xsjs_api
-        properties:
-          url: '${default-url}'
-    parameters:
-      host: openSAP-core-xsjs
-      register-service-url: true
-      service-name: openSAP-core-xsjs
-      service-url: '${default-url}'
-    requires:
-      - name: openSAP-ex-uaa
-      - name: container
-      - name: openSAP-ex-core-db
-      - name: sap.hana.democontent.epm.services.images
-      - name: CROSS_SCHEMA_SFLIGHT
+          
 resources:
   - name: user-container
     properties:
@@ -206,4 +206,8 @@ resources:
     parameters:
       service-name: openSAP.CentralDB.opensap-central-container
     properties:
-      central-db-name: '${service-name}'
+      central-db-name: '${service-name}'        
+
+
+
+
