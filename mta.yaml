@@ -32,7 +32,6 @@ modules:
         properties:
           key: central-db-service
           service: '~{central-db-name}'
-
   - name: openSAP-ex-core-node
     type: nodejs
     path: core_node
@@ -54,7 +53,6 @@ modules:
       - name: openSAP-ex-core-db
       - name: sap.hana.democontent.epm.services.images
       - name: CROSS_SCHEMA_SFLIGHT
-
   - name: openSAP-ex-user-xsjs
     type: nodejs
     path: user_xsjs
@@ -73,7 +71,6 @@ modules:
       - name: openSAP-ex-uaa
       - name: user-container
       - name: openSAP-ex-user-db
-
   - name: openSAP-ex-user-java
     type: java
     path: user_java
@@ -82,7 +79,7 @@ modules:
         properties:
           url: '${default-url}'
     parameters:
-      memory: 512M    
+      memory: 512M
       host: openSAP-user-java
       register-service-url: true
       service-name: openSAP-user-java
@@ -93,7 +90,6 @@ modules:
         properties:
           JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml: {"service_name_for_DefaultDB" : "~{user-container-name}"}]'
       - name: openSAP-ex-user-db
-
   - name: openSAP-ex-core-xsjs
     type: nodejs
     path: core_xsjs
@@ -112,7 +108,6 @@ modules:
       - name: openSAP-ex-core-db
       - name: sap.hana.democontent.epm.services.images
       - name: CROSS_SCHEMA_SFLIGHT
-
   - name: openSAP-ex-web
     type: html5
     path: web
@@ -154,7 +149,6 @@ modules:
           name: user-java-backend
           url: '~{url}'
           forwardAuthToken: true
-          
 resources:
   - name: user-container
     properties:
@@ -196,7 +190,7 @@ resources:
     type: configuration
     parameters:
       provider-id: 'com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV4:sapui5_fesv4'
-      version: '>=1.52.02'
+      version: '>=1.52.01'
   - name: openSAP-ex-log
     type: org.cloudfoundry.managed-service
     parameters:
@@ -207,8 +201,4 @@ resources:
     parameters:
       service-name: openSAP.CentralDB.opensap-central-container
     properties:
-      central-db-name: '${service-name}'        
-
-
-
-
+      central-db-name: '${service-name}'
