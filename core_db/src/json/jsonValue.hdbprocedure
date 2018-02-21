@@ -2,7 +2,7 @@ PROCEDURE "jsonValue" (
 out JSONOUT1 table ( VALUE INTEGER ),
 out JSONOUT2 table ( VALUE INTEGER ),
 out JSONOUT3 table ( VALUE INTEGER ),
-out JSONOUT4 table ( "LastName" NVARCHAR(100) )
+out JSONOUT4 table ( "LastName" NVARCHAR(5000) )
 --out JSONOUT5 table ( "Item" NVARCHAR(100) ),
 --out JSONOUT6 table ( "LastName" NVARCHAR(100) )
 )
@@ -15,11 +15,11 @@ BEGIN
        Write your procedure logic 
    *************************************/
    
-   JSONOUT1 = SELECT JSON_VALUE('{"item1":10}', '$.item1') AS value  FROM DUMMY;
+   JSONOUT1 = SELECT TO_INTEGER(JSON_VALUE('{"item1":10}', '$.item1')) AS value  FROM DUMMY;
    
-   JSONOUT2 = SELECT JSON_VALUE('{"item1":{"sub1":10}, "item2":{"sub2":5}, "item3":{"sub3":7}}', '$.*.sub2') AS value  FROM DUMMY;
+   JSONOUT2 = SELECT TO_INTEGER(JSON_VALUE('{"item1":{"sub1":10}, "item2":{"sub2":5}, "item3":{"sub3":7}}', '$.*.sub2')) AS value  FROM DUMMY;
    
-   JSONOUT3 = SELECT JSON_VALUE('[0, 1, 2, 3]', '$[0]') AS value  FROM DUMMY;
+   JSONOUT3 = SELECT TO_INTEGER(JSON_VALUE('[0, 1, 2, 3]', '$[0]')) AS value  FROM DUMMY;
    
    JSONOUT4 = SELECT JSON_VALUE('{"firstname":"John"}', '$.lastname' DEFAULT 'No last name found' ON EMPTY) AS "LastName"  FROM DUMMY;
    

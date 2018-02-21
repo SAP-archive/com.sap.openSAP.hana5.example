@@ -9,6 +9,7 @@
                 "has_header": true
             },
             "import_settings": {
+            	"include_filter" : [ ],            
                 "import_columns": [
                     "ADDRESSID",
 					"CITY",
@@ -33,6 +34,7 @@
                 "has_header": true
             },
             "import_settings": {
+            	"include_filter" : [ ],            
                 "import_columns": [
                     "PARTNERID",
 					"PARTNERROLE",
@@ -59,6 +61,7 @@
                 "has_header": true
             },
             "import_settings": {
+            	"include_filter" : [ ],            
                 "import_columns": [
 					"EMPLOYEEID",
 					"NAME.FIRST",
@@ -90,6 +93,7 @@
                 "has_header": true
             },
             "import_settings": {
+            	"include_filter" : [ ],            
                 "import_columns": [
                     "PRODUCTID",
 					"TYPECODE",

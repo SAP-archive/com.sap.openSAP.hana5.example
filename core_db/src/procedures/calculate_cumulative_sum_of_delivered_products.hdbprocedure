@@ -16,7 +16,7 @@ BEGIN
     DECLARE i             INTEGER      = 1;
 
 IF NOT IS_EMPTY(:im_products) THEN
-    ex_products = select products.*, NULL AS CUMULATIVE_SUM FROM :im_products as products;
+    ex_products = select products.*, TO_BIGINT(NULL) AS CUMULATIVE_SUM FROM :im_products as products;
 
 --  FOR i IN 1..CARDINALITY(ARRAY_AGG(:IM_PRODUCTS.PRODUCTID))DO 
     FOR i IN 1..record_count(:im_products)DO 

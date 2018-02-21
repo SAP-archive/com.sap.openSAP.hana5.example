@@ -9,6 +9,7 @@
                 "has_header": true
             },
             "import_settings": {
+            	"include_filter" : [ ],            
                 "import_columns": [
                     "PURCHASEORDERID",
 					"HISTORY.CREATEDBY.EMPLOYEEID",
@@ -37,6 +38,7 @@
                 "has_header": true
             },
             "import_settings": {
+            	"include_filter" : [ ],            
                 "import_columns": [
                     "HEADER.PURCHASEORDERID",
 					"PRODUCT.PRODUCTID",

@@ -12,6 +12,7 @@
 			}
 		},
 		"import_settings": {
+         	"include_filter" : [ ],		
 			"import_columns": ["PURCHASEORDERID",
 			"NOTEID",
 			"PARTNER",
@@ -52,6 +53,7 @@
 			}
 		},
 		"import_settings": {
+           	"include_filter" : [ ],		
 			"import_columns": ["POHeader.PURCHASEORDERID",
 			"PRODUCT",
 			"NOTEID",

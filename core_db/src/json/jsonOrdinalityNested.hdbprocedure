@@ -1,5 +1,5 @@
 PROCEDURE "jsonOrdinalityNested" (
-out JSONOUT table ( RN INTEGER,
+out JSONOUT table ( RN BIGINT,
                     USER_NAME NVARCHAR(20),
 					ORDER_NUMBER INTEGER,
                     ITEM_NUMBER INTEGER,

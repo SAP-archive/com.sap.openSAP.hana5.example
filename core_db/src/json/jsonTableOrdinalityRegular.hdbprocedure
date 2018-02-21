@@ -1,5 +1,5 @@
 PROCEDURE "jsonTableOrdinalityRegular" ( 
-	out JSONOUT table ( RN INTEGER,
+	out JSONOUT table ( RN BIGINT,
 	                    ITEM_NUMBER INTEGER,
 	                    UPC_CODE BIGINT
 	))

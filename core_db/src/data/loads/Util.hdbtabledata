@@ -9,6 +9,7 @@
                 "has_header": true
             },
             "import_settings": {
+            	"include_filter" : [ ],            
                 "import_columns": [
                     "NOTEID",
 					"LINKID",
@@ -28,6 +29,7 @@
                 "has_header": true
             },
             "import_settings": {
+            	"include_filter" : [ ],            
                 "import_columns": [
                     "DOMAIN",
 					"FIXEDVALUE",
@@ -44,6 +46,7 @@
                 "has_header": true
             },
             "import_settings": {
+            	"include_filter" : [ ],            
                 "import_columns": [
                     "NOTEID",
 					"AUTHOR",
@@ -62,6 +65,7 @@
                 "has_header": true
             },
             "import_settings": {
+            	"include_filter" : [ ],            
                 "import_columns": [
                     "TEXTID",
 					"LANGUAGE",
