@@ -67,11 +67,6 @@
 			"default": "$XSAPPNAME.Display"
 		}
 	}, {
-		"source": "/java/odata(.*)",
-		"destination": "user-java-backend",
-		"csrfProtection": true,
-		"authenticationType": "xsuaa"
-	}, {
 		"source": "/get/(.*)",
 		"destination": "core-node-backend",
 		"scope": "$XSAPPNAME.DataGenerator"
