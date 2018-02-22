@@ -36,13 +36,13 @@ module.exports = function() {
 				} else {
 					ip = req.ip;
 				}
-				auditLog.securityMessage('%d unsuccessful login attempts', 3).by(req.user.id).externalIP(ip).log(function(err, id) {
+				auditLog.securityMessage('%d unsuccessful login attempts', 3).by(req.user.id).externalIP(ip).log(function(err) {
 					// Place all of the remaining logic here
 					if (err) {
 						res.type("text/plain").status(500).send("ERROR: " + err.toString());
 						return;
 					}
-					res.type("application/json").status(200).send(JSON.stringify(`Log Entry Saved as: ${id}`));
+					res.type("application/json").status(200).send(JSON.stringify(`Log Entry Saved`));
 				});
 			});
 		}
