@@ -16,13 +16,6 @@ module.exports = {
 						host: "www.loc.gov"
 					}
 				},
-				/*http.get(
-	{path: "http://www.loc.gov/pictures/search/?fo=json&q=SAP&",
-     host: "proxy.wdf.sap.corp",
-     port: "8080",
-     headers: {
-     	host: "www.loc.gov"
-     }}, */
 				function(response) {
 					response.setEncoding("utf8");
 					response.on("data", (data) => {
