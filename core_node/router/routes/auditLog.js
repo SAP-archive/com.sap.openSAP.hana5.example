@@ -6,13 +6,6 @@ var express = require("express");
 module.exports = function() {
 	var app = express.Router();
 
-	var xsenv = require("@sap/xsenv");
-	xsenv.loadEnv();
-	var credentials = xsenv.getServices({
-		auditlog: 'openSAP-ex-log'
-	}).auditlog;
-	var auditLog = require('@sap/audit-logging')(credentials);
-
 	//TOC
 	app.get("/", (req, res) => {
 		var output = `<H1>Audit Log Examples</H1></br>
@@ -21,24 +14,39 @@ module.exports = function() {
 		res.type("text/html").status(200).send(output);
 	});
 
-	//Simple AuditLog Example
-	app.get("/example1", (req, res) => {
-		var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-		if (req.headers['x-forwarded-for']) {
-			ip = req.headers['x-forwarded-for'].split(",")[0];
-		} else if (req.connection && req.connection.remoteAddress) {
-			ip = req.connection.remoteAddress;
+	var xsenv = require("@sap/xsenv");
+	xsenv.loadEnv();
+	var credentials = xsenv.getServices({
+		auditlog: 'openSAP-ex-log'
+	}).auditlog;
+	var auditLogging = require('@sap/audit-logging');
+	auditLogging.v2(credentials, (err, auditLog) => {
+		if (err) {
+			// if the Audit log server does not support version 2 of the REST APIs
+			// an error in the callback is returned
+			return console.log(err);
 		} else {
-			ip = req.ip;
+			//Simple AuditLog Example
+			app.get("/example1", (req, res) => {
+				var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+				if (req.headers['x-forwarded-for']) {
+					ip = req.headers['x-forwarded-for'].split(",")[0];
+				} else if (req.connection && req.connection.remoteAddress) {
+					ip = req.connection.remoteAddress;
+				} else {
+					ip = req.ip;
+				}
+				auditLog.securityMessage('%d unsuccessful login attempts', 3).by(req.user.id).externalIP(ip).log(function(err, id) {
+					// Place all of the remaining logic here
+					if (err) {
+						res.type("text/plain").status(500).send("ERROR: " + err.toString());
+						return;
+					}
+					res.type("application/json").status(200).send(JSON.stringify(`Log Entry Saved as: ${id}`));
+				});
+			});
 		}
-		auditLog.securityMessage('%d unsuccessful login attempts', 3).by(req.user.id).externalIP(ip).log(function(err, id) {
-			// Place all of the remaining logic here
-			if (err) {
-				res.type("text/plain").status(500).send("ERROR: " + err.toString());
-				return;
-			}
-			res.type("application/json").status(200).send(JSON.stringify(`Log Entry Saved as: ${id}`));
-		});
+		return null;
 	});
 
 	return app;

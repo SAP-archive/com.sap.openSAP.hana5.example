@@ -11,10 +11,10 @@ module.exports = function() {
 	var jsonParser = bodyParser.json();
 	var xsenv = require('@sap/xsenv');
 	xsenv.loadEnv();
-	var credentials = xsenv.getServices({
-		auditlog: 'openSAP-ex-log'
-	}).auditlog;
-	var auditLog = require('@sap/audit-logging')(credentials);
+//	var credentials = xsenv.getServices({
+//		auditlog: 'openSAP-ex-log'
+//	}).auditlog;
+//	var auditLog = require('@sap/audit-logging')(credentials);
 	var app = express.Router();
 	winston.level = process.env.winston_level || 'error';
 	//Generate time based Data
@@ -71,7 +71,7 @@ module.exports = function() {
 		var reqContext = appContext.createRequestContext(req);
 		logger = reqContext.getLogger('/replicate/sales');
 		logger.info('Sales Data generation initiated');
-		var msg = auditLog.update('Sales order generation initialted ').attribute('Data generation initiation', true).by(usrName);
+//		var msg = auditLog.update('Sales order generation initialted ').attribute('Data generation initiation', true).by(usrName);
 		msg.log(function(err, id) {
 			// Place all of the remaining logic here
 			if (err) {
