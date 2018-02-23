@@ -100,9 +100,11 @@
 			"pathSuffixes": [
 				"index.html"
 			],
-			"vars": [
-				"ui5liburl"
-			]
+			"services": {
+				"sapui5_sb": {
+					"tag": "ui5"
+				}
+			}
 		}
 	}, {
 		"source": "^/job-ui/(.*)",
@@ -112,9 +114,11 @@
 			"pathSuffixes": [
 				"index.html"
 			],
-			"vars": [
-				"sapui5url"
-			]
+			"services": {
+				"sapui5_sb": {
+					"tag": "ui5"
+				}
+			}
 		}
 	}, {
 		"source": "(.*)(.xsjs)",
