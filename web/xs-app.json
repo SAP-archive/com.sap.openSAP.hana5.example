@@ -170,9 +170,11 @@
 				"index.html",
 				"odataTest.html"
 			],
-			"vars": [
-				"ui5liburl"
-			]
+			"services": {
+				"sapui5_sb": {
+					"tag": "ui5"
+				}
+			}
 		}
 	}]
 }

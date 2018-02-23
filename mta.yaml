@@ -104,9 +104,10 @@ modules:
       service-url: '${default-url}'
     requires:
       - name: openSAP-ex-uaa
-      - name: ui5-lib
-        properties:
-          ui5liburl: '~{url}'
+      - name: openSAP-ui5
+#      - name: ui5-lib
+#        properties:
+#          ui5liburl: '~{url}'
       - name: core_node_api
         group: destinations
         properties:
@@ -162,11 +163,16 @@ resources:
     type: org.cloudfoundry.existing-service
     parameters:
       service-name: CROSS_SCHEMA_SFLIGHT
-  - name: ui5-lib
-    type: configuration
+  - name: openSAP-ui5
+    type: org.cloudfoundry.managed-service
     parameters:
-      provider-id: 'com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV4:sapui5_fesv4'
-      version: '>=1.52.01'
+      service: sapui5_sb
+      service-plan: sapui5-1.52
+#  - name: ui5-lib      
+#    type: configuration
+#    parameters:
+#      provider-id: 'com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV4:sapui5_fesv4'
+#      version: '>=1.52.01'
   - name: openSAP-ex-log
     type: org.cloudfoundry.managed-service
     parameters:
