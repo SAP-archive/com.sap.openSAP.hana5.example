@@ -174,7 +174,7 @@ module.exports = function() {
 			});
 	});
 
-	//Number Formatting
+	//Number 
 	app.get("/numFormat", function(req, res) {
 		let numEN = new Intl.NumberFormat("en-US");
 		let numDE = new Intl.NumberFormat("de-DE");
