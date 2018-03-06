@@ -3,7 +3,7 @@
 		"node": " ^8 "
 	},
 	"dependencies": {
-		"@sap/xssec": "2.1.6",
+		"@sap/xssec": "2.1.7",
 		"@sap/xsenv": "1.2.9",
 		"@sap/hdbext": "4.7.0",
 		"@sap/textbundle": "latest",
@@ -36,7 +36,7 @@
 	"main": "server.js",
 	"name": "core_node",
 	"scripts": {
-		"start": "node server.js",
+		"start": "node --expose-http2 --experimental-modules server.js",
 		"test": "node ./node_modules/gulp/bin/gulp test",
 		"test-coverage": "node ./node_modules/gulp/bin/gulp test-coverage"
 	},
