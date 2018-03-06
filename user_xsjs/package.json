@@ -3,9 +3,9 @@
 		"node": " ^8 "
 	},
 	"dependencies": {
-		"@sap/xssec": "2.1.6",
+		"@sap/xssec": "2.1.7",
 		"@sap/xsenv": "1.2.9",
-		"@sap/xsjs": "3.3.0"
+		"@sap/xsjs": "3.3.2"
 	},
 	"devDependencies": {
 		"@sap/xsjs-test": "2.0.14"
