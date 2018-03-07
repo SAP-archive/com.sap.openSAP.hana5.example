@@ -11,6 +11,7 @@ module.exports = (app, server) => {
 	app.use("/node/zip", require("./routes/zip")());
 	app.use("/node/cds", require("./routes/cds")());
 	app.use("/node/auditLog", require("./routes/auditLog")());
+	app.use("/node/os", require("./routes/os")());
 
 	app.use("/sap/bc/lrep", require("./routes/lrep")());
 	app.use("/node/annotations", require("./routes/annotations")());
