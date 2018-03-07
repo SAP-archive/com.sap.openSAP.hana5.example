@@ -16,8 +16,7 @@
 		"scope": {
 			"GET": "$XSAPPNAME.Display",
 			"POST": [
-				"$XSAPPNAME.Display",
-				"$XSAPPNAME.Create"
+				"$XSAPPNAME.Display"
 			],
 			"PUT": [
 				"$XSAPPNAME.Display",

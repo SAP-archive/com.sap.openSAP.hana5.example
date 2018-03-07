@@ -12,6 +12,8 @@ module.exports = (app, server) => {
 	app.use("/node/cds", require("./routes/cds")());
 	app.use("/node/auditLog", require("./routes/auditLog")());
 	app.use("/node/os", require("./routes/os")());
+	var express = require("express");
+	app.use("/node/os/web", express.static("os_web"));
 
 	app.use("/sap/bc/lrep", require("./routes/lrep")());
 	app.use("/node/annotations", require("./routes/annotations")());

@@ -3,7 +3,7 @@
 
 "use strict";
 var express = require("express");
-
+global.child = null;
 module.exports = function() {
 	var app = express.Router();
 	//Hello Router
@@ -37,7 +37,7 @@ module.exports = function() {
 		var result = JSON.stringify(output);
 		res.type("application/json").status(200).send(result);
 	});
-	
+
 	app.get("/whoami", (req, res) => {
 		var exec = require("child_process").exec;
 		exec("whoami", (err, stdout, stderr) => {
@@ -52,8 +52,8 @@ module.exports = function() {
 
 	app.get("/xs-login/:password", (req, res) => {
 		var exec = require("child_process").exec;
-		var script = 
-		`xs-admin-login --stdin <<< ${req.params.password} 
+		var script =
+			`xs-admin-login --stdin <<< ${req.params.password} 
 		 xs system-info`;
 		exec(script, (err, stdout, stderr) => {
 			if (err) {
@@ -65,10 +65,10 @@ module.exports = function() {
 		});
 	});
 
-	app.get("/xs-cmd/:password/:cmd", (req, res) => {
+	app.get("/xs-cmd1/:password/:cmd", (req, res) => {
 		var exec = require("child_process").exec;
-		var script = 
-		`xs-admin-login --stdin <<< ${req.params.password} 
+		var script =
+			`xs-admin-login --stdin <<< ${req.params.password} 
 		 xs ${req.params.cmd}`;
 		exec(script, (err, stdout, stderr) => {
 			if (err) {
@@ -80,11 +80,45 @@ module.exports = function() {
 		});
 	});
 
+	app.get("/xs-cmd/:password/:cmd", (req, res) => {
+//		var body = req.body;
+//		var cmd = body.command;
+		if (global.child === null) {
+			global.child = require("child_process").exec;
+			var script =
+				`xs-admin-login --stdin <<< ${req.params.password} 
+		 xs ${req.params.cmd}`;
+			global.child(script, (err, stdout, stderr) => {
+				if (err) {
+					res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
+					return;
+				} else {
+					res.type("text/plain").status(200).send(stdout);
+				}
+			});
+		} else {
+			var script2 =
+				//	`xs-admin-login --stdin <<< ${cmd} 
+				`xs ${req.params.cmd}`;
+			global.child(script2, (err, stdout, stderr) => {
+				if (err) {
+					res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
+					return;
+				} else {
+					res.type("text/plain").status(200).send(stdout);
+				}
+			});
+		}
+
+	});
+
 	app.get("/hdbsql-cmd/:user/:password/:instance/:port/:cmd", (req, res) => {
 		var exec = require("child_process").exec;
-		var script = 
-		`hdbsql -u ${req.params.user} -p ${req.params.password} -n localhost:3${req.params.instance}${req.params.port} -i 00 -m -j -A "${req.params.cmd}" `;
-		exec(script, {maxBuffer: 1024 * 500000}, (err, stdout, stderr) => {
+		var script =
+			`hdbsql -u ${req.params.user} -p ${req.params.password} -n localhost:3${req.params.instance}${req.params.port} -i 00 -m -j -A "${req.params.cmd}" `;
+		exec(script, {
+			maxBuffer: 1024 * 500000
+		}, (err, stdout, stderr) => {
 			if (err) {
 				res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 				return;
@@ -93,6 +127,6 @@ module.exports = function() {
 			}
 		});
 	});
-	
+
 	return app;
 };
