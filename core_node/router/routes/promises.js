@@ -7,7 +7,10 @@ var express = require("express");
 module.exports = function() {
 	var app = express.Router();
 
-	function readFilePromisified(filename) {
+	const util = require("util");
+	//New Node.js 8.x Utility to Promisify for you if the target uses (err,value)
+	const readFilePromisified = util.promisify(require("fs").readFile);
+/*	function readFilePromisified(filename) {
 		return new Promise((resolve, reject) => {
 			require("fs").readFile(filename, "utf8", (error, data) => {
 				if (error) {
@@ -17,15 +20,18 @@ module.exports = function() {
 				}
 			});
 		});
-	}
+	}*/
 
 	class promisedDB {
 		constructor(client) {
 			this.client = client;
+			this.client.promisePrepare = util.promisify(this.client.prepare);			
 		}
 
+
 		preparePromisified(query) {
-			return new Promise((resolve, reject) => {
+			return this.client.promisePrepare(query);
+/*			return new Promise((resolve, reject) => {
 				this.client.prepare(query, (error, statement) => {
 					if (error) {
 						reject(error);
@@ -33,11 +39,13 @@ module.exports = function() {
 						resolve(statement);
 					}
 				});
-			});
+			});*/
 		}
 
 		statementExecPromisified(statement, parameters) {
-			return new Promise((resolve, reject) => {
+		    statement.promiseExec = util.promisify(statement.exec);
+			return statement.promiseExec(parameters);
+/*			return new Promise((resolve, reject) => {
 				statement.exec(parameters, (error, results) => {
 					if (error) {
 						reject(error);
@@ -45,11 +53,13 @@ module.exports = function() {
 						resolve(results);
 					}
 				});
-			});
+			});*/
 		}
 
 		loadProcedurePromisified(hdbext, schema, procedure) {
-			return new Promise((resolve, reject) => {
+			hdbext.promiseLoadProcedure = util.promisify(hdbext.loadProcedure);
+			return 	hdbext.promiseLoadProcedure(this.client, schema, procedure);
+/*			return new Promise((resolve, reject) => {
 				hdbext.loadProcedure(this.client, schema, procedure, (error, storedProc) => {
 					if (error) {
 						reject(error);
@@ -57,7 +67,7 @@ module.exports = function() {
 						resolve(storedProc);
 					}
 				});
-			});
+			});*/
 		}
 
 		callProcedurePromisified(storedProc, inputParams) {

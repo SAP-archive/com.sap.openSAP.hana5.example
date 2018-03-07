@@ -3,44 +3,25 @@
 "use strict";
 
 module.exports = class {
+
 	constructor(client) {
 		this.client = client;
+		this.util = require("util");
+		this.client.promisePrepare = this.util.promisify(this.client.prepare);			
 	}
 
 	preparePromisified(query) {
-		return new Promise((resolve, reject) => {
-			this.client.prepare(query, (error, statement) => {
-				if (error) {
-					reject(error);
-				} else {
-					resolve(statement);
-				}
-			});
-		});
+		return this.client.promisePrepare(query);
 	}
 
 	statementExecPromisified(statement, parameters) {
-		return new Promise((resolve, reject) => {
-			statement.exec(parameters, (error, results) => {
-				if (error) {
-					reject(error);
-				} else {
-					resolve(results);
-				}
-			});
-		});
+		statement.promiseExec = this.util.promisify(statement.exec);
+		return statement.promiseExec(parameters);	
 	}
 
 	loadProcedurePromisified(hdbext, schema, procedure) {
-		return new Promise((resolve, reject) => {
-			hdbext.loadProcedure(this.client, schema, procedure, (error, storedProc) => {
-				if (error) {
-					reject(error);
-				} else {
-					resolve(storedProc);
-				}
-			});
-		});
+		hdbext.promiseLoadProcedure = this.util.promisify(hdbext.loadProcedure);
+		return 	hdbext.promiseLoadProcedure(this.client, schema, procedure);
 	}
 
 	callProcedurePromisified(storedProc, inputParams) {
