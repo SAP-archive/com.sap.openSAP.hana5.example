@@ -1,4 +1,4 @@
-PROCEDURE "intermediate_table_operators_search" (
+PROCEDURE "search_by_product_id" (
 	                 in im_productid nvarchar(10),
 	                 out ex_found boolean )
    LANGUAGE SQLSCRIPT
