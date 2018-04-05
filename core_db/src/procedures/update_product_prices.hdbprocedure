@@ -14,7 +14,7 @@ BEGIN
  declare v_new_price decimal(15,2);
  declare CURSOR c_products FOR
     	SELECT PRODUCTID, CATEGORY, PRICE from 
-    	"Product.Products";
+    	"Product.Products";     -- FOR UPDATE
 
  FOR cur_row as c_products  DO
   if :im_direction = 'INCREASE' then
@@ -23,7 +23,7 @@ BEGIN
     v_new_price := cur_row.PRICE - (cur_row.PRICE * :im_rate);
   end if;
   UPDATE "Product.Products" 
-        SET PRICE = v_new_price where PRODUCTID = cur_row.PRODUCTID;
+        SET PRICE = v_new_price where PRODUCTID = cur_row.PRODUCTID;  -- WHERE CURRENT OF c_products
   
  END FOR;
 
