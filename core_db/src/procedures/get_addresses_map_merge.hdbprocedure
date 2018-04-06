@@ -1,4 +1,4 @@
-PROCEDURE "map_merge" (
+PROCEDURE "get_addresses_map_merge" (
 	        out ex_addresses "MD.Addresses" )
    LANGUAGE SQLSCRIPT
    SQL SECURITY INVOKER
