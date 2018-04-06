@@ -4,7 +4,7 @@ PROCEDURE "search_by_product_id" (
    LANGUAGE SQLSCRIPT
    SQL SECURITY INVOKER
    READS SQL DATA AS
-BEGIN
+BEGIN 
  
  lt_products = select * from "MD.Products";
 

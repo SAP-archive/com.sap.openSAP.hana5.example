@@ -10,7 +10,7 @@ PROCEDURE "update_product_prices" (
 BEGIN
    /*************************************
        Write your procedure logic 
-   *************************************/
+   *************************************/ 
  declare v_new_price decimal(15,2);
  declare CURSOR c_products FOR
     	SELECT PRODUCTID, CATEGORY, PRICE from 

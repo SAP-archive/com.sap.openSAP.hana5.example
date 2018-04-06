@@ -4,7 +4,7 @@ PROCEDURE "get_product_sale_price" (
    LANGUAGE SQLSCRIPT
    SQL SECURITY INVOKER
    READS SQL DATA AS
-BEGIN
+BEGIN 
 
 declare lv_discount decimal(15,2) := 0; 
 declare ls_product row like "MD.Products";

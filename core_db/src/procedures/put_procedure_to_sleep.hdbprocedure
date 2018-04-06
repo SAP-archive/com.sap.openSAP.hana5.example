@@ -3,7 +3,7 @@ PROCEDURE "put_procedure_to_sleep" ( )
    SQL SECURITY INVOKER
    READS SQL DATA AS
 BEGIN USING SQLSCRIPT_SYNC as SyncLib;
-
+ 
 call SyncLib:SLEEP_SECONDS(10);
 
 END

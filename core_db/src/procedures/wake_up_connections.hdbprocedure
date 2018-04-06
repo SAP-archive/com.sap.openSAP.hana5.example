@@ -2,7 +2,7 @@ PROCEDURE "wake_up_connections" ( )
    LANGUAGE SQLSCRIPT
    SQL SECURITY INVOKER
    READS SQL DATA AS
-BEGIN USING SQLSCRIPT_SYNC as SyncLib;
+BEGIN USING SQLSCRIPT_SYNC as SyncLib; 
 
  declare i integer;
  declare lv_id int;

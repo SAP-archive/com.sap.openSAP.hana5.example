@@ -3,7 +3,7 @@ PROCEDURE "get_session_var_value" (
    LANGUAGE SQLSCRIPT
    SQL SECURITY INVOKER
    READS SQL DATA AS
-BEGIN
+BEGIN 
 
 declare lv_value nvarchar(50);
 lv_value = session_context(:im_var);

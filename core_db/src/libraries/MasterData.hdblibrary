@@ -1,6 +1,6 @@
 LIBRARY "MasterData"
   LANGUAGE SQLSCRIPT AS
- BEGIN
+ BEGIN 
  
    public variable maxval constant int = 100;
  

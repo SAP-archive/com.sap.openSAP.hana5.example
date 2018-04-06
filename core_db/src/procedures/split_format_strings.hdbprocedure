@@ -4,7 +4,7 @@ PROCEDURE "split_format_strings" (
    LANGUAGE SQLSCRIPT
    SQL SECURITY INVOKER
    READS SQL DATA AS
- BEGIN USING SQLSCRIPT_STRING AS LIB;
+ BEGIN USING SQLSCRIPT_STRING AS LIB; 
 
    declare lv_index int;
    declare lv_productid string;

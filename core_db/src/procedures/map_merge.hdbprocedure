@@ -3,7 +3,7 @@ PROCEDURE "map_merge" (
    LANGUAGE SQLSCRIPT
    SQL SECURITY INVOKER
    READS SQL DATA AS
-BEGIN
+BEGIN 
 
 lt_employees = select * from "MD.Employees";
 ex_addresses = MAP_MERGE(:lt_employees, 

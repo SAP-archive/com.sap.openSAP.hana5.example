@@ -7,7 +7,7 @@ PROCEDURE "get_master_data" (
    LANGUAGE SQLSCRIPT
    SQL SECURITY INVOKER
    READS SQL DATA AS
-BEGIN USING "MasterData" as MData;
+BEGIN USING "MasterData" as MData; 
 
  ex_max_val = MData:maxval;    -- Library variable
 
