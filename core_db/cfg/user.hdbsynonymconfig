@@ -1,0 +1,14 @@
+{
+  "UserData.User": {
+    "target": {
+      "object": "UserData.User",
+      "schema.configure": "hdi-user-service/schema"
+    }
+  },
+  "USER_DETAILS": {
+    "target": {
+      "object": "user.models::USER_DETAILS",
+      "schema.configure": "hdi-user-service/schema"
+    }
+  }
+}

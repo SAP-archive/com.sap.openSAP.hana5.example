@@ -1,0 +1,44 @@
+{
+  "ISO.COUNTRIES": {
+    "target": {
+      "object": "ISO.COUNTRIES",
+      "*.configure": "central-db-service"
+    }
+  },
+  "ISO.CURRENCIES": {
+    "target": {
+      "object": "ISO.CURRENCIES",
+      "*.configure": "central-db-service"
+    }
+  },
+  "ISO.CURRNECY_CODES": {
+    "target": {
+      "object": "ISO.CURRNECY_CODES",
+      "*.configure": "central-db-service"
+    }
+  },
+  "ISO.SUBDIVISIONS": {
+    "target": {
+      "object": "ISO.SUBDIVISIONS",
+      "*.configure": "central-db-service"
+    }
+  },
+  "ISO.COUNTRIES_REGIONS": {
+    "target": {
+      "object": "ISO.COUNTRIES_REGIONS",
+      "*.configure": "central-db-service"
+    }
+  },
+  "ISO.US_STATES": {
+    "target": {
+      "object": "ISO.US_STATES",
+      "*.configure": "central-db-service"
+    }
+  },
+  "ISO.US_STATES_AND_TERRITORIES": {
+    "target": {
+      "object": "ISO.US_STATES_AND_TERRITORIES",
+      "*.configure": "central-db-service"
+    }
+  }
+}
