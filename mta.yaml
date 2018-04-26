@@ -1,6 +1,6 @@
 _schema-version: '2.0'
 ID: hana6.example
-version: 2.3.2
+version: 2.3.3
 modules:
   - name: openSAP-ex-user-db
     type: hdb
@@ -144,7 +144,63 @@ resources:
   - name: openSAP-ex-uaa
     type: com.sap.xs.uaa
     parameters:
-      config-path: ./xs-security.json
+     config:
+       xsappname: openSAP-ex
+       attributes:
+       - name: client
+         description: Session Client
+         valueType: int
+       scopes:
+       - name: "$XSAPPNAME.JOBSCHEDULER"
+         description: Job Scheduler Scope
+         grant-as-authority-to-apps: [jobscheduler]
+       - name: "$XSAPPNAME.Display"
+         description: display
+       - name: "$XSAPPNAME.Create"
+         description: create
+       - name: "$XSAPPNAME.Edit"
+         description: edit
+       - name: "$XSAPPNAME.Delete"
+         description: delete
+       - name: "$XSAPPNAME.DataGenerator"
+         description: data generator
+       - name: xs_authorization.read
+         description: Read authorization information from UAA
+       - name: xs_authorization.write
+         description: Write authorization information to UAA
+       role-templates:
+       - name: Admin
+         description: refapps administrator
+         scope-references:
+         - "$XSAPPNAME.Display"
+         - "$XSAPPNAME.Edit"
+         - "$XSAPPNAME.Delete"
+         - "$XSAPPNAME.DataGenerator"
+         - "$XSAPPNAME.Create"
+         - "$XSAPPNAME.JOBSCHEDULER"
+         - xs_controller.read
+         - xs_authorization.read
+         - xs_authorization.writen
+       - name: Viewer
+         description: Viewer
+         scope-references:
+         - "$XSAPPNAME.Display"
+         attribute-referernces:
+         - "client"
+       - name: Editor
+         description: Edit and Delete records
+         scope-references:
+         - "$XSAPPNAME.Display"
+         - "$XSAPPNAME.Edit"
+         - "$XSAPPNAME.Delete"
+         - "$XSAPPNAME.Create"
+         - "$XSAPPNAME.DataGenerator"
+         - "$XSAPPNAME.JOBSCHEDULER"
+         - xs_controller.read
+         - xs_authorization.read
+         - xs_authorization.writen  
+         attribute-referernces:
+         - "client"         
   - name: openSAP-ex-scheduler
     type: com.sap.xs.job-scheduler
   - name: sap.hana.democontent.epm.services.images
