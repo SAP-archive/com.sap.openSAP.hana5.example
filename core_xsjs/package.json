@@ -1,14 +1,14 @@
 {
 	"dependencies": {
-		"@sap/xssec": "2.1.8",
+		"@sap/xssec": "2.1.10",
 		"@sap/xsenv": "1.2.9",
-		"@sap/xsjs": "3.3.2",
+		"@sap/xsjs": "3.3.7",
 		"node-xlsx": "~0.11",
 		"node-zip": "~1.1.1",
 		"xmldoc": "~1.1.0"
 	},
 	"devDependencies": {
-		"@sap/xsjs-test": "2.0.14"
+		"@sap/xsjs-test": "2.0.16"
 	},
 	"files": [],
 	"main": "server.js",
