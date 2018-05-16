@@ -9,8 +9,9 @@ module.exports = function() {
 
 	//Hello Router
 	app.get("/", (req, res) => {
-		var output = `<H1>HDBEXT Examples</H1></br> 
-			<a href="${req.baseUrl}/example1">/example1</a> - Simple Database Select - In-Line Callbacks</br> 
+		var output =
+			`<H1>HDBEXT Examples</H1></br> 
+			<a href="${req.baseUrl}/example1">/example1</a> - Simple Database Select - Promises and Await</br> 
 			<a href="${req.baseUrl}/example2">/example2</a> - Simple Database Select - Async Waterfall</br> 
 			<a href="${req.baseUrl}/example3">/example3</a> - Call Stored Procedure</br> 
 			<a href="${req.baseUrl}/example4/1">/example4</a> - Call Stored Procedure with Input = Partner Role 1 </br> 
@@ -23,29 +24,22 @@ module.exports = function() {
 		res.type("text/html").status(200).send(output);
 	});
 
-	//Simple Database Select - In-line Callbacks
-	app.get("/example1", (req, res) => {
-		var client = req.db;
-		client.prepare(
-			"select SESSION_USER from \"DUMMY\" ",
-			(err, statement) => {
-				if (err) {
-					res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
-					return;
-				}
-				statement.exec([],
-					(err, results) => {
-						if (err) {
-							res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
-							return;
-						} else {
-							var result = JSON.stringify({
-								Objects: results
-							});
-							res.type("application/json").status(200).send(result);
-						}
-					});
+	//Simple Database Select - Promises and Await
+	app.get("/example1", async(req, res) => {
+
+		try {
+			let client = req.db;
+			client.promisePrepare = await require("util").promisify(client.prepare);
+			const statement = await client.promisePrepare("select SESSION_USER from \"DUMMY\" ");
+			statement.promiseExec = await require("util").promisify(statement.exec);
+			const results = await statement.promiseExec([]);
+			var result = JSON.stringify({
+				Objects: results
 			});
+			return res.type("application/json").status(200).send(result);
+		} catch (err) {
+			return res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
+		}
 	});
 
 	//Simple Database Select - Async Waterfall
@@ -193,62 +187,47 @@ module.exports = function() {
 	});
 
 	//Call Stored Procedure and return as Excel
-	app.get("/products", (req, res) => {
-		var client = req.db;
-		var hdbext = require("@sap/hdbext");
-		//(client, Schema, Procedure, callback)
-		hdbext.loadProcedure(client, null, "build_products", (err, sp) => {
-			if (err) {
-				res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
-				return;
+	app.get("/products", async(req, res) => {
+		try {
+			let dbClass = require(global.__base + "utils/dbPromises");
+			let dbConn = new dbClass(req.db);
+			var hdbext = require("@sap/hdbext");
+			const sp = await dbConn.loadProcedurePromisified(hdbext, null, "build_products");
+			const output = await dbConn.callProcedurePromisified(sp, {});
+			var out = [];
+			for (let result of output.results) {
+				out.push([result.PRODUCTID, result.CATEGORY, result.PRICE]);
 			}
-			//(Input Parameters, callback(errors, Output Scalar Parameters, [Output Table Parameters])
-			sp({}, (err, parameters, results) => {
-				if (err) {
-					res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
-				}
-				var out = [];
-				for (let result of results){
-					out.push([result.PRODUCTID, result.CATEGORY, result.PRICE]);
-				}
-				var excel = require("node-xlsx");
-				var excelOut = excel.build([{
-					name: "Products",
-					data: out
-				}]);
-				res.header("Content-Disposition", "attachment; filename=Excel.xlsx");
-				res.type("application/vnd.ms-excel").status(200).send(excelOut);
-			});
-		});
-
+			var excel = require("node-xlsx");
+			var excelOut = excel.build([{
+				name: "Products",
+				data: out
+			}]);
+			res.header("Content-Disposition", "attachment; filename=Excel.xlsx");
+			return res.type("application/vnd.ms-excel").status(200).send(excelOut);
+		} catch (err) {
+			return res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
+		}
 	});
-	
-	app.get("/hdb", (req, res) => {
-		var client = req.db;
-		client.prepare(
-			"SELECT FROM PurchaseOrder.Item { " +
-			" POHeader.PURCHASEORDERID as \"PurchaseOrderId\", " +
-			" PRODUCT as \"ProductID\", " +
-			" GROSSAMOUNT as \"Amount\" " +
-			" } ",
-			(err, statement) => {
-				if (err) {
-					res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
-					return;
-				}
-				statement.exec([],
-					(err, results) => {
-						if (err) {
-							res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
-							return;
-						} else {
-							var result = JSON.stringify({
-								PurchaseOrders: results
-							});
-							res.type("application/json").status(200).send(result);
-						}
-					});
+
+	app.get("/hdb", async(req, res) => {
+		try {
+			let dbClass = require(global.__base + "utils/dbPromises");
+			let dbConn = new dbClass(req.db);
+			const statement = await dbConn.preparePromisified(
+				`SELECT FROM PurchaseOrder.Item { 
+			                 POHeader.PURCHASEORDERID as "PurchaseOrderId", 
+			                 PRODUCT as "ProductID", 
+			                 GROSSAMOUNT as "Amount" } `
+			);
+			const results = await dbConn.statementExecPromisified(statement, []);
+			let result = JSON.stringify({
+				PurchaseOrders: results
 			});
+			return res.type("application/json").status(200).send(result);
+		} catch (err) {
+			return res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
+		}
 	});
 
 	app.get("/user1", (req, res) => {
