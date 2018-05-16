@@ -1,6 +1,7 @@
 {
 	"parserOptions": {
-        "sourceType": "module"
+        "sourceType": "module",
+        "ecmaVersion": 2017
     },
     "rules": {
 		"array-callback-return": 0,
