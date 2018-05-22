@@ -19,6 +19,8 @@ var express = require("express");
 //logging
 var logging = require("@sap/logging");
 var appContext = logging.createAppContext();
+var logger = appContext.getLogger("/Application");
+var tracer = appContext.getTracer(__filename);
 
 //Initialize Express App for XS UAA and HDBEXT Middleware
 var app = express();
@@ -49,5 +51,11 @@ var router = require("./router")(app, server);
 //Start the Server 
 server.on("request", app);
 server.listen(port, function() {
+	console.info(`Logger Level: ${logger.getLevel().toString()}`);
+	console.info(`Logger Error Enabled: ${logger.isEnabled("error")}`);
+	console.info(`Tracer Level: ${tracer.getLevel().toString()}`);
+	console.info(`Tracer Error Enabled: ${tracer.isEnabled("error")}`);	
+	logger.error(`HTTP Server: ${server.address().port}`);
+	tracer.info(`HTTP Server: ${server.address().port}`);	
 	console.info(`HTTP Server: ${server.address().port}`);
 });

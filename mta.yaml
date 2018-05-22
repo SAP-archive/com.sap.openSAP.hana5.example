@@ -40,6 +40,7 @@ modules:
       register-service-url: true
       service-name: openSAP-core-node
       service-url: '${default-url}'
+      memory: 2G
     properties:
       UAA_SERVICE_NAME: openSAP-ex-uaa
     provides:
@@ -71,7 +72,6 @@ modules:
       - name: openSAP-ex-uaa
       - name: user-container
       - name: openSAP-ex-user-db
-  
   - name: openSAP-ex-core-xsjs
     type: nodejs
     path: core_xsjs
@@ -105,9 +105,6 @@ modules:
     requires:
       - name: openSAP-ex-uaa
       - name: openSAP-ui5
-#      - name: ui5-lib
-#        properties:
-#          ui5liburl: '~{url}'
       - name: core_node_api
         group: destinations
         properties:
@@ -144,63 +141,64 @@ resources:
   - name: openSAP-ex-uaa
     type: com.sap.xs.uaa
     parameters:
-     config:
-       xsappname: openSAP-ex
-       attributes:
-       - name: client
-         description: Session Client
-         valueType: int
-       scopes:
-       - name: "$XSAPPNAME.JOBSCHEDULER"
-         description: Job Scheduler Scope
-         grant-as-authority-to-apps: [jobscheduler]
-       - name: "$XSAPPNAME.Display"
-         description: display
-       - name: "$XSAPPNAME.Create"
-         description: create
-       - name: "$XSAPPNAME.Edit"
-         description: edit
-       - name: "$XSAPPNAME.Delete"
-         description: delete
-       - name: "$XSAPPNAME.DataGenerator"
-         description: data generator
-       - name: xs_authorization.read
-         description: Read authorization information from UAA
-       - name: xs_authorization.write
-         description: Write authorization information to UAA
-       role-templates:
-       - name: Admin
-         description: refapps administrator
-         scope-references:
-         - "$XSAPPNAME.Display"
-         - "$XSAPPNAME.Edit"
-         - "$XSAPPNAME.Delete"
-         - "$XSAPPNAME.DataGenerator"
-         - "$XSAPPNAME.Create"
-         - "$XSAPPNAME.JOBSCHEDULER"
-         - xs_controller.read
-         - xs_authorization.read
-         - xs_authorization.writen
-       - name: Viewer
-         description: Viewer
-         scope-references:
-         - "$XSAPPNAME.Display"
-         attribute-referernces:
-         - "client"
-       - name: Editor
-         description: Edit and Delete records
-         scope-references:
-         - "$XSAPPNAME.Display"
-         - "$XSAPPNAME.Edit"
-         - "$XSAPPNAME.Delete"
-         - "$XSAPPNAME.Create"
-         - "$XSAPPNAME.DataGenerator"
-         - "$XSAPPNAME.JOBSCHEDULER"
-         - xs_controller.read
-         - xs_authorization.read
-         - xs_authorization.writen  
-         attribute-referernces:
-         - "client"         
+      config:
+        xsappname: openSAP-ex
+        attributes:
+          - name: client
+            description: Session Client
+            valueType: int
+        scopes:
+          - name: $XSAPPNAME.JOBSCHEDULER
+            description: Job Scheduler Scope
+            grant-as-authority-to-apps:
+              - jobscheduler
+          - name: $XSAPPNAME.Display
+            description: display
+          - name: $XSAPPNAME.Create
+            description: create
+          - name: $XSAPPNAME.Edit
+            description: edit
+          - name: $XSAPPNAME.Delete
+            description: delete
+          - name: $XSAPPNAME.DataGenerator
+            description: data generator
+          - name: xs_authorization.read
+            description: Read authorization information from UAA
+          - name: xs_authorization.write
+            description: Write authorization information to UAA
+        role-templates:
+          - name: Admin
+            description: refapps administrator
+            scope-references:
+              - $XSAPPNAME.Display
+              - $XSAPPNAME.Edit
+              - $XSAPPNAME.Delete
+              - $XSAPPNAME.DataGenerator
+              - $XSAPPNAME.Create
+              - $XSAPPNAME.JOBSCHEDULER
+              - xs_controller.read
+              - xs_authorization.read
+              - xs_authorization.writen
+          - name: Viewer
+            description: Viewer
+            scope-references:
+              - $XSAPPNAME.Display
+            attribute-referernces:
+              - client
+          - name: Editor
+            description: Edit and Delete records
+            scope-references:
+              - $XSAPPNAME.Display
+              - $XSAPPNAME.Edit
+              - $XSAPPNAME.Delete
+              - $XSAPPNAME.Create
+              - $XSAPPNAME.DataGenerator
+              - $XSAPPNAME.JOBSCHEDULER
+              - xs_controller.read
+              - xs_authorization.read
+              - xs_authorization.writen
+            attribute-referernces:
+              - client
   - name: openSAP-ex-scheduler
     type: com.sap.xs.job-scheduler
   - name: sap.hana.democontent.epm.services.images
@@ -224,11 +222,6 @@ resources:
     parameters:
       service: sapui5_sb
       service-plan: sapui5-1.52
-#  - name: ui5-lib      
-#    type: configuration
-#    parameters:
-#      provider-id: 'com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV4:sapui5_fesv4'
-#      version: '>=1.52.01'
   - name: openSAP-ex-log
     type: org.cloudfoundry.managed-service
     parameters:

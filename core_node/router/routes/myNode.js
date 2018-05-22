@@ -17,6 +17,7 @@ module.exports = function() {
 			<a href="${req.baseUrl}/example4/1">/example4</a> - Call Stored Procedure with Input = Partner Role 1 </br> 
 			<a href="${req.baseUrl}/example4/2">/example4</a> - Call Stored Procedure with Input = Partner Role 2 </br> 
 			<a href="${req.baseUrl}/example5">/example5</a> - Call Two Stored Procedures in Parallel Because We Can!</br> 
+			<a href="${req.baseUrl}/logger">/logger</a> - Logger Status</br> 			
 			<a href="${req.baseUrl}/whoAmI">/whoAmI</a> - Look at the session information</br> 
 			<a href="${req.baseUrl}/hdb">/hdb</a> - Small DB example - port of hdb.xsjs</br> 
 			<a href="${req.baseUrl}/os">/os</a> - Operating System Information - port of os.xsjs</br>` +
@@ -24,8 +25,31 @@ module.exports = function() {
 		res.type("text/html").status(200).send(output);
 	});
 
+	//Get Logger Status
+	app.get("/logger", async(req, res) => {
+		var logger = await req.loggingContext.getLogger("/Application");
+		var tracer = await req.loggingContext.getTracer(__filename);
+		tracer.entering("/logger", req, res);
+		try {
+			let result =
+				`Logger Level: ${logger.getLevel().toString()}</br>
+				 Logger Info Enabled: ${logger.isEnabled("info")}</br>
+				 Tracer Level: ${tracer.getLevel().toString()}</br>
+				 Tracer Debug Enabled: ${tracer.isEnabled("debug")}</br>`;
+			tracer.exiting("/logger", result);
+			return res.type("text/html").status(200).send(result);
+		} catch (err) {
+			tracer.catching("/logger", err);
+			logger.error(`ERROR: ${err.toString()}`);
+			return res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
+		}
+	});
+
 	//Simple Database Select - Promises and Await
 	app.get("/example1", async(req, res) => {
+		var logger = await req.loggingContext.getLogger("/Application/node/example1");
+		var tracer = await req.loggingContext.getTracer(__filename);
+		tracer.entering("/example1", req, res);
 
 		try {
 			let client = req.db;
@@ -33,11 +57,16 @@ module.exports = function() {
 			const statement = await client.promisePrepare("select SESSION_USER from \"DUMMY\" ");
 			statement.promiseExec = await require("util").promisify(statement.exec);
 			const results = await statement.promiseExec([]);
-			var result = JSON.stringify({
+			var result = await JSON.stringify({
 				Objects: results
 			});
+			tracer.debug(`Results: ${result}`);
+			logger.info("Processing GET request to /node/example1");
+			tracer.exiting("/example1", result);
 			return res.type("application/json").status(200).send(result);
 		} catch (err) {
+			tracer.catching("/example1", err);
+			logger.error(`ERROR: ${err.toString()}`);
 			return res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
 		}
 	});
