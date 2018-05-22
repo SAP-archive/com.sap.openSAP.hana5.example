@@ -65,5 +65,38 @@ module.exports = function() {
 		return query(req, res, "SELECT * FROM M_SESSION_CONTEXT WHERE connection_id=current_connection ", logger, tracer);
 	});
 
+	app.get("/userstore", (req, res) => {
+		let logger = req.loggingContext.getLogger("/Application");
+		let tracer = req.loggingContext.getTracer(__filename);
+		tracer.entering("/client/query", req, res);
+		let client = require("@sap/hana-client");
+		var connParams = {
+			serverNode: "@KEY2"
+		};
+		let conn = client.createConnection();
+		conn.connect(connParams, (err) => {
+			if (err) {
+				tracer.catching("/client", err);
+				logger.error(`ERROR: ${JSON.stringify(err)}`);
+				return res.type("text/plain").status(500).send(`ERROR: ${JSON.stringify(err)}`);
+			} else {
+				conn.exec("select SESSION_USER from \"DUMMY\" ", (err, result) => {
+					if (err) {
+						tracer.catching("/client", err);
+						logger.error(`ERROR: ${JSON.stringify(err)}`);
+						return res.type("text/plain").status(500).send(`ERROR: ${JSON.stringify(err)}`);
+					} else {
+						console.log(JSON.stringify(result));
+						conn.disconnect();
+						tracer.exiting("/client/query", result);
+						return res.type("application/json").status(200).send(result);
+					}
+				});
+			}
+			return null;
+		});
+	});
+
+
 	return app;
 };
