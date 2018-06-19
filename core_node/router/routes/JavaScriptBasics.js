@@ -169,10 +169,10 @@ module.exports = function() {
 			}
 		};
 
-		body += "<span style=\"color:" + colors.red + "\">Red</span></p>";
-		body += "<span style=\"color:" + colors["blue"] + "\">Blue</span></p>";
-		body += "<span style=\"color:" + colors.green + "\">Green</span></p>";
-		body += "<span style=\"color:" + colors.favoriteColor() + "\">Favorite Color</span></p>";
+	body += `<span style="color: ${colors.red}">Red</span></p>`;
+	body += `<span style="color: ${colors["blue"]}">Blue</span></p>`;
+	body += `<span style="color: ${colors.green}">Green</span></p>`;
+	body += `<span style="color: ${colors.favoriteColor()}">Favorite Color</span></p>`;
 
 		body += "<b>References</b></p>";
 		//References 
@@ -180,8 +180,8 @@ module.exports = function() {
 		var value1 = "First Value";
 		var value2 = value1;
 		value1 = "New Value";
-		body += "Value 1: " + value1 + "</p>"; // = First Value
-		body += "Value 2: " + value2 + "</p>"; // = New Value
+	body += `Value 1: ${value1} </p>`; // = First Value
+	body += `Value 2: ${value2} </p>`; // = New Value
 
 		//objects are assigned by reference
 		var value3 = {
@@ -189,8 +189,8 @@ module.exports = function() {
 		};
 		var value4 = value3;
 		value3.val = "New Value";
-		body += "Value 3: " + value3.val + "</p>"; // = New Value
-		body += "Value 4: " + value4.val + "</p>"; // = New Value 	
+	body += `Value 3: ${value3.val} </p>`; // = New Value
+	body += `Value 4: ${value4.val} </p>`; // = New Value 	
 
 		body += "<b>Object Constructor</b></p>";
 		//Object Constructor
