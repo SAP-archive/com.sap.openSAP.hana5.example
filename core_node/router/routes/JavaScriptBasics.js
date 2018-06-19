@@ -44,6 +44,11 @@ module.exports = function() {
 
 		nextMonth.setDate(now.getDate() + 30);
 		body += "30 days from now: " + nextMonth + "</p>";
+		
+		let dateUS = new Intl.DateTimeFormat("en-US");
+		let dateDE = new Intl.DateTimeFormat("de-DE");
+		body += `US: ${dateUS.format(new Date())}, DE: ${dateDE.format(new Date())} </p>`;
+		
 		res.type("text/html").status(200).send(body);
 	});
 
