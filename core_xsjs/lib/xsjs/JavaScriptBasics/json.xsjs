@@ -1,23 +1,21 @@
-var SESSION = $.import("sap.hana.democontent.epm.services", "session");
+/*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, new-cap: 0*/
+/*eslint-env node, es6 */
 
-var conn = $.db.getConnection();
-var pstmt;
+var conn = $.hdb.getConnection();
 var rs;
 var query;
 
-query = 'SELECT * FROM "PO.Header" '
-		+ ' LIMIT 10';
+query = `SELECT * 
+           FROM "PO.Header" 
+           LIMIT 10`;
 
-pstmt = conn.prepareStatement(query);
-rs = pstmt.executeQuery();
-var po = SESSION.recordSetToJSON(rs,'PurchaseOrder');
+rs = conn.executeQuery(query);
 
-for(var i = 0; i < po.PurchaseOrder.length; i++){
-	po.PurchaseOrder[i].DISCOUNTAMOUNT = (po.PurchaseOrder[i].GROSSAMOUNT - po.PurchaseOrder[i].GROSSAMOUNT * '.10');
+for (let item of rs) {
+	item.DISCOUNTAMOUNT = (item.GROSSAMOUNT - item.GROSSAMOUNT * .10);
 }
 
-
-$.response.contentType = 'application/json';
-$.response.setBody(JSON.stringify(po));
+$.response.contentType = "application/json";
+$.response.setBody(JSON.stringify(rs));
 $.response.status = $.net.http.OK;
 
