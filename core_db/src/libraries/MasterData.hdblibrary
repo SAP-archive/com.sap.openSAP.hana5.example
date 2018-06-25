@@ -2,8 +2,8 @@ LIBRARY "MasterData"
   LANGUAGE SQLSCRIPT AS
  BEGIN 
  
-   public variable maxval constant int = 100;
- 
+   public variable rowcount int; 
+
    public function "employee_exists"( 
                 in im_employee_id nvarchar(10) )
                 returns res boolean as
@@ -25,6 +25,7 @@ LIBRARY "MasterData"
       AS
    begin
      ex_employees = select * from "MD.Employees";
+     rowcount = record_count(:ex_employees);
    end;
 
    public procedure "get_product_data"(
@@ -34,6 +35,7 @@ LIBRARY "MasterData"
      AS
    begin
      ex_products = select * from "MD.Products";
+     rowcount = record_count(:ex_products);
    end;
 
    public procedure "get_business_partner_data"( 
@@ -43,6 +45,8 @@ LIBRARY "MasterData"
        AS
    begin
      ex_businesspartners = select * from "MD.BusinessPartner";
+     rowcount = record_count(:ex_businesspartners);
    end;
 
 END;
+

@@ -1,20 +1,25 @@
 PROCEDURE "get_master_data" ( 
-	             out ex_max_val int,
 	             out ex_emp_exists boolean, 
 	             out ex_employees "MD.Employees",
+	             out ex_emp_count int,
 	             out ex_products "MD.Products",
-	             out ex_business_partners "MD.BusinessPartner" )
+	             out ex_prod_count int, 
+	             out ex_business_partners "MD.BusinessPartner",
+	             out ex_bp_count int)
    LANGUAGE SQLSCRIPT
    SQL SECURITY INVOKER
    READS SQL DATA AS
 BEGIN USING "MasterData" as MData; 
 
- ex_max_val = MData:maxval;    -- Library variable
+ ex_emp_exists  = MData:"employee_exists"('199999');   
 
- ex_emp_exists  = MData:"employee_exists"('199999');   -- Library function
-
- call MData:"get_employee_data"( ex_employees );  -- Library procedure
+ call MData:"get_employee_data"( ex_employees ); 
+ ex_emp_count = MData:rowcount;
+ 
  call MData:"get_product_data"( ex_products );
+ ex_prod_count = MData:rowcount;
+ 
  call MData:"get_business_partner_data"( ex_business_partners );
+ ex_bp_count = MData:rowcount;
  
 END;
