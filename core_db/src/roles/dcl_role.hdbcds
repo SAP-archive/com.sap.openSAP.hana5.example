@@ -1,0 +1,9 @@
+using SO; 
+  
+AccessPolicy dcl_role {  
+   
+  role salesOrderCountryGer {
+    grant select on SO.salesOrderView
+        where customerCountry = 'DE'; 
+  }; 
+};

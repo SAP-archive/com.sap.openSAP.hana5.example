@@ -90,4 +90,47 @@ context SO {
             @Comment : 'Column Value'
             COLVALUE : String(8);
     };
+
+    view salesOrderView as
+        select from Header
+        {
+            SALESORDERID               as id,
+            PARTNER.ADDRESSES.COUNTRY  as customerCountry,
+            HISTORY.CREATEDBY.LANGUAGE as employeeLanguage,
+            CURRENCY                   as currencyCode,
+            GROSSAMOUNT                as grossAmount,
+            NETAMOUNT                  as netAmount,
+            TAXAMOUNT                  as taxAmount,
+            LIFECYCLESTATUS            as lifecycleStatus,
+            BILLINGSTATUS              as billingStatus,
+            DELIVERYSTATUS             as deliveryStatus
+        }
+        with structured privilege check;
+
+    view salesOrderKeyView as
+        select from Header
+        {
+            key SALESORDERID               as id,
+                PARTNER.ADDRESSES.COUNTRY  as customerCountry,
+                HISTORY.CREATEDBY.LANGUAGE as employeeLanguage,
+            key CURRENCY                   as currencyCode,
+                GROSSAMOUNT                as grossAmount,
+                NETAMOUNT                  as netAmount,
+                TAXAMOUNT                  as taxAmount,
+                LIFECYCLESTATUS            as lifecycleStatus,
+                BILLINGSTATUS              as billingStatus,
+                DELIVERYSTATUS             as deliveryStatus
+        }
+        with structured privilege check;
+
+    view addressView as
+        select from MD.Addresses
+        {
+            ADDRESSID  as id,
+            CITY       as city,
+            POSTALCODE as postalCode,
+            STREET     as street,
+            COUNTRY    as country
+            //     toEmployee.loginName as employeeLoginName
+        };
 };

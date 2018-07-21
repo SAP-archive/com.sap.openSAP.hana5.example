@@ -147,6 +147,9 @@ resources:
           - name: client
             description: Session Client
             valueType: int
+          - name: country
+            description: Country
+            valueType: s         
         scopes:
           - name: $XSAPPNAME.JOBSCHEDULER
             description: Job Scheduler Scope
@@ -185,6 +188,7 @@ resources:
               - $XSAPPNAME.Display
             attribute-referernces:
               - client
+              - country
           - name: Editor
             description: Edit and Delete records
             scope-references:

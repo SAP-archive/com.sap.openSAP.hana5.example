@@ -22,6 +22,7 @@ module.exports = (app, server) => {
 	app.use("/node/promises", require("./routes/promises")());
 	app.use("/node/await", require("./routes/await")());	
 	app.use("/node/es6", require("./routes/es6")());
+	app.use("/node/dcl", require("./routes/dcl")());
 
 	app.use("/jobactivity", require("./routes/jobactivity")());
 	app.use("/jobs", require("./routes/jobs")());

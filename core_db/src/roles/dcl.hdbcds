@@ -1,0 +1,34 @@
+using SO; 
+using dcl_role.salesOrderCountryGer;
+using "dummyview" as dummy_view;
+using "dclExtendRole" as native_role;
+using dcl_aspect.aspCountry;
+  
+AccessPolicy dcl {
+   
+  role salesOrderCountryOwnAndGer {
+    grant select on SO.salesOrderView
+        where customerCountry in $env.user.country;
+    grant salesOrderCountryGer;
+  }; 
+
+  role salesOrderCountryNotOwn {
+    grant select on SO.salesOrderView
+        where customerCountry <> aspect :aspCountry;
+  }; 
+
+  role salesOrderCurrencyUsd {
+    grant SO.salesOrderView.select
+        where currencyCode = 'US';
+  };
+
+  role salesOrderCountryUsaAndDclExtendRole {
+    grant select on SO.salesOrderView
+        where customerCountry = 'US';
+    grant select on SO.salesOrderKeyView
+        where customerCountry = 'US';
+    grant select on dummy_view
+        where KEY = 1;
+    grant native_role;
+  };
+};

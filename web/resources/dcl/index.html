@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+    <title>Sales Orders</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+      	<script id="sap-ui-bootstrap" src="{{{sapui5_sb.url}}}/resources/sap-ui-core.js"
+		data-sap-ui-theme="sap_belize_plus"
+        data-sap-ui-libs="sap.ui.commons, sap.ui.ux3, sap.ui.table, sap.viz">
+        </script>
+
+         <script>
+            sap.ui.localResources("jds")
+            sap.ui.localResources("userInfo")
+            var oShell = new sap.ui.ux3.Shell({
+                id : "SalesOrderShell",
+                appTitle : "Sales Orders",
+                showLogoutButton : true,
+                showSearchTool : false,
+                showFeederTool : false,
+                showTools : false,
+                showPane : false,
+                designType : sap.ui.ux3.ShellDesignType.Crystal,
+            })
+            oShell.addWorksetItem(new sap.ui.ux3.NavigationItem({
+                id : "nav-tree",
+                text : "Sales Orders",
+                key : "salesorders"
+            }))
+            oShell.addWorksetItem(new sap.ui.ux3.NavigationItem({
+                id : "userinfo",
+                text : "User info",
+                key : "userinfo"
+            }))
+            oShell.addStyleClass('sapDkShell')
+            var mUserinfoContent = new sap.ui.view({id:"userinfoContent", viewName:"userInfo.userInfo", type:sap.ui.core.mvc.ViewType.JS})
+            var mSalesOrderContent = new sap.ui.view({id:"salesOrderContent", viewName:"jds.tree", type:sap.ui.core.mvc.ViewType.JS})
+            oShell.attachWorksetItemSelected(function(oEvent) {
+                var itemKey = oEvent.getParameter("key")
+                if(itemKey === "userinfo") {
+                    oShell.setContent(mUserinfoContent)
+                }
+                else if(itemKey === "salesorders") {
+                    oShell.setContent(mSalesOrderContent)
+                }
+            })
+            oShell.attachLogout(function(oEvent) {
+                window.location.replace('/do/logout');
+            })
+            //initial content is the sales orders list
+            oShell.setContent(mSalesOrderContent)
+            oShell.placeAt("content")
+       </script>
+    </head>
+    <body class="sapUiBody" role="application">
+        <div id="content"></div>
+    </body>
+</html>

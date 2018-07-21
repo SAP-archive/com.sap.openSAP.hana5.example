@@ -2,7 +2,7 @@
 	"role":{
 		"name": "default_access_role",
 		"schema_roles": [{
-		 "names": ["admin"]
-		}] 
+		 "names": ["admin", "dcl.salesOrderCountryOwnAndGer"]
+		}]
 	}
 }

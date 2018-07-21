@@ -32,6 +32,10 @@
 		"name": "client",
 		"description": "Session Client",
 		"valueType": "int"
+	}, {
+		"name": "country",
+		"description": "country",
+		"valueType": "s"
 	}],
 	"role-templates": [{
 		"name": "Viewer",
@@ -40,7 +44,7 @@
 			"$XSAPPNAME.Display"
 		],
 		"attribute-references": [
-			"client"
+			"client", "country"
 		]
 	}, {
 		"name": "Editor",
