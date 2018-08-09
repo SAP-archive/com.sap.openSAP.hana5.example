@@ -1,8 +1,0 @@
-namespace userExt;
-in package userExt;
-using UserData.User2 as User;
-
-extend entity User with {
-    @Comment : 'Extension Field'
-    ZMYNEW1 : String(10);
-};
