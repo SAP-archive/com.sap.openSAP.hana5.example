@@ -1,6 +1,5 @@
-VIEW "PurchaseOrdersSQL"
+VIEW "PurchaseOrders"
    ( "PURCHASEORDERID",
-	 "PURCHASEORDERITEM",
 	 "PARTNERID",
 	 "PRODUCTID",
 	 "CURRENCY",
@@ -11,7 +10,6 @@ VIEW "PurchaseOrdersSQL"
 	 "QUANTITYUNIT",
 	 "DELIVERYDATE" ) AS SELECT
 	 "Header_$0"."PURCHASEORDERID" ,
-	 "Item_$1"."PURCHASEORDERITEM" ,
 	 "Header_$0"."PARTNER" ,
 	 "Item_$1"."PRODUCT" ,
 	 "Header_$0"."CURRENCY" ,
@@ -21,5 +19,5 @@ VIEW "PurchaseOrdersSQL"
 	 "Item_$1"."QUANTITY" ,
 	 "Item_$1"."QUANTITYUNIT" ,
 	 "Item_$1"."DELIVERYDATE" 
-FROM ( "PurchaseOrderSQL.Header" AS "Header_$0" 
-	INNER JOIN "PurchaseOrderSQL.Item" AS "Item_$1" ON ( "Header_$0"."PURCHASEORDERID" = "Item_$1"."PURCHASEORDERID" ) ) WITH READ ONLY
+FROM ( "PurchaseOrder.Header" AS "Header_$0" 
+	INNER JOIN "PurchaseOrder.Item" AS "Item_$1" ON ( "Header_$0"."PURCHASEORDERID" = "Item_$1"."POHeader.PURCHASEORDERID" ) ) WITH READ ONLY

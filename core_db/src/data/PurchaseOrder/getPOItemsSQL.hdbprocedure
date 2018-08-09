@@ -1,4 +1,4 @@
-PROCEDURE "getPOItemsSQL" (OUT ex_items "PurchaseOrderSQL.Item" )
+PROCEDURE "getPOItems" (OUT ex_items "PurchaseOrder.Item" )
    LANGUAGE SQLSCRIPT
    SQL SECURITY INVOKER
    --DEFAULT SCHEMA <default_schema_name>
@@ -9,6 +9,6 @@ BEGIN
    *************************************/
    ex_items = 
      select *
-              from "PurchaseOrderSQL.Item";
+              from "PurchaseOrder.Item";
 
 END

@@ -4,24 +4,29 @@
 		"schema_privileges": [{
 		   "privileges": ["SELECT METADATA", 
 		    			  "SELECT" ] }],
+		"schema_analytic_privileges": [
+            {
+                "privileges":[ "PO_VIEW_PRIVILEGE" ]
+            }
+        ],		    			  
 		"object_privileges":[
 			{
-				"name": "PurchaseOrderSQL.Header",
+				"name": "PurchaseOrder.Header",
 				"type": "TABLE",
 				"privileges": [ "SELECT" ]
 			},
 			{
-				"name": "PurchaseOrderSQL.Item",
+				"name": "PurchaseOrder.Item",
 				"type": "TABLE",
 				"privileges": [ "SELECT" ]
 			},
 			{
-				"name": "getPOItemsSQL",
+				"name": "getPOItems",
 				"type": "PROCEDURE",
 				"privileges": [ "EXECUTE" ]
 			},
 			{
-				"name": "PurchaseOrdersSQL",
+				"name": "PurchaseOrders",
 				"type": "VIEW",
 				"privileges": [ "SELECT" ]
 			}			
