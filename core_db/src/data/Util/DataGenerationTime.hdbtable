@@ -1,0 +1,3 @@
+ROW TABLE "Util.DataGenerationTime" ( 
+     "STARTTIME" BIGINT CS_FIXED,
+	 "ENDTIME" BIGINT CS_FIXED ) 
