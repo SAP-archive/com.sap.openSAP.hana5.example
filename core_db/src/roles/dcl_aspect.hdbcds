@@ -1,7 +1,7 @@
-using MD; 
+using "MD.Employees" as Employees; 
 
 AccessPolicy dcl_aspect { 
   aspect aspCountry as  
-    select from MD.Employees { ADDRESSES.COUNTRY } 
+    select from Employees { ADDRESSES.COUNTRY } 
       where $user in LOGINNAME; 
 };  

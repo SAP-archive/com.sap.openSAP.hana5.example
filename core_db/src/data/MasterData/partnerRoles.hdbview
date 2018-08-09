@@ -1,0 +1,5 @@
+VIEW "MDViews.partnerRoles" ( "PARTNERROLE",
+	 "PARTNERDESC" ) AS SELECT
+	 "getPartnerRoles_$0"."PARTNERROLE" ,
+	 "getPartnerRoles_$0"."PARTNERDESC" 
+FROM "core.models::GET_PARTNER_ROLES" AS "getPartnerRoles_$0" WITH READ ONLY

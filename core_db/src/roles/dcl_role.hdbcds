@@ -1,9 +1,9 @@
-using SO; 
+using "SO.salesOrderView" as salesOrderView; 
   
 AccessPolicy dcl_role {  
    
   role salesOrderCountryGer {
-    grant select on SO.salesOrderView
+    grant select on salesOrderView
         where customerCountry = 'DE'; 
   }; 
 };

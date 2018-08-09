@@ -1,0 +1,5 @@
+VIEW "MDViews.ProductsValueHelp" ( "Product_Id",
+	 "Product_Name" ) AS SELECT
+	 "PRODUCTS_$0"."Product_Id" ,
+	 "PRODUCTS_$0"."Product_Name" 
+FROM "core.models::PRODUCTS" AS "PRODUCTS_$0" WITH READ ONLY

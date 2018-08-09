@@ -2,7 +2,7 @@
 	"role":{
 		"name": "default_access_role",
 		"schema_roles": [{
-		 "names": ["poAccess", "sflightDCL.SflightByClient", "sflight"]
+		 "names": ["poAccess", "sflightDCL.SflightByClient", "sflight", "admin", "dcl.salesOrderCountryOwnAndGer"]
 		}]
 	}
 }
