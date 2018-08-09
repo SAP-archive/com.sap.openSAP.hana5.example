@@ -1,5 +1,6 @@
 using SFLIGHT as FLIGHTTBL;
 using SBOOK as BOOKINGS;
+using SflightExt;
 
 context FLIGHT {
    define view SflightView as
@@ -44,3 +45,13 @@ context FLIGHT {
       } with structured privilege check;
 
 };
+
+AccessPolicy sflightDCL {
+   
+  role SflightByClient {
+    grant select on FLIGHT.SflightExt
+        where Client in $env.user.client;
+    grant select on SflightExt
+        where Client = '001';
+  }; 
+}
