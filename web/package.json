@@ -3,8 +3,11 @@
 	"engines": {
 		"node": " ^8 "
 	},
+	"devDependencies": {
+		"@sap/grunt-sapui5module-bestpractice-build": "~1.0"
+	},	
 	"dependencies": {
-		"@sap/approuter": "5.3.0"
+		"@sap/approuter": "5.6.3"
 	},
 	"scripts": {
 		"start": "node node_modules/@sap/approuter/approuter.js"

@@ -3,12 +3,12 @@
 		"node": " ^8 "
 	},
 	"dependencies": {
-		"@sap/xssec": "2.1.10",
+		"@sap/xssec": "2.1.15",
 		"@sap/xsenv": "1.2.9",
-		"@sap/xsjs": "3.3.7"
+		"@sap/xsjs": "3.4.2"
 	},
 	"devDependencies": {
-		"@sap/xsjs-test": "2.0.14"
+		"@sap/xsjs-test": "2.0.16"
 	},
 	"files": [],
 	"main": "server.js",
