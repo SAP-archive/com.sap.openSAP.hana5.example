@@ -38,6 +38,3 @@ jspm_packages
 
 .settings
 .project
-
-#Web IDE Internals
-*.che
