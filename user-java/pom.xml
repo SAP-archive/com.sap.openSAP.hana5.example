@@ -10,7 +10,7 @@
 	<packaging>war</packaging>
 	<properties>
 		<javax.version>2.5</javax.version>
-		<odata.version>4.2.0-sap-03</odata.version>
+		<odata.version>4.7.1</odata.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<xs2.jdbc.version>0.1.0</xs2.jdbc.version>
 		<json.version>2.0</json.version>
